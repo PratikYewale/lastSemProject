@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1\Admin\FaqController;
+namespace App\Http\Controllers\v1\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,11 +52,11 @@ class FaqController extends Controller
 
             $updateFaq = FAQ::query()->where('id', $request->id)->first();
 
-            if ($request->filled('questions')) {
-                $updateFaq->questions = $request->questions;
+            if ($request->filled('question')) {
+                $updateFaq->question= $request->question;
             }
-            if ($request->filled('answers')) {
-                $updateFaq->answers = $request->answers;
+            if ($request->filled('answer')) {
+                $updateFaq->answer= $request->answer;
             }
             if ($request->filled('for_whom')) {
                 $updateFaq->for_whom = $request->for_whom;
@@ -76,16 +76,17 @@ class FaqController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:faqs,id'
+                //'id' => 'required|integer|exists:faqs,id'
 
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $getFaq = FAQ::query()->where('id', $request->id)->where('is_active', true)->first();
+            $getFaq = FAQ::query()->get();
+            $countfaq=FAQ::query()->count();
 
-            return $this->sendResponse($getFaq, 'FAQ Fetched Successfully', true);
+            return $this->sendResponse($getFaq,$countfaq, 'FAQ Fetched Successfully', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
@@ -109,6 +110,24 @@ class FaqController extends Controller
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+        }
+    }
+
+    public function getFaqById(Request $request): JsonResponse
+    {
+        try{
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $faq = FAQ::query()->where('id',$request->id)->first();
+
+            return $this->sendResponse($faq, "Faq fetched successfully", true);
+        }catch(Exception $e){
+            return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
     }
 
