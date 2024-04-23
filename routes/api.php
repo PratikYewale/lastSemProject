@@ -24,13 +24,14 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
     
 
-    Route::group(['middleware' => ['cors', 'jwt.verify', 'role:admin']], function () {
+    Route::group(['middleware' => ['cors', 'jwt.verify', 'admin']], function () {
 
         
     });
 });
 
 Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
+    Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
 
-    
+    });
 });
