@@ -22,19 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
-    Route::post('adminRegister', [AdminAuthController::class, 'adminRegister']);
-    Route::post('adminLogin', [AdminAuthController::class, 'adminLogin']);
+    
 
     Route::group(['middleware' => ['cors', 'jwt.verify', 'admin']], function () {
 
-        Route::get('getStudentStatus', [AdminAuthController::class, 'getStudentStatus']);
-        Route::post('updateApproveStatus', [AdminAuthController::class, 'updateApproveStatus']);
+        
     });
 });
 
-Route::group(['prefix' => 'v1/student', 'as' => 'v1/student'], function () {
+Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
 
-    Route::post('studentLogin', [StudentAuthController::class, 'studentLogin']);
-    Route::Post('addParent', [StudentAuthController::class, 'addParent']);
-    Route::Post('studentRegister', [StudentAuthController::class, 'studentRegister']);
+    
 });
