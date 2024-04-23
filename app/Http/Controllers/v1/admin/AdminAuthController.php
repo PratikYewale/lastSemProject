@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
@@ -59,7 +57,7 @@ class AdminAuthController extends Controller
             $newUser->email = $request->email;
             $newUser->password = Hash::make($request->password);
             $newUser->mobile_no = $request->mobile_no;
-            $newUser->is_admin = true;
+            $newUser->role = 'admin';
             $newUser->save();
             $response = [
                 'userData' => $newUser,
@@ -81,13 +79,11 @@ class AdminAuthController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $user = User::where('email', $request->email)->first();
-            $user['role'] = 'admin';
             if ($user && Hash::check($request->password, $user->password)) {
                 Auth::login($user);
-                $token = JWTAuth::fromUser($user, ['role' => 'admin']);
+                $token = JWTAuth::fromUser($user);
                 $response = ['token' => $token];
                 $response['userData'] = $user;
-                $response['role'] = 'admin';
                 return $this->sendResponse($response, 'Admin logged in successfully.', 200);
             }
             return $this->sendError("Invalid credentials", [], 401);
