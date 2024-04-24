@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Models\Program;
 use Illuminate\Support\Str; 
+use Illuminate\Validation\Rule;
+
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
-
-class NewsController extends Controller
+class ProgramController extends Controller
 {
     public function saveFile($file, $fileName)
     {
@@ -35,19 +35,18 @@ class NewsController extends Controller
         return "/$fileName/" . $newFileName;
     }
 
-    public function createNews(Request $request): JsonResponse
+    public function createPrograms(Request $request): JsonResponse
     {
 
         try{
             $validator = Validator::make($request->all(), [
+                'type' => [Rule::in(['sport','development','training'])],
+                'title'=>'nullable',
                 'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'title'=>'nullable',
-                'user_id'=>'nullable',
-                'img_description'=>'nullable',
                 'intro_para'=>'nullable',
+                'body_para'=>'nullable',
                 'conclusion'=>'nullable',
-                'body_para'=>'nullable'
         
 
             ]);
@@ -55,76 +54,75 @@ class NewsController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $uploadNews = new News();
+            $addprograms = new Program();
+            $addprograms->type=$request->type;
+            $addprograms->title = $request->title;
+
            if ($request->hasFile('primary_img')) {
-                $uploadNews->primary_img = $this->saveFile($request->file('primary_img'), 'NewsPrimaryImage');
+                $addprograms->primary_img = $this->saveFile($request->file('primary_img'), 'ProgramPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
-                $uploadNews->secondary_img = $this->saveFile($request->file('secondary_img'), 'NewsSecondaryImage');
+                $addprograms->secondary_img = $this->saveFile($request->file('secondary_img'), 'ProgramSecondaryImage');
             }
-            $uploadNews->user_id = $request->user_id;
-            $uploadNews->title = $request->title;
-            $uploadNews->img_description=$request->img_description;
-            $uploadNews->intro_para=$request->intro_para;
-            $uploadNews->body_para=$request->body_para;
-            $uploadNews->conclusion=$request->conclusion;
+            $addprograms->intro_para=$request->intro_para;
+            $addprograms->body_para=$request->body_para;
+            $addprograms->conclusion=$request->conclusion;
 
-                $uploadNews->save();
+                $addprograms->save();
 
-                return $this->sendResponse($uploadNews->id,'News uploaded successfully',true);
+                return $this->sendResponse($addprograms->id,'Programs uploaded successfully',true);
 
             }
 
         catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+        
         }
     }
-
-    public function updateNews(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer'
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-
-            $updateNews = News::query()->where('id', $request->id)->first();
-            if ($request->hasFile('primary_img')) {
-                $updateNews->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $updateNews->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
-            }
-            if ($request->filled('user_id')) {
-                $updateNews->user_id= $request->user_id;
-            }
-            if ($request->filled('title')) {
-                $updateNews->title= $request->title;
-            }
-            if ($request->filled('img_description')) {
-                $updateNews->img_description= $request->img_description;
-            }
-            if ($request->filled('intro_para')) {
-                $updateNews->intro_para= $request->intro_para;
-            }
-            if ($request->filled('body_para')) {
-                $updateNews->body_para= $request->body_para;
-            }
-            if ($request->filled('conclusion')) {
-                $updateNews->conclusion= $request->conclusion;
-            }
+        public function updateProgram(Request $request): JsonResponse
+        {
+            try {
+                $validator = Validator::make($request->all(), [
+                    'id' => 'required|integer'
+                ]);
+                if ($validator->fails()) {
+                    return $this->sendError('Validation Error.', $validator->errors());
+                }
+    
+                $updateProgram = Program::query()->where('id', $request->id)->first();
+                if ($request->filled('type')) {
+                    $updateProgram->type= $request->type;
+                }
+                if ($request->filled('title')) {
+                    $updateProgram->title= $request->title;
+                }
+                if ($request->hasFile('primary_img')) {
+                    $updateProgram->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
+                }
+                if ($request->hasFile('secondary_img')) {
+                    $updateProgram->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
+                }
             
-            
-            $updateNews->save();
-            return $this->sendResponse($updateNews, 'News Updated Successfully', true);
-
-        } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+                if ($request->filled('intro_para')) {
+                    $updateProgram->intro_para= $request->intro_para;
+                }
+                if ($request->filled('body_para')) {
+                    $updateProgram->body_para= $request->body_para;
+                }
+                if ($request->filled('conclusion')) {
+                    $updateProgram->conclusion= $request->conclusion;
+                }
+                
+                
+                $updateProgram->save();
+                return $this->sendResponse($updateProgram, 'Program Updated Successfully', true);
+    
+            } catch (Exception $e) {
+                return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            }
         }
-    }
-    public function getAllNews(Request $request)
+
+        public function getAllProgram(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -134,7 +132,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = Program::query();
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -154,21 +152,21 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-    public function deleteNews(Request $request): JsonResponse
+    
+    public function deletePrograms(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id'
+                'id' => 'required|integer|exists:programs,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $deleteFaq = News::query()->where('id', $request->id)->first();
-            $deleteFaq->delete();
+            $deleteProgram = Program::query()->where('id', $request->id)->first();
+            $deleteProgram->delete();
 
-            return $this->sendResponse($deleteFaq, 'News Deleted Successfully', true);
+            return $this->sendResponse($deleteProgram, 'Program Deleted Successfully', true);
 
 
         } catch (Exception $e) {
@@ -176,7 +174,7 @@ class NewsController extends Controller
         }
     }
 
-    public function getNewsById(Request $request): JsonResponse
+    public function getProgramById(Request $request): JsonResponse
     {
         try{
             $validator = Validator::make($request->all(), [
@@ -186,9 +184,9 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $News = News::query()->where('id',$request->id)->first();
+            $Program = Program::query()->where('id',$request->id)->first();
 
-            return $this->sendResponse($News, "News fetched successfully", true);
+            return $this->sendResponse($Program, "Program fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
