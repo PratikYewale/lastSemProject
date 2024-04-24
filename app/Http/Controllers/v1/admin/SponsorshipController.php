@@ -3,19 +3,18 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-use Illuminate\Support\Str; 
-use Illuminate\Validation\Rule;
-use App\Models\Club;
+use App\Http\Controllers\Controller;
+use App\Models\Sponsorship;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
-class ClubController extends Controller
+
+class SponsorshipController extends Controller
 {
-    public function createClub(Request $request): JsonResponse
+    public function createSponsorship(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -26,19 +25,20 @@ class ClubController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $addClub = new Club;
-            $addClub->name = $request->name;
-            $addClub->description = $request->description;
+            $addSponsorship = new Sponsorship;
+            $addSponsorship->name = $request->name;
+            $addSponsorship->description = $request->description;
           
-            $addClub->save();
+            $addSponsorship->save();
 
-            return $this->sendResponse($addClub, 'Club Saved Successfully', true);
+            return $this->sendResponse($addSponsorship, 'Sponsorship Saved Successfully', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-    public function updateClub(Request $request): JsonResponse
+
+    public function updateSponsorship(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -48,23 +48,24 @@ class ClubController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $updateclub = Club::query()->where('id', $request->id)->first();
+            $updateSponsorship = Sponsorship::query()->where('id', $request->id)->first();
 
             if ($request->filled('name')) {
-                $updateclub->name= $request->name;
+                $updateSponsorship->name= $request->name;
             }
             if ($request->filled('description')) {
-                $updateclub->description= $request->description;
+                $updateSponsorship->description= $request->description;
             }
            
-            $updateclub->save();
-            return $this->sendResponse($updateclub, 'Club Updated Successfully', true);
+            $updateSponsorship->save();
+            return $this->sendResponse($updateSponsorship, 'Sponsorship Updated Successfully', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-    public function getAllClub(Request $request)
+
+    public function getAllSponsorship(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -74,7 +75,7 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Club::query();
+            $query = Sponsorship::query();
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -94,27 +95,29 @@ class ClubController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function deleteClub(Request $request): JsonResponse
+
+    public function deleteSponsorship(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:clubs,id'
+                'id' => 'required|integer|exists:sponsorships,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $deleteClub = Club::query()->where('id', $request->id)->first();
-            $deleteClub->delete();
+            $deleteSponsorship = Sponsorship::query()->where('id', $request->id)->first();
+            $deleteSponsorship->delete();
 
-            return $this->sendResponse($deleteClub, 'Club Deleted Successfully', true);
+            return $this->sendResponse($deleteSponsorship, 'Sponsorship Deleted Successfully', true);
 
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-    public function getClubById(Request $request): JsonResponse
+
+    public function getSponsorshipById(Request $request): JsonResponse
     {
         try{
             $validator = Validator::make($request->all(), [
@@ -124,9 +127,9 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $club = Club::query()->where('id',$request->id)->first();
+            $sponsorship = Sponsorship::query()->where('id',$request->id)->first();
 
-            return $this->sendResponse($club, "Club fetched successfully", true);
+            return $this->sendResponse($sponsorship, "Sponsorship fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
