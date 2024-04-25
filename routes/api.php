@@ -53,6 +53,47 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getTeamProfileById', [TeamController::class, 'getTeamProfileById']);
         Route::delete('deleteTeamProfileById', [TeamController::class, 'deleteTeamProfileById']);
 
+        //FAQ
+        Route::post('createFaq', [FaqController::class, 'createFaq']);
+        Route::post('updateFaq', [FaqController::class, 'updateFaq']);
+        Route::get('getFaq', [FaqController::class, 'getFaq']);
+        Route::delete('deleteFaq', [FaqController::class, 'deleteFaq']);
+        Route::get('getFaqById', [FaqController::class, 'getFaqById']);
+
+        //News
+        Route::post('createNews', [NewsController::class, 'createNews']);
+        Route::post('updateNews', [NewsController::class, 'updateNews']);
+        Route::get('getAllNews', [NewsController::class, 'getAllNews']);
+        Route::delete('deleteNews', [NewsController::class, 'deleteNews']);
+        Route::get('getNewsById', [NewsController::class, 'getNewsById']);
+
+        //Programs
+        Route::post('createPrograms', [ProgramController::class, 'createPrograms']);
+        Route::post('updateProgram', [ProgramController::class, 'updateProgram']);
+        Route::get('getAllProgram', [ProgramController::class, 'getAllProgram']);
+        Route::delete('deletePrograms', [ProgramController::class, 'deletePrograms']);
+        Route::get('getProgramById', [ProgramController::class, 'getProgramById']);
+
+        //Clubs
+        Route::post('createClub', [ClubController::class, 'createClub']);
+        Route::post('updateClub', [ClubController::class, 'updateClub']);
+        Route::get('getAllClub', [ClubController::class, 'getAllClub']);
+        Route::delete('deleteClub', [ClubController::class, 'deleteClub']);
+        Route::get('getClubById', [ClubController::class, 'getClubById']);
+
+        //Membership
+        Route::post('createMembership', [MembershipController::class, 'createMembership']);
+        Route::post('updateMembership', [MembershipController::class, 'updateMembership']);
+        Route::get('getAllMemberships', [MembershipController::class, 'getAllMemberships']);
+        Route::delete('deletemembership', [MembershipController::class, 'deletemembership']);
+        Route::get('getMembershipById', [MembershipController::class, 'getMembershipById']);
+
+        //createSponsorship
+        Route::post('createSponsorship', [SponsorshipController::class, 'createSponsorship']);
+        Route::post('updateSponsorship', [SponsorshipController::class, 'updateSponsorship']);
+        Route::get('getAllSponsorship', [SponsorshipController::class, 'getAllSponsorship']);
+        Route::delete('deleteSponsorship', [SponsorshipController::class, 'deleteSponsorship']);
+        Route::get('getSponsorshipById', [SponsorshipController::class, 'getSponsorshipById']);
     });
 });
 
