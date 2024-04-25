@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers\v1\Admin;
 
-use Auth;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Models\Event;
 use Illuminate\Support\Str; 
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
-class NewsController extends Controller
+class EventController extends Controller
 {
     public function saveFile($file, $fileName)
     {
@@ -36,44 +34,47 @@ class NewsController extends Controller
         return "/$fileName/" . $newFileName;
     }
 
-    public function createNews(Request $request): JsonResponse
+
+    public function createEvent(Request $request): JsonResponse
     {
 
         try{
             $validator = Validator::make($request->all(), [
-                'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'title'=>'nullable',
-                'user_id'=>'nullable',
-                'img_description'=>'nullable',
+                'program_id'=>'nullable|exists:programs,id',
+                'team_id'=>'nullable|exists:teams,id',
+                'title'=>'required',
+                'primary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'intro_para'=>'nullable',
+                "body_para"=>'nullable',
                 'conclusion'=>'nullable',
-                'body_para'=>'nullable'
-        
-
+                'start_date'=>'nullable',
+                'end_date'=>'nullable',
+                'is_competition'=>'nullable'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $uploadNews = new News();
+            $addEvent = new Event();
+            $addEvent->program_id = $request->program_id;
+            $addEvent->team_id=$request->team_id;
+            $addEvent->title=$request->title;
            if ($request->hasFile('primary_img')) {
-                $uploadNews->primary_img = $this->saveFile($request->file('primary_img'), 'NewsPrimaryImage');
+                $addEvent->primary_img = $this->saveFile($request->file('primary_img'), 'EventPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
-                $uploadNews->secondary_img = $this->saveFile($request->file('secondary_img'), 'NewsSecondaryImage');
+                $addEvent->secondary_img = $this->saveFile($request->file('secondary_img'), 'EventSecondaryImage');
             }
-            $userid = Auth::user()->id;
-            $uploadNews->user_id = $userid;
-            $uploadNews->title = $request->title;
-            $uploadNews->img_description=$request->img_description;
-            $uploadNews->intro_para=$request->intro_para;
-            $uploadNews->body_para=$request->body_para;
-            $uploadNews->conclusion=$request->conclusion;
+            $addEvent->intro_para = $request->intro_para;
+            $addEvent->body_para=$request->body_para;
+            $addEvent->conclusion=$request->conclusion;
+            $addEvent->start_date=$request->start_date;
+            $addEvent->end_date=$request->end_date;
+            $addEvent->is_competition=$request->is_competition;
+            $addEvent->save();
 
-                $uploadNews->save();
-
-                return $this->sendResponse($uploadNews->id,'News uploaded successfully',true);
+                return $this->sendResponse($addEvent,'Event uploaded successfully',true);
 
             }
 
@@ -82,51 +83,59 @@ class NewsController extends Controller
         }
     }
 
-    public function updateNews(Request $request): JsonResponse
+
+    public function updateEvent(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id'
+                'id' => 'required|integer|exists:events,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $updateNews = News::query()->where('id', $request->id)->first();
-            if ($request->hasFile('primary_img')) {
-                $updateNews->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
+            $updateEvent = Event::query()->where('id', $request->id)->first();
+            if ($request->filled('program_id')) {
+                $updateEvent->program_id= $request->program_id;
             }
-            if ($request->hasFile('secondary_img')) {
-                $updateNews->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
-            }
-            if ($request->filled('user_id')) {
-                $updateNews->user_id= $request->user_id;
+            if ($request->filled('team_id')) {
+                $updateEvent->team_id= $request->team_id;
             }
             if ($request->filled('title')) {
-                $updateNews->title= $request->title;
+                $updateEvent->title= $request->title;
             }
-            if ($request->filled('img_description')) {
-                $updateNews->img_description= $request->img_description;
+            if ($request->hasFile('primary_img')) {
+                $updateEvent->primary_img = $this->saveFile($request->primary_img, 'EventPrimaryImage');
             }
-            if ($request->filled('intro_para')) {
-                $updateNews->intro_para= $request->intro_para;
+            if ($request->hasFile('secondary_img')) {
+                $updateEvent->secondary_img = $this->saveFile($request->secondary_img, 'EventSecondaryImage');
+            }
+           if ($request->filled('intro_para')) {
+                $updateEvent->intro_para= $request->intro_para;
             }
             if ($request->filled('body_para')) {
-                $updateNews->body_para= $request->body_para;
+                $updateEvent->body_para= $request->body_para;
+            }
+            if ($request->filled('start_date')) {
+                $updateEvent->start_date= $request->start_date;
+            }
+            if ($request->filled('end_date')) {
+                $updateEvent->end_date= $request->end_date;
             }
             if ($request->filled('conclusion')) {
-                $updateNews->conclusion= $request->conclusion;
+                $updateEvent->conclusion= $request->conclusion;
             }
             
             
-            $updateNews->save();
-            return $this->sendResponse($updateNews, 'News Updated Successfully', true);
+            $updateEvent->save();
+            return $this->sendResponse($updateEvent, 'Event Updated Successfully', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-    public function getAllNews(Request $request)
+
+    public function getAllEvents(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -136,7 +145,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = Event::query();
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -146,7 +155,7 @@ class NewsController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['News'] = $data;
+                $response['Events'] = $data;
                 $response['count'] = $count;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {
@@ -157,20 +166,21 @@ class NewsController extends Controller
         }
     }
 
-    public function deleteNews(Request $request): JsonResponse
+
+    public function deleteEvent(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id'
+                'id' => 'required|integer|exists:events,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $deleteFaq = News::query()->where('id', $request->id)->first();
-            $deleteFaq->delete();
+            $deleteEvent = Event::query()->where('id', $request->id)->first();
+            $deleteEvent->delete();
 
-            return $this->sendResponse($deleteFaq, 'News Deleted Successfully', true);
+            return $this->sendResponse($deleteEvent, 'Events Deleted Successfully', true);
 
 
         } catch (Exception $e) {
@@ -178,22 +188,21 @@ class NewsController extends Controller
         }
     }
 
-    public function getNewsById(Request $request): JsonResponse
+    public function getEventById(Request $request): JsonResponse
     {
         try{
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:events,id',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $News = News::query()->where('id',$request->id)->first();
+            $Event = Event::query()->where('id',$request->id)->first();
 
-            return $this->sendResponse($News, "News fetched successfully", true);
+            return $this->sendResponse($Event, "Event fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
     }
-    }
-
+}

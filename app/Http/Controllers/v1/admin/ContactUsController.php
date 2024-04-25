@@ -13,31 +13,31 @@ use Exception;
 
 class ContactUsController extends Controller
 {
-    public function addContactUs(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'nullable',
-                'email' => 'required|email',
-                'mobile_no' => 'required|nullable',
-                'message' => 'nullable',
-            ]);
+    // public function addContactUs(Request $request)
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'name' => 'nullable',
+    //             'email' => 'required|email',
+    //             'mobile_no' => 'required|nullable',
+    //             'message' => 'nullable',
+    //         ]);
 
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-            $ContactUs = new ContactUs;
-            $ContactUs->name = $request->name;
-            $ContactUs->email = $request->email;
-            $ContactUs->mobile_no = $request->mobile_no;
-            $ContactUs->message = $request->message;
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         $ContactUs = new ContactUs;
+    //         $ContactUs->name = $request->name;
+    //         $ContactUs->email = $request->email;
+    //         $ContactUs->mobile_no = $request->mobile_no;
+    //         $ContactUs->message = $request->message;
             
-            $ContactUs->save();
-            return $this->sendResponse($ContactUs, 'Contact added Successfully.', true);
-        } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getTrace(), 413);
-        }
-    }
+    //         $ContactUs->save();
+    //         return $this->sendResponse($ContactUs, 'Contact added Successfully.', true);
+    //     } catch (Exception $e) {
+    //         return $this->sendError('Something went wrong', $e->getTrace(), 413);
+    //     }
+    // }
 
     public function getAllContactUs(Request $request)
     {
@@ -66,7 +66,25 @@ class ContactUsController extends Controller
                 return $this->sendResponse('No Data Available', [], false);
             }
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+            return $this->sendError($e->getMessage(), 500);
+        }
+    }
+
+    public function getContactUsById(Request $request): JsonResponse
+    {
+        try{
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $ContactUs = ContactUs::query()->where('id',$request->id)->first();
+
+            return $this->sendResponse($ContactUs, "Contact us fetched successfully", true);
+        }catch(Exception $e){
+            return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
     }
 }

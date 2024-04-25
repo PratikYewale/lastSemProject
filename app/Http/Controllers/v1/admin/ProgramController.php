@@ -83,7 +83,7 @@ class ProgramController extends Controller
         {
             try {
                 $validator = Validator::make($request->all(), [
-                    'id' => 'required|integer'
+                    'id' => 'required|integer|exists:programs,id'
                 ]);
                 if ($validator->fails()) {
                     return $this->sendError('Validation Error.', $validator->errors());
@@ -142,7 +142,7 @@ class ProgramController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['News'] = $data;
+                $response['Program'] = $data;
                 $response['count'] = $count;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {

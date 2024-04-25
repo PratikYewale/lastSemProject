@@ -72,24 +72,34 @@ class FaqController extends Controller
         }
     }
 
-    public function getFaq(Request $request): JsonResponse
+    public function getAllFaq(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                //'id' => 'required|integer|exists:faqs,id'
-
+                'pageNo' => 'numeric',
+                'limit' => 'numeric',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-
-            $getFaq = FAQ::query()->get();
-            $countfaq=FAQ::query()->count();
-
-            return $this->sendResponse($getFaq,$countfaq, 'FAQ Fetched Successfully', true);
-
+            $query = FAQ::query();
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query = $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            if (count($data) > 0) {
+                $response['FAQ'] = $data;
+                $response['count'] = $count;
+                return $this->sendResponse($response, 'Data Fetched Successfully', );
+            } else {
+                return $this->sendResponse('No Data Available', [], false);
+            }
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), 500);
         }
     }
     public function deleteFaq(Request $request): JsonResponse

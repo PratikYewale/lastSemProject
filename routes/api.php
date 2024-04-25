@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\EventController;
+use App\Http\Controllers\v1\Admin\JobController;
 use App\Http\Controllers\v1\Admin\SponsorshipController;
 use App\Http\Controllers\v1\Admin\ClubController;
-use App\Http\Controllers\v1\Admin\ContactUsController;
+use App\Http\Controllers\v1\Admin\ContactUsController as AdminContactUsController;
 use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
@@ -13,6 +15,9 @@ use App\Http\Controllers\v1\Admin\AdminAuthController;
 use App\Http\Controllers\v1\Admin\DonationController as AdminDonationController;
 use App\Http\Controllers\v1\Admin\TeamController;
 use App\Http\Controllers\v1\Customer\DonationController;
+use App\Http\Controllers\v1\Customer\ContactUsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +99,25 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllSponsorship', [SponsorshipController::class, 'getAllSponsorship']);
         Route::delete('deleteSponsorship', [SponsorshipController::class, 'deleteSponsorship']);
         Route::get('getSponsorshipById', [SponsorshipController::class, 'getSponsorshipById']);
+
+        //ContactUs
+        Route::get('getAllContactUs',[AdminContactUsController::class,'getAllContactUs']);
+        Route::get('getContactUsById',[AdminContactUsController::class,'getContactUsById']);
+
+        //Event
+        Route::post('createEvent',[EventController::class,'createEvent']);
+        Route::post('updateEvent',[EventController::class,'updateEvent']);
+        Route::get('getAllEvents',[EventController::class,'getAllEvents']);
+        Route::delete('deleteEvent',[EventController::class,'deleteEvent']);
+        Route::get('getEventById',[EventController::class,'getEventById']);
+
+
+        //job
+        Route::post('createJob',[JobController::class,'createJob']);
+        Route::delete('deleteJob',[JobController::class,'deleteJob']);
+        Route::get('getJobById',[JobController::class,'getJobById']);
+        Route::get('getAllJob',[JobController::class,'getAllJob']);
+
     });
 });
 
@@ -101,6 +125,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
 
     // Donation
     Route::post('addDonation', [DonationController::class, 'addDonation']);
+
+    //ContactUs
+    Route::post('addContactUs',[ContactUsController::class,'addContactUs']);
 
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
     });
