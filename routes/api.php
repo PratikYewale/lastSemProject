@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\SponsorshipController;
+use App\Http\Controllers\v1\Admin\ClubController;
+use App\Http\Controllers\v1\Admin\ContactUsController;
+use App\Http\Controllers\v1\Admin\FaqController;
+use App\Http\Controllers\v1\Admin\MembershipController;
+use App\Http\Controllers\v1\Admin\NewsController;
+use App\Http\Controllers\v1\Admin\ProgramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Admin\AdminAuthController;
