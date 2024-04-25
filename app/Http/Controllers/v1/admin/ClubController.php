@@ -32,7 +32,7 @@ class ClubController extends Controller
           
             $addClub->save();
 
-            return $this->sendResponse($addClub, 'Club Saved Successfully', true);
+            return $this->sendResponse($addClub, 'Club Saved Successfully.', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);

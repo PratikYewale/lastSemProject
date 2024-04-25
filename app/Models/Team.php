@@ -13,4 +13,12 @@ class Team extends Model
     {
         return $this->hasMany(TeamProfiles::class);
     }
+    public function teammembers()
+    {
+        return $this->hasMany(TeamMember::class);
+    }
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
 }

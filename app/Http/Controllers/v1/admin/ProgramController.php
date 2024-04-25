@@ -5,13 +5,14 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+
 class ProgramController extends Controller
 {
     public function saveFile($file, $fileName)
@@ -38,16 +39,16 @@ class ProgramController extends Controller
     public function createPrograms(Request $request): JsonResponse
     {
 
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'type' => [Rule::in(['sport','development','training'])],
-                'title'=>'nullable',
+                'type' => [Rule::in(['sport', 'development', 'training'])],
+                'title' => 'nullable',
                 'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'intro_para'=>'nullable',
-                'body_para'=>'nullable',
-                'conclusion'=>'nullable',
-        
+                'intro_para' => 'nullable',
+                'body_para' => 'nullable',
+                'conclusion' => 'nullable',
+
 
             ]);
             if ($validator->fails()) {
@@ -55,74 +56,69 @@ class ProgramController extends Controller
             }
 
             $addprograms = new Program();
-            $addprograms->type=$request->type;
+            $addprograms->type = $request->type;
             $addprograms->title = $request->title;
 
-           if ($request->hasFile('primary_img')) {
+            if ($request->hasFile('primary_img')) {
                 $addprograms->primary_img = $this->saveFile($request->file('primary_img'), 'ProgramPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
                 $addprograms->secondary_img = $this->saveFile($request->file('secondary_img'), 'ProgramSecondaryImage');
             }
-            $addprograms->intro_para=$request->intro_para;
-            $addprograms->body_para=$request->body_para;
-            $addprograms->conclusion=$request->conclusion;
+            $addprograms->intro_para = $request->intro_para;
+            $addprograms->body_para = $request->body_para;
+            $addprograms->conclusion = $request->conclusion;
 
-                $addprograms->save();
+            $addprograms->save();
 
-                return $this->sendResponse($addprograms->id,'Programs uploaded successfully',true);
-
-            }
-
-        catch (Exception $e) {
+            return $this->sendResponse($addprograms->id, 'Programs uploaded successfully', true);
+        } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
-        
         }
     }
-        public function updateProgram(Request $request): JsonResponse
-        {
-            try {
-                $validator = Validator::make($request->all(), [
-                    'id' => 'required|integer'
-                ]);
-                if ($validator->fails()) {
-                    return $this->sendError('Validation Error.', $validator->errors());
-                }
-    
-                $updateProgram = Program::query()->where('id', $request->id)->first();
-                if ($request->filled('type')) {
-                    $updateProgram->type= $request->type;
-                }
-                if ($request->filled('title')) {
-                    $updateProgram->title= $request->title;
-                }
-                if ($request->hasFile('primary_img')) {
-                    $updateProgram->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
-                }
-                if ($request->hasFile('secondary_img')) {
-                    $updateProgram->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
-                }
-            
-                if ($request->filled('intro_para')) {
-                    $updateProgram->intro_para= $request->intro_para;
-                }
-                if ($request->filled('body_para')) {
-                    $updateProgram->body_para= $request->body_para;
-                }
-                if ($request->filled('conclusion')) {
-                    $updateProgram->conclusion= $request->conclusion;
-                }
-                
-                
-                $updateProgram->save();
-                return $this->sendResponse($updateProgram, 'Program Updated Successfully', true);
-    
-            } catch (Exception $e) {
-                return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+    public function updateProgram(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer'
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
             }
-        }
 
-        public function getAllProgram(Request $request)
+            $updateProgram = Program::query()->where('id', $request->id)->first();
+            if ($request->filled('type')) {
+                $updateProgram->type = $request->type;
+            }
+            if ($request->filled('title')) {
+                $updateProgram->title = $request->title;
+            }
+            if ($request->hasFile('primary_img')) {
+                $updateProgram->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
+            }
+            if ($request->hasFile('secondary_img')) {
+                $updateProgram->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
+            }
+
+            if ($request->filled('intro_para')) {
+                $updateProgram->intro_para = $request->intro_para;
+            }
+            if ($request->filled('body_para')) {
+                $updateProgram->body_para = $request->body_para;
+            }
+            if ($request->filled('conclusion')) {
+                $updateProgram->conclusion = $request->conclusion;
+            }
+
+
+            $updateProgram->save();
+            return $this->sendResponse($updateProgram, 'Program Updated Successfully', true);
+        } catch (Exception $e) {
+            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+        }
+    }
+
+    public function getAllProgram(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -152,7 +148,7 @@ class ProgramController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
+
     public function deletePrograms(Request $request): JsonResponse
     {
         try {
@@ -167,8 +163,6 @@ class ProgramController extends Controller
             $deleteProgram->delete();
 
             return $this->sendResponse($deleteProgram, 'Program Deleted Successfully', true);
-
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
@@ -176,7 +170,7 @@ class ProgramController extends Controller
 
     public function getProgramById(Request $request): JsonResponse
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer',
             ]);
@@ -184,12 +178,11 @@ class ProgramController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $Program = Program::query()->where('id',$request->id)->first();
+            $Program = Program::query()->where('id', $request->id)->first();
 
             return $this->sendResponse($Program, "Program fetched successfully", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong', $e->getMessage(), 500);
         }
     }
-    }
-
+}

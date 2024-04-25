@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\TeamMember;
 use App\Models\TeamProfiles;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -157,6 +158,9 @@ class TeamController extends Controller
                 $query->skip($skip)->limit($limit);
             }
             $data = $query->orderBy('id', 'DESC')->get();
+            foreach ($data as &$member) {
+                $member['links'] = is_string($member['links']) ? json_decode($member['links'], true) : $member['links'];
+            }
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
@@ -175,10 +179,12 @@ class TeamController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $getTeam = Team::query()->where('id', $request->id)->with(['teamprofiles'])->first();
+            $getTeam['links'] = is_string($getTeam['links']) ? json_decode($getTeam['links'], true) : $getTeam['links'];
 
             if (empty($getTeam)) {
                 return $this->sendError("No team found.");
             }
+            
             return $this->sendResponse($getTeam, 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -330,6 +336,144 @@ class TeamController extends Controller
             $teamProfile->delete();
             DB::commit();
             return $this->sendResponse($teamProfile->id, 'Team profile deleted successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+
+    // Team Member
+    public function addTeamMember(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'team_id' => 'required|integer|exists:teams,id',
+                'team_profile_id' => 'required|integer|exists:team_profiles,id',
+                'member_id' => 'required|integer|exists:members,id',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $newTeamMember = new TeamMember();
+            $newTeamMember->team_id = $request->team_id;
+            $newTeamMember->team_profile_id = $request->team_profile_id;
+            $newTeamMember->member_id = $request->member_id;
+            $newTeamMember->save();
+            DB::commit();
+            return $this->sendResponse($newTeamMember, 'Team member added successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function updateTeamMember(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:team_member,id',
+                'team_id' => 'required|integer|exists:teams,id',
+                'team_profile_id' => 'required|integer|exists:team_profiles,id',
+                'member_id' => 'required|integer|exists:members,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $updateTeamMember = TeamMember::query()->where('id', $request->id)->first();
+            if (!$updateTeamMember) {
+                return $this->sendError("No team found.");
+            }
+            if ($request->has('team_id')) {
+                $updateTeamMember->team_id = $request->team_id;
+            }
+            if ($request->has('team_profile_id')) {
+                $updateTeamMember->team_profile_id = $request->team_profile_id;
+            }
+            if ($request->has('member_id')) {
+                $updateTeamMember->member_id = $request->member_id;
+            }
+            $updateTeamMember->save();
+            DB::commit();
+            return $this->sendResponse($updateTeamMember, 'Team member updated successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function getAllTeamMembers(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'pageNo' => 'nullable|numeric',
+                'limit' => 'nullable|numeric',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+            $query = TeamMember::query()->with(['team', 'teamprofiles', 'member']);
+
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            foreach ($data as &$member) {
+                $member['member']['achievements'] = is_string($member['member']['achievements']) ? json_decode($member['member']['achievements'], true) : $member['member']['achievements'];
+                $member['member']['schools'] = is_string($member['member']['schools']) ? json_decode($member['member']['schools'], true) : $member['member']['schools'];
+                $member['member']['links'] = is_string($member['member']['links']) ? json_decode($member['member']['links'], true) : $member['member']['links'];
+                $member['team']['links'] = is_string($member['team']['links']) ? json_decode($member['team']['links'], true) : $member['team']['links'];
+            }
+            if (count($data) <= 0) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully.', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getTeamMemberById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:team_member,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            $getTeamMember = TeamMember::query()->where('id', $request->id)->with(['team', 'teamprofiles', 'member'])->first();
+
+                $getTeamMember['member']['achievements'] = is_string($getTeamMember['member']['achievements']) ? json_decode($getTeamMember['member']['achievements'], true) : $getTeamMember['member']['achievements'];
+                $getTeamMember['member']['schools'] = is_string($getTeamMember['member']['schools']) ? json_decode($getTeamMember['member']['schools'], true) : $getTeamMember['member']['schools'];
+                $getTeamMember['member']['links'] = is_string($getTeamMember['member']['links']) ? json_decode($getTeamMember['member']['links'], true) : $getTeamMember['member']['links'];
+                $getTeamMember['team']['links'] = is_string($getTeamMember['team']['links']) ? json_decode($getTeamMember['team']['links'], true) : $getTeamMember['team']['links'];
+
+            if (empty($getTeamMember)) {
+                return $this->sendError("No team found.");
+            }
+            return $this->sendResponse($getTeamMember, 'Data fetched successfully.', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function deleteTeamMemberById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:team_member,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $teamMember = TeamMember::query()->where('id', $request->id)->first();
+            $teamMember->delete();
+            DB::commit();
+            return $this->sendResponse($teamMember->id, 'Team member deleted successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);

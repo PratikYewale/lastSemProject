@@ -9,4 +9,10 @@ class TeamProfiles extends Model
 {
     use HasFactory;
     protected $table='team_profiles';
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+    
 }

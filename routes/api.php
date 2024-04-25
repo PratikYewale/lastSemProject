@@ -11,8 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Admin\AdminAuthController;
 use App\Http\Controllers\v1\Admin\DonationController as AdminDonationController;
+use App\Http\Controllers\v1\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\v1\Admin\TeamController;
 use App\Http\Controllers\v1\Customer\DonationController;
+use App\Http\Controllers\v1\Customer\MemberController;
+use App\Http\Controllers\v1\Customer\MembershipController as CustomerMembershipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +55,12 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllTeamProfiles', [TeamController::class, 'getAllTeamProfiles']);
         Route::get('getTeamProfileById', [TeamController::class, 'getTeamProfileById']);
         Route::delete('deleteTeamProfileById', [TeamController::class, 'deleteTeamProfileById']);
+        // Team Member // Testing Required
+        Route::post('addTeamMember', [TeamController::class, 'addTeamMember']);
+        Route::post('updateTeamMember', [TeamController::class, 'updateTeamMember']);
+        Route::get('getAllTeamMembers', [TeamController::class, 'getAllTeamMembers']);
+        Route::get('getTeamMemberById', [TeamController::class, 'getTeamMemberById']);
+        Route::delete('deleteTeamMemberById', [TeamController::class, 'deleteTeamMemberById']);
 
         //FAQ
         Route::post('createFaq', [FaqController::class, 'createFaq']);
@@ -87,21 +96,32 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllMemberships', [MembershipController::class, 'getAllMemberships']);
         Route::delete('deletemembership', [MembershipController::class, 'deletemembership']);
         Route::get('getMembershipById', [MembershipController::class, 'getMembershipById']);
-
+        
         //createSponsorship
         Route::post('createSponsorship', [SponsorshipController::class, 'createSponsorship']);
         Route::post('updateSponsorship', [SponsorshipController::class, 'updateSponsorship']);
         Route::get('getAllSponsorship', [SponsorshipController::class, 'getAllSponsorship']);
         Route::delete('deleteSponsorship', [SponsorshipController::class, 'deleteSponsorship']);
         Route::get('getSponsorshipById', [SponsorshipController::class, 'getSponsorshipById']);
+
+        // Member
+        Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+
     });
 });
 
 Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
-
+    
     // Donation
     Route::post('addDonation', [DonationController::class, 'addDonation']);
-
+    
+    // Member
+    Route::post('addMember', [MemberController::class, 'addMember']);
+    
+    // Membership
+    Route::get('getAllMemberships', [CustomerMembershipController::class, 'getAllMemberships']);
+    Route::get('getMembershipById', [CustomerMembershipController::class, 'getMembershipById']);
+    
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
     });
 });
