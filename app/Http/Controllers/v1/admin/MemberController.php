@@ -25,6 +25,17 @@ class MemberController extends Controller
             }
     
             $query = Member::query()->with('user');
+            if($request->has('is_athlete'))
+            {
+                if($request->is_athlete == true)
+                {
+                    $query->where('is_athlete',true);
+                }
+                if($request->is_athlete == false)
+                {
+                    $query->where('is_athlete',false);
+                }
+            }
             $count = $query->count();
     
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -48,6 +59,24 @@ class MemberController extends Controller
             }
     
             return $this->sendResponse(["count" => $count, "data" => $members], 'Data Fetched Successfully.', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getMemberById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|exists:members,id',
+            ]);
+    
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+    
+            $query = Member::query()->where('id',$request->id)->with('user')->first();
+           
+            return $this->sendResponse($query, 'Data Fetched Successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }

@@ -70,34 +70,6 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    // public function getAllMembers(Request $request): JsonResponse
-    // {
-    //     try {
-    //         $validator = Validator::make($request->all(), [
-    //             'pageNo' => 'nullable|numeric',
-    //             'limit' => 'nullable|numeric',
-    //             'name' => 'nullable|string|max:255',
-    //         ]);
-    //         if ($validator->fails()) {
-    //             return $this->sendError('Validation Error.', $validator->errors(), 400);
-    //         }
-    //         $query = Member::query();
-    //         $count = $query->count();
-    //         if ($request->has('pageNo') && $request->has('limit')) {
-    //             $limit = $request->limit;
-    //             $pageNo = $request->pageNo;
-    //             $skip = $limit * $pageNo;
-    //             $query->skip($skip)->limit($limit);
-    //         }
-    //         $data = $query->orderBy('id', 'DESC')->get();
-    //         if (count($data) <= 0) {
-    //             return $this->sendError('No data available.');
-    //         }
-    //         return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully.', true);
-    //     } catch (Exception $e) {
-    //         return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-    //     }
-    // }
     
     
 

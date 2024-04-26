@@ -40,8 +40,11 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
     // Authentication
     Route::post('adminRegister', [AdminAuthController::class, 'adminRegister']);
     Route::post('adminLogin', [AdminAuthController::class, 'adminLogin']);
-
+    
     Route::group(['middleware' => ['cors', 'jwt.verify', 'admin']], function () {
+        
+        //Auth
+        Route::get('getCurrentProfile', [AdminAuthController::class, 'getCurrentProfile']);
 
         // Donation
         Route::get('getAllDonors', [AdminDonationController::class, 'getAllDonors']);
@@ -109,6 +112,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
         // Member
         Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+        Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
 
         //ContactUs
         Route::get('getAllContactUs',[AdminContactUsController::class,'getAllContactUs']);

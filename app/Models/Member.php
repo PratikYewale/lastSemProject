@@ -24,4 +24,10 @@ class Member extends Model
     public function getAchievementsAttribute($value){
         return json_decode($value,true);
     }
+    public function getSchoolsAttribute($value){
+        return json_decode($value,true);
+    }
+    public function getLinksAttribute($value){
+        return json_decode($value,true);
+    }
 }
