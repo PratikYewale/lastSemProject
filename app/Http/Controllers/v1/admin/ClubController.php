@@ -35,7 +35,7 @@ class ClubController extends Controller
             return $this->sendResponse($addClub, 'Club Saved Successfully.', true);
 
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(),$e->getTrace(), 413);
         }
     }
     public function updateClub(Request $request): JsonResponse
@@ -86,9 +86,9 @@ class ClubController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Club'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError('No Data Available.');
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);

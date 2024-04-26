@@ -26,11 +26,6 @@ class MembershipController extends Controller
                 'selling_price' => 'nullable',
                 'is_active' => 'nullable',
                 'discount' => 'nullable',
-                'start_date' => 'nullable|date', 
-
-
-
-
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());

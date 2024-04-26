@@ -24,10 +24,6 @@ class CreateMembersTable extends Migration
             $table->longText('address_line1')->nullable();
             $table->longText('address_line2')->nullable();
             $table->boolean('is_athlete')->default(false);
-            $table->bigInteger('team_id')->unsigned();
-            $table->foreign('team_id')->references('id')->on('teams');
-            $table->bigInteger('club_id')->unsigned();
-            $table->foreign('club_id')->references('id')->on('clubs');
             $table->json('schools')->nullable();
             $table->json('links')->nullable();
             $table->string('bio')->nullable();
