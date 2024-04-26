@@ -24,7 +24,7 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
     
-            $query = Member::query()->with('user');
+            $query = Member::query()->with(['user']);
             if($request->has('is_athlete'))
             {
                 if($request->is_athlete == true)
@@ -47,7 +47,6 @@ class MemberController extends Controller
     
             $members = $query->orderBy('id', 'DESC')->get()->toArray();
     
-            // Ensure each JSON-encoded field is decoded only if it's a string
             foreach ($members as &$member) {
                 $member['achievements'] = is_string($member['achievements']) ? json_decode($member['achievements'], true) : $member['achievements'];
                 $member['schools'] = is_string($member['schools']) ? json_decode($member['schools'], true) : $member['schools'];
