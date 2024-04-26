@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use App\Models\News;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -39,17 +39,17 @@ class NewsController extends Controller
     public function createNews(Request $request): JsonResponse
     {
 
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
                 'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'title'=>'nullable',
-                'user_id'=>'nullable',
-                'img_description'=>'nullable',
-                'intro_para'=>'nullable',
-                'conclusion'=>'nullable',
-                'body_para'=>'nullable'
-        
+                'title' => 'nullable',
+                'user_id' => 'nullable',
+                'img_description' => 'nullable',
+                'intro_para' => 'nullable',
+                'conclusion' => 'nullable',
+                'body_para' => 'nullable'
+
 
             ]);
             if ($validator->fails()) {
@@ -57,7 +57,7 @@ class NewsController extends Controller
             }
 
             $uploadNews = new News();
-           if ($request->hasFile('primary_img')) {
+            if ($request->hasFile('primary_img')) {
                 $uploadNews->primary_img = $this->saveFile($request->file('primary_img'), 'NewsPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
@@ -66,18 +66,15 @@ class NewsController extends Controller
             $userid = Auth::user()->id;
             $uploadNews->user_id = $userid;
             $uploadNews->title = $request->title;
-            $uploadNews->img_description=$request->img_description;
-            $uploadNews->intro_para=$request->intro_para;
-            $uploadNews->body_para=$request->body_para;
-            $uploadNews->conclusion=$request->conclusion;
+            $uploadNews->img_description = $request->img_description;
+            $uploadNews->intro_para = $request->intro_para;
+            $uploadNews->body_para = $request->body_para;
+            $uploadNews->conclusion = $request->conclusion;
 
-                $uploadNews->save();
+            $uploadNews->save();
 
-                return $this->sendResponse($uploadNews->id,'News uploaded successfully',true);
-
-            }
-
-        catch (Exception $e) {
+            return $this->sendResponse($uploadNews->id, 'News uploaded successfully', true);
+        } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
@@ -100,32 +97,32 @@ class NewsController extends Controller
                 $updateNews->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
             }
             if ($request->filled('user_id')) {
-                $updateNews->user_id= $request->user_id;
+                $updateNews->user_id = $request->user_id;
             }
             if ($request->filled('title')) {
-                $updateNews->title= $request->title;
+                $updateNews->title = $request->title;
             }
             if ($request->filled('img_description')) {
-                $updateNews->img_description= $request->img_description;
+                $updateNews->img_description = $request->img_description;
             }
             if ($request->filled('intro_para')) {
-                $updateNews->intro_para= $request->intro_para;
+                $updateNews->intro_para = $request->intro_para;
             }
             if ($request->filled('body_para')) {
-                $updateNews->body_para= $request->body_para;
+                $updateNews->body_para = $request->body_para;
             }
             if ($request->filled('conclusion')) {
-                $updateNews->conclusion= $request->conclusion;
+                $updateNews->conclusion = $request->conclusion;
             }
-            
-            
+
+
             $updateNews->save();
             return $this->sendResponse($updateNews, 'News Updated Successfully', true);
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
+    
     public function getAllNews(Request $request)
     {
         try {
@@ -171,8 +168,6 @@ class NewsController extends Controller
             $deleteFaq->delete();
 
             return $this->sendResponse($deleteFaq, 'News Deleted Successfully', true);
-
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
@@ -180,20 +175,19 @@ class NewsController extends Controller
 
     public function getNewsById(Request $request): JsonResponse
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:news,id',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $News = News::query()->where('id',$request->id)->first();
+            $News = News::query()->where('id', $request->id)->first();
 
             return $this->sendResponse($News, "News fetched successfully", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong', $e->getMessage(), 500);
         }
     }
-    }
-
+}

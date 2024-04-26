@@ -87,4 +87,28 @@ class ContactUsController extends Controller
             return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
     }
+    // public function resolveQuery(Request $request)
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'message' => 'required|nullable',
+    //             'attachment' => 'nullable'
+    //         ]);
+
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         $resolveQuery = new ContactUs;
+    //         $ContactUs->name = $request->name;
+    //         $ContactUs->email = $request->email;
+    //         $ContactUs->mobile_no = $request->mobile_no;
+    //         $ContactUs->message = $request->message;
+            
+    //         $ContactUs->save();
+    //         return $this->sendResponse($ContactUs, 'Contact added Successfully.', true);
+    //     } catch (Exception $e) {
+    //         return $this->sendError('Something went wrong', $e->getTrace(), 413);
+    //     }
+    // }
+    //Pending
 }
