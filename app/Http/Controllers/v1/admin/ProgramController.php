@@ -76,46 +76,14 @@ class ProgramController extends Controller
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-        public function updateProgram(Request $request): JsonResponse
-        {
-            try {
-                $validator = Validator::make($request->all(), [
-                    'id' => 'required|integer|exists:programs,id'
-                ]);
-                if ($validator->fails()) {
-                    return $this->sendError('Validation Error.', $validator->errors());
-                }
-    
-                $updateProgram = Program::query()->where('id', $request->id)->first();
-                if ($request->filled('type')) {
-                    $updateProgram->type= $request->type;
-                }
-                if ($request->filled('title')) {
-                    $updateProgram->title= $request->title;
-                }
-                if ($request->hasFile('primary_img')) {
-                    $updateProgram->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
-                }
-                if ($request->hasFile('secondary_img')) {
-                    $updateProgram->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
-                }
-            
-                if ($request->filled('intro_para')) {
-                    $updateProgram->intro_para= $request->intro_para;
-                }
-                if ($request->filled('body_para')) {
-                    $updateProgram->body_para= $request->body_para;
-                }
-                if ($request->filled('conclusion')) {
-                    $updateProgram->conclusion= $request->conclusion;
-                }
-                
-                
-                $updateProgram->save();
-                return $this->sendResponse($updateProgram, 'Program Updated Successfully', true);
-    
-            } catch (Exception $e) {
-                return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+    public function updateProgram(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:programs,id'
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
             }
 
             $updateProgram = Program::query()->where('id', $request->id)->first();
