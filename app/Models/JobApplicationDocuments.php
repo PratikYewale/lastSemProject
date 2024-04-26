@@ -9,4 +9,11 @@ class JobApplicationDocuments extends Model
 {
     use HasFactory;
     protected $table='job_application_doc';
+
+    public function jobApplication()
+{
+    return $this->belongsTo(JobApplication::class);
+}
+
+
 }

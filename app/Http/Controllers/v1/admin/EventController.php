@@ -141,11 +141,20 @@ class EventController extends Controller
             $validator = Validator::make($request->all(), [
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
+                'start_date' => 'nullable|date_format:Y-m-d',
+
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
             $query = Event::query();
+            if ($request->has('start_date')) {
+                $query->whereDate('start_date', '=', $request->start_date);
+            }
+            if ($request->has('end_date')) {
+                $query->whereDate('end_date', '=', $request->end_date);
+            }
+
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -155,8 +164,8 @@ class EventController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Events'] = $data;
                 $response['count'] = $count;
+                $response['Events'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {
                 return $this->sendResponse('No Data Available', [], false);
@@ -199,7 +208,10 @@ class EventController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $Event = Event::query()->where('id',$request->id)->first();
-
+            if(!$Event)
+            {
+                return $this->sendError('No data available.');
+            }
             return $this->sendResponse($Event, "Event fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);

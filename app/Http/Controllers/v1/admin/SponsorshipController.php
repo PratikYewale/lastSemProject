@@ -85,8 +85,8 @@ class SponsorshipController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Sponsorship'] = $data;
                 $response['count'] = $count;
+                $response['Sponsorship'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {
                 return $this->sendResponse('No Data Available', [], false);
@@ -128,7 +128,10 @@ class SponsorshipController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $sponsorship = Sponsorship::query()->where('id',$request->id)->first();
-
+            if(!$sponsorship)
+            {
+                return $this->sendError('No data available.');
+            }
             return $this->sendResponse($sponsorship, "Sponsorship fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);

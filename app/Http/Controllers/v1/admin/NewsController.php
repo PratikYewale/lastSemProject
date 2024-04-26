@@ -143,8 +143,8 @@ class NewsController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['News'] = $data;
                 $response['count'] = $count;
+                $response['News'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {
                 return $this->sendResponse('No Data Available', [], false);
@@ -184,7 +184,10 @@ class NewsController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $News = News::query()->where('id', $request->id)->first();
-
+            if(!$News)
+            {
+                return $this->sendError('No data available.');
+            }
             return $this->sendResponse($News, "News fetched successfully", true);
         } catch (Exception $e) {
             return $this->sendError('Something went wrong', $e->getMessage(), 500);

@@ -59,8 +59,8 @@ class ContactUsController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Contact_us'] = $data;
                 $response['count'] = $count;
+                $response['Contact_us'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully', true);
             } else {
                 return $this->sendResponse('No Data Available', [], false);
@@ -81,8 +81,11 @@ class ContactUsController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $ContactUs = ContactUs::query()->where('id',$request->id)->first();
-
-            return $this->sendResponse($ContactUs, "Contact us fetched successfully", true);
+            if(!$ContactUs)
+            {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($ContactUs, "Contact us fetched successfully.", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);
         }

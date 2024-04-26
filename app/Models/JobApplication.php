@@ -9,4 +9,9 @@ class JobApplication extends Model
 {
     use HasFactory;
     protected $table='job_application';
+    public function documents()
+{
+    return $this->hasMany(JobApplicationDocuments::class);
+}
+
 }

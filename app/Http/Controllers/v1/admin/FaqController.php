@@ -92,11 +92,11 @@ class FaqController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['FAQ'] = $data;
                 $response['count'] = $count;
+                $response['FAQ'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully', );
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError('No Data Available');
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), 500);
@@ -134,7 +134,10 @@ class FaqController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $faq = FAQ::query()->where('id',$request->id)->first();
-
+            if(!$faq)
+            {
+                return $this->sendError('No data available.');
+            }
             return $this->sendResponse($faq, "Faq fetched successfully", true);
         }catch(Exception $e){
             return $this->sendError('Something went wrong',$e->getMessage(),500);

@@ -91,4 +91,17 @@ class AdminAuthController extends Controller
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
+    public function getCurrentProfile(Request $request): JsonResponse
+    {
+        try{
+            $user_id = Auth::user()->id;
+            $user = User::query()->where('id',$user_id)->where('role','admin')->select('id','first_name','last_name','mobile_no','email','role')->first();
+            if(!$user){
+                return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+            }
+            return $this->sendResponse($user, "User profile fetched successfully.",true);
+        }catch(Exception $e){
+            return $this->sendError($e->getMessage(),$e->getTrace(),500);
+        }
+    }
 }

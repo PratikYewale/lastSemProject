@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropColumnInMembersTable extends Migration
+class AddColumnsToMembershipTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class DropColumnInMembersTable extends Migration
      */
     public function up()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->dropForeign('members_team_id_foreign');
-        $table->dropForeign('members_club_id_foreign');
-        $table->dropColumn(['team_id', 'club_id']);
+        Schema::table('membership', function (Blueprint $table) {
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
         });
     }
 
@@ -27,7 +26,7 @@ class DropColumnInMembersTable extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
+        Schema::table('membership', function (Blueprint $table) {
             //
         });
     }
