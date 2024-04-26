@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1\Admin;
 
+use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -62,7 +63,8 @@ class NewsController extends Controller
             if ($request->hasFile('secondary_img')) {
                 $uploadNews->secondary_img = $this->saveFile($request->file('secondary_img'), 'NewsSecondaryImage');
             }
-            $uploadNews->user_id = $request->user_id;
+            $userid = Auth::user()->id;
+            $uploadNews->user_id = $userid;
             $uploadNews->title = $request->title;
             $uploadNews->img_description = $request->img_description;
             $uploadNews->intro_para = $request->intro_para;
@@ -81,7 +83,7 @@ class NewsController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id',
+                'id' => 'required|integer|exists:news,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());

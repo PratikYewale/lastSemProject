@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\EventController;
+use App\Http\Controllers\v1\Admin\JobController;
 use App\Http\Controllers\v1\Admin\SponsorshipController;
 use App\Http\Controllers\v1\Admin\ClubController;
-use App\Http\Controllers\v1\Admin\ContactUsController;
+use App\Http\Controllers\v1\Admin\ContactUsController as AdminContactUsController;
 use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
