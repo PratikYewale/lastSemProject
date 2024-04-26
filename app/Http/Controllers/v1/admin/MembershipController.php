@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Carbon\Carbon;
+
 
 class MembershipController extends Controller
 {
@@ -20,11 +22,12 @@ class MembershipController extends Controller
                 'name' => 'required',
                 'description' => 'nullable',
                 'type' => [Rule::in(['yearly', 'monthly'])],
-                'days' => 'nullable',
                 'mrp' => 'nullable',
                 'selling_price' => 'nullable',
                 'is_active' => 'nullable',
-                'discount' => 'nullable'
+                'discount' => 'nullable',
+                'start_date' => 'nullable|date', 
+
 
 
 
@@ -34,16 +37,23 @@ class MembershipController extends Controller
             }
 
             $addMembership = new Membership();
-
             $addMembership->name = $request->name;
             $addMembership->description = $request->description ?? null;
             $addMembership->type = $request->type;
-            $addMembership->days = $request->days;
             $addMembership->mrp = $request->mrp ?? 0;
             $addMembership->selling_price = $request->selling_price;
             $addMembership->discount = $addMembership->mrp > $request->selling_price ? $addMembership->mrp - $addMembership->selling_price : 0;;
             $addMembership->is_active = true;
-
+            if ($request->type == 'monthly' && $request->has('start_date')) {
+                $addMembership->start_date = $request->start_date;
+                $addMembership->end_date = Carbon::parse($request->start_date)->addMonth()->format('Y-m-d');
+            } elseif ($request->type == 'yearly' && $request->has('start_date')) {
+                $addMembership->start_date = $request->start_date;
+                $addMembership->end_date = Carbon::parse($request->start_date)->addYear()->format('Y-m-d');
+            } else {
+                $addMembership->start_date = null;
+                $addMembership->end_date = null;
+            }
             $addMembership->save();
 
             return $this->sendResponse($addMembership, 'Membership uploaded successfully.', true);
@@ -70,8 +80,6 @@ class MembershipController extends Controller
             if ($request->filled('description')) {
                 $updateMembership->description = $request->description;
             }
-
-
             if ($request->filled('type')) {
                 $updateMembership->type = $request->type;
             }
@@ -86,6 +94,14 @@ class MembershipController extends Controller
             }
             if ($request->filled('is_active')) {
                 $updateMembership->is_active = $request->is_active;
+            }
+            if ($request->filled('start_date') && in_array($updateMembership->type, ['monthly', 'yearly'])) {
+                $updateMembership->start_date = $request->start_date;
+                if ($updateMembership->type == 'monthly') {
+                    $updateMembership->end_date = Carbon::parse($request->start_date)->addMonth()->format('Y-m-d');
+                } elseif ($updateMembership->type == 'yearly') {
+                    $updateMembership->end_date = Carbon::parse($request->start_date)->addYear()->format('Y-m-d');
+                }
             }
 
             $updateMembership->save();
@@ -115,8 +131,8 @@ class MembershipController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Membership'] = $data;
                 $response['count'] = $count;
+                $response['Membership'] = $data;
                 return $this->sendResponse($response, 'Data Fetched Successfully.', true);
             } else {
                 return $this->sendResponse('No Data Available', [], false);
@@ -156,7 +172,10 @@ class MembershipController extends Controller
                 return $this->sendError("Validation failed", $validator->errors());
             }
             $Membership = Membership::query()->where('id', $request->id)->first();
-
+            if(!$Membership)
+            {
+                return $this->sendError('No data available.');
+            }
             return $this->sendResponse($Membership, "Membership fetched successfully.", true);
         } catch (Exception $e) {
             return $this->sendError('Something went wrong', $e->getMessage(), 500);

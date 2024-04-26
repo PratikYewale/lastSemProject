@@ -93,11 +93,14 @@ class ContactUsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $ContactUs = ContactUs::query()->where('id', $request->id)->first();
-
-            return $this->sendResponse($ContactUs, "Contact us fetched successfully", true);
-        } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            $ContactUs = ContactUs::query()->where('id',$request->id)->first();
+            if(!$ContactUs)
+            {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($ContactUs, "Contact us fetched successfully.", true);
+        }catch(Exception $e){
+            return $this->sendError('Something went wrong',$e->getMessage(),500);
         }
     }
     public function resolveQuery(Request $request)

@@ -9,6 +9,9 @@ use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
+use App\Http\Controllers\V1\Customer\JobApplicationController;
+use App\Http\Controllers\V1\Admin\JobApplicationController as AppliedJobController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Admin\AdminAuthController;
@@ -71,7 +74,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         //FAQ
         Route::post('createFaq', [FaqController::class, 'createFaq']);
         Route::post('updateFaq', [FaqController::class, 'updateFaq']);
-        Route::get('getFaq', [FaqController::class, 'getFaq']);
+        Route::get('getAllFaq', [FaqController::class, 'getAllFaq']);
         Route::delete('deleteFaq', [FaqController::class, 'deleteFaq']);
         Route::get('getFaqById', [FaqController::class, 'getFaqById']);
 
@@ -132,8 +135,11 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::delete('deleteJob',[JobController::class,'deleteJob']);
         Route::get('getJobById',[JobController::class,'getJobById']);
         Route::get('getAllJob',[JobController::class,'getAllJob']);
+        Route::post('updateJob',[JobController::class,'updateJob']);
 
-
+        //JobApplication
+        Route::get('getJobApplicationByJobId',[AppliedJobController::class,'getJobApplicationByJobId']);
+        Route::get('getJobApplicationById',[AppliedJobController::class,'getJobApplicationById']);
     });
 });
 
@@ -151,6 +157,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     // Membership
     Route::get('getAllMemberships', [CustomerMembershipController::class, 'getAllMemberships']);
     Route::get('getMembershipById', [CustomerMembershipController::class, 'getMembershipById']);
+
+    //JobApplication
+    Route::post('addJobApplication',[JobApplicationController::class,'addJobApplication']);
     
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
     });

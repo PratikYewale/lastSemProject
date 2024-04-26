@@ -19,7 +19,7 @@ class MemberController extends Controller
                 'limit' => 'nullable|numeric',
                 'name' => 'nullable|string|max:255',
             ]);
-    
+
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
@@ -37,14 +37,14 @@ class MemberController extends Controller
                 }
             }
             $count = $query->count();
-    
+
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
                 $pageNo = $request->pageNo;
                 $skip = $limit * $pageNo;
                 $query->skip($skip)->limit($limit);
             }
-    
+
             $members = $query->orderBy('id', 'DESC')->get()->toArray();
     
             foreach ($members as &$member) {
@@ -52,11 +52,11 @@ class MemberController extends Controller
                 $member['schools'] = is_string($member['schools']) ? json_decode($member['schools'], true) : $member['schools'];
                 $member['links'] = is_string($member['links']) ? json_decode($member['links'], true) : $member['links'];
             }
-    
+
             if (count($members) <= 0) {
                 return $this->sendError('No data available.');
             }
-    
+
             return $this->sendResponse(["count" => $count, "data" => $members], 'Data Fetched Successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
