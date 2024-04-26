@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\v1\Admin;
 
-use Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -12,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
