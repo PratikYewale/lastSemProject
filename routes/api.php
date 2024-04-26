@@ -115,10 +115,12 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
         // Member
         Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+        Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
 
         //ContactUs
         Route::get('getAllContactUs',[AdminContactUsController::class,'getAllContactUs']);
         Route::get('getContactUsById',[AdminContactUsController::class,'getContactUsById']);
+        Route::post('resolveQuery',[AdminContactUsController::class,'resolveQuery']);
 
         //Event
         Route::post('createEvent',[EventController::class,'createEvent']);

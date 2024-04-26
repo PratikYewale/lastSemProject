@@ -23,8 +23,19 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-
-            $query = Member::query()->with('user');
+    
+            $query = Member::query()->with(['user']);
+            if($request->has('is_athlete'))
+            {
+                if($request->is_athlete == true)
+                {
+                    $query->where('is_athlete',true);
+                }
+                if($request->is_athlete == false)
+                {
+                    $query->where('is_athlete',false);
+                }
+            }
             $count = $query->count();
 
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -35,8 +46,7 @@ class MemberController extends Controller
             }
 
             $members = $query->orderBy('id', 'DESC')->get()->toArray();
-
-            // Ensure each JSON-encoded field is decoded only if it's a string
+    
             foreach ($members as &$member) {
                 $member['achievements'] = is_string($member['achievements']) ? json_decode($member['achievements'], true) : $member['achievements'];
                 $member['schools'] = is_string($member['schools']) ? json_decode($member['schools'], true) : $member['schools'];
@@ -48,6 +58,24 @@ class MemberController extends Controller
             }
 
             return $this->sendResponse(["count" => $count, "data" => $members], 'Data Fetched Successfully.', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getMemberById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|exists:members,id',
+            ]);
+    
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+    
+            $query = Member::query()->where('id',$request->id)->with('user')->first();
+           
+            return $this->sendResponse($query, 'Data Fetched Successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }

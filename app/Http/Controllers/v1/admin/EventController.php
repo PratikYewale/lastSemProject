@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -38,19 +38,19 @@ class EventController extends Controller
     public function createEvent(Request $request): JsonResponse
     {
 
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'program_id'=>'nullable|exists:programs,id',
-                'team_id'=>'nullable|exists:teams,id',
-                'title'=>'required',
+                'program_id' => 'nullable|exists:programs,id',
+                'team_id' => 'nullable|exists:teams,id',
+                'title' => 'required',
                 'primary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'intro_para'=>'nullable',
-                "body_para"=>'nullable',
-                'conclusion'=>'nullable',
-                'start_date'=>'nullable',
-                'end_date'=>'nullable',
-                'is_competition'=>'nullable'
+                'intro_para' => 'nullable',
+                "body_para" => 'nullable',
+                'conclusion' => 'nullable',
+                'start_date' => 'nullable',
+                'end_date' => 'nullable',
+                'is_competition' => 'nullable'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -58,28 +58,25 @@ class EventController extends Controller
 
             $addEvent = new Event();
             $addEvent->program_id = $request->program_id;
-            $addEvent->team_id=$request->team_id;
-            $addEvent->title=$request->title;
-           if ($request->hasFile('primary_img')) {
+            $addEvent->team_id = $request->team_id;
+            $addEvent->title = $request->title;
+            if ($request->hasFile('primary_img')) {
                 $addEvent->primary_img = $this->saveFile($request->file('primary_img'), 'EventPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
                 $addEvent->secondary_img = $this->saveFile($request->file('secondary_img'), 'EventSecondaryImage');
             }
             $addEvent->intro_para = $request->intro_para;
-            $addEvent->body_para=$request->body_para;
-            $addEvent->conclusion=$request->conclusion;
-            $addEvent->start_date=$request->start_date;
-            $addEvent->end_date=$request->end_date;
-            $addEvent->is_competition=$request->is_competition;
+            $addEvent->body_para = $request->body_para;
+            $addEvent->conclusion = $request->conclusion;
+            $addEvent->start_date = $request->start_date;
+            $addEvent->end_date = $request->end_date;
+            $addEvent->is_competition = $request->is_competition;
             $addEvent->save();
 
-                return $this->sendResponse($addEvent,'Event uploaded successfully',true);
-
-            }
-
-        catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendResponse($addEvent, 'Event uploaded successfully', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
 
@@ -96,13 +93,13 @@ class EventController extends Controller
 
             $updateEvent = Event::query()->where('id', $request->id)->first();
             if ($request->filled('program_id')) {
-                $updateEvent->program_id= $request->program_id;
+                $updateEvent->program_id = $request->program_id;
             }
             if ($request->filled('team_id')) {
-                $updateEvent->team_id= $request->team_id;
+                $updateEvent->team_id = $request->team_id;
             }
             if ($request->filled('title')) {
-                $updateEvent->title= $request->title;
+                $updateEvent->title = $request->title;
             }
             if ($request->hasFile('primary_img')) {
                 $updateEvent->primary_img = $this->saveFile($request->primary_img, 'EventPrimaryImage');
@@ -110,26 +107,25 @@ class EventController extends Controller
             if ($request->hasFile('secondary_img')) {
                 $updateEvent->secondary_img = $this->saveFile($request->secondary_img, 'EventSecondaryImage');
             }
-           if ($request->filled('intro_para')) {
-                $updateEvent->intro_para= $request->intro_para;
+            if ($request->filled('intro_para')) {
+                $updateEvent->intro_para = $request->intro_para;
             }
             if ($request->filled('body_para')) {
-                $updateEvent->body_para= $request->body_para;
+                $updateEvent->body_para = $request->body_para;
             }
             if ($request->filled('start_date')) {
-                $updateEvent->start_date= $request->start_date;
+                $updateEvent->start_date = $request->start_date;
             }
             if ($request->filled('end_date')) {
-                $updateEvent->end_date= $request->end_date;
+                $updateEvent->end_date = $request->end_date;
             }
             if ($request->filled('conclusion')) {
-                $updateEvent->conclusion= $request->conclusion;
+                $updateEvent->conclusion = $request->conclusion;
             }
-            
-            
+
+
             $updateEvent->save();
             return $this->sendResponse($updateEvent, 'Event Updated Successfully', true);
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
@@ -190,8 +186,6 @@ class EventController extends Controller
             $deleteEvent->delete();
 
             return $this->sendResponse($deleteEvent, 'Events Deleted Successfully', true);
-
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
@@ -199,7 +193,7 @@ class EventController extends Controller
 
     public function getEventById(Request $request): JsonResponse
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:events,id',
             ]);
@@ -213,8 +207,8 @@ class EventController extends Controller
                 return $this->sendError('No data available.');
             }
             return $this->sendResponse($Event, "Event fetched successfully", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+        } catch (Exception $e) {
+            return $this->sendError('Something went wrong', $e->getMessage(), 500);
         }
     }
 }
