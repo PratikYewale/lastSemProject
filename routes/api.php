@@ -43,7 +43,9 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
     // Authentication
     Route::post('adminRegister', [AdminAuthController::class, 'adminRegister']);
     Route::post('adminLogin', [AdminAuthController::class, 'adminLogin']);
-    
+    Route::post('forgetPasswordAdmin',[AdminAuthController::class,'forgetPasswordAdmin']);
+    Route::post('checkOtpAndLoginEmail',[AdminAuthController::class,'checkOtpAndLoginEmail']);
+    Route::post('updatePassword',[AdminAuthController::class,'updatePassword']);
     Route::group(['middleware' => ['cors', 'jwt.verify', 'admin']], function () {
         
         //Auth
