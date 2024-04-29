@@ -32,13 +32,12 @@ class FaqController extends Controller
             $faq->is_active = $request->is_active;
             $faq->save();
 
-            return $this->sendResponse($faq, 'FAQ Saved Successfully', true);
+            return $this->sendResponse($faq, 'FAQ saved successfully.', true);
 
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-
 
     public function updateFaq(Request $request): JsonResponse
     {
@@ -116,8 +115,6 @@ class FaqController extends Controller
             $deleteFaq->delete();
 
             return $this->sendResponse($deleteFaq, 'FAQ Deleted Successfully', true);
-
-
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
