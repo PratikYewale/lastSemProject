@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\admin;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\JwtMiddleware;
+use App\Http\Middleware\member;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'cors' => Cors::class,
         'jwt.verify' => JwtMiddleware::class,
         'admin' => admin::class,
+        'member' => member::class,
     ];
 }

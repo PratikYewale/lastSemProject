@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 
 use App\Http\Controllers\Controller;
@@ -22,16 +23,16 @@ class admin
     {
         
         try {
-            if (!$request->user()->is_admin == true) {
+            if (!$request->user()->role == 'admin') {
                 $response = [
                     "success"=>false,
                     "message"=>"Unauthorized access."
                 ];
-                return response()->json($response, 401  );
+                return response()->json($response, 401);
             }
             return $next($request);
         } catch (Exception $e) {
-            return response()->json($e->getMessage(),$e->getTrace());
+            return response()->json($e->getMessage());
         }
     }
 }
