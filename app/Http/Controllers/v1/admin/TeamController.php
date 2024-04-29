@@ -164,7 +164,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully', true);
+            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -184,7 +184,7 @@ class TeamController extends Controller
             if (empty($getTeam)) {
                 return $this->sendError("No team found.");
             }
-            
+
             return $this->sendResponse($getTeam, 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -298,7 +298,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully', true);
+            return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -431,7 +431,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data Fetched Successfully.', true);
+            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -447,10 +447,10 @@ class TeamController extends Controller
             }
             $getTeamMember = TeamMember::query()->where('id', $request->id)->with(['team', 'teamprofiles', 'member'])->first();
 
-                $getTeamMember['member']['achievements'] = is_string($getTeamMember['member']['achievements']) ? json_decode($getTeamMember['member']['achievements'], true) : $getTeamMember['member']['achievements'];
-                $getTeamMember['member']['schools'] = is_string($getTeamMember['member']['schools']) ? json_decode($getTeamMember['member']['schools'], true) : $getTeamMember['member']['schools'];
-                $getTeamMember['member']['links'] = is_string($getTeamMember['member']['links']) ? json_decode($getTeamMember['member']['links'], true) : $getTeamMember['member']['links'];
-                $getTeamMember['team']['links'] = is_string($getTeamMember['team']['links']) ? json_decode($getTeamMember['team']['links'], true) : $getTeamMember['team']['links'];
+            $getTeamMember['member']['achievements'] = is_string($getTeamMember['member']['achievements']) ? json_decode($getTeamMember['member']['achievements'], true) : $getTeamMember['member']['achievements'];
+            $getTeamMember['member']['schools'] = is_string($getTeamMember['member']['schools']) ? json_decode($getTeamMember['member']['schools'], true) : $getTeamMember['member']['schools'];
+            $getTeamMember['member']['links'] = is_string($getTeamMember['member']['links']) ? json_decode($getTeamMember['member']['links'], true) : $getTeamMember['member']['links'];
+            $getTeamMember['team']['links'] = is_string($getTeamMember['team']['links']) ? json_decode($getTeamMember['team']['links'], true) : $getTeamMember['team']['links'];
 
             if (empty($getTeamMember)) {
                 return $this->sendError("No team found.");

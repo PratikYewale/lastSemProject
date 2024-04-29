@@ -22,7 +22,7 @@ class JobApplicationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
 
             $query = JobApplication::where('job_id', $request->job_id)->with('documents');
@@ -46,7 +46,7 @@ class JobApplicationController extends Controller
                 return $this->sendError('No data available.');
             }
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -58,18 +58,15 @@ class JobApplicationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             $JobApplication = JobApplication::query()->where('id', $request->id)->with('documents')->first();
             if (!$JobApplication) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($JobApplication, "Job Application fetched successfully", true);
+            return $this->sendResponse($JobApplication, "Job Application fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
-
 }

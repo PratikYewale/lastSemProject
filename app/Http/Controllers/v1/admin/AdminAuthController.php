@@ -23,18 +23,14 @@ class AdminAuthController extends Controller
         $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
         $uploadsPath = public_path('uploads');
         $directoryPath = "$uploadsPath/$fileName";
-
         if (!File::exists($uploadsPath)) {
             File::makeDirectory($uploadsPath, 0755, true);
         }
-
         if (!File::exists($directoryPath)) {
             File::makeDirectory($directoryPath, 0755, true);
         }
-
         $destinationPath = "$directoryPath/$newFileName";
         $file->move($directoryPath, $newFileName);
-
         return "/$fileName/" . $newFileName;
     }
     public function adminRegister(Request $request): JsonResponse
@@ -88,20 +84,20 @@ class AdminAuthController extends Controller
             }
             return $this->sendError("Invalid credentials", [], 401);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function getCurrentProfile(Request $request): JsonResponse
     {
-        try{
+        try {
             $user_id = Auth::user()->id;
-            $user = User::query()->where('id',$user_id)->where('role','admin')->select('id','first_name','last_name','mobile_no','email','role')->first();
-            if(!$user){
+            $user = User::query()->where('id', $user_id)->where('role', 'admin')->select('id', 'first_name', 'last_name', 'mobile_no', 'email', 'role')->first();
+            if (!$user) {
                 return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
             }
-            return $this->sendResponse($user, "User profile fetched successfully.",true);
-        }catch(Exception $e){
-            return $this->sendError($e->getMessage(),$e->getTrace(),500);
+            return $this->sendResponse($user, "User profile fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

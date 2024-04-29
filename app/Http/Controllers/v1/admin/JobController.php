@@ -55,14 +55,13 @@ class JobController extends Controller
             $addjob->hiring_manager_name = $request->hiring_manager_name;
             $addjob->hiring_manager_contact_no = $request->hiring_manager_contact_no;
             $addjob->hiring_manager_email = $request->hiring_manager_email;
-            $addjob->status = $request->status;
+            $addjob->status = "active";
 
             $addjob->save();
 
-            return $this->sendResponse($addjob, 'Job Saved Successfully', true);
-
+            return $this->sendResponse($addjob, 'Job saved successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -79,11 +78,9 @@ class JobController extends Controller
             $deleteJob = Job::query()->where('id', $request->id)->first();
             $deleteJob->delete();
 
-            return $this->sendResponse($deleteJob, 'Job Deleted Successfully', true);
-
-
+            return $this->sendResponse($deleteJob, 'Job deleted successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function getJobById(Request $request): JsonResponse
@@ -94,15 +91,15 @@ class JobController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             $Job = Job::query()->where('id', $request->id)->with('jobApplications',)->first();
             if (!$Job) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($Job, "Job fetched successfully", true);
+            return $this->sendResponse($Job, "Job fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -128,9 +125,9 @@ class JobController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Job'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available.");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -197,10 +194,9 @@ class JobController extends Controller
             }
 
             $updateJob->save();
-            return $this->sendResponse($updateJob, 'Job Updated Successfully', true);
-
+            return $this->sendResponse($updateJob, 'Job updated successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }
