@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -38,7 +39,7 @@ class JobController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            $user = Auth::user()->id;
             $addjob = new Job;
 
             $addjob->company_name = $request->company_name;
@@ -48,7 +49,7 @@ class JobController extends Controller
             $addjob->company_contact_no = $request->company_contact_no;
             $addjob->experience = $request->experience;
             $addjob->location = $request->location;
-            $addjob->created_by = $request->created_by;
+            $addjob->created_by = $user;
             $addjob->application_end_date = $request->application_end_date;
             $addjob->job_type = $request->job_type;
             $addjob->salary_range = $request->salary_range;
@@ -167,9 +168,6 @@ class JobController extends Controller
             }
             if ($request->filled('location')) {
                 $updateJob->location = $request->location;
-            }
-            if ($request->filled('created_by')) {
-                $updateJob->created_by = $request->created_by;
             }
             if ($request->filled('application_end_date')) {
                 $updateJob->application_end_date = $request->application_end_date;

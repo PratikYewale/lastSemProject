@@ -39,16 +39,6 @@ class MembershipController extends Controller
             $addMembership->selling_price = $request->selling_price;
             $addMembership->discount = $addMembership->mrp > $request->selling_price ? $addMembership->mrp - $addMembership->selling_price : 0;;
             $addMembership->is_active = true;
-            if ($request->type == 'monthly' && $request->has('start_date')) {
-                $addMembership->start_date = $request->start_date;
-                $addMembership->end_date = Carbon::parse($request->start_date)->addMonth()->format('Y-m-d');
-            } elseif ($request->type == 'yearly' && $request->has('start_date')) {
-                $addMembership->start_date = $request->start_date;
-                $addMembership->end_date = Carbon::parse($request->start_date)->addYear()->format('Y-m-d');
-            } else {
-                $addMembership->start_date = null;
-                $addMembership->end_date = null;
-            }
             $addMembership->save();
 
             return $this->sendResponse($addMembership, 'Membership uploaded successfully.', true);
@@ -78,9 +68,6 @@ class MembershipController extends Controller
             if ($request->filled('type')) {
                 $updateMembership->type = $request->type;
             }
-            if ($request->filled('days')) {
-                $updateMembership->days = $request->days;
-            }
             if ($request->filled('mrp')) {
                 $updateMembership->mrp = $request->mrp;
             }
@@ -90,15 +77,6 @@ class MembershipController extends Controller
             if ($request->filled('is_active')) {
                 $updateMembership->is_active = $request->is_active;
             }
-            if ($request->filled('start_date') && in_array($updateMembership->type, ['monthly', 'yearly'])) {
-                $updateMembership->start_date = $request->start_date;
-                if ($updateMembership->type == 'monthly') {
-                    $updateMembership->end_date = Carbon::parse($request->start_date)->addMonth()->format('Y-m-d');
-                } elseif ($updateMembership->type == 'yearly') {
-                    $updateMembership->end_date = Carbon::parse($request->start_date)->addYear()->format('Y-m-d');
-                }
-            }
-
             $updateMembership->save();
             return $this->sendResponse($updateMembership, 'Membership updated successfully.', true);
         } catch (Exception $e) {

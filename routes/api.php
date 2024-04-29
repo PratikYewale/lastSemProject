@@ -144,15 +144,16 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 });
 
 Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
+
+    // Member
+    Route::post('addMember', [MemberController::class, 'addMember']);
+    Route::post('loginMember', [MemberController::class, 'loginMember']);
     
     // Donation
     Route::post('addDonation', [DonationController::class, 'addDonation']);
     
     // Contact Us
     Route::post('addContactUs', [ContactUsController::class, 'addContactUs']);
-    
-    // Member
-    Route::post('addMember', [MemberController::class, 'addMember']);
     
     // Membership
     Route::get('getAllMemberships', [CustomerMembershipController::class, 'getAllMemberships']);
@@ -161,6 +162,17 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     //JobApplication
     Route::post('addJobApplication',[JobApplicationController::class,'addJobApplication']);
     
+    
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
+        
+        //Athlete Registration
+        Route::post('athleteRegistration',[MemberController::class,'athleteRegistration']);
+        Route::post('paymentVerification',[MemberController::class,'paymentVerification']);
+    });
+
+
+
+    Route::group(['middleware' => ['cors', 'jwt.verify', 'athlete']], function () {
+
     });
 });
