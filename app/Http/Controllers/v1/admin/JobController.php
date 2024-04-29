@@ -93,7 +93,7 @@ class JobController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-            $Job = Job::query()->where('id', $request->id)->with('jobApplications',)->first();
+            $Job = Job::query()->where('id', $request->id)->with('jobApplications')->first();
             if (!$Job) {
                 return $this->sendError('No data available.');
             }
