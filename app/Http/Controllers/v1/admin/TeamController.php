@@ -214,7 +214,6 @@ class TeamController extends Controller
         }
     }
 
-    // Team Profiles
     public function addTeamProfile(Request $request): JsonResponse
     {
         try {

@@ -14,7 +14,7 @@ use Exception;
 
 class SponsorshipController extends Controller
 {
-    public function createSponsorship(Request $request): JsonResponse
+    public function createSponsorship(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -28,7 +28,6 @@ class SponsorshipController extends Controller
             $addSponsorship = new Sponsorship;
             $addSponsorship->name = $request->name;
             $addSponsorship->description = $request->description;
-
             $addSponsorship->save();
 
             return $this->sendResponse($addSponsorship, 'Sponsorship saved successfully.', true);
@@ -37,7 +36,7 @@ class SponsorshipController extends Controller
         }
     }
 
-    public function updateSponsorship(Request $request): JsonResponse
+    public function updateSponsorship(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -48,21 +47,18 @@ class SponsorshipController extends Controller
             }
 
             $updateSponsorship = Sponsorship::query()->where('id', $request->id)->first();
-
             if ($request->filled('name')) {
                 $updateSponsorship->name = $request->name;
             }
             if ($request->filled('description')) {
                 $updateSponsorship->description = $request->description;
             }
-
             $updateSponsorship->save();
             return $this->sendResponse($updateSponsorship, 'Sponsorship updated successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllSponsorship(Request $request)
     {
         try {
@@ -112,7 +108,6 @@ class SponsorshipController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getSponsorshipById(Request $request): JsonResponse
     {
         try {

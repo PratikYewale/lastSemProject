@@ -24,13 +24,10 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
             $addClub = new Club;
             $addClub->name = $request->name;
             $addClub->description = $request->description;
-
             $addClub->save();
-
             return $this->sendResponse($addClub, 'Club saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -45,16 +42,13 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
             $updateclub = Club::query()->where('id', $request->id)->first();
-
             if ($request->filled('name')) {
                 $updateclub->name = $request->name;
             }
             if ($request->filled('description')) {
                 $updateclub->description = $request->description;
             }
-
             $updateclub->save();
             return $this->sendResponse($updateclub, 'Club updated successfully.', true);
         } catch (Exception $e) {

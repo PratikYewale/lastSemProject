@@ -21,7 +21,6 @@ class ContactUsController extends Controller
                 'mobile_no' => 'required|nullable',
                 'message' => 'nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }

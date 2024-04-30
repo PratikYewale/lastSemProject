@@ -7,14 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
-
     public function createJob(Request $request): JsonResponse
     {
         try {
@@ -34,14 +33,13 @@ class JobController extends Controller
                 'hiring_manager_contact_no' => 'nullable',
                 'hiring_manager_email' => 'nullable',
                 'status' => [Rule::in(['Active', 'Closed', 'Pending', 'Draft', 'Expired', 'On Hold', 'Filled', 'Cancelled', 'Other'])],
-
+                'vacancy' => 'nullable'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $user = Auth::user()->id;
             $addjob = new Job;
-
             $addjob->company_name = $request->company_name;
             $addjob->position = $request->position;
             $addjob->description = $request->description;
@@ -56,16 +54,14 @@ class JobController extends Controller
             $addjob->hiring_manager_name = $request->hiring_manager_name;
             $addjob->hiring_manager_contact_no = $request->hiring_manager_contact_no;
             $addjob->hiring_manager_email = $request->hiring_manager_email;
+            $addjob->vacancy = $request->vacancy;
             $addjob->status = "active";
-
             $addjob->save();
-
             return $this->sendResponse($addjob, 'Job saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function deleteJob(Request $request): JsonResponse
     {
         try {
@@ -75,10 +71,8 @@ class JobController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
             $deleteJob = Job::query()->where('id', $request->id)->first();
             $deleteJob->delete();
-
             return $this->sendResponse($deleteJob, 'Job deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -90,7 +84,6 @@ class JobController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:job,id',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
@@ -103,7 +96,6 @@ class JobController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllJob(Request $request)
     {
         try {
@@ -134,8 +126,6 @@ class JobController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function updateJob(Request $request): JsonResponse
     {
         try {
@@ -147,7 +137,6 @@ class JobController extends Controller
             }
 
             $updateJob = Job::query()->where('id', $request->id)->first();
-
             if ($request->filled('company_name')) {
                 $updateJob->company_name = $request->company_name;
             }
@@ -190,7 +179,9 @@ class JobController extends Controller
             if ($request->filled('status')) {
                 $updateJob->status = $request->status;
             }
-
+            if ($request->filled('vacancy')) {
+                $updateJob->vacancy = $request->vacancy;
+            }
             $updateJob->save();
             return $this->sendResponse($updateJob, 'Job updated successfully.', true);
         } catch (Exception $e) {

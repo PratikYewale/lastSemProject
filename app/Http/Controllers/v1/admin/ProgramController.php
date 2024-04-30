@@ -35,7 +35,6 @@ class ProgramController extends Controller
 
         return "/$fileName/" . $newFileName;
     }
-
     public function createPrograms(Request $request): JsonResponse
     {
         try {
@@ -65,7 +64,6 @@ class ProgramController extends Controller
             $addprograms->intro_para = $request->intro_para;
             $addprograms->body_para = $request->body_para;
             $addprograms->conclusion = $request->conclusion;
-
             $addprograms->save();
 
             return $this->sendResponse($addprograms->id, 'Programs uploaded successfully.', true);
@@ -113,8 +111,6 @@ class ProgramController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function getAllProgram(Request $request)
     {
         try {
@@ -164,14 +160,12 @@ class ProgramController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getProgramById(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:programs,id'
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }

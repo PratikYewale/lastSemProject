@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\MediaGalleryController;
 use App\Http\Controllers\v1\Admin\EventController;
 use App\Http\Controllers\v1\Admin\JobController;
 use App\Http\Controllers\v1\Admin\SponsorshipController;
@@ -145,6 +146,12 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         //JobApplication
         Route::get('getJobApplicationByJobId',[AppliedJobController::class,'getJobApplicationByJobId']);
         Route::get('getJobApplicationById',[AppliedJobController::class,'getJobApplicationById']);
+
+        //MediaGallery
+        Route::post('addMediaGallery',[MediaGalleryController::class,'addMediaGallery']);
+        Route::delete('deleteMediaGallery',[MediaGalleryController::class,'deleteMediaGallery']);
+        Route::get('getAllMediaGallery',[MediaGalleryController::class,'getAllMediaGallery']);
+        Route::get('getMediaGalleryById',[MediaGalleryController::class,'getMediaGalleryById']);
     });
 });
 

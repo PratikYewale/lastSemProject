@@ -36,7 +36,7 @@ class NewsController extends Controller
         return "/$fileName/" . $newFileName;
     }
 
-    public function createNews(Request $request): JsonResponse
+    public function createNews(Request $request)
     {
 
         try {
@@ -68,7 +68,6 @@ class NewsController extends Controller
             $uploadNews->intro_para = $request->intro_para;
             $uploadNews->body_para = $request->body_para;
             $uploadNews->conclusion = $request->conclusion;
-
             $uploadNews->save();
 
             return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
@@ -76,8 +75,7 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-    public function updateNews(Request $request): JsonResponse
+    public function updateNews(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -149,8 +147,7 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-    public function deleteNews(Request $request): JsonResponse
+    public function deleteNews(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -160,22 +157,20 @@ class NewsController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $deleteFaq = News::query()->where('id', $request->id)->first();
-            $deleteFaq->delete();
+            $deletenews = News::query()->where('id', $request->id)->first();
+            $deletenews->delete();
 
-            return $this->sendResponse($deleteFaq, 'News deleted successfully.', true);
+            return $this->sendResponse($deletenews, 'News deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-    public function getNewsById(Request $request): JsonResponse
+    public function getNewsById(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:news,id',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
