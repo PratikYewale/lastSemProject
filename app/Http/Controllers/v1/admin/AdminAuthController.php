@@ -107,20 +107,21 @@ class AdminAuthController extends Controller
 
     public function forgetPasswordAdmin(Request $request): JsonResponse
     {
-        try{
-            $validator = Validator::make($request->all(),[
-                'email'=>'required|email|exists:users,email',
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
             ]);
-            if($validator->fails()){
-                return $this->sendError("Validation failed.",$validator->errors());
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
             }
-            $user = User::query()->where('email',$request->email)->first();
-            if(!$user){
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
                 return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
             }
             $otp = rand(100000, 999999);
             $user->email_otp = $otp;
-            $user->email_otp_expiry = Carbon::now()->addMinutes(5);;
+            $user->email_otp_expiry = Carbon::now()->addMinutes(5);
+            ;
             $user->save();
             $to_name = $user->name;
             $to_email = $user->email;
@@ -130,39 +131,38 @@ class AdminAuthController extends Controller
                     ->subject('Otp for Login');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI');
             });
-            return $this->sendResponse([],"Otp sent successfully.",true);
-        }catch(Exception $e){
-            return $this->sendError($e->getMessage(),$e->getTrace(),500);
+            return $this->sendResponse([], "Otp sent successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function checkOtpAndLoginEmail(Request $request): JsonResponse
     {
-        try{
-            $validator = Validator::make($request->all(),[
-                'email'=>'required|email|exists:users,email',
-                'otp'=>'required|string',
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
+                'otp' => 'required|string',
             ]);
-            if($validator->fails()){
-                return $this->sendError("Validation failed",$validator->errors());
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
             }
-            $user = User::query()->where('email',$request->email)->first();
-            if(!$user){
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
                 return $this->sendError('User does not exist or user doesn\'t have access. ', [], 401);
             }
-            if($user->email_otp != $request->otp){
+            if ($user->email_otp != $request->otp) {
                 return $this->sendError("Validation failed.", ['otp' => 'Invalid OTP']);
             }
-            if($user->email_otp_expiry < Carbon::now()){
+            if ($user->email_otp_expiry < Carbon::now()) {
                 return $this->sendError("Validation failed.", ['otp' => 'Expired OTP']);
             }
             $user->email_otp = null;
             $user->email_otp_expiry = null;
-            $hashedPassword = Hash::make($request->password);
-            $user->password = $hashedPassword;
+          ;
             $user->save();
-            return $this->sendResponse([], 'Password changed successfully.', 200);
-        }catch(Exception $e){
-            return $this->sendError($e->getMessage(),$e->getTrace(),500);
+            return $this->sendResponse([], 'Otp verified successfully.', 200);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function updatePassword(Request $request): JsonResponse
@@ -170,7 +170,7 @@ class AdminAuthController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|exists:users,email',
-                'password' => 'required|min:8',
+                'password' => 'required|min:6',
             ]);
             
             if ($validator->fails()) {
@@ -192,6 +192,4 @@ class AdminAuthController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
-   
 }

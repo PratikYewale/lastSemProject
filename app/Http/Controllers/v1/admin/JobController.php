@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
@@ -48,7 +48,7 @@ class JobController extends Controller
             $addjob->company_contact_no = $request->company_contact_no;
             $addjob->experience = $request->experience;
             $addjob->location = $request->location;
-            $addjob->created_by = $request->created_by;
+            $addjob->created_by =Auth::user()->id;
             $addjob->application_end_date = $request->application_end_date;
             $addjob->job_type = $request->job_type;
             $addjob->salary_range = $request->salary_range;
