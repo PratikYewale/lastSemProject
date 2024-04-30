@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Exception;
+use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JwtMiddleware
@@ -23,6 +24,9 @@ class JwtMiddleware
         ];
         try {
             $user = JWTAuth::parseToken()->authenticate();
+            if (!$user) {
+                return response()->json(['error' => 'Unauthorized access.'], Response::HTTP_UNAUTHORIZED);
+            }
         } catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 $response['message'] = 'Token is Invalid';
