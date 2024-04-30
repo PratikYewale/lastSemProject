@@ -53,7 +53,7 @@ class MembershipController extends Controller
 
             return $this->sendResponse($addMembership, 'Membership uploaded successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -100,9 +100,9 @@ class MembershipController extends Controller
             }
 
             $updateMembership->save();
-            return $this->sendResponse($updateMembership, 'Membership Updated Successfully.', true);
+            return $this->sendResponse($updateMembership, 'Membership updated successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -128,9 +128,9 @@ class MembershipController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Membership'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -150,9 +150,9 @@ class MembershipController extends Controller
             $deleteMembership = Membership::query()->where('id', $request->id)->first();
             $deleteMembership->delete();
 
-            return $this->sendResponse($deleteMembership, 'Membership Deleted Successfully', true);
+            return $this->sendResponse($deleteMembership, 'Membership deleted successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -160,20 +160,19 @@ class MembershipController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:membership,id'
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             $Membership = Membership::query()->where('id', $request->id)->first();
-            if(!$Membership)
-            {
+            if (!$Membership) {
                 return $this->sendError('No data available.');
             }
             return $this->sendResponse($Membership, "Membership fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

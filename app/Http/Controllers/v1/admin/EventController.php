@@ -74,7 +74,7 @@ class EventController extends Controller
             $addEvent->is_competition = $request->is_competition;
             $addEvent->save();
 
-            return $this->sendResponse($addEvent, 'Event uploaded successfully', true);
+            return $this->sendResponse($addEvent, 'Event uploaded successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
@@ -125,9 +125,9 @@ class EventController extends Controller
 
 
             $updateEvent->save();
-            return $this->sendResponse($updateEvent, 'Event Updated Successfully', true);
+            return $this->sendResponse($updateEvent, 'Event Updated Successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -162,9 +162,9 @@ class EventController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Events'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available.");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -185,9 +185,9 @@ class EventController extends Controller
             $deleteEvent = Event::query()->where('id', $request->id)->first();
             $deleteEvent->delete();
 
-            return $this->sendResponse($deleteEvent, 'Events Deleted Successfully', true);
+            return $this->sendResponse($deleteEvent, 'Events deleted successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -201,14 +201,13 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $Event = Event::query()->where('id',$request->id)->first();
-            if(!$Event)
-            {
+            $Event = Event::query()->where('id', $request->id)->first();
+            if (!$Event) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($Event, "Event fetched successfully", true);
+            return $this->sendResponse($Event, "Event fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

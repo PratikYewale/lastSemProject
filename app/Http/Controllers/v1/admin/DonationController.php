@@ -21,7 +21,7 @@ class DonationController extends Controller
                 'pageNo' => 'integer',
             ]);
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             $query = Donor::query()->with(['donations','honors']);
             if ($request->has('first_name')) {
@@ -39,11 +39,11 @@ class DonationController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) <= 0) {
-                return $this->sendResponse([], "No data found", false);
+                return $this->sendError("No data found.");
             }
             return $this->sendResponse(['count' => $count, 'data' => $data], "Donors fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError("Something went wrong", $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

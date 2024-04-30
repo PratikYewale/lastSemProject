@@ -74,12 +74,12 @@ class ContactUsController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Contact_us'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available.");
             }
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -87,20 +87,19 @@ class ContactUsController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:contact_us,id',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $ContactUs = ContactUs::query()->where('id',$request->id)->first();
-            if(!$ContactUs)
-            {
+            $ContactUs = ContactUs::query()->where('id', $request->id)->first();
+            if (!$ContactUs) {
                 return $this->sendError('No data available.');
             }
             return $this->sendResponse($ContactUs, "Contact us fetched successfully.", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function resolveQuery(Request $request)

@@ -4,8 +4,7 @@ namespace App\Http\Controllers\v1\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use App\Models\Club;
 use Illuminate\Support\Facades\File;
@@ -21,7 +20,7 @@ class ClubController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'description' => 'nullable',
-                 ]);
+            ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
@@ -29,13 +28,12 @@ class ClubController extends Controller
             $addClub = new Club;
             $addClub->name = $request->name;
             $addClub->description = $request->description;
-          
+
             $addClub->save();
 
-            return $this->sendResponse($addClub, 'Club Saved Successfully.', true);
-
+            return $this->sendResponse($addClub, 'Club saved successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(),$e->getTrace(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
     public function updateClub(Request $request): JsonResponse
@@ -51,17 +49,16 @@ class ClubController extends Controller
             $updateclub = Club::query()->where('id', $request->id)->first();
 
             if ($request->filled('name')) {
-                $updateclub->name= $request->name;
+                $updateclub->name = $request->name;
             }
             if ($request->filled('description')) {
-                $updateclub->description= $request->description;
+                $updateclub->description = $request->description;
             }
-           
-            $updateclub->save();
-            return $this->sendResponse($updateclub, 'Club Updated Successfully', true);
 
+            $updateclub->save();
+            return $this->sendResponse($updateclub, 'Club updated successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function getAllClub(Request $request)
@@ -107,31 +104,28 @@ class ClubController extends Controller
             $deleteClub = Club::query()->where('id', $request->id)->first();
             $deleteClub->delete();
 
-            return $this->sendResponse($deleteClub, 'Club Deleted Successfully', true);
-
-
+            return $this->sendResponse($deleteClub, 'Club deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
     public function getClubById(Request $request): JsonResponse
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:clubs,id'
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $club = Club::query()->where('id',$request->id)->first();
-            if(!$club)
-            {
+            $club = Club::query()->where('id', $request->id)->first();
+            if (!$club) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($club, "Club fetched successfully", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+            return $this->sendResponse($club, "Club fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }
