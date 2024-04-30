@@ -23,7 +23,7 @@ class DonationController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-            $query = Donor::query()->with(['donations','honors']);
+            $query = Donor::query()->with(['donations', 'honors']);
             if ($request->has('first_name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
             }
@@ -42,6 +42,25 @@ class DonationController extends Controller
                 return $this->sendError("No data found.");
             }
             return $this->sendResponse(['count' => $count, 'data' => $data], "Donors fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getDonorById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:donors,id'
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $faq = Donor::query()->where('id', $request->id)->with(['donations', 'honors'])->first();
+            if (!$faq) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($faq, "Donor fetched successfully.", true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }

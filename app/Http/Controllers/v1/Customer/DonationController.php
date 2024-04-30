@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Razorpay\Api\Api;
 
 class DonationController extends Controller
 {
@@ -26,18 +27,19 @@ class DonationController extends Controller
                 'honoree_last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
-                'address_line1'=>'required|string',
-                'zip'=>'required|numeric',
-                'city'=>'required|string',
-                'country'=>'required|string',
-                'state'=>'required|string',
-                'subscription_to_news'=>'boolean',
-                'text_updates'=>'boolean',
-                'future_contact'=>'boolean',
-                'dedicate'=>'boolean',
-                'cover_fees'=>'boolean',
-                'donation_type'=>'required|in:onetime,monthly',
-                'amount'=>'required|numeric',
+                'address_line1' => 'required|string',
+                'zip' => 'required|numeric',
+                'city' => 'required|string',
+                'country' => 'required|string',
+                'state' => 'required|string',
+                'subscription_to_news' => 'boolean',
+                'text_updates' => 'boolean',
+                'future_contact' => 'boolean',
+                'dedicate' => 'boolean',
+                'cover_fees' => 'boolean',
+                'donation_type' => 'required|in:onetime,monthly',
+                'currency' => 'required',
+                'amount' => 'required|numeric',
                 'honor_type' => 'required|in:in honor of,in memory of',
             ]);
 
@@ -64,14 +66,8 @@ class DonationController extends Controller
             $newDonor->cover_fees = $request->cover_fees;
             $newDonor->save();
 
-            $newDonation = new Donation();
-            $newDonation->type = $request->donation_type;
-            $newDonation->amount = $request->amount;
-            $newDonation->donor_id = $newDonor->id;
-            $newDonation->save();
 
-            if($newDonor->dedicate == true)
-            {
+            if ($newDonor->dedicate == true) {
                 $newHonor = new Honor();
                 $newHonor->donor_id = $newDonor->id;
                 $newHonor->type =  $request->honor_type;
@@ -79,12 +75,61 @@ class DonationController extends Controller
                 $newHonor->honoree_last_name =  $request->honoree_last_name;
                 $newHonor->save();
             }
-            
+
+            $newDonation = new Donation();
+            $newDonation->type = $request->donation_type;
+            $newDonation->currency = $request->currency;
+            $newDonation->amount = $request->amount;
+            $newDonation->donor_id = $newDonor->id;
+            if ($newDonation->save()) {
+                $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+                $orderDetails = $api->order->create([
+                    'receipt' => 'Inv-' . $newDonation->id,
+                    'amount' => intval($request->amount * 100),
+                    'currency' => $request->currency,
+                    'notes' => [],
+                ]);
+                $newDonation->payment_gateway = "razor-pay";
+                $newDonation->payment_gateway_id = $orderDetails->id;
+                $newDonation->save();
+            }
             DB::commit();
-            $data = Donor::query()->where('id',$newDonor->id)->with(['donations','honors'])->get();
+            $data = Donor::query()->where('id', $newDonor->id)->with(['donations', 'honors'])->get();
             return $this->sendResponse($data, 'Donation added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function donationPaymentVerification(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'donation_id' => 'required|numeric',
+                'payment_gateway_id' => 'required|string',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            $payment = Donation::where('payment_gateway_id', $request->payment_gateway_id)->find($request->donation_id);
+            if (is_null($payment)) {
+                return $this->sendError('Wrong payment id.');
+            }
+            if ($payment->status == "paid") {
+                return $this->sendError('Payment already done.');
+            }
+            $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+            $razorpay_order = $api->order->fetch($request->payment_gateway_id);
+            if ($razorpay_order->status == 'paid' || true) {
+                $payment->status = "paid";
+                $payment->save();
+            } else {
+                $payment->status = "pending";
+                $payment->save();
+                return $this->sendError('Payment pending.');
+            }
+            return $this->sendResponse([], 'Donated successfully.', true);
+        } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }

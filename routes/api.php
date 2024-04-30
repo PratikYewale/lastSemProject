@@ -54,6 +54,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         
         // Donation
         Route::get('getAllDonors', [AdminDonationController::class, 'getAllDonors']);
+        Route::get('getDonorById', [AdminDonationController::class, 'getDonorById']);
         
         // Teams
         Route::post('addTeam', [TeamController::class, 'addTeam']);
@@ -159,6 +160,7 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     
     // Donation
     Route::post('addDonation', [DonationController::class, 'addDonation']);
+    Route::post('donationPaymentVerification', [DonationController::class, 'donationPaymentVerification']);
     
     // Contact Us
     Route::post('addContactUs', [ContactUsController::class, 'addContactUs']);

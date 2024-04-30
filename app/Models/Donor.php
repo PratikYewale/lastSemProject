@@ -16,6 +16,6 @@ class Donor extends Model
     }
     public function honors()
     {
-        return  $this->hasOne(Honor::class);
+        return  $this->hasMany(Honor::class);
     }
 }

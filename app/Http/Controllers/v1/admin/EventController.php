@@ -80,7 +80,6 @@ class EventController extends Controller
         }
     }
 
-
     public function updateEvent(Request $request): JsonResponse
     {
         try {
