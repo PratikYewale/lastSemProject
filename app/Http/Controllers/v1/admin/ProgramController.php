@@ -35,10 +35,8 @@ class ProgramController extends Controller
 
         return "/$fileName/" . $newFileName;
     }
-
     public function createPrograms(Request $request): JsonResponse
     {
-
         try {
             $validator = Validator::make($request->all(), [
                 'type' => [Rule::in(['sport', 'development', 'training'])],
@@ -66,7 +64,6 @@ class ProgramController extends Controller
             $addprograms->intro_para = $request->intro_para;
             $addprograms->body_para = $request->body_para;
             $addprograms->conclusion = $request->conclusion;
-
             $addprograms->save();
 
             return $this->sendResponse($addprograms->id, 'Programs uploaded successfully.', true);
@@ -114,8 +111,6 @@ class ProgramController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function getAllProgram(Request $request)
     {
         try {
@@ -138,9 +133,9 @@ class ProgramController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Program'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data found.");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -160,29 +155,27 @@ class ProgramController extends Controller
             $deleteProgram = Program::query()->where('id', $request->id)->first();
             $deleteProgram->delete();
 
-            return $this->sendResponse($deleteProgram, 'Program Deleted Successfully', true);
+            return $this->sendResponse($deleteProgram, 'Program deleted successfully', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getProgramById(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:programs,id'
             ]);
-
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             $Program = Program::query()->where('id', $request->id)->first();
             if (!$Program) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($Program, "Program fetched successfully", true);
+            return $this->sendResponse($Program, "Program fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

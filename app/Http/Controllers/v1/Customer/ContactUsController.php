@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\v1\Customer;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+
 class ContactUsController extends Controller
 {
     public function addContactUs(Request $request)
@@ -18,7 +21,6 @@ class ContactUsController extends Controller
                 'mobile_no' => 'required|nullable',
                 'message' => 'nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
@@ -27,11 +29,21 @@ class ContactUsController extends Controller
             $ContactUs->email = $request->email;
             $ContactUs->mobile_no = $request->mobile_no;
             $ContactUs->message = $request->message;
-            
             $ContactUs->save();
-            return $this->sendResponse($ContactUs, 'Contact added Successfully.', true);
+            $data = [
+                'to_name' => $request->name,
+                'email' => $request->email,
+                'message' => $request->message,
+            ];
+
+            Mail::send('emails.confirmationMail', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['to_name'])
+                    ->subject('Confirmation email');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+            return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

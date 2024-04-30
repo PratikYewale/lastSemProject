@@ -15,11 +15,16 @@ class CreateMembershipHistoryTable extends Migration
     {
         Schema::create('membership_history', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('member_id')->unsigned();
+            $table->foreign('member_id')->references('id')->on('members');
             $table->bigInteger('membership_id')->unsigned();
             $table->foreign('membership_id')->references('id')->on('membership');
             $table->string('payment_gateway')->nullable();
             $table->string('payment_gateway_id')->nullable();
             $table->integer('total_amount')->nullable();
+            $table->dateTime('start_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->enum('status',['paid','pending'])->default('pending');
             $table->timestamps();
         });
     }

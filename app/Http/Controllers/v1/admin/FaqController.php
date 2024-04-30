@@ -37,7 +37,6 @@ class FaqController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function updateFaq(Request $request): JsonResponse
     {
         try {
@@ -69,7 +68,6 @@ class FaqController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllFaq(Request $request): JsonResponse
     {
         try {
@@ -118,7 +116,6 @@ class FaqController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getFaqById(Request $request): JsonResponse
     {
         try {

@@ -109,7 +109,6 @@ class ContactUsController extends Controller
                 'query_id' => 'required|exists:contact_us,id',
                 'message' => 'required|nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 422);
             }
@@ -135,7 +134,7 @@ class ContactUsController extends Controller
             Mail::send('emails.resolvedQueries', $data, function ($message) use ($data) {
                 $message->to($data['email'], $data['to_name'])
                     ->subject('Response to your query');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'INDIAN SKI AND SNOWBOARD');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
             DB::commit();
             return $this->sendResponse($resolveQuery, 'Mail sent successfully.', true);
