@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class admin
 {
@@ -23,7 +25,12 @@ class admin
     {
         
         try {
-            if (!$request->user()->role == 'admin') {
+            $user = JWTAuth::parseToken()->authenticate();
+            if (!$user) {
+                return response()->json(['error' => 'Unauthorized access.'], Response::HTTP_UNAUTHORIZED);
+            }
+            $role = $user->role;
+            if ($role != 'admin') {
                 $response = [
                     "success"=>false,
                     "message"=>"Unauthorized access."
@@ -32,6 +39,10 @@ class admin
             }
             return $next($request);
         } catch (Exception $e) {
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
+                $response['message'] = 'Token is Invalid';
+                return response()->json($response, 403, [], JSON_NUMERIC_CHECK);
+            }
             return response()->json($e->getMessage());
         }
     }

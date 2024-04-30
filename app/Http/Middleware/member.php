@@ -6,6 +6,8 @@ use Closure;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class member
 {
@@ -20,7 +22,12 @@ class member
     {
         
         try {
-            if (!$request->user()->role == 'member') {
+            $user = JWTAuth::parseToken()->authenticate();
+            if (!$user) {
+                return response()->json(['error' => 'Unauthorized access.'], Response::HTTP_UNAUTHORIZED);
+            }
+            $role = $user->role;
+            if ($role != 'member') {
                 $response = [
                     "success"=>false,
                     "message"=>"Unauthorized access."

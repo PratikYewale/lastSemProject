@@ -12,6 +12,6 @@ class MembershipHistory extends Model
 
     public function member()
     {
-        return $this->hasMany(Member::class)->with('user');
+        return $this->hasMany(Member::class,'id')->with('user');
     }
 }

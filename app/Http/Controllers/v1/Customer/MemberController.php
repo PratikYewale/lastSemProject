@@ -102,81 +102,6 @@ class MemberController extends Controller
         }
     }
 
-    // Athlete Registration
-    // public function addEventRegistration(Request $request)
-    // {
-    //     try {
-    //         $validator = Validator::make($request->all(), [
-    //             'event_ids' => 'required|array|distinct',
-    //             'event_ids.*' => 'required|integer|exists:event_details,id',
-    //             // Add validation for 'event_prices' if necessary
-    //         ]);
-
-    //         if ($validator->fails()) {
-    //             return $this->sendError('Validation Error.', $validator->errors());
-    //         }
-
-    //         $user = Auth::user()->id;
-
-    //         $eventPrices = [];
-    //         $totalAmount = 0;
-
-    //         foreach ($request->event_ids as $eventId) {
-    //             $event = EventDetails::find($eventId);
-
-
-    //             $existingRegistration = EventRegistration::whereJsonContains('event_prices', [['event_ids' => $eventId]])
-    //                 ->where('user_id', $user)
-    //                 ->where('payment_status', 'like', 'paid')
-    //                 ->first();
-
-    //             if (!is_null($existingRegistration)) {
-    //                 return $this->sendResponse([], 'You are already registered for the event with ID', false);
-    //             }
-    //             $isMember = in_array('members', Auth::user()->roles->pluck('name')->toArray());
-    //             $event_prices_by_event_id = $isMember ? $event->price_for_members : $event->price_for_students;
-    //             $totalAmount += $event_prices_by_event_id;
-
-    //             $eventPrices[] = [
-    //                 'event_ids' => $eventId,
-    //                 'event_prices' => $event_prices_by_event_id,
-    //             ];
-    //         }
-
-    //         $newEventRegistration = new EventRegistration();
-    //         $newEventRegistration->event_prices = json_encode($eventPrices);
-    //         $newEventRegistration->user_id = $user;
-    //         $newEventRegistration->gst_no = null;
-    //         $newEventRegistration->legal_name = null;
-    //         $newEventRegistration->attendance_status = null;
-    //         $newEventRegistration->event_price = $totalAmount;
-    //         $newEventRegistration->total_amount = $totalAmount;
-
-    //         if ($newEventRegistration->save()) {
-    //             $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
-    //             $orderDetails = $api->order->create([
-    //                 'receipt' => 'Inv-' . $newEventRegistration->id,
-    //                 'amount' => intval($totalAmount) * 100,
-    //                 'currency' => 'INR',
-    //                 'notes' => [],
-    //             ]);
-
-    //             $newEventRegistration->razorpay_id = $orderDetails->id;
-    //             $newEventRegistration->save();
-
-    //             $response = [
-    //                 'system_order_id' => $newEventRegistration->id,
-    //                 'razorpay_order_id' => $newEventRegistration->razorpay_id,
-    //                 'razorpay_api_key' => env('R_API_KEY'),
-    //             ];
-
-    //             return $this->sendResponse($response, 'Payment Initiated Successfully', true);
-    //         }
-    //     } catch (\Exception $e) {
-    //         return $this->sendError('Something went wrong', $e->getMessage(), 413);
-    //     }
-    // }
-
     public function athleteRegistration(Request $request)
     {
         try {
@@ -233,9 +158,6 @@ class MemberController extends Controller
                     'razorpay_order_id' => $addMembershipHistory->payment_gateway_id,
                     'razorpay_api_key' => env('R_API_KEY'),
                 ];
-                $user = User::findOrFail(Auth::User()->id);
-                $user->role = 'athlete';
-                $user->save();
                 DB::commit();
                 return $this->sendResponse($response, 'Payment initiated successfully.', true);
             }
@@ -267,6 +189,12 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $member = Member::where('user_id', Auth::user()->id)->first();
+                $member->is_athlete = true;
+                $member->save();
+                $user = User::findOrFail(Auth::User()->id);
+                $user->role = 'athlete';
+                $user->save();
             } else {
                 $payment->status = "pending";
                 $payment->save();

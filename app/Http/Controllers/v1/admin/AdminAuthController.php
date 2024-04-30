@@ -174,7 +174,7 @@ class AdminAuthController extends Controller
             ]);
             
             if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
+                return $this->sendError("Validation failed.", $validator->errors());
             }
             
             $user = User::where('email', $request->email)->first();
@@ -192,6 +192,4 @@ class AdminAuthController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
-   
 }

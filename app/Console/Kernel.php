@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Models\Member;
+use App\Models\Membership;
 use App\Models\MembershipHistory;
 use App\Models\User;
 use Illuminate\Console\Scheduling\Schedule;
@@ -26,7 +28,8 @@ class Kernel extends ConsoleKernel
 
             // Update the role of users associated with expired memberships
             foreach ($expiredMemberships as $membership) {
-                $this->updateUserRole($membership->member->user_id, 'default');
+                $member = Member::where('id',$membership->member_id)->first();
+                $this->updateUserRole($member->user_id, 'member');
             }
         })->everyMinute();
     }
