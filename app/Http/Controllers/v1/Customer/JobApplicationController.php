@@ -66,13 +66,15 @@ class JobApplicationController extends Controller
             $jobApplication->experience = $request->experience;
             $jobApplication->status = 'Applied';
             $jobApplication->save();
-
+            $documents = $request->file('document');
+            if (!is_array($documents)) {
+                return $this->sendError('Documents cannot be null.');
+            }
             foreach ($request->file('document') as $key => $file) {
                 $jobApplicationDoc = new JobApplicationDocuments();
                 $jobApplicationDoc->job_application_id = $jobApplication->id;
                 $jobApplicationDoc->document_type = $request->document_type[$key];
-                $jobApplicationDoc->document = $this->saveFile($file, 'NewsDocument'); // Pass a single file object
-
+                $jobApplicationDoc->document = $this->saveFile($file, 'NewsDocument'); 
                 $jobApplicationDoc->save();
             }
             return $this->sendResponse([$jobApplication], 'Job application and document added successfully.');

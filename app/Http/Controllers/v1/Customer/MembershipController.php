@@ -33,9 +33,9 @@ class MembershipController extends Controller
             if (count($data) > 0) {
                 $response['News'] = $data;
                 $response['count'] = $count;
-                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data found.");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -45,7 +45,7 @@ class MembershipController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:membership,id'
             ]);
 
             if ($validator->fails()) {
@@ -55,7 +55,7 @@ class MembershipController extends Controller
 
             return $this->sendResponse($Membership, "Membership fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }
