@@ -58,6 +58,7 @@ class DonationController extends Controller
             $newDonor->city = $request->city;
             $newDonor->state = $request->state;
             $newDonor->country = $request->country;
+            $newDonor->comment = $request->comment;
             $newDonor->gift_allocation = $request->gift_allocation;
             $newDonor->subscription_to_news = $request->subscription_to_news;
             $newDonor->text_updates = $request->text_updates;
