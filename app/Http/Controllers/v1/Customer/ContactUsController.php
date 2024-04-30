@@ -20,7 +20,6 @@ class ContactUsController extends Controller
                 'mobile_no' => 'required|nullable',
                 'message' => 'nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
@@ -29,7 +28,6 @@ class ContactUsController extends Controller
             $ContactUs->email = $request->email;
             $ContactUs->mobile_no = $request->mobile_no;
             $ContactUs->message = $request->message;
-
             $ContactUs->save();
             return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {

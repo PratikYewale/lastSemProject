@@ -109,7 +109,6 @@ class ContactUsController extends Controller
                 'query_id' => 'required|exists:contact_us,id',
                 'message' => 'required|nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 422);
             }

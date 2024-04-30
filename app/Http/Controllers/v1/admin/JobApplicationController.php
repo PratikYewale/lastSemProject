@@ -20,27 +20,21 @@ class JobApplicationController extends Controller
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-
             $query = JobApplication::where('job_id', $request->job_id)->with('documents');
             $count = $query->count();
-
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
                 $pageNo = $request->pageNo;
                 $skip = $limit * ($pageNo - 1);
                 $query = $query->skip($skip)->take($limit);
             }
-
             $jobApplications = $query->get();
-
             if (!$jobApplications->isEmpty()) {
                 $response['count'] = $count;
                 $response['job_applications'] = $jobApplications;
-
                 return $this->sendResponse($response, "Job applications fetched successfully.", true);
             } else {
                 return $this->sendError('No data available.');
@@ -49,14 +43,12 @@ class JobApplicationController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getJobApplicationById(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:job_application,id',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }

@@ -32,12 +32,11 @@ class FaqController extends Controller
             $faq->is_active = $request->is_active;
             $faq->save();
 
-return $this->sendResponse($faq, 'FAQ saved successfully.', true);
+            return $this->sendResponse($faq, 'FAQ saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function updateFaq(Request $request): JsonResponse
     {
         try {
@@ -69,7 +68,6 @@ return $this->sendResponse($faq, 'FAQ saved successfully.', true);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllFaq(Request $request): JsonResponse
     {
         try {
@@ -118,7 +116,6 @@ return $this->sendResponse($faq, 'FAQ saved successfully.', true);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getFaqById(Request $request): JsonResponse
     {
         try {

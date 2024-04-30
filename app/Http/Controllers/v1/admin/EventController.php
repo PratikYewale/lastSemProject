@@ -33,11 +33,8 @@ class EventController extends Controller
 
         return "/$fileName/" . $newFileName;
     }
-
-
     public function createEvent(Request $request): JsonResponse
     {
-
         try {
             $validator = Validator::make($request->all(), [
                 'program_id' => 'nullable|exists:programs,id',
@@ -79,8 +76,6 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
-
     public function updateEvent(Request $request): JsonResponse
     {
         try {
@@ -130,7 +125,6 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllEvents(Request $request)
     {
         try {
@@ -170,8 +164,6 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function deleteEvent(Request $request): JsonResponse
     {
         try {
@@ -190,7 +182,6 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getEventById(Request $request): JsonResponse
     {
         try {

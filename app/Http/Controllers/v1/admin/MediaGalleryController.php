@@ -128,7 +128,7 @@ class MediaGalleryController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function getMediaGalleryById(Request $request): JsonResponse
+    public function getMediaGalleryById(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [

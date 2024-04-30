@@ -66,7 +66,6 @@ class JobApplicationController extends Controller
             $jobApplication->experience = $request->experience;
             $jobApplication->status = 'Applied';
             $jobApplication->save();
-           
             $documents = $request->file('document');
             if (!is_array($documents)) {
                 return $this->sendError('Documents cannot be null.');

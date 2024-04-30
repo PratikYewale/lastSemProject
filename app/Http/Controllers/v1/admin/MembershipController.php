@@ -37,7 +37,7 @@ class MembershipController extends Controller
             $addMembership->type = $request->type;
             $addMembership->mrp = $request->mrp ?? 0;
             $addMembership->selling_price = $request->selling_price;
-            $addMembership->discount = $addMembership->mrp > $request->selling_price ? $addMembership->mrp - $addMembership->selling_price : 0;;
+            $addMembership->discount = $addMembership->mrp > $request->selling_price ? $addMembership->mrp - $addMembership->selling_price : 0;
             $addMembership->is_active = true;
             if ($request->type == 'monthly' && $request->has('start_date')) {
                 $addMembership->start_date = $request->start_date;
@@ -56,8 +56,6 @@ class MembershipController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function updateMembership(Request $request): JsonResponse
     {
         try {
@@ -136,7 +134,6 @@ class MembershipController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function deletemembership(Request $request): JsonResponse
     {
         try {
