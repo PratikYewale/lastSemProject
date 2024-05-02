@@ -33,6 +33,14 @@ class MemberController extends Controller
                     $query->where('is_athlete', false);
                 }
             }
+            if ($request->has('is_featured')) {
+                if ($request->is_featured == true) {
+                    $query->where('is_featured', true)->where('is_athlete', true);
+                }
+                if ($request->is_featured == false) {
+                    $query->where('is_featured', false)->where('is_athlete', true);
+                }
+            }
             $count = $query->count();
 
             if ($request->has('pageNo') && $request->has('limit')) {

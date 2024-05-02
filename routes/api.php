@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\Admin\AnnouncementController;
 use App\Http\Controllers\v1\Admin\MediaGalleryController;
 use App\Http\Controllers\v1\Admin\EventController;
 use App\Http\Controllers\v1\Admin\JobController;
@@ -10,8 +11,9 @@ use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
-use App\Http\Controllers\V1\Customer\JobApplicationController;
-use App\Http\Controllers\V1\Admin\JobApplicationController as AppliedJobController;
+use App\Http\Controllers\v1\Customer\JobApplicationController;
+use App\Http\Controllers\v1\Admin\JobApplicationController as AppliedJobController;
+use App\Http\Controllers\v1\Customer\AnnouncementController as CustomerAnnouncementController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +25,7 @@ use App\Http\Controllers\v1\Customer\ContactUsController;
 use App\Http\Controllers\v1\Customer\DonationController;
 use App\Http\Controllers\v1\Customer\MemberController;
 use App\Http\Controllers\v1\Customer\MembershipController as CustomerMembershipController;
-
+use App\Http\Controllers\v1\Customer\NewsController as CustomerNewsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -149,6 +151,13 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::delete('deleteMediaGallery',[MediaGalleryController::class,'deleteMediaGallery']);
         Route::get('getAllMediaGallery',[MediaGalleryController::class,'getAllMediaGallery']);
         Route::get('getMediaGalleryById',[MediaGalleryController::class,'getMediaGalleryById']);
+
+        //Announcement
+        Route::post('createAnnouncement',[AnnouncementController::class,'createAnnouncement']);
+        Route::post('updateAnnouncement',[AnnouncementController::class,'updateAnnouncement']);
+        Route::get('getAllAnnouncement',[AnnouncementController::class,'getAllAnnouncement']);
+        Route::get('getAnnouncementById',[AnnouncementController::class,'getAnnouncementById']);
+        Route::delete('deleteAnnouncement',[AnnouncementController::class,'deleteAnnouncement']);
     });
 });
 
@@ -169,6 +178,13 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
 
     //JobApplication
     Route::post('addJobApplication',[JobApplicationController::class,'addJobApplication']);
+    //News
+    Route::get('getAllNews',[CustomerNewsController::class,'getAllNews']);
+    Route::get('getNewsById',[CustomerNewsController::class,'getNewsById']);
+    //Announcement
+    Route::get('getAllAnnouncement',[CustomerAnnouncementController::class,'getAllAnnouncement']);
+    Route::get('getAnnouncementById',[CustomerAnnouncementController::class,'getAnnouncementById']);
+
     
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
     });
