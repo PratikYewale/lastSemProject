@@ -6,7 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="format-detection" content="telephone=no">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('frontend/js/vendor/essential-grid/css/settings.css') }}" type="text/css"
         media="all" />
     <link rel="stylesheet" href="{{ url('frontend/css/tpl-essential-grids.css') }}" type="text/css" media="all" />
@@ -117,12 +118,12 @@
                                 <!-- Cart -->
                                 <div class="menu_main_cart top_panel_icon">
                                     <a href="#" class="top_panel_cart_button" data-items="2"
-                                        data-summa="&#036;538.00">
-                                        <span class="contact_icon icon-basket"></span>
-                                        <span class="cart_summa">&#36;538.00</span>
+                                        data-summa="Login">
+                                        <span class="contact_icon icon-user"></span>
+                                        <span class="cart_summa">Login</span>
                                         <span class="contact_label contact_cart_label">Your cart:</span>
                                     </a>
-                                    <ul class="widget_area sidebar_cart sidebar">
+                                    {{-- <ul class="widget_area sidebar_cart sidebar">
                                         <li>
                                             <div class="widget woocommerce widget_shopping_cart">
                                                 <div class="hide_cart_widget_if_empty">
@@ -184,7 +185,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                                 <!-- /Cart -->
                                 <!-- Booking button block -->
@@ -227,7 +228,7 @@
                     <div class="menu_main_cart top_panel_icon">
                         <a href="#" class="top_panel_cart_button" data-items="2" data-summa="&#036;538.00">
                             <span class="contact_icon icon-basket"></span>
-                            <span class="cart_summa">&#36;538.00</span>
+                            <span class="cart_summa">Login</span>
                             <span class="contact_label contact_cart_label">Your cart:</span>
                         </a>
                         <ul class="widget_area sidebar_cart sidebar">
@@ -668,69 +669,99 @@
                                 </div>
                             </div>
                             <!-- END REVOLUTION SLIDER -->
-                       <!-- Snowboard Schools -->
-                       <div class="hp_schools_section">
-                        <div class="content_wrap">
-                            <div class="custom_title_1 text_align_center">WHAT WE OFFER</div>
-                            <div class="sc_services_wrap">
-                                <div class="sc_services sc_services_style_services-3 sc_services_type_icons title_center width_100_per">
-                                    <h2 class="sc_services_title sc_item_title sc_item_title_with_descr">Snowboard Schools</h2>
-                                    <div class="sc_services_descr sc_item_descr">Skiing and snowboarding still rank among the undisputed winter sport highlights for all ages and ability levels. The perfectly groomed ski slopes makes a real heaven for skiers and riders. Our professional ski and snowboard instructors can show you all the little details while improving your skiing techniques and riding skills.</div>
-                                    <div class="sc_columns columns_wrap">
-                                        <div class="column-1_3 column_padding_bottom">
-                                            <div class="sc_services_item sc_services_item_1 odd first">
-                                                <div class="sc_services_item_featured post_featured">
-                                                    <div class="post_thumb" data-image="" data-title="Private Lessons for Beginners">
-                                                        <a class="hover_icon hover_icon_link" href="service-single.html">
-                                                            <img alt="service_image_4.png" src="{{ url('frontend/images/service_image_4.png') }}">
-                                                        </a>
+                            <!-- Snowboard Schools -->
+                            <div class="hp_schools_section">
+                                <div class="content_wrap">
+                                    <div class="custom_title_1 text_align_center">WHAT WE OFFER</div>
+                                    <div class="sc_services_wrap">
+                                        <div
+                                            class="sc_services sc_services_style_services-3 sc_services_type_icons title_center width_100_per">
+                                            <h2 class="sc_services_title sc_item_title sc_item_title_with_descr">
+                                                Snowboard Schools</h2>
+                                            <div class="sc_services_descr sc_item_descr">Skiing and snowboarding still
+                                                rank among the undisputed winter sport highlights for all ages and
+                                                ability levels. The perfectly groomed ski slopes makes a real heaven for
+                                                skiers and riders. Our professional ski and snowboard instructors can
+                                                show you all the little details while improving your skiing techniques
+                                                and riding skills.</div>
+                                            <div class="sc_columns columns_wrap row">
+                                                <div class="col-lg-4 column_padding_bottom">
+                                                    <div class="sc_services_item sc_services_item_1 odd first">
+                                                        <div class="sc_services_item_featured post_featured">
+                                                            <div class="post_thumb" data-image=""
+                                                                data-title="Private Lessons for Beginners">
+                                                                <a class="hover_icon hover_icon_link"
+                                                                    href="service-single.html">
+                                                                    <img alt="service_image_4.png"
+                                                                        src="{{ url('frontend/images/service_image_4.png') }}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sc_services_item_content">
+                                                            <h4 class="sc_services_item_subtitle">New to Snowboarding?
+                                                            </h4>
+                                                            <h4 class="sc_services_item_title">
+                                                                <a href="service-single.html">Private Lessons for
+                                                                    Beginners</a>
+                                                            </h4>
+                                                            <div class="sc_services_item_description">
+                                                                <a href="service-single.html"
+                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
+                                                                    $200</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="sc_services_item_content">
-                                                    <h4 class="sc_services_item_subtitle">New to Snowboarding?</h4>
-                                                    <h4 class="sc_services_item_title">
-                                                        <a href="service-single.html">Private Lessons for Beginners</a>
-                                                    </h4>
-                                                    <div class="sc_services_item_description">
-                                                        <a href="service-single.html" class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From $200</a>
+                                                <div class="col-lg-4 column_padding_bottom">
+                                                    <div class="sc_services_item sc_services_item_2 even">
+                                                        <div class="sc_services_item_featured post_featured">
+                                                            <div class="post_thumb" data-image=""
+                                                                data-title="Group Lessons for Beginners">
+                                                                <a class="hover_icon hover_icon_link"
+                                                                    href="service-single.html">
+                                                                    <img alt="service_image_5.png"
+                                                                        src="{{ url('frontend/images/service_image_5.png') }}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sc_services_item_content">
+                                                            <h4 class="sc_services_item_subtitle">Need a Crew?</h4>
+                                                            <h4 class="sc_services_item_title">
+                                                                <a href="service-single.html">Group Lessons for
+                                                                    Beginners</a>
+                                                            </h4>
+                                                            <div class="sc_services_item_description">
+                                                                <a href="service-single.html"
+                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
+                                                                    $100</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div><div class="column-1_3 column_padding_bottom">
-                                            <div class="sc_services_item sc_services_item_2 even">
-                                                <div class="sc_services_item_featured post_featured">
-                                                    <div class="post_thumb" data-image="" data-title="Group Lessons for Beginners">
-                                                        <a class="hover_icon hover_icon_link" href="service-single.html">
-                                                            <img alt="service_image_5.png" src="{{ url('frontend/images/service_image_5.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="sc_services_item_content">
-                                                    <h4 class="sc_services_item_subtitle">Need a Crew?</h4>
-                                                    <h4 class="sc_services_item_title">
-                                                        <a href="service-single.html">Group Lessons for Beginners</a>
-                                                    </h4>
-                                                    <div class="sc_services_item_description">
-                                                        <a href="service-single.html" class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From $100</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="column-1_3 column_padding_bottom">
-                                            <div class="sc_services_item sc_services_item_3 odd">
-                                                <div class="sc_services_item_featured post_featured">
-                                                    <div class="post_thumb" data-image="" data-title="Advanced Group Lessons">
-                                                        <a class="hover_icon hover_icon_link" href="service-single.html">
-                                                            <img alt="service_image_6.png" src="{{ url('frontend/images/service_image_6.png') }}">
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="sc_services_item_content">
-                                                    <h4 class="sc_services_item_subtitle">Wanna More?</h4>
-                                                    <h4 class="sc_services_item_title">
-                                                        <a href="service-single.html">Advanced Group Lessons</a>
-                                                    </h4>
-                                                    <div class="sc_services_item_description">
-                                                        <a href="service-single.html" class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From $300</a>
+                                                <div class="col-lg-4 column_padding_bottom">
+                                                    <div class="sc_services_item sc_services_item_3 odd">
+                                                        <div class="sc_services_item_featured post_featured">
+                                                            <div class="post_thumb" data-image=""
+                                                                data-title="Advanced Group Lessons">
+                                                                <a class="hover_icon hover_icon_link"
+                                                                    href="service-single.html">
+                                                                    <img alt="service_image_6.png"
+                                                                        src="{{ url('frontend/images/service_image_6.png') }}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="sc_services_item_content">
+                                                            <h4 class="sc_services_item_subtitle">Wanna More?</h4>
+                                                            <h4 class="sc_services_item_title">
+                                                                <a href="service-single.html">Advanced Group
+                                                                    Lessons</a>
+                                                            </h4>
+                                                            <div class="sc_services_item_description">
+                                                                <a href="service-single.html"
+                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
+                                                                    $300</a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -738,28 +769,43 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- /Snowboard Schools -->
+                            <!-- /Snowboard Schools -->
                             <!-- Online Booking -->
                             <div class="hp_booking_section">
                                 <div class="content_wrap">
                                     <div class="sc_columns columns_wrap">
                                         <div class="column-1_2">
-                                            <div class="custom_title_1 text_align_left">WHAT WE OFFER</div>
+                                            <div class="custom_title_1 text_align_left">Ski and Snowboard India</div>
                                             <div class="sc_section">
                                                 <div class="sc_section_inner">
                                                     <h2
                                                         class="sc_section_title sc_item_title sc_item_title_with_descr">
-                                                        Online Booking</h2>
-                                                    <div class="sc_section_descr sc_item_descr">To make an enquiry
-                                                        about ski lessons or to book your ski instructor or guide,
-                                                        please contact our ski school office. Duis mauris lectus,
-                                                        tincidunt nec est eget, ultrices porttitor dui. Cras molestie
-                                                        semper lorem sit amet varius.</div>
+                                                        About SSI</h2>
+                                                    <div class="sc_section_descr sc_item_descr">Ski and Snowboard India
+                                                        (SSI) is the National Sports Association governing sport
+                                                        disciplines under the International Ski Federation (FIS) in the
+                                                        territory of India. SSI is also a recognised member of the
+                                                        Indian Olympic Association </div>
+                                                    {{-- <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <h4 class="mt-0 mb-1">Mission</h4>
+                                                            <p>The mission of the National Sport Federation of Ski and
+                                                                Snowboard India is to promote and develop skiing and
+                                                                snowboarding as accessible and popular sports throughout
+                                                                India. </p>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <h4 class="mt-0 mb-1">Vision</h4>
+                                                            <p>Their vision is to create a vibrant skiing and
+                                                                snowboarding community that fosters talent, encourages
+                                                                participation, and achieves excellence on both national
+                                                                and international levels.</p>
+                                                        </div>
+                                                    </div> --}}
                                                     <div class="sc_section_content_wrap">
                                                         <a href="#"
-                                                            class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_tiny">booking</a>
+                                                            class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_tiny">Contact
+                                                            Us</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -913,6 +959,7 @@
                                             </div>
                                         </li>
                                         <!-- /Grid item -->
+
                                     </ul>
                                 </div>
                             </article>
@@ -921,7 +968,7 @@
                             <!-- Crew -->
                             <div class="hp_crew_section">
                                 <div class="content_wrap">
-                                    <div class="custom_title_1 text_align_center">ABOUT US</div>
+                                    <div class="custom_title_1 text_align_center">Team</div>
                                     <div class="sc_section title_center">
                                         <div class="sc_section_inner">
                                             <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">meet
@@ -930,9 +977,9 @@
                                                 <div class="sc_team_wrap margin_top_small">
                                                     <div
                                                         class="sc_team sc_team_style_team-3 title_center width_100_per">
-                                                        <div class="sc_columns columns_wrap">
+                                                        <div class="sc_columns columns_wrap row">
                                                             <!-- Team item -->
-                                                            <div class="column-1_4 column_padding_bottom">
+                                                            <div class="col-lg-3 column_padding_bottom">
                                                                 <div class="sc_team_item sc_team_item_1 odd first">
                                                                     <div class="sc_team_item_avatar">
                                                                         <img alt="Shannon Lorenz"
@@ -979,7 +1026,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="column-1_4 column_padding_bottom">
+                                                            <div class="col-lg-3 column_padding_bottom">
                                                                 <div class="sc_team_item sc_team_item_2 even">
                                                                     <div class="sc_team_item_avatar">
                                                                         <img alt="Peter Colins"
@@ -1026,7 +1073,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="column-1_4 column_padding_bottom">
+                                                            <div class="col-lg-3 column_padding_bottom">
                                                                 <div class="sc_team_item sc_team_item_3 odd">
                                                                     <div class="sc_team_item_avatar">
                                                                         <img alt="James Billings"
@@ -1073,7 +1120,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="column-1_4 column_padding_bottom">
+                                                            <div class="col-lg-3 column_padding_bottom">
                                                                 <div class="sc_team_item sc_team_item_4 even">
                                                                     <div class="sc_team_item_avatar">
                                                                         <img alt="Samantha Allen"
@@ -1135,31 +1182,45 @@
                                 <div class="content_wrap">
                                     <div class="sc_columns columns_wrap">
                                         <div class="column-9_12">
-                                            <div class="custom_title_1 text_align_left">HELLO AND WELCOME TO</div>
+                                            <div class="custom_title_1 text_align_left">Ski and Snowboard India (SSI)
+                                            </div>
                                             <div class="sc_section">
                                                 <div class="sc_section_inner">
                                                     <h2
                                                         class="sc_section_title sc_item_title sc_item_title_without_descr">
-                                                        MountHood Snowboard School</h2>
+                                                        Development</h2>
                                                 </div>
                                             </div>
                                             <div class="sc_section margin_top_small-">
                                                 <div class="sc_section_inner">
-                                                    <div class="sc_section_descr sc_item_descr">MountHood Snowboard
-                                                        School is the first 100% snowboard school with probably the best
-                                                        riders from the valley. As MountHood is often called the
-                                                        ''Mecca'' of freeride, our preference naturally focuses on
-                                                        backcountry and off-piste riding. Our team consists of local,
-                                                        experienced and certified snowboard instructors. Our instructors
-                                                        and official UIAGM mountain guides, give you the unique
-                                                        opportunity to discover the ultimate powder spots, under maximum
-                                                        security and always with loads of fun.</div>
+                                                    <div class="sc_section_descr sc_item_descr">Skiing and
+                                                        snowboarding in India have increasingly become popular
+                                                        activities for both domestic and international tourists seeking
+                                                        winter sports experiences. The breath-taking landscapes of the
+                                                        Indian Himalayas coupled with the thrill of skiing and
+                                                        snowboarding have attracted adventurers and outdoor enthusiasts
+                                                        from around the world.
+                                                        <br /><br />
+                                                        While skiing and snowboarding in India continue to grow in
+                                                        popularity, there are challenges such as limited infrastructure,
+                                                        funding constraints, and access to training facilities,
+                                                        especially for athletes from regions with less snowfall.
+                                                        However, the passion and dedication of Indian skiers and
+                                                        snowboarders, coupled with increasing support from government
+                                                        bodies and private organizations, present opportunities for the
+                                                        further development and promotion of winter sports in India.
+                                                        <br /><br />
+                                                        Overall, the history of skiing and snowboarding in India is
+                                                        characterized by a journey of exploration, passion, and
+                                                        perseverance, with the potential to become a thriving part of
+                                                        the country's sports and tourism landscape in the years to come.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="sc_skills sc_skills_counter margin_top_6em"
                                                 data-type="counter" data-caption="Skills">
-                                                <div class="columns_wrap sc_skills_columns sc_skills_columns_3">
-                                                    <div class="sc_skills_column column-1_3">
+                                                <div class="columns_wrap sc_skills_columns sc_skills_columns_3 row">
+                                                    <div class="sc_skills_column col-lg-4">
                                                         <div class="sc_skills_item sc_skills_style_2 odd first">
                                                             <div class="sc_skills_total" data-start="0"
                                                                 data-stop="2300" data-step="23" data-max="2300"
@@ -1171,7 +1232,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="sc_skills_column column-1_3">
+                                                    <div class="sc_skills_column col-lg-4">
                                                         <div class="sc_skills_item sc_skills_style_2 even">
                                                             <div class="sc_skills_total" data-start="0"
                                                                 data-stop="26" data-step="23" data-max="2300"
@@ -1183,7 +1244,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="sc_skills_column column-1_3">
+                                                    <div class="sc_skills_column col-lg-4">
                                                         <div class="sc_skills_item sc_skills_style_2 odd">
                                                             <div class="sc_skills_total" data-start="0"
                                                                 data-stop="319" data-step="23" data-max="2300"
@@ -1203,7 +1264,7 @@
                             </div>
                             <!-- /School Info -->
                             <!-- Equipment -->
-                            <div class="hp_equipment_section">
+                            {{-- <div class="hp_equipment_section">
                                 <div class="content_wrap">
                                     <div class="sc_section margin_top_6em">
                                         <div class="sc_section_inner">
@@ -1364,7 +1425,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- /Equipment -->
                             <!-- From the Blog -->
                             <div class="hp_blog_section">
@@ -1372,12 +1433,12 @@
                                     <div class="sc_section">
                                         <div class="sc_section_inner">
                                             <div class="sc_section_content_wrap">
-                                                <div class="custom_title_1 text_align_center">FROM THE BLOG</div>
+                                                <div class="custom_title_1 text_align_center">FROM THE NEWS</div>
                                                 <div
                                                     class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
                                                     <h2
                                                         class="sc_blogger_title sc_item_title sc_item_title_without_descr">
-                                                        A Few Words About Our Lifestyle</h2>
+                                                        Breaking News</h2>
                                                     <div class="isotope_wrap" data-columns="3">
                                                         <!-- Post item -->
                                                         <div
@@ -1427,7 +1488,7 @@
                                                                                 <a href="post-single.html"
                                                                                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
                                                                                     <span class="">Read
-                                                                                        more</span>
+                                                                                        More</span>
                                                                                 </a>
                                                                             </div>
                                                                         </div>
@@ -1482,7 +1543,7 @@
                                                                                 <a href="post-single.html"
                                                                                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
                                                                                     <span class="">Read
-                                                                                        more</span>
+                                                                                        More</span>
                                                                                 </a>
                                                                             </div>
                                                                         </div>
@@ -1537,7 +1598,7 @@
                                                                                 <a href="post-single.html"
                                                                                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
                                                                                     <span class="">Read
-                                                                                        more</span>
+                                                                                        More</span>
                                                                                 </a>
                                                                             </div>
                                                                         </div>
@@ -1550,7 +1611,7 @@
                                                 </div>
                                                 <a href="blog-classic-with-sidebar.html"
                                                     class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large aligncenter margin_top_small margin_bottom_tiny sc_button_iconed none">View
-                                                    More Posts From Our Blog</a>
+                                                    More News</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1562,8 +1623,8 @@
                                 <div class="sc_services_wrap">
                                     <div
                                         class="sc_services sc_services_style_services-1 sc_services_type_icons margin_top_medium margin_bottom_medium width_100_per">
-                                        <div class="sc_columns columns_wrap">
-                                            <div class="column-1_3 column_padding_bottom">
+                                        <div class="sc_columns columns_wrap row">
+                                            <div class="col-lg-4 column_padding_bottom">
                                                 <div class="sc_services_item sc_services_item_1 odd first">
                                                     <span class="sc_icon icon-mobile-1"></span>
                                                     <div class="sc_services_item_content">
@@ -1575,7 +1636,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="column-1_3 column_padding_bottom">
+                                            <div class="col-lg-4 column_padding_bottom">
                                                 <div class="sc_services_item sc_services_item_2 even">
                                                     <span class="sc_icon icon-location-1"></span>
                                                     <div class="sc_services_item_content">
@@ -1587,7 +1648,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="column-1_3 column_padding_bottom">
+                                            <div class="col-lg-4 column_padding_bottom">
                                                 <div class="sc_services_item sc_services_item_3 odd">
                                                     <span class="sc_icon icon-clock-1"></span>
                                                     <div class="sc_services_item_content">
@@ -1622,119 +1683,97 @@
             <footer class="footer_wrap widget_area">
                 <div class="footer_wrap_inner widget_area_inner">
                     <div class="content_wrap">
-                        <div class="columns_wrap">
+                        <div class="columns_wrap row">
                             <!-- Widget: Weather -->
                             <aside class="column-1_3 widget widget_text">
-                                <h5 class="widget_title">WEATHER TODAY</h5>
+
                                 <div class="textwidget">
                                     <div class="wpc-weather-id">
-                                        <div id="wpc-weather" class="wpc-weather-1 medium">
-                                            <div class="now">
-                                                <div class="location_name">New Jersey</div>
-                                                <div class="time_symbol climacon" style="fill:#ffffff">
-                                                    <svg id="cloudDrizzleSun"
-                                                        class="climacon climacon_cloudDrizzleSun" version="1.1"
-                                                        xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                                                        viewBox="15 15 70 70" enable-background="new 15 15 70 70"
-                                                        xml:space="preserve">
-                                                        <clipPath id="cloudFillClip">
-                                                            <path
-                                                                d="M15,15v70h70V15H15z M59.943,61.639c-3.02,0-12.381,0-15.999,0c-6.626,0-11.998-5.371-11.998-11.998c0-6.627,5.372-11.999,11.998-11.999c5.691,0,10.434,3.974,11.665,9.29c1.252-0.81,2.733-1.291,4.334-1.291c4.418,0,8,3.582,8,8C67.943,58.057,64.361,61.639,59.943,61.639z">
-                                                            </path>
-                                                        </clipPath>
-                                                        <clipPath id="sunCloudFillClip">
-                                                            <path
-                                                                d="M15,15v70h70V15H15z M57.945,49.641c-4.417,0-8-3.582-8-7.999c0-4.418,3.582-7.999,8-7.999s7.998,3.581,7.998,7.999C65.943,46.059,62.362,49.641,57.945,49.641z">
-                                                            </path>
-                                                        </clipPath>
-                                                        <clipPath id="cloudSunFillClip">
-                                                            <path
-                                                                d="M15,15v70h20.947V63.481c-4.778-2.767-8-7.922-8-13.84c0-8.836,7.163-15.998,15.998-15.998c6.004,0,11.229,3.312,13.965,8.203c0.664-0.113,1.338-0.205,2.033-0.205c6.627,0,11.998,5.373,11.998,12c0,5.262-3.394,9.723-8.107,11.341V85H85V15H15z">
-                                                            </path>
-                                                        </clipPath>
-                                                        <g
-                                                            class="climacon_iconWrap climacon_iconWrap-cloudDrizzleSun">
-                                                            <g clip-path="url(#cloudSunFillClip)">
-                                                                <g
-                                                                    class="climacon_componentWrap climacon_componentWrap-sun climacon_componentWrap-sun_cloud">
-                                                                    <g
-                                                                        class="climacon_componentWrap climacon_componentWrap_sunSpoke">
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M80.029,43.611h-3.998c-1.105,0-2-0.896-2-1.999s0.895-2,2-2h3.998c1.104,0,2,0.896,2,2S81.135,43.611,80.029,43.611z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M72.174,30.3c-0.781,0.781-2.049,0.781-2.828,0c-0.781-0.781-0.781-2.047,0-2.828l2.828-2.828c0.779-0.781,2.047-0.781,2.828,0c0.779,0.781,0.779,2.047,0,2.828L72.174,30.3z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M58.033,25.614c-1.105,0-2-0.896-2-2v-3.999c0-1.104,0.895-2,2-2c1.104,0,2,0.896,2,2v3.999C60.033,24.718,59.135,25.614,58.033,25.614z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M43.892,30.3l-2.827-2.828c-0.781-0.781-0.781-2.047,0-2.828c0.78-0.781,2.047-0.781,2.827,0l2.827,2.828c0.781,0.781,0.781,2.047,0,2.828C45.939,31.081,44.673,31.081,43.892,30.3z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M42.033,41.612c0,1.104-0.896,1.999-2,1.999h-4c-1.104,0-1.998-0.896-1.998-1.999s0.896-2,1.998-2h4C41.139,39.612,42.033,40.509,42.033,41.612z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M43.892,52.925c0.781-0.78,2.048-0.78,2.827,0c0.781,0.78,0.781,2.047,0,2.828l-2.827,2.827c-0.78,0.781-2.047,0.781-2.827,0c-0.781-0.78-0.781-2.047,0-2.827L43.892,52.925z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M58.033,57.61c1.104,0,2,0.895,2,1.999v4c0,1.104-0.896,2-2,2c-1.105,0-2-0.896-2-2v-4C56.033,58.505,56.928,57.61,58.033,57.61z">
-                                                                        </path>
-                                                                        <path
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunSpoke climacon_component-stroke_sunSpoke-north"
-                                                                            d="M72.174,52.925l2.828,2.828c0.779,0.78,0.779,2.047,0,2.827c-0.781,0.781-2.049,0.781-2.828,0l-2.828-2.827c-0.781-0.781-0.781-2.048,0-2.828C70.125,52.144,71.391,52.144,72.174,52.925z">
-                                                                        </path>
-                                                                    </g>
-                                                                    <g class="climacon_wrapperComponent climacon_wrapperComponent-sunBody"
-                                                                        clip-path="url(#sunCloudFillClip)">
-                                                                        <circle
-                                                                            class="climacon_component climacon_component-stroke climacon_component-stroke_sunBody"
-                                                                            cx="58.033" cy="41.612"
-                                                                            r="11.999"></circle>
-                                                                    </g>
-                                                                </g>
-                                                            </g>
-                                                            <g
-                                                                class="climacon_wrapperComponent climacon_wrapperComponent-drizzle">
-                                                                <path
-                                                                    class="climacon_component climacon_component-stroke climacon_component-stroke_drizzle climacon_component-stroke_drizzle-left"
-                                                                    d="M42.001,53.644c1.104,0,2,0.896,2,2v3.998c0,1.105-0.896,2-2,2c-1.105,0-2.001-0.895-2.001-2v-3.998C40,54.538,40.896,53.644,42.001,53.644z">
-                                                                </path>
-                                                                <path
-                                                                    class="climacon_component climacon_component-stroke climacon_component-stroke_drizzle climacon_component-stroke_drizzle-middle"
-                                                                    d="M49.999,53.644c1.104,0,2,0.896,2,2v4c0,1.104-0.896,2-2,2s-1.998-0.896-1.998-2v-4C48.001,54.54,48.896,53.644,49.999,53.644z">
-                                                                </path>
-                                                                <path
-                                                                    class="climacon_component climacon_component-stroke climacon_component-stroke_drizzle climacon_component-stroke_drizzle-right"
-                                                                    d="M57.999,53.644c1.104,0,2,0.896,2,2v3.998c0,1.105-0.896,2-2,2c-1.105,0-2-0.895-2-2v-3.998C55.999,54.538,56.894,53.644,57.999,53.644z">
-                                                                </path>
-                                                            </g>
-                                                            <g class="climacon_wrapperComponent climacon_wrapperComponent-cloud"
-                                                                clip-path="url(#cloudFillClip)">
-                                                                <path
-                                                                    class="climacon_component climacon_component-stroke climacon_component-stroke_cloud"
-                                                                    d="M63.999,64.944v-4.381c2.387-1.386,3.998-3.961,3.998-6.92c0-4.418-3.58-8-7.998-8c-1.603,0-3.084,0.481-4.334,1.291c-1.232-5.316-5.973-9.29-11.664-9.29c-6.628,0-11.999,5.372-11.999,12c0,3.549,1.55,6.729,3.998,8.926v4.914c-4.776-2.769-7.998-7.922-7.998-13.84c0-8.836,7.162-15.999,15.999-15.999c6.004,0,11.229,3.312,13.965,8.203c0.664-0.113,1.336-0.205,2.033-0.205c6.627,0,11.998,5.373,11.998,12C71.997,58.864,68.655,63.296,63.999,64.944z">
-                                                                </path>
-                                                            </g>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <div class="time_temperature">2</div>
-                                            </div>
-                                            <div class="today">
-                                                <div class="day">
-                                                    <span class="wpc-highlight"></span> Today
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <img src="{{ url('frontend/images/logo.png') }}" class="footer_logo"
+                                            alt="">
                                     </div>
+
+
+                                </div>
+                            </aside><!-- /Widget: Weather --><!-- Widget: Quick Links -->
+                            <aside class="column-1_3 widget widget_recent_reviews">
+                                <h5 class="widget_title">Quick Links</h5>
+                                <div class="recent_reviews">
+                                    <article class="post_item no_thumb first">
+
+                                        <ul id="menu_footer" class="menu_footer_nav">
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/') }}"><span
+                                                            class="ms-1">Home</span></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/donate') }}"><span
+                                                            class="ms-1">Donate</span></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/about') }}"><span
+                                                            class="ms-1">About</span></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/teams') }}"><span
+                                                            class="ms-1">Teams</span></a>
+                                            </li>
+                                            <!-- /Menu: Rent -->
+                                            <!-- Menu: Store -->
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/programs') }}"><span
+                                                            class="ms-1">Programs</span></a>
+                                            </li>
+                                            <!-- /Menu: Store -->
+                                            <!-- Menu: News -->
+                                            <li class="menu-item ">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/competition') }}"><span
+                                                            class="ms-1">Competition</span></a>
+
+                                            </li>
+                                            <!-- /Menu: News -->
+                                            <!-- Menu: Contact Us -->
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/membership') }}"><span
+                                                            class="ms-1">Membership</span></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/contact') }}"><span class="ms-1">Contact
+                                                            Us</span></a>
+                                            </li>
+                                        </ul>
+                                    </article>
+
+                                </div>
+                            </aside><!-- /Widget: Quick Links --><!-- Widget: Contacts -->
+                            <aside class="column-1_3 widget widget_contacts">
+                                <h5 class="widget_title">Contact Us</h5>
+                                <div class="widget_inner">
+                                    <ul class="contact_info">
+
+                                        <li class="d-flex">
+                                            <i class="icon icon-location"></i>
+                                            <div>2 Chemin de Bordeneuve, 31490 Brax, France<br /></div>
+                                        </li>
+                                        <li class="d-flex">
+
+                                            <i class="icon icon-mobile"></i>
+                                            <div>1 800 215 16 35</div>
+                                        </li>
+                                        <li class="d-flex">
+                                            <i class="icon icon-pencil"></i>
+                                            <div>info@skisnowboardindia.com</div>
+                                        </li>
+
+                                    </ul>
                                     <div class="widget_area sc_widget_socials">
                                         <aside id="widget_socials" class="widget widget_socials">
                                             <div class="widget_inner">
@@ -1769,123 +1808,6 @@
                                         </aside>
                                     </div>
                                 </div>
-                            </aside><!-- /Widget: Weather --><!-- Widget: Recent Reviews -->
-                            <aside class="column-1_3 widget widget_recent_reviews">
-                                <h5 class="widget_title">Recent Reviews</h5>
-                                <div class="recent_reviews">
-                                    <article class="post_item no_thumb first">
-                                        <div class="post_content">
-                                            <h6 class="post_title">
-                                                <a href="post-single.html">Serving Cookies at Alpine Nationals</a>
-                                            </h6>
-                                            <div class="post_rating reviews_summary blog_reviews">
-                                                <div class="criteria_summary criteria_row">
-                                                    <div class="reviews_stars reviews_style_stars" data-mark="87.3">
-                                                        <div class="reviews_stars_wrap">
-                                                            <div class="reviews_stars_bg"><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span></div>
-                                                            <div class="reviews_stars_hover" style="width:87%"><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span></div>
-                                                        </div>
-                                                        <div class="reviews_value">87.3</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post_info"></div>
-                                        </div>
-                                    </article>
-                                    <article class="post_item no_thumb">
-                                        <div class="post_content">
-                                            <h6 class="post_title">
-                                                <a href="post-single.html">Loveland Pass Shuttle Service</a>
-                                            </h6>
-                                            <div class="post_rating reviews_summary blog_reviews">
-                                                <div class="criteria_summary criteria_row">
-                                                    <div class="reviews_stars reviews_style_stars" data-mark="75.3">
-                                                        <div class="reviews_stars_wrap">
-                                                            <div class="reviews_stars_bg"><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span></div>
-                                                            <div class="reviews_stars_hover" style="width:75%"><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span></div>
-                                                        </div>
-                                                        <div class="reviews_value">75.3</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post_info"></div>
-                                        </div>
-                                    </article>
-                                    <article class="post_item no_thumb">
-                                        <div class="post_content">
-                                            <h6 class="post_title">
-                                                <a href="post-single.html">Advanced Group Lessons</a>
-                                            </h6>
-                                            <div class="post_rating reviews_summary blog_reviews">
-                                                <div class="criteria_summary criteria_row">
-                                                    <div class="reviews_stars reviews_style_stars"
-                                                        data-mark="100.0">
-                                                        <div class="reviews_stars_wrap">
-                                                            <div class="reviews_stars_bg"><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span></div>
-                                                            <div class="reviews_stars_hover" style="width:100%">
-                                                                <span class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span><span
-                                                                    class="reviews_star"></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="reviews_value">100.0</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="post_info"></div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </aside><!-- /Widget: Recent Reviews --><!-- Widget: Contacts -->
-                            <aside class="column-1_3 widget widget_contacts">
-                                <h5 class="widget_title">Contact Us</h5>
-                                <div class="widget_inner">
-                                    <ul class="contact_info">
-                                        <li>
-                                            <i class="icon icon-phone"></i>
-                                            <div>1 800 215 16 35</div>
-                                        </li>
-                                        <li>
-                                            <i class="icon icon-location"></i>
-                                            <div>2 Chemin de Bordeneuve, 31490 Brax, France<br /></div>
-                                        </li>
-                                        <li>
-                                            <i class="icon icon-pencil"></i>
-                                            <div>inbox@mounthood.com</div>
-                                        </li>
-                                        <li>
-                                            <i class="icon icon-clock"></i>
-                                            <div>Open Hours: 8.00 am – 10.00 pm Monday - Sunday</div>
-                                        </li>
-                                    </ul>
-                                </div>
 
                             </aside>
                         </div>
@@ -1897,47 +1819,21 @@
             <div class="copyright_wrap copyright_style_menu">
                 <div class="copyright_wrap_inner">
                     <div class="content_wrap">
-                        <ul id="menu_footer" class="menu_footer_nav">
-                            <li class="menu-item">
-                                <a href="{{ url('/') }}"><span>Home</span></a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ url('/donate') }}"><span>Donate</span></a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ url('/about') }}"><span>About</span></a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ url('/teams') }}"><span>Teams</span></a>
-                            </li>
-                            <!-- /Menu: Rent -->
-                            <!-- Menu: Store -->
-                            <li class="menu-item">
-                                <a href="{{ url('/programs') }}"><span>Programs</span></a>
-                            </li>
-                            <!-- /Menu: Store -->
-                            <!-- Menu: News -->
-                            <li class="menu-item ">
-                                <a href="{{ url('/competition') }}"><span>Competition</span></a>
-
-                            </li>
-                            <!-- /Menu: News -->
-                            <!-- Menu: Contact Us -->
-                            <li class="menu-item">
-                                <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
-                            </li>
-                        </ul>
-                        <div class="copyright_text">
-                            <p>
-                                <a href="#">Ski Snowboard India</a> © 2024 All
-                                Rights Reserved.
-                                <a href="#">Terms of Use</a> and
-                                <a href="#">Privacy Policy</a>
-                            </p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="copyright_text">
+                                    <p>
+                                        <a href="#">Ski Snowboard India</a> © 2024 All
+                                        Rights Reserved.
+                                        <a href="#">Terms of Use</a> and
+                                        <a href="#">Privacy Policy</a>
+                                    </p>
+                                </div>
+                            </div>
+                         
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -1995,6 +1891,9 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAA8O_i6YWSOXQn1vd9SSiIriIqewvBFWk">
     </script>
     <script type="text/javascript" src="{{ url('frontend/js/core.googlemap.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

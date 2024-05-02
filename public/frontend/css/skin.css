@@ -309,7 +309,7 @@ figure figcaption,
 }
 
 .scheme_original a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original a:hover {
@@ -321,7 +321,7 @@ figure figcaption,
 }
 
 .scheme_original blockquote:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original blockquote,
@@ -338,19 +338,19 @@ figure figcaption,
 }
 
 .scheme_original .accent1 {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .accent1_bgc {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .accent1_bg {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_original .accent1_border {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original a.accent1:hover {
@@ -408,7 +408,7 @@ figure figcaption,
 .scheme_original .post_content.ih-item.circle.effect20.colored .info .info-back,
 .scheme_original .post_content.ih-item.square.effect_book.colored .info,
 .scheme_original .post_content.ih-item.square.effect_pull.colored .post_descr {
-    background: #004eb3;
+    background: #029ce2;
     color: #ffffff
 }
 
@@ -432,7 +432,7 @@ figure figcaption,
 .scheme_original .post_content.ih-item.square.effect_border.colored .img,
 .scheme_original .post_content.ih-item.square.effect_fade.colored .img,
 .scheme_original .post_content.ih-item.square.effect_slide.colored .img {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_original .post_content.ih-item.square.effect_border.colored .info,
@@ -447,8 +447,8 @@ figure figcaption,
 }
 
 .scheme_original .post_content.ih-item.circle.effect1 .spinner {
-    border-right-color: #004eb3;
-    border-bottom-color: #004eb3
+    border-right-color: #029ce2;
+    border-bottom-color: #029ce2
 }
 
 .scheme_original .post_content.ih-item .post_readmore .post_readmore_label,
@@ -474,14 +474,14 @@ figure figcaption,
 
 .scheme_original .sc_table table th,
 .scheme_original .sc_table table td {
-    border-color: #1b1b1b
+    border-color: #00003d
 }
 
 .scheme_original .sc_table table tr:first-child {
 }
 
 .scheme_original .sc_table table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -503,12 +503,12 @@ figure figcaption,
 .scheme_original pre.code,
 .scheme_original #toc .toc_item.current,
 .scheme_original #toc .toc_item:hover {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original::selection,
 .scheme_original::-moz-selection {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -521,8 +521,9 @@ figure figcaption,
 .scheme_original select,
 .scheme_original textarea {
     color: #ffffff;
-    border-color: #3b3b3b;
-    background-color: #3b3b3b
+    border: 1px solid ;
+    border-color: #2b2b2b;
+    background-color: #fff
 }
 
 .scheme_original input[type="text"]:hover,
@@ -540,9 +541,10 @@ figure figcaption,
 .scheme_original input[type="password"]:focus,
 .scheme_original select:focus,
 .scheme_original textarea:focus {
-    color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    color: #3b3b3b;
+    border: 1px solid;
+    border-color: #029ce2;
+    background-color: #fff;
 }
 
 .scheme_original input::-webkit-input-placeholder {
@@ -660,7 +662,7 @@ figure figcaption,
 .scheme_original .sc_input_hover_accent input[type="search"]:focus,
 .scheme_original .sc_input_hover_accent select:focus,
 .scheme_original .sc_input_hover_accent textarea:focus {
-    box-shadow: 0 0 0 2px #004eb3;
+    box-shadow: 0 0 0 2px #029ce2;
 }
 
 .scheme_original .sc_input_hover_accent input[type="text"] + label:before,
@@ -707,7 +709,7 @@ figure figcaption,
 .scheme_original .sc_input_hover_jump input[type="password"].filled,
 .scheme_original .sc_input_hover_jump input[type="search"].filled,
 .scheme_original .sc_input_hover_jump textarea.filled {
-    border-color: #004eb3;
+    border-color: #029ce2;
 }
 
 .scheme_original .sc_input_hover_underline input[type="text"] + label:before,
@@ -823,7 +825,7 @@ figure figcaption,
 }
 
 .scheme_original body:not(.top_panel_over) .top_panel_style_6 {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .top_panel_style_6 .top_panel_position_above .logo .logo_text,
@@ -836,11 +838,11 @@ figure figcaption,
 }
 
 .scheme_original .top_panel_inner_style_7 .top_panel_cart_button:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .top_panel_style_8 .top_panel_buttons .top_panel_cart_button:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .top_panel_style_8 .top_panel_buttons .top_panel_cart_button:after {
@@ -859,7 +861,7 @@ figure figcaption,
 .scheme_original .top_panel_inner_style_3 .top_panel_top .sidebar_cart,
 .scheme_original .top_panel_inner_style_4 .top_panel_top .sidebar_cart {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .top_panel_top a {
@@ -935,7 +937,7 @@ figure figcaption,
 .scheme_original .top_panel_inner_style_4 .menu_user_nav>li ul,
 .scheme_original .top_panel_inner_style_5 .menu_user_nav>li ul {
     color: #ffffff;
-    background-color: #004eb3;
+    background-color: #029ce2;
     border-color: #3c3c3c
 }
 
@@ -947,7 +949,7 @@ figure figcaption,
 .scheme_original .menu_user_nav>li ul li.current-menu-item>a,
 .scheme_original .menu_user_nav>li ul li.current-menu-ancestor>a {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .menu_user_nav>li.menu_user_controls .user_avatar {
@@ -959,7 +961,7 @@ figure figcaption,
 }
 
 .scheme_original .top_panel_middle {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .top_panel_position_over.top_panel_middle {
@@ -978,11 +980,11 @@ figure figcaption,
 /* Top panel (bottom area) */
 
 .scheme_original .top_panel_bottom {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .top_panel_image_hover {
-    background-color: rgba(249, 246, 0, 0.8)
+    /* background-color: rgba(249, 246, 0, 0.8) */
 }
 
 .scheme_original .top_panel_image_header,
@@ -1030,7 +1032,7 @@ figure figcaption,
 .scheme_original .menu_main_nav>li.current-menu-item>a,
 .scheme_original .menu_main_nav>li.current-menu-parent>a,
 .scheme_original .menu_main_nav>li.current-menu-ancestor>a {
-    color: #ffffff
+    color: #029ce2
 }
 
 .scheme_original .menu_main_nav>li ul li a {
@@ -1040,7 +1042,7 @@ figure figcaption,
 .scheme_original .menu_main_nav>li ul li a:hover,
 .scheme_original .menu_main_nav>li ul li.current-menu-item>a,
 .scheme_original .menu_main_nav>li ul li.current-menu-ancestor>a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .top_panel_inner_style_1 .menu_main_nav>li>a,
@@ -1051,7 +1053,7 @@ figure figcaption,
 .scheme_original .top_panel_inner_style_1 .menu_main_nav>li ul,
 .scheme_original .top_panel_inner_style_2 .menu_main_nav>li ul {
     border-color: #3c3c3c;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .top_panel_inner_style_1 .menu_main_nav>li ul li a,
@@ -1085,8 +1087,8 @@ figure figcaption,
     background-color: #3c3c3c
 }
 
-.scheme_original .menu_hover_slide_box .menu_main_nav>li#blob {
-    background-color: #1b1b1b
+/* .scheme_original .menu_hover_slide_box .menu_main_nav>li#blob {
+    background-color: #00003d
 }
 
 .scheme_original .top_panel_inner_style_1 .menu_hover_slide_box .menu_main_nav>li#blob,
@@ -1096,7 +1098,7 @@ figure figcaption,
 
 .scheme_original .menu_hover_slide_line .menu_main_nav>li#blob {
     background-color: #ffffff
-}
+} */
 
 .scheme_original .menu_hover_zoom_line .menu_main_nav>li>a:before {
     background-color: #3c3c3c
@@ -1196,7 +1198,7 @@ figure figcaption,
 
 .scheme_original .content .search_wrap .search_form_wrap .search_submit:hover,
 .scheme_original .content .search_wrap .search_form_wrap .search_submit:focus {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .content .search_field {
@@ -1242,7 +1244,7 @@ figure figcaption,
 .scheme_original .top_panel_icon:hover .contact_icon,
 .scheme_original .top_panel_icon:hover .search_submit,
 .scheme_original .top_panel_icon:hover .cart_summa {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .search_style_fullscreen.search_state_closed:not(.top_panel_icon) .search_submit,
@@ -1266,7 +1268,7 @@ figure figcaption,
 
 .scheme_original .search_results .post_more,
 .scheme_original .search_results .search_results_close {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .search_results .post_more:hover,
@@ -1280,7 +1282,7 @@ figure figcaption,
 }
 
 .scheme_original .pushy_inner a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .pushy_inner a:hover {
@@ -1292,7 +1294,7 @@ figure figcaption,
 }
 
 .scheme_original .header_mobile {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .header_mobile .sidebar_cart {
@@ -1311,11 +1313,11 @@ figure figcaption,
 
 .scheme_original .header_mobile .panel_top,
 .scheme_original .header_mobile .side_wrap {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .header_mobile .panel_middle {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .header_mobile .panel_bottom {
@@ -1326,7 +1328,7 @@ figure figcaption,
 .scheme_original .header_mobile .menu_main_cart .top_panel_cart_button .contact_icon:hover,
 .scheme_original .header_mobile .menu_main_cart.top_panel_icon:hover .top_panel_cart_button .contact_icon,
 .scheme_original .header_mobile .side_wrap .close:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .header_mobile .menu_main_nav>li a,
@@ -1353,7 +1355,7 @@ figure figcaption,
 
 .scheme_original .header_mobile .search_wrap,
 .scheme_original .header_mobile .login {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .header_mobile .login .popup_link,
@@ -1409,7 +1411,7 @@ figure figcaption,
 
 
 .scheme_original .top_panel_title_inner {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     border-color: rgba(54, 54, 54, 0.1)
 }
 
@@ -1438,16 +1440,16 @@ figure figcaption,
 }
 
 .scheme_original .post_title .post_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .pagination>a {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .post_format_aside.post_item_single .post_content p,
 .scheme_original .post_format_aside .post_descr {
-    border-color: #004eb3;
+    border-color: #029ce2;
     background-color: #ffffff
 }
 
@@ -1461,7 +1463,7 @@ figure figcaption,
 .scheme_original .post_content .post_info_bottom .post_info_item a,
 .scheme_original .post_content .post_info_bottom .post_info_item a>span,
 .scheme_original .post_content .post_info_bottom .post_info_item a[class*="icon-"] {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .post_content .post_info_bottom .post_info_item a:hover,
@@ -1480,7 +1482,7 @@ figure figcaption,
 }
 
 .scheme_original .post_item .post_info_share .social_icons:hover {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .post_item .post_info_share .social_icons:hover>span {
@@ -1489,7 +1491,7 @@ figure figcaption,
 
 .scheme_original .hover_icon:before {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .hover_icon:after {
@@ -1504,7 +1506,7 @@ figure figcaption,
 }
 
 .scheme_original .post_info a[class*="icon-"] {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .post_info a:hover,
@@ -1551,7 +1553,7 @@ figure figcaption,
 .scheme_original .isotope_item_colored .post_featured .post_title,
 .scheme_original .isotope_item_colored .post_content.ih-item.square.colored .info {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .isotope_item_colored .post_featured .post_title a {
@@ -1562,7 +1564,7 @@ figure figcaption,
 .scheme_original .isotope_item_colored .post_rating .reviews_stars_bg,
 .scheme_original .isotope_item_colored .post_rating .reviews_stars_hover,
 .scheme_original .isotope_item_colored .post_rating .reviews_value {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .isotope_item_colored .post_featured .post_descr {
@@ -1574,7 +1576,7 @@ figure figcaption,
 }
 
 .scheme_original .isotope_item_colored .post_info_wrap .post_button .sc_button {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -1585,7 +1587,7 @@ figure figcaption,
 
 .scheme_original .isotope_item_colored_1 a,
 .scheme_original .isotope_item_colored_1 .post_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .isotope_item_colored_1 a:hover,
@@ -1595,11 +1597,11 @@ figure figcaption,
 }
 
 .scheme_original .isotope_wrap .isotope_item_colored_1 .post_featured {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .isotope_wrap .isotope_item_masonry .post_content_overlay .post_title:hover a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .isotope_wrap .isotope_item_classic .post_item .post_content_overlay:after {
@@ -1611,7 +1613,7 @@ figure figcaption,
 }
 
 .scheme_original .isotope_wrap .isotope_item_classic.isotope_column_3 .post_item .post_content_overlay .post_content .post_title:hover a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .isotope_wrap .isotope_item_classic .post_item .post_content_overlay .post_content .post_descr .sc_button {
@@ -1620,7 +1622,7 @@ figure figcaption,
 }
 
 .scheme_original .isotope_wrap .isotope_item_classic .post_item .post_content_overlay .post_content .post_descr .sc_button:hover {
-    background-color: #004eb3 !important;
+    background-color: #029ce2 !important;
     color: #ffffff !important;
 }
 
@@ -1633,8 +1635,8 @@ figure figcaption,
 }
 
 .scheme_original .isotope_filters a {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -1658,7 +1660,7 @@ figure figcaption,
 .scheme_original .pagination_slider .pager_cur:focus,
 .scheme_original .pagination_pages>.active,
 .scheme_original .pagination_pages>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .pagination_slider .pager_slider {
@@ -1677,12 +1679,12 @@ figure figcaption,
 .scheme_original .pagination_wrap .pager_prev:hover,
 .scheme_original .pagination_wrap .pager_last:hover,
 .scheme_original .pagination_wrap .pager_first:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .pagination_viewmore>a {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .pagination_viewmore>a:hover {
@@ -1701,31 +1703,31 @@ figure figcaption,
 }
 
 .scheme_original .post_featured .post_nav_item:before {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
 .scheme_original .post_featured .post_nav_item .post_nav_info {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .reviews_block .reviews_summary .reviews_item {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .reviews_block .reviews_summary,
 .scheme_original .reviews_block .reviews_max_level_100 .reviews_stars_bg {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .reviews_block .reviews_max_level_100 .reviews_stars_hover,
 .scheme_original .reviews_block .reviews_item .reviews_slider {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .reviews_block .reviews_item .reviews_stars_hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .reviews_block .reviews_value {
@@ -1767,11 +1769,11 @@ figure figcaption,
 }
 
 .scheme_original .post_author .post_author_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .post_author .post_author_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .post_author .post_author_title a:hover {
@@ -1797,7 +1799,7 @@ figure figcaption,
 }
 
 .scheme_original .comments_list_wrap .comment-respond {
-    border-bottom-color: #004eb3
+    border-bottom-color: #029ce2
 }
 
 .scheme_original .comments_list_wrap>ul {
@@ -1814,7 +1816,7 @@ figure figcaption,
 }
 
 .scheme_original .comments_list_wrap .comment_reply a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .comments_list_wrap .comment_text {
@@ -1823,7 +1825,7 @@ figure figcaption,
 
 .scheme_original .post_item_404 .page_title,
 .scheme_original .post_item_404 .page_subtitle {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sidebar.widget_area .widget {
@@ -1844,14 +1846,14 @@ figure figcaption,
 }
 
 .scheme_original .sidebar_inner.widget_area_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .widget_area_inner a,
 .scheme_original .widget_area_inner ul li:before,
 .scheme_original .widget_area_inner ul li a:hover,
 .scheme_original .widget_area_inner button:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .widget_area_inner a:hover,
@@ -1866,7 +1868,7 @@ figure figcaption,
 
 .scheme_original .widget_area_inner .widget_text a:not(.sc_button),
 .scheme_original .widget_area_inner .post_info a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .widget_area_inner .widget_text a:not(.sc_button):hover,
@@ -1897,7 +1899,7 @@ figure figcaption,
 }
 
 .scheme_original .widget_area .post_item .post_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -1918,14 +1920,14 @@ figure figcaption,
 .scheme_original .widget_area_inner .widget_search input.search_field:hover,
 .scheme_original .widget_area_inner .widget_product_search input.search_field:focus,
 .scheme_original .widget_area_inner .widget_search input.search_field:focus {
-    background-color: #004eb3;
+    background-color: #029ce2;
     border-color: #3c3c3c;
     color: #3c3c3c !important
 }
 
 .scheme_original .widget_area_inner .widget_product_search .search_button,
 .scheme_original .widget_area_inner .widget_search .search_button {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .widget_area_inner .widget_product_search .search_button:hover,
@@ -1940,7 +1942,7 @@ figure figcaption,
 
 .scheme_original .widget_area_inner .widget_product_search .search_button:hover:before,
 .scheme_original .widget_area_inner .widget_search .search_button:hover:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -1956,7 +1958,7 @@ figure figcaption,
 }
 
 .scheme_original .widget_area_inner .widget_calendar td a:hover {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #070707
 }
 
@@ -1967,7 +1969,7 @@ figure figcaption,
 .scheme_original .widget_area_inner .widget_calendar .today .day_wrap {
     border-color: #f9f600;
     background-color: #f9f600;
-    color: #1b1b1b
+    color: #00003d
 }
 
 .scheme_original .widget_area_inner .widget_calendar [class*="month_"] a {
@@ -1975,7 +1977,7 @@ figure figcaption,
 }
 
 .scheme_original .widget_area_inner .widget_calendar [class*="month_"] a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -1989,13 +1991,13 @@ figure figcaption,
 
 .scheme_original .widget_area_inner .widget_product_tag_cloud a:hover,
 .scheme_original .widget_area_inner .widget_tag_cloud a:hover {
-    background-color: #004eb3 !important;
+    background-color: #029ce2 !important;
     color: #070707 !important
 }
 
 .scheme_original .widget_area_inner .widget_product_tag_cloud a:not([class*="sc_button_hover_"]):hover,
 .scheme_original .widget_area_inner .widget_tag_cloud a:not([class*="sc_button_hover_"]):hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sidebar_inner aside {
@@ -2003,7 +2005,7 @@ figure figcaption,
 }
 
 .scheme_original .sidebar aside:nth-child(2n+1) {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .sidebar aside:nth-child(2n+0) {
@@ -2011,11 +2013,11 @@ figure figcaption,
 }
 
 .scheme_original .footer_wrap .footer_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .footer_wrap aside.widget {
-    background-color: #262626;
+    /* background-color: #262626; */
     color: #ffffff
 }
 
@@ -2031,7 +2033,7 @@ figure figcaption,
 }
 
 .scheme_original .copyright_wrap .copyright_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .copyright_wrap_inner {
@@ -2077,7 +2079,7 @@ figure figcaption,
 }
 
 .scheme_original .preloader_wrap>div {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original.gallery_preview:before {
@@ -2111,14 +2113,14 @@ figure figcaption,
 }
 
 .scheme_original .mode_buttons a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .woocommerce.widget_shopping_cart .quantity,
 .scheme_original .woocommerce .widget_shopping_cart .quantity,
 .scheme_original .woocommerce-page.widget_shopping_cart .quantity,
 .scheme_original .woocommerce-page .widget_shopping_cart .quantity {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original body:not(.woocommerce-cart) .woocommerce a.remove {
@@ -2126,7 +2128,7 @@ figure figcaption,
 }
 
 .scheme_original:not(.woocommerce-cart) .woocommerce a.remove:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .woocommerce .woocommerce-message:before,
@@ -2170,11 +2172,11 @@ figure figcaption,
 .scheme_original .widget_area_inner .widgetWrap ul>li .star-rating span,
 .scheme_original .woocommerce #review_form #respond .stars a,
 .scheme_original .woocommerce-page #review_form #respond .stars a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce #reviews #comments ol.commentlist li .meta {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce div.quantity span,
@@ -2184,7 +2186,7 @@ figure figcaption,
 
 .scheme_original .woocommerce div.quantity span:hover,
 .scheme_original .woocommerce-page div.quantity span:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content {
@@ -2193,12 +2195,12 @@ figure figcaption,
 
 .scheme_original .woocommerce .widget_price_filter .ui-slider .ui-slider-range,
 .scheme_original .woocommerce-page .widget_price_filter .ui-slider .ui-slider-range {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
 .scheme_original .woocommerce-page .widget_price_filter .ui-slider .ui-slider-handle {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_original .woocommerce .widget_price_filter .price_label {
@@ -2206,7 +2208,7 @@ figure figcaption,
 }
 
 .scheme_original .woocommerce .widget_price_filter .price_label span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce .woocommerce-message,
@@ -2231,7 +2233,7 @@ figure figcaption,
 .scheme_original .woocommerce-page input.button:active,
 .scheme_original .woocommerce-page #respond input#submit:active,
 .scheme_original .woocommerce-page #content input.button:active {
-    border-top-color: #004eb3
+    border-top-color: #029ce2
 }
 
 .scheme_original .woocommerce .product_meta span {
@@ -2239,7 +2241,7 @@ figure figcaption,
 }
 
 .scheme_original .woocommerce .product_meta span span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce div.product .woocommerce-tabs ul.tabs li.active,
@@ -2266,7 +2268,7 @@ figure figcaption,
 }
 
 .scheme_original .woocommerce .related.products h2:after {
-    border-color: #004eb3 !important
+    border-color: #029ce2 !important
 }
 
 .scheme_original .woocommerce a.button,
@@ -2292,7 +2294,7 @@ figure figcaption,
 .scheme_original .woocommerce-account .addresses .title .edit,
 .scheme_original .woocommerce ul.products li.product .add_to_cart_button,
 .scheme_original .woocommerce-page ul.products li.product .add_to_cart_button {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #363636
 }
 
@@ -2325,7 +2327,7 @@ figure figcaption,
 
 .scheme_original .woocommerce ul.products li.product h3 a:hover,
 .scheme_original .woocommerce-page ul.products li.product h3 a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce .quantity input.qty,
@@ -2368,7 +2370,7 @@ figure figcaption,
 
 .scheme_original .woocommerce ul.products li.product .price,
 .scheme_original .woocommerce-page ul.products li.product .price {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .woocommerce .products .post_item_wrap .post_featured .post_thumb a.button:hover {
@@ -2389,11 +2391,11 @@ figure figcaption,
 }
 
 .scheme_original.article_style_boxed.woocommerce ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original.article_style_boxed.woocommerce-page ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original.article_style_boxed.woocommerce ul.products li.product .post_content {
@@ -2406,15 +2408,15 @@ figure figcaption,
 
 .scheme_original .woocommerce nav.woocommerce-pagination ul li a,
 .scheme_original .woocommerce nav.woocommerce-pagination ul li span.current {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
 .scheme_original .woocommerce nav.woocommerce-pagination ul li a:focus,
 .scheme_original .woocommerce nav.woocommerce-pagination ul li a:hover,
 .scheme_original .woocommerce nav.woocommerce-pagination ul li span.current {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -2440,7 +2442,7 @@ figure figcaption,
 }
 
 .scheme_original .single-product div.product .woocommerce-tabs.trx-stretch-width .wc-tabs li.active a:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .woocommerce table.cart thead th,
@@ -2454,18 +2456,18 @@ figure figcaption,
 .scheme_original .woocommerce #content table.cart thead th:nth-child(2n+1),
 .scheme_original .woocommerce-page table.cart thead th:nth-child(2n+1),
 .scheme_original .woocommerce-page #content table.cart thead th:nth-child(2n+1) {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .woocommerce table.cart thead th:nth-child(2n+0),
 .scheme_original .woocommerce #content table.cart thead th:nth-child(2n+0),
 .scheme_original .woocommerce-page table.cart thead th:nth-child(2n+0),
 .scheme_original .woocommerce-page #content table.cart thead th:nth-child(2n+0) {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original table.shop_table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -2490,7 +2492,7 @@ figure figcaption,
 
 .scheme_original .woocommerce table.shop_table td.product-name a:hover,
 .scheme_original .woocommerce-page table.shop_table td.product-name a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .woocommerce-account .woocommerce-MyAccount-navigation,
@@ -2520,7 +2522,7 @@ figure figcaption,
 }
 
 .scheme_original .top_panel_wrap .widget_shopping_cart ul.cart_list>li>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .top_panel_wrap .widget_shopping_cart ul.cart_list>li.empty {
@@ -2539,7 +2541,7 @@ figure figcaption,
 .scheme_original body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li:hover,
 .scheme_original body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li:hover>a,
 .scheme_original body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories ul {
@@ -2547,7 +2549,7 @@ figure figcaption,
 }
 
 .scheme_original .tribe-events-calendar thead th {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original a.tribe-events-read-more,
@@ -2556,7 +2558,7 @@ figure figcaption,
 .scheme_original .tribe-events-nav-next a,
 .scheme_original .tribe-events-widget-link a,
 .scheme_original .tribe-events-viewmore a {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -2590,7 +2592,7 @@ figure figcaption,
 }
 
 .scheme_original #myplayer .ttw-music-player .progress-wrapper {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original #myplayer .ttw-music-player .tracklist li.track {
@@ -2615,7 +2617,7 @@ figure figcaption,
 }
 
 .scheme_original .mc4wp-response .mc4wp-success {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .custom-1 .eg-custom-skin-1-element-10 {
@@ -2623,7 +2625,7 @@ figure figcaption,
 }
 
 .scheme_original .custom-1 .eg-custom-skin-1-element-10:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .custom-1 .eg-custom-skin-1-element-12 {
@@ -2644,13 +2646,13 @@ figure figcaption,
 }
 
 .scheme_original .sc_accordion .sc_accordion_item .sc_accordion_title.ui-state-active {
-    color: #004eb3;
-    border-color: #004eb3
+    color: #029ce2;
+    border-color: #029ce2
 }
 
 .scheme_original .sc_accordion .sc_accordion_item .sc_accordion_title.ui-state-active .sc_accordion_icon_opened {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_accordion .sc_accordion_item .sc_accordion_title:hover {
@@ -2684,7 +2686,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_audio_player .sc_audio_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_audio_player .sc_audio_author {
@@ -2694,7 +2696,7 @@ figure figcaption,
 .scheme_original .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
 .scheme_original .mejs-controls .mejs-volume-button .mejs-volume-slider,
 .scheme_original .mejs-controls .mejs-time-rail .mejs-time-current {
-    background: #004eb3 !important
+    background: #029ce2 !important
 }
 
 .scheme_original .mejs-container,
@@ -2721,7 +2723,7 @@ figure figcaption,
 .scheme_original .mejs-container .mejs-controls .mejs-fullscreen-button,
 .scheme_original .mejs-container .mejs-controls .mejs-volume-button,
 .scheme_original .mejs-container .mejs-controls .mejs-playpause-button {
-    background: #004eb3 !important
+    background: #029ce2 !important
 }
 
 .scheme_original input[type="submit"],
@@ -2729,7 +2731,7 @@ figure figcaption,
 .scheme_original input[type="button"],
 .scheme_original button,
 .scheme_original .sc_button.sc_button_style_filled {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff !important;
 }
 
@@ -2749,8 +2751,8 @@ figure figcaption,
 }
 
 .scheme_original .sc_button.sc_button_style_border {
-    border-color: #004eb3;
-    color: #004eb3
+    border-color: #029ce2;
+    color: #029ce2
 }
 
 .scheme_original .sc_button.sc_button_style_border:hover {
@@ -2764,7 +2766,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_button.sc_button_style_simple:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -2779,7 +2781,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_button.sc_button_style_simple_white:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -2789,7 +2791,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_button.sc_button_style_simple_alter:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -2807,7 +2809,7 @@ figure figcaption,
 
 .scheme_original [class*="sc_button_hover_slide"] {
     color: #ffffff !important;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original [class*="sc_button_hover_slide"]:hover {
@@ -2815,19 +2817,19 @@ figure figcaption,
 }
 
 .scheme_original .sc_button_hover_slide_left {
-    background: linear-gradient(to right, #3c3c3c 50%, #004eb3 50%) repeat scroll right bottom / 210% 100% rgba(0, 0, 0, 0) !important
+    background: linear-gradient(to right, #3c3c3c 50%, #029ce2 50%) repeat scroll right bottom / 210% 100% rgba(0, 0, 0, 0) !important
 }
 
 .scheme_original .sc_button_hover_slide_top {
-    background: linear-gradient(to bottom, #3c3c3c 50%, #004eb3 50%) repeat scroll right bottom / 100% 210% rgba(0, 0, 0, 0) !important
+    background: linear-gradient(to bottom, #3c3c3c 50%, #029ce2 50%) repeat scroll right bottom / 100% 210% rgba(0, 0, 0, 0) !important
 }
 
 
 /* ================= END BUTTON'S HOVERS ==================== */
 
 .scheme_original .sc_blogger.layout_date .sc_blogger_item .sc_blogger_date {
-    background-color: #004eb3;
-    border-color: #004eb3;
+    background-color: #029ce2;
+    border-color: #029ce2;
     color: #ffffff
 }
 
@@ -2845,7 +2847,7 @@ figure figcaption,
 
 .scheme_original .sc_blogger.layout_polaroid .photostack nav span.current {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_blogger.layout_polaroid .photostack nav span.current.flip {
@@ -2858,7 +2860,7 @@ figure figcaption,
 
 .scheme_original .sc_call_to_action_accented {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_call_to_action_accented .sc_item_title,
@@ -2868,7 +2870,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_call_to_action_accented .sc_item_button>a {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -2885,7 +2887,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_call_to_action.sc_call_to_action_style_1:not(.sc_call_to_action_accented) .sc_call_to_action_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_call_to_action.sc_call_to_action_style_1:not(.sc_call_to_action_accented) .sc_call_to_action_descr {
@@ -2912,7 +2914,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_chat_inner a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_chat_inner a:hover {
@@ -2930,12 +2932,12 @@ figure figcaption,
 }
 
 .scheme_original .sc_clients_style_clients-2 .sc_client_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_clients_style_clients-2 .sc_client_description:before,
 .scheme_original .sc_clients_style_clients-2 .sc_client_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_form .sc_form_address_label,
@@ -2983,7 +2985,7 @@ figure figcaption,
 
 .scheme_original .sc_form table.picker__table th {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_form .picker__day--infocus {
@@ -3014,11 +3016,11 @@ figure figcaption,
 .scheme_original .sc_form .picker__button--today:before,
 .scheme_original .sc_form .picker__button--clear:before,
 .scheme_original .sc_form button:focus {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .sc_form .picker__button--close:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_form .picker--time .picker__button--clear:hover,
@@ -3081,7 +3083,7 @@ figure figcaption,
 
 .scheme_original .sc_countdown.sc_countdown_style_1 .sc_countdown_digits,
 .scheme_original .sc_countdown.sc_countdown_style_1 .sc_countdown_separator {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_countdown.sc_countdown_style_1 .sc_countdown_digits {
@@ -3090,19 +3092,19 @@ figure figcaption,
 }
 
 .scheme_original .sc_countdown.sc_countdown_style_1 .sc_countdown_label {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_countdown.sc_countdown_style_2 .sc_countdown_separator {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_countdown.sc_countdown_style_2 .sc_countdown_digits span {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_countdown.sc_countdown_style_2 .sc_countdown_label {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_dropcaps .sc_dropcaps_item {
@@ -3110,7 +3112,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_dropcaps.sc_dropcaps_style_1 .sc_dropcaps_item {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_dropcaps.sc_dropcaps_style_2 .sc_dropcaps_item {
@@ -3122,7 +3124,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_events_item .sc_events_item_readmore span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_events_item .sc_events_item_readmore:hover,
@@ -3140,7 +3142,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_events_style_events-2 .sc_events_item_date {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -3158,11 +3160,11 @@ figure figcaption,
 }
 
 .scheme_original .sc_highlight_style_1 {
-    background-color: #004eb3;
+    background-color: #029ce2;
 }
 
 .scheme_original .sc_highlight_style_2 {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_highlight_style_3 {
@@ -3173,13 +3175,13 @@ figure figcaption,
 .scheme_original .sc_icon_hover:hover,
 .scheme_original a:hover .sc_icon_hover {
     color: #ffffff !important;
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_original .sc_icon_shape_round.sc_icon,
 .scheme_original .sc_icon_shape_square.sc_icon {
-    background-color: #004eb3;
-    border-color: #004eb3;
+    background-color: #029ce2;
+    border-color: #029ce2;
     color: #ffffff
 }
 
@@ -3187,7 +3189,7 @@ figure figcaption,
 .scheme_original .sc_icon_shape_square.sc_icon:hover,
 .scheme_original a:hover .sc_icon_shape_round.sc_icon,
 .scheme_original a:hover .sc_icon_shape_square.sc_icon {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -3197,7 +3199,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_image a:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_image a:after {
@@ -3206,7 +3208,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_infobox.sc_infobox_style_regular {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_intro_inner .sc_intro_subtitle {
@@ -3224,7 +3226,7 @@ figure figcaption,
 
 .scheme_original .sc_list_style_iconed li:before,
 .scheme_original .sc_list_style_iconed .sc_list_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_list_style_iconed li .sc_list_title {
@@ -3245,7 +3247,7 @@ figure figcaption,
 }
 
 .scheme_original .match_block .player_country {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -3256,7 +3258,7 @@ figure figcaption,
 
 .scheme_original .match_block .player_name a:hover {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .match_block .match_score {
@@ -3270,11 +3272,11 @@ figure figcaption,
 
 .scheme_original .match_block .match_category a:hover,
 .scheme_original .match_block .match_date {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .post_item_colored .match_date {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .matches_hover>a:after {
@@ -3282,7 +3284,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_matches.style_matches-1 .sc_matches_next {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -3305,15 +3307,15 @@ figure figcaption,
 }
 
 .scheme_original .sc_matches.style_matches-2 .sc_matches_next .sc_item_title {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_matches.style_matches-2 .sc_matches_next .sc_match_date {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .post_item_single_players .post_title:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .post_item_single_players .player_info span {
@@ -3326,11 +3328,11 @@ figure figcaption,
 
 .scheme_original .sc_player .sc_player_info .sc_player_club,
 .scheme_original .sc_player .sc_player_info .sc_player_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_player .sc_player_info {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .sc_player .sc_player_avatar .sc_player_hover {
@@ -3344,7 +3346,7 @@ figure figcaption,
 }
 
 .scheme_original .post_item_colored .player_info {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_players_table table tr .country {
@@ -3360,7 +3362,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_popup:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_price .sc_price_currency,
@@ -3387,13 +3389,13 @@ figure figcaption,
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_1 .sc_price_block_money .sc_price>* {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_3,
 .scheme_original .sc_price_block.sc_price_block_style_3 .sc_price_block_money * {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_3 .sc_price_block_title {
@@ -3413,7 +3415,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_promo_block {
-    background-color: #262626
+    background-color: #00003d
 }
 
 .scheme_original .sc_promo .sc_promo_subtitle {
@@ -3429,7 +3431,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_promo .sc_promo_line {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_promo .sc_button.sc_button_style_simple {
@@ -3437,11 +3439,11 @@ figure figcaption,
 }
 
 .scheme_original .sc_promo .sc_button.sc_button_style_simple:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .sc_promo .sc_button.sc_button_style_simple:hover::before {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .sc_section_inner {
@@ -3449,7 +3451,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_item .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_item .sc_services_item_readmore {
@@ -3457,7 +3459,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_item .sc_services_item_readmore span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_item .sc_services_item_readmore:hover,
@@ -3492,7 +3494,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_style_services-2 .sc_services_item_overlay .sc_services_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-2 .sc_services_item_description .sc_button {
@@ -3501,11 +3503,11 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_style_services-2 .sc_services_item_overlay .sc_services_item_description .sc_button:hover {
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_original .sc_services_style_services-3 .sc_services_item_title a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original .sc_services_style_services-3 .sc_services_item_description .sc_button {
@@ -3514,22 +3516,22 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_style_services-3 .sc_services_item_description .sc_button:hover {
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_original .sc_services_style_services-3 a:hover .sc_icon,
 .scheme_original .sc_services_style_services-3 .sc_icon:hover {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
 .scheme_original .sc_services_style_services-3 a:hover .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-4 .sc_icon {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-4 .sc_services_item_title {
@@ -3542,20 +3544,20 @@ figure figcaption,
 }
 
 .scheme_original .sc_services_style_services-4 a:hover .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-5 .sc_icon {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-5 .sc_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-5 .sc_icon:hover,
 .scheme_original .sc_services_style_services-5 a:hover .sc_icon {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_services_style_services-5 .sc_icon:hover,
@@ -3564,7 +3566,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_scroll_controls_wrap a {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -3578,7 +3580,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_scroll_bar .swiper-scrollbar-drag:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_scroll .sc_scroll_bar {
@@ -3590,7 +3592,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_skills_counter .sc_skills_item .sc_skills_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_skills_counter .sc_skills_item:hover .sc_skills_icon {
@@ -3606,7 +3608,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_skills_bar .sc_skills_item .sc_skills_count {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .sc_skills_legend {
@@ -3623,7 +3625,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_skills_counter .sc_skills_item.sc_skills_style_1 .sc_skills_total {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_skills_counter .sc_skills_item.sc_skills_style_1 .sc_skills_count,
@@ -3644,7 +3646,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_skills_counter .sc_skills_item.sc_skills_style_2 .sc_skills_total {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_skills_bar .sc_skills_item .sc_skills_count,
@@ -3652,7 +3654,7 @@ figure figcaption,
 .scheme_original .sc_skills_counter .sc_skills_item.sc_skills_style_4 .sc_skills_count,
 .scheme_original .sc_skills_counter .sc_skills_item.sc_skills_style_4 .sc_skills_info {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_skills_bar .sc_skills_info .sc_skills_label {
@@ -3669,14 +3671,14 @@ figure figcaption,
 }
 
 .scheme_original .sc_slider_controls_wrap a:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
 .scheme_original .sc_slider_swiper .sc_slider_pagination_wrap .swiper-pagination-bullet-active,
 .scheme_original .sc_slider_swiper .sc_slider_pagination_wrap span:hover {
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_original .sc_slider_swiper .sc_slider_info {
@@ -3697,8 +3699,8 @@ figure figcaption,
 
 .scheme_original .sc_slider_pagination_over .sc_slider_pagination_wrap span:hover,
 .scheme_original .sc_slider_pagination_over .sc_slider_pagination_wrap .swiper-pagination-bullet-active {
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_original .sc_slider_pagination_over .sc_slider_pagination .post_title {
@@ -3723,8 +3725,8 @@ figure figcaption,
 .scheme_original .widget_area_inner .widget_text .sc_socials a:hover,
 .scheme_original .sc_socials.sc_socials_type_icons a:hover {
     color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_original .sc_socials.sc_socials_share.sc_socials_dir_vertical .sc_socials_item a {
@@ -3739,12 +3741,12 @@ figure figcaption,
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.ui-state-active a,
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.sc_tabs_active a,
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.ui-state-active a:after,
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.sc_tabs_active a:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_tabs.sc_tabs_style_1 .sc_tabs_content,
@@ -3753,8 +3755,8 @@ figure figcaption,
 }
 
 .scheme_original .sc_tabs.sc_tabs_style_2 .sc_tabs_titles li a {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -3782,7 +3784,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_team_style_team-1 .sc_team_item .sc_team_item_info .sc_team_item_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_team_style_team-1 .sc_team_item .sc_team_item_info .sc_team_item_description {
@@ -3791,14 +3793,14 @@ figure figcaption,
 
 .scheme_original .sc_team_style_team-1 .sc_team_item_info,
 .scheme_original .sc_team_style_team-3 .sc_team_item_info {
-    border-color: #004eb3;
+    border-color: #029ce2;
     color: #3c3c3c
 }
 
 .scheme_original .sc_team.sc_team_style_team-3 .sc_socials_item a {
     color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_original .sc_team.sc_team_style_team-3 .sc_socials_item a:hover {
@@ -3808,7 +3810,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_team_style_team-3 .sc_team_item_info .sc_team_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_team.sc_team_style_team-3 .sc_team_item_avatar .sc_team_item_hover {
@@ -3827,8 +3829,8 @@ figure figcaption,
 
 .scheme_original .sc_team.sc_team_style_team-4 .sc_socials_item a:hover {
     color: #363636;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_original .sc_team.sc_team_style_team-4 .sc_team_item_avatar .sc_team_item_hover {
@@ -3840,7 +3842,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_team_style_team-4 .sc_team_item_info .sc_team_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_team_style_team-4 .sc_team_item_info .sc_team_item_position {
@@ -3848,7 +3850,7 @@ figure figcaption,
 }
 
 .scheme_original .post_item_single_team .single_team_post_description .team_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_testimonials {
@@ -3869,7 +3871,7 @@ figure figcaption,
 
 .scheme_original .sc_testimonials_style_testimonials-1 .sc_testimonial_content p:first-child:before,
 .scheme_original .sc_testimonials_style_testimonials-1 .sc_testimonial_author_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_testimonials_style_testimonials-1 .sc_item_subtitle {
@@ -3907,15 +3909,15 @@ figure figcaption,
 
 .scheme_original .sc_testimonials_style_testimonials-3 .sc_testimonial_content p:first-child:before,
 .scheme_original .sc_testimonials_style_testimonials-3 .sc_testimonial_author_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_title_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_title_underline::after {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_original .sc_title_underline_dark::after {
@@ -3941,13 +3943,13 @@ figure figcaption,
 }
 
 .scheme_original .sc_toggles .sc_toggles_item .sc_toggles_title.ui-state-active {
-    color: #004eb3;
-    border-color: #004eb3
+    color: #029ce2;
+    border-color: #029ce2
 }
 
 .scheme_original .sc_toggles .sc_toggles_item .sc_toggles_title.ui-state-active .sc_toggles_icon_opened {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_original .sc_toggles .sc_toggles_item .sc_toggles_title:hover {
@@ -3964,7 +3966,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_tooltip_parent {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original .sc_tooltip_parent .sc_tooltip,
@@ -4007,7 +4009,7 @@ figure figcaption,
 }
 
 .scheme_original .sc_blogger_button a.sc_button_style_simple:hover:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_original body #booked-profile-page input[type=submit].button-primary:hover,
@@ -4034,7 +4036,7 @@ figure figcaption,
 
 .scheme_original body table.booked-calendar thead th .page-right:hover,
 .scheme_original body table.booked-calendar thead th .page-left:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_original body table.booked-calendar tr.days th,
@@ -4051,7 +4053,7 @@ figure figcaption,
 }
 
 .scheme_original body table.booked-calendar td.today .date span {
-    border-color: #004eb3 !important
+    border-color: #029ce2 !important
 }
 
 .scheme_original body table.booked-calendar td.today:hover .date span {
@@ -4059,7 +4061,7 @@ figure figcaption,
 }
 
 .scheme_original body table.booked-calendar tbody td:nth-child(2n+1) span {
-    background-color: #1b1b1b !important;
+    background-color: #00003d !important;
     color: #ffffff
 }
 
@@ -4234,7 +4236,7 @@ figure figcaption,
 
 .scheme_light .sc_table table th,
 .scheme_light .sc_table table td {
-    border-color: #1b1b1b
+    border-color: #00003d
 }
 
 .scheme_light .sc_table table tr:first-child {
@@ -4242,7 +4244,7 @@ figure figcaption,
 }
 
 .scheme_light .sc_table table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -4579,7 +4581,7 @@ figure figcaption,
 }
 
 .scheme_light body:not(.top_panel_over) .top_panel_style_6 {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .top_panel_style_6 .top_panel_position_above .logo .logo_text,
@@ -4636,7 +4638,7 @@ figure figcaption,
 .scheme_light .menu_user_nav>li ul li.current-menu-item>a,
 .scheme_light .menu_user_nav>li ul li.current-menu-ancestor>a {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .menu_user_nav>li.menu_user_controls .user_avatar {
@@ -4648,7 +4650,7 @@ figure figcaption,
 }
 
 .scheme_light .top_panel_middle {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .top_panel_position_over.top_panel_middle {
@@ -4732,13 +4734,13 @@ figure figcaption,
     color: #b3c200;
 }
 
-.scheme_light .menu_hover_slide_box .menu_main_nav>li#blob {
-    background-color: #1b1b1b
+/* .scheme_light .menu_hover_slide_box .menu_main_nav>li#blob {
+    background-color: #00003d
 }
 
 .scheme_light .menu_hover_slide_line .menu_main_nav>li#blob {
     background-color: #ffffff
-}
+} */
 
 .scheme_light .menu_hover_zoom_line .menu_main_nav>li>a:before {
     background-color: #3c3c3c
@@ -4905,7 +4907,7 @@ figure figcaption,
 }
 
 .scheme_light .header_mobile {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .header_mobile .sidebar_cart {
@@ -5021,7 +5023,7 @@ figure figcaption,
 }
 
 .scheme_light .top_panel_title_inner {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     border-color: rgba(54, 54, 54, 0.1)
 }
 
@@ -5325,7 +5327,7 @@ figure figcaption,
 
 .scheme_light .reviews_block .reviews_summary,
 .scheme_light .reviews_block .reviews_max_level_100 .reviews_stars_bg {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .reviews_block .reviews_max_level_100 .reviews_stars_hover,
@@ -5454,7 +5456,7 @@ figure figcaption,
 }
 
 .scheme_light .sidebar_inner.widget_area_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .widget_area_inner a,
@@ -5577,7 +5579,7 @@ figure figcaption,
 .scheme_light .widget_area_inner .widget_calendar .today .day_wrap {
     border-color: #c3d300;
     background-color: #c3d300;
-    color: #1b1b1b
+    color: #00003d
 }
 
 .scheme_light .widget_area_inner .widget_calendar [class*="month_"] a {
@@ -5613,7 +5615,7 @@ figure figcaption,
 }
 
 .scheme_light .sidebar aside:nth-child(2n+1) {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .sidebar aside:nth-child(2n+0) {
@@ -5621,7 +5623,7 @@ figure figcaption,
 }
 
 .scheme_light .footer_wrap .footer_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .footer_wrap aside.widget {
@@ -5641,7 +5643,7 @@ figure figcaption,
 }
 
 .scheme_light .copyright_wrap .copyright_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .copyright_wrap_inner {
@@ -5999,11 +6001,11 @@ figure figcaption,
 }
 
 .scheme_light.article_style_boxed.woocommerce ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light.article_style_boxed.woocommerce-page ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light.article_style_boxed.woocommerce ul.products li.product .post_content {
@@ -6075,7 +6077,7 @@ figure figcaption,
 }
 
 .scheme_light table.shop_table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -6209,7 +6211,7 @@ figure figcaption,
 }
 
 .scheme_light #myplayer .ttw-music-player .progress-wrapper {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light #myplayer .ttw-music-player .tracklist li.track {
@@ -6927,7 +6929,7 @@ figure figcaption,
 }
 
 .scheme_light .sc_matches.style_matches-2 .sc_matches_next .sc_match_date {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .post_item_single_players .post_title:after {
@@ -7011,7 +7013,7 @@ figure figcaption,
 .scheme_light .sc_price_block.sc_price_block_style_3,
 .scheme_light .sc_price_block.sc_price_block_style_3 .sc_price_block_money * {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_light .sc_price_block.sc_price_block_style_3 .sc_price_block_title {
@@ -7663,7 +7665,7 @@ figure figcaption,
 }
 
 .scheme_light body table.booked-calendar tbody td:nth-child(2n+1) span {
-    background-color: #1b1b1b !important;
+    background-color: #00003d !important;
     color: #ffffff
 }
 
@@ -7704,7 +7706,7 @@ figure figcaption,
 }
 
 .scheme_dark a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark a:hover {
@@ -7716,7 +7718,7 @@ figure figcaption,
 }
 
 .scheme_dark blockquote:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark blockquote,
@@ -7733,19 +7735,19 @@ figure figcaption,
 }
 
 .scheme_dark .accent1 {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .accent1_bgc {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .accent1_bg {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_dark .accent1_border {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark a.accent1:hover {
@@ -7790,7 +7792,7 @@ figure figcaption,
 .scheme_dark .post_content.ih-item.circle.effect20.colored .info .info-back,
 .scheme_dark .post_content.ih-item.square.effect_book.colored .info,
 .scheme_dark .post_content.ih-item.square.effect_pull.colored .post_descr {
-    background: #004eb3;
+    background: #029ce2;
     color: #ffffff
 }
 
@@ -7814,7 +7816,7 @@ figure figcaption,
 .scheme_dark .post_content.ih-item.square.effect_border.colored .img,
 .scheme_dark .post_content.ih-item.square.effect_fade.colored .img,
 .scheme_dark .post_content.ih-item.square.effect_slide.colored .img {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_dark .post_content.ih-item.square.effect_border.colored .info,
@@ -7829,8 +7831,8 @@ figure figcaption,
 }
 
 .scheme_dark .post_content.ih-item.circle.effect1 .spinner {
-    border-right-color: #004eb3;
-    border-bottom-color: #004eb3
+    border-right-color: #029ce2;
+    border-bottom-color: #029ce2
 }
 
 .scheme_dark .post_content.ih-item .post_readmore .post_readmore_label,
@@ -7856,7 +7858,7 @@ figure figcaption,
 
 .scheme_dark .sc_table table th,
 .scheme_dark .sc_table table td {
-    border-color: #1b1b1b
+    border-color: #00003d
 }
 
 .scheme_dark .sc_table table tr:first-child {
@@ -7864,7 +7866,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_table table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -7886,12 +7888,12 @@ figure figcaption,
 .scheme_dark pre.code,
 .scheme_dark #toc .toc_item.current,
 .scheme_dark #toc .toc_item:hover {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark::selection,
 .scheme_dark::-moz-selection {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -7924,8 +7926,8 @@ figure figcaption,
 .scheme_dark select:focus,
 .scheme_dark textarea:focus {
     color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark input::-webkit-input-placeholder {
@@ -8043,7 +8045,7 @@ figure figcaption,
 .scheme_dark .sc_input_hover_accent input[type="search"]:focus,
 .scheme_dark .sc_input_hover_accent select:focus,
 .scheme_dark .sc_input_hover_accent textarea:focus {
-    box-shadow: 0 0 0 2px #004eb3
+    box-shadow: 0 0 0 2px #029ce2
 }
 
 .scheme_dark .sc_input_hover_accent input[type="text"] + label:before,
@@ -8090,7 +8092,7 @@ figure figcaption,
 .scheme_dark .sc_input_hover_jump input[type="password"].filled,
 .scheme_dark .sc_input_hover_jump input[type="search"].filled,
 .scheme_dark .sc_input_hover_jump textarea.filled {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_input_hover_underline input[type="text"] + label:before,
@@ -8206,7 +8208,7 @@ figure figcaption,
 }
 
 .scheme_dark body:not(.top_panel_over) .top_panel_style_6 {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .top_panel_style_6 .top_panel_position_above .logo .logo_text,
@@ -8219,7 +8221,7 @@ figure figcaption,
 }
 
 .scheme_dark .top_panel_inner_style_7 .top_panel_cart_button:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .top_panel_middle .sidebar_cart:after,
@@ -8257,7 +8259,7 @@ figure figcaption,
 .scheme_dark .menu_user_nav>li ul li.current-menu-item>a,
 .scheme_dark .menu_user_nav>li ul li.current-menu-ancestor>a {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .menu_user_nav>li.menu_user_controls .user_avatar {
@@ -8269,7 +8271,7 @@ figure figcaption,
 }
 
 .scheme_dark .top_panel_middle {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .top_panel_position_over.top_panel_middle {
@@ -8288,7 +8290,7 @@ figure figcaption,
 /* Top panel (bottom area) */
 
 .scheme_dark .top_panel_bottom {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .top_panel_image_hover {
@@ -8350,7 +8352,7 @@ figure figcaption,
 .scheme_dark .menu_main_nav>li ul li a:hover,
 .scheme_dark .menu_main_nav>li ul li.current-menu-item>a,
 .scheme_dark .menu_main_nav>li ul li.current-menu-ancestor>a {
-    color: #004eb3;
+    color: #029ce2;
 }
 
 .scheme_dark .top_panel_inner_style_1 .menu_main_nav>li>a,
@@ -8361,7 +8363,7 @@ figure figcaption,
 .scheme_dark .top_panel_inner_style_1 .menu_main_nav>li ul,
 .scheme_dark .top_panel_inner_style_2 .menu_main_nav>li ul {
     border-color: #3c3c3c;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .top_panel_inner_style_1 .menu_main_nav>li ul li a,
@@ -8370,7 +8372,7 @@ figure figcaption,
 }
 
 .scheme_dark .menu_hover_slide_box .menu_main_nav>li#blob {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .menu_hover_slide_line .menu_main_nav>li#blob {
@@ -8456,7 +8458,7 @@ figure figcaption,
 
 .scheme_dark .content .search_wrap .search_form_wrap .search_submit:hover,
 .scheme_dark .content .search_wrap .search_form_wrap .search_submit:focus {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .content .search_field {
@@ -8492,7 +8494,7 @@ figure figcaption,
 .scheme_dark .top_panel_icon:hover .contact_icon,
 .scheme_dark .top_panel_icon:hover .search_submit,
 .scheme_dark .top_panel_icon:hover .cart_summa {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .search_style_fullscreen.search_state_closed:not(.top_panel_icon) .search_submit,
@@ -8511,7 +8513,7 @@ figure figcaption,
 
 .scheme_dark .search_results .post_more,
 .scheme_dark .search_results .search_results_close {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .search_results .post_more:hover,
@@ -8525,7 +8527,7 @@ figure figcaption,
 }
 
 .scheme_dark .pushy_inner a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .pushy_inner a:hover {
@@ -8537,7 +8539,7 @@ figure figcaption,
 }
 
 .scheme_dark .header_mobile {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .header_mobile .sidebar_cart {
@@ -8556,11 +8558,11 @@ figure figcaption,
 
 .scheme_dark .header_mobile .panel_top,
 .scheme_dark .header_mobile .side_wrap {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .header_mobile .panel_middle {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .header_mobile .panel_bottom {
@@ -8571,7 +8573,7 @@ figure figcaption,
 .scheme_dark .header_mobile .menu_main_cart .top_panel_cart_button .contact_icon:hover,
 .scheme_dark .header_mobile .menu_main_cart.top_panel_icon:hover .top_panel_cart_button .contact_icon,
 .scheme_dark .header_mobile .side_wrap .close:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .header_mobile .menu_main_nav>li a,
@@ -8598,7 +8600,7 @@ figure figcaption,
 
 .scheme_dark .header_mobile .search_wrap,
 .scheme_dark .header_mobile .login {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .header_mobile .login .popup_link,
@@ -8653,7 +8655,7 @@ figure figcaption,
 }
 
 .scheme_dark .top_panel_title_inner {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     border-color: rgba(54, 54, 54, 0.1)
 }
 
@@ -8682,16 +8684,16 @@ figure figcaption,
 }
 
 .scheme_dark .post_title .post_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .pagination>a {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .post_format_aside.post_item_single .post_content p,
 .scheme_dark .post_format_aside .post_descr {
-    border-color: #004eb3;
+    border-color: #029ce2;
     background-color: #ffffff
 }
 
@@ -8705,7 +8707,7 @@ figure figcaption,
 .scheme_dark .post_content .post_info_bottom .post_info_item a,
 .scheme_dark .post_content .post_info_bottom .post_info_item a>span,
 .scheme_dark .post_content .post_info_bottom .post_info_item a[class*="icon-"] {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .post_content .post_info_bottom .post_info_item a:hover,
@@ -8724,7 +8726,7 @@ figure figcaption,
 }
 
 .scheme_dark .post_item .post_info_share .social_icons:hover {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .post_item .post_info_share .social_icons:hover>span {
@@ -8733,7 +8735,7 @@ figure figcaption,
 
 .scheme_dark .hover_icon:before {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .hover_icon:after {
@@ -8746,7 +8748,7 @@ figure figcaption,
 }
 
 .scheme_dark .post_info a[class*="icon-"] {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .post_info a:hover,
@@ -8788,7 +8790,7 @@ figure figcaption,
 .scheme_dark .isotope_item_colored .post_featured .post_title,
 .scheme_dark .isotope_item_colored .post_content.ih-item.square.colored .info {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .isotope_item_colored .post_featured .post_title a {
@@ -8799,7 +8801,7 @@ figure figcaption,
 .scheme_dark .isotope_item_colored .post_rating .reviews_stars_bg,
 .scheme_dark .isotope_item_colored .post_rating .reviews_stars_hover,
 .scheme_dark .isotope_item_colored .post_rating .reviews_value {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .isotope_item_colored .post_featured .post_descr {
@@ -8811,7 +8813,7 @@ figure figcaption,
 }
 
 .scheme_dark .isotope_item_colored .post_info_wrap .post_button .sc_button {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -8822,7 +8824,7 @@ figure figcaption,
 
 .scheme_dark .isotope_item_colored_1 a,
 .scheme_dark .isotope_item_colored_1 .post_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .isotope_item_colored_1 a:hover,
@@ -8832,11 +8834,11 @@ figure figcaption,
 }
 
 .scheme_dark .isotope_wrap .isotope_item_colored_1 .post_featured {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .isotope_wrap .isotope_item_masonry .post_content_overlay .post_title:hover a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .isotope_wrap .isotope_item_classic .post_item .post_content_overlay:after {
@@ -8848,7 +8850,7 @@ figure figcaption,
 }
 
 .scheme_dark .isotope_wrap .isotope_item_classic.isotope_column_3 .post_item .post_content_overlay .post_content .post_title:hover a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .isotope_wrap .isotope_item_classic .post_item .post_content_overlay .post_content .post_descr .sc_button {
@@ -8857,7 +8859,7 @@ figure figcaption,
 }
 
 .scheme_dark .isotope_wrap .isotope_item_classic .post_item .post_content_overlay .post_content .post_descr .sc_button:hover {
-    background-color: #004eb3 !important;
+    background-color: #029ce2 !important;
     color: #ffffff !important;
 }
 
@@ -8866,8 +8868,8 @@ figure figcaption,
 }
 
 .scheme_dark .isotope_filters a {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -8891,7 +8893,7 @@ figure figcaption,
 .scheme_dark .pagination_slider .pager_cur:focus,
 .scheme_dark .pagination_pages>.active,
 .scheme_dark .pagination_pages>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .pagination_slider .pager_slider {
@@ -8910,12 +8912,12 @@ figure figcaption,
 .scheme_dark .pagination_wrap .pager_prev:hover,
 .scheme_dark .pagination_wrap .pager_last:hover,
 .scheme_dark .pagination_wrap .pager_first:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .pagination_viewmore>a {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .pagination_viewmore>a:hover {
@@ -8934,31 +8936,31 @@ figure figcaption,
 }
 
 .scheme_dark .post_featured .post_nav_item:before {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
 .scheme_dark .post_featured .post_nav_item .post_nav_info {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .reviews_block .reviews_summary .reviews_item {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .reviews_block .reviews_summary,
 .scheme_dark .reviews_block .reviews_max_level_100 .reviews_stars_bg {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .reviews_block .reviews_max_level_100 .reviews_stars_hover,
 .scheme_dark .reviews_block .reviews_item .reviews_slider {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .reviews_block .reviews_item .reviews_stars_hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .reviews_block .reviews_value {
@@ -9000,11 +9002,11 @@ figure figcaption,
 }
 
 .scheme_dark .post_author .post_author_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .post_author .post_author_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .post_author .post_author_title a:hover {
@@ -9030,7 +9032,7 @@ figure figcaption,
 }
 
 .scheme_dark .comments_list_wrap .comment-respond {
-    border-bottom-color: #004eb3
+    border-bottom-color: #029ce2
 }
 
 .scheme_dark .comments_list_wrap>ul {
@@ -9047,7 +9049,7 @@ figure figcaption,
 }
 
 .scheme_dark .comments_list_wrap .comment_reply a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .comments_list_wrap .comment_text {
@@ -9056,7 +9058,7 @@ figure figcaption,
 
 .scheme_dark .post_item_404 .page_title,
 .scheme_dark .post_item_404 .page_subtitle {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sidebar.widget_area .widget {
@@ -9077,14 +9079,14 @@ figure figcaption,
 }
 
 .scheme_dark .sidebar_inner.widget_area_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .widget_area_inner a,
 .scheme_dark .widget_area_inner ul li:before,
 .scheme_dark .widget_area_inner ul li a:hover,
 .scheme_dark .widget_area_inner button:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .widget_area_inner a:hover,
@@ -9099,7 +9101,7 @@ figure figcaption,
 
 .scheme_dark .widget_area_inner .widget_text a:not(.sc_button),
 .scheme_dark .widget_area_inner .post_info a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .widget_area_inner .widget_text a:not(.sc_button):hover,
@@ -9130,7 +9132,7 @@ figure figcaption,
 }
 
 .scheme_dark .widget_area .post_item .post_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -9151,14 +9153,14 @@ figure figcaption,
 .scheme_dark .widget_area_inner .widget_search input.search_field:hover,
 .scheme_dark .widget_area_inner .widget_product_search input.search_field:focus,
 .scheme_dark .widget_area_inner .widget_search input.search_field:focus {
-    background-color: #004eb3;
+    background-color: #029ce2;
     border-color: #3c3c3c;
     color: #3c3c3c !important
 }
 
 .scheme_dark .widget_area_inner .widget_product_search .search_button,
 .scheme_dark .widget_area_inner .widget_search .search_button {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .widget_area_inner .widget_product_search .search_button:hover,
@@ -9173,7 +9175,7 @@ figure figcaption,
 
 .scheme_dark .widget_area_inner .widget_product_search .search_button:hover:before,
 .scheme_dark .widget_area_inner .widget_search .search_button:hover:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -9189,7 +9191,7 @@ figure figcaption,
 }
 
 .scheme_dark .widget_area_inner .widget_calendar td a:hover {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #070707
 }
 
@@ -9200,7 +9202,7 @@ figure figcaption,
 .scheme_dark .widget_area_inner .widget_calendar .today .day_wrap {
     border-color: #f9f600;
     background-color: #f9f600;
-    color: #1b1b1b
+    color: #00003d
 }
 
 .scheme_dark .widget_area_inner .widget_calendar [class*="month_"] a {
@@ -9208,7 +9210,7 @@ figure figcaption,
 }
 
 .scheme_dark .widget_area_inner .widget_calendar [class*="month_"] a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 
@@ -9222,13 +9224,13 @@ figure figcaption,
 
 .scheme_dark .widget_area_inner .widget_product_tag_cloud a:hover,
 .scheme_dark .widget_area_inner .widget_tag_cloud a:hover {
-    background-color: #004eb3 !important;
+    background-color: #029ce2 !important;
     color: #070707 !important
 }
 
 .scheme_dark .widget_area_inner .widget_product_tag_cloud a:not([class*="sc_button_hover_"]):hover,
 .scheme_dark .widget_area_inner .widget_tag_cloud a:not([class*="sc_button_hover_"]):hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sidebar_inner aside {
@@ -9236,7 +9238,7 @@ figure figcaption,
 }
 
 .scheme_dark .sidebar aside:nth-child(2n+1) {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .sidebar aside:nth-child(2n+0) {
@@ -9244,7 +9246,7 @@ figure figcaption,
 }
 
 .scheme_dark .footer_wrap .footer_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .footer_wrap aside.widget {
@@ -9264,7 +9266,7 @@ figure figcaption,
 }
 
 .scheme_dark .copyright_wrap .copyright_wrap_inner {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .copyright_wrap_inner {
@@ -9310,7 +9312,7 @@ figure figcaption,
 }
 
 .scheme_dark .preloader_wrap>div {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark.gallery_preview:before {
@@ -9344,14 +9346,14 @@ figure figcaption,
 }
 
 .scheme_dark .mode_buttons a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .woocommerce.widget_shopping_cart .quantity,
 .scheme_dark .woocommerce .widget_shopping_cart .quantity,
 .scheme_dark .woocommerce-page.widget_shopping_cart .quantity,
 .scheme_dark .woocommerce-page .widget_shopping_cart .quantity {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark body:not(.woocommerce-cart) .woocommerce a.remove {
@@ -9359,7 +9361,7 @@ figure figcaption,
 }
 
 .scheme_dark:not(.woocommerce-cart) .woocommerce a.remove:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .woocommerce .woocommerce-message:before,
@@ -9403,11 +9405,11 @@ figure figcaption,
 .scheme_dark .widget_area_inner .widgetWrap ul>li .star-rating span,
 .scheme_dark .woocommerce #review_form #respond .stars a,
 .scheme_dark .woocommerce-page #review_form #respond .stars a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce #reviews #comments ol.commentlist li .meta {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce div.quantity span,
@@ -9417,7 +9419,7 @@ figure figcaption,
 
 .scheme_dark .woocommerce div.quantity span:hover,
 .scheme_dark .woocommerce-page div.quantity span:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content {
@@ -9426,12 +9428,12 @@ figure figcaption,
 
 .scheme_dark .woocommerce .widget_price_filter .ui-slider .ui-slider-range,
 .scheme_dark .woocommerce-page .widget_price_filter .ui-slider .ui-slider-range {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
 .scheme_dark .woocommerce-page .widget_price_filter .ui-slider .ui-slider-handle {
-    background: #004eb3
+    background: #029ce2
 }
 
 .scheme_dark .woocommerce .widget_price_filter .price_label {
@@ -9439,7 +9441,7 @@ figure figcaption,
 }
 
 .scheme_dark .woocommerce .widget_price_filter .price_label span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce .woocommerce-message,
@@ -9464,7 +9466,7 @@ figure figcaption,
 .scheme_dark .woocommerce-page input.button:active,
 .scheme_dark .woocommerce-page #respond input#submit:active,
 .scheme_dark .woocommerce-page #content input.button:active {
-    border-top-color: #004eb3
+    border-top-color: #029ce2
 }
 
 .scheme_dark .woocommerce .product_meta span {
@@ -9472,7 +9474,7 @@ figure figcaption,
 }
 
 .scheme_dark .woocommerce .product_meta span span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce div.product .woocommerce-tabs ul.tabs li.active,
@@ -9499,7 +9501,7 @@ figure figcaption,
 }
 
 .scheme_dark .woocommerce .related.products h2:after {
-    border-color: #004eb3 !important
+    border-color: #029ce2 !important
 }
 
 .scheme_dark .woocommerce a.button,
@@ -9525,7 +9527,7 @@ figure figcaption,
 .scheme_dark .woocommerce-account .addresses .title .edit,
 .scheme_dark .woocommerce ul.products li.product .add_to_cart_button,
 .scheme_dark .woocommerce-page ul.products li.product .add_to_cart_button {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #363636
 }
 
@@ -9558,7 +9560,7 @@ figure figcaption,
 
 .scheme_dark .woocommerce ul.products li.product h3 a:hover,
 .scheme_dark .woocommerce-page ul.products li.product h3 a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce .quantity input.qty,
@@ -9601,7 +9603,7 @@ figure figcaption,
 
 .scheme_dark .woocommerce ul.products li.product .price,
 .scheme_dark .woocommerce-page ul.products li.product .price {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .woocommerce .products .post_item_wrap .post_featured .post_thumb a.button:hover {
@@ -9622,11 +9624,11 @@ figure figcaption,
 }
 
 .scheme_dark.article_style_boxed.woocommerce ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark.article_style_boxed.woocommerce-page ul.products li.product .post_item_wrap {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark.article_style_boxed.woocommerce ul.products li.product .post_content {
@@ -9639,15 +9641,15 @@ figure figcaption,
 
 .scheme_dark .woocommerce nav.woocommerce-pagination ul li a,
 .scheme_dark .woocommerce nav.woocommerce-pagination ul li span.current {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
 .scheme_dark .woocommerce nav.woocommerce-pagination ul li a:focus,
 .scheme_dark .woocommerce nav.woocommerce-pagination ul li a:hover,
 .scheme_dark .woocommerce nav.woocommerce-pagination ul li span.current {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -9673,7 +9675,7 @@ figure figcaption,
 }
 
 .scheme_dark .single-product div.product .woocommerce-tabs.trx-stretch-width .wc-tabs li.active a:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .woocommerce table.cart thead th,
@@ -9687,18 +9689,18 @@ figure figcaption,
 .scheme_dark .woocommerce #content table.cart thead th:nth-child(2n+1),
 .scheme_dark .woocommerce-page table.cart thead th:nth-child(2n+1),
 .scheme_dark .woocommerce-page #content table.cart thead th:nth-child(2n+1) {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .woocommerce table.cart thead th:nth-child(2n+0),
 .scheme_dark .woocommerce #content table.cart thead th:nth-child(2n+0),
 .scheme_dark .woocommerce-page table.cart thead th:nth-child(2n+0),
 .scheme_dark .woocommerce-page #content table.cart thead th:nth-child(2n+0) {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark table.shop_table tr td:nth-child(2n+1) {
-    background-color: #1b1b1b;
+    background-color: #00003d;
     color: #ffffff
 }
 
@@ -9723,7 +9725,7 @@ figure figcaption,
 
 .scheme_dark .woocommerce table.shop_table td.product-name a:hover,
 .scheme_dark .woocommerce-page table.shop_table td.product-name a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .woocommerce-account .woocommerce-MyAccount-navigation,
@@ -9745,7 +9747,7 @@ figure figcaption,
 }
 
 .scheme_dark .top_panel_wrap .widget_shopping_cart ul.cart_list>li>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .top_panel_wrap .widget_shopping_cart ul.cart_list>li.empty {
@@ -9764,7 +9766,7 @@ figure figcaption,
 .scheme_dark body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li:hover,
 .scheme_dark body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li:hover>a,
 .scheme_dark body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories li>a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark body:not(.woocommerce) .widget_area:not(.footer_wrap) .widget_product_categories ul.product-categories ul {
@@ -9772,7 +9774,7 @@ figure figcaption,
 }
 
 .scheme_dark .tribe-events-calendar thead th {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark a.tribe-events-read-more,
@@ -9781,7 +9783,7 @@ figure figcaption,
 .scheme_dark .tribe-events-nav-next a,
 .scheme_dark .tribe-events-widget-link a,
 .scheme_dark .tribe-events-viewmore a {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -9815,7 +9817,7 @@ figure figcaption,
 }
 
 .scheme_dark #myplayer .ttw-music-player .progress-wrapper {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark #myplayer .ttw-music-player .tracklist li.track {
@@ -9840,7 +9842,7 @@ figure figcaption,
 }
 
 .scheme_dark .mc4wp-response .mc4wp-success {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .custom-1 .eg-custom-skin-1-element-10 {
@@ -9848,7 +9850,7 @@ figure figcaption,
 }
 
 .scheme_dark .custom-1 .eg-custom-skin-1-element-10:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .custom-1 .eg-custom-skin-1-element-12 {
@@ -9869,13 +9871,13 @@ figure figcaption,
 }
 
 .scheme_dark .sc_accordion .sc_accordion_item .sc_accordion_title.ui-state-active {
-    color: #004eb3;
-    border-color: #004eb3
+    color: #029ce2;
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_accordion .sc_accordion_item .sc_accordion_title.ui-state-active .sc_accordion_icon_opened {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_accordion .sc_accordion_item .sc_accordion_title:hover {
@@ -9909,7 +9911,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_audio_player .sc_audio_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_audio_player .sc_audio_author {
@@ -9919,7 +9921,7 @@ figure figcaption,
 .scheme_dark .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current,
 .scheme_dark .mejs-controls .mejs-volume-button .mejs-volume-slider,
 .scheme_dark .mejs-controls .mejs-time-rail .mejs-time-current {
-    background: #004eb3 !important
+    background: #029ce2 !important
 }
 
 .scheme_dark .mejs-container,
@@ -9946,7 +9948,7 @@ figure figcaption,
 .scheme_dark .mejs-container .mejs-controls .mejs-fullscreen-button,
 .scheme_dark .mejs-container .mejs-controls .mejs-volume-button,
 .scheme_dark .mejs-container .mejs-controls .mejs-playpause-button {
-    background: #004eb3 !important
+    background: #029ce2 !important
 }
 
 .scheme_dark input[type="submit"],
@@ -9954,7 +9956,7 @@ figure figcaption,
 .scheme_dark input[type="button"],
 .scheme_dark button,
 .scheme_dark .sc_button.sc_button_style_filled {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff !important
 }
 
@@ -9968,8 +9970,8 @@ figure figcaption,
 }
 
 .scheme_dark .sc_button.sc_button_style_border {
-    border-color: #004eb3;
-    color: #004eb3
+    border-color: #029ce2;
+    color: #029ce2
 }
 
 .scheme_dark .sc_button.sc_button_style_border:hover {
@@ -9983,7 +9985,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_button.sc_button_style_simple:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -9998,7 +10000,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_button.sc_button_style_simple_white:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -10008,7 +10010,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_button.sc_button_style_simple_alter:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
@@ -10026,7 +10028,7 @@ figure figcaption,
 
 .scheme_dark [class*="sc_button_hover_slide"] {
     color: #ffffff !important;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark [class*="sc_button_hover_slide"]:hover {
@@ -10034,19 +10036,19 @@ figure figcaption,
 }
 
 .scheme_dark .sc_button_hover_slide_left {
-    background: linear-gradient(to right, #3c3c3c 50%, #004eb3 50%) repeat scroll right bottom / 210% 100% rgba(0, 0, 0, 0) !important
+    background: linear-gradient(to right, #3c3c3c 50%, #029ce2 50%) repeat scroll right bottom / 210% 100% rgba(0, 0, 0, 0) !important
 }
 
 .scheme_dark .sc_button_hover_slide_top {
-    background: linear-gradient(to bottom, #3c3c3c 50%, #004eb3 50%) repeat scroll right bottom / 100% 210% rgba(0, 0, 0, 0) !important
+    background: linear-gradient(to bottom, #3c3c3c 50%, #029ce2 50%) repeat scroll right bottom / 100% 210% rgba(0, 0, 0, 0) !important
 }
 
 
 /* ================= END BUTTON'S HOVERS ==================== */
 
 .scheme_dark .sc_blogger.layout_date .sc_blogger_item .sc_blogger_date {
-    background-color: #004eb3;
-    border-color: #004eb3;
+    background-color: #029ce2;
+    border-color: #029ce2;
     color: #ffffff
 }
 
@@ -10064,7 +10066,7 @@ figure figcaption,
 
 .scheme_dark .sc_blogger.layout_polaroid .photostack nav span.current {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_blogger.layout_polaroid .photostack nav span.current.flip {
@@ -10077,7 +10079,7 @@ figure figcaption,
 
 .scheme_dark .sc_call_to_action_accented {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_call_to_action_accented .sc_item_title,
@@ -10087,7 +10089,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_call_to_action_accented .sc_item_button>a {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -10100,7 +10102,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_call_to_action.sc_call_to_action_style_1:not(.sc_call_to_action_accented) .sc_call_to_action_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_call_to_action.sc_call_to_action_style_1:not(.sc_call_to_action_accented) .sc_call_to_action_descr {
@@ -10127,7 +10129,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_chat_inner a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_chat_inner a:hover {
@@ -10145,12 +10147,12 @@ figure figcaption,
 }
 
 .scheme_dark .sc_clients_style_clients-2 .sc_client_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_clients_style_clients-2 .sc_client_description:before,
 .scheme_dark .sc_clients_style_clients-2 .sc_client_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_form .sc_form_item.sc_form_button button {}
@@ -10202,7 +10204,7 @@ figure figcaption,
 
 .scheme_dark .sc_form table.picker__table th {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_form .picker__day--infocus {
@@ -10233,11 +10235,11 @@ figure figcaption,
 .scheme_dark .sc_form .picker__button--today:before,
 .scheme_dark .sc_form .picker__button--clear:before,
 .scheme_dark .sc_form button:focus {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_form .picker__button--close:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_form .picker--time .picker__button--clear:hover,
@@ -10300,7 +10302,7 @@ figure figcaption,
 
 .scheme_dark .sc_countdown.sc_countdown_style_1 .sc_countdown_digits,
 .scheme_dark .sc_countdown.sc_countdown_style_1 .sc_countdown_separator {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_countdown.sc_countdown_style_1 .sc_countdown_digits {
@@ -10309,19 +10311,19 @@ figure figcaption,
 }
 
 .scheme_dark .sc_countdown.sc_countdown_style_1 .sc_countdown_label {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_countdown.sc_countdown_style_2 .sc_countdown_separator {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_countdown.sc_countdown_style_2 .sc_countdown_digits span {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_countdown.sc_countdown_style_2 .sc_countdown_label {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_dropcaps .sc_dropcaps_item {
@@ -10329,7 +10331,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_dropcaps.sc_dropcaps_style_1 .sc_dropcaps_item {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_dropcaps.sc_dropcaps_style_2 .sc_dropcaps_item {
@@ -10341,7 +10343,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_events_item .sc_events_item_readmore span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_events_item .sc_events_item_readmore:hover,
@@ -10359,7 +10361,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_events_style_events-2 .sc_events_item_date {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -10377,11 +10379,11 @@ figure figcaption,
 }
 
 .scheme_dark .sc_highlight_style_1 {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_highlight_style_2 {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_highlight_style_3 {
@@ -10392,13 +10394,13 @@ figure figcaption,
 .scheme_dark .sc_icon_hover:hover,
 .scheme_dark a:hover .sc_icon_hover {
     color: #ffffff !important;
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_dark .sc_icon_shape_round.sc_icon,
 .scheme_dark .sc_icon_shape_square.sc_icon {
-    background-color: #004eb3;
-    border-color: #004eb3;
+    background-color: #029ce2;
+    border-color: #029ce2;
     color: #ffffff
 }
 
@@ -10406,7 +10408,7 @@ figure figcaption,
 .scheme_dark .sc_icon_shape_square.sc_icon:hover,
 .scheme_dark a:hover .sc_icon_shape_round.sc_icon,
 .scheme_dark a:hover .sc_icon_shape_square.sc_icon {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
@@ -10416,7 +10418,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_image a:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_image a:after {
@@ -10425,7 +10427,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_infobox.sc_infobox_style_regular {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_intro_inner .sc_intro_subtitle {
@@ -10443,7 +10445,7 @@ figure figcaption,
 
 .scheme_dark .sc_list_style_iconed li:before,
 .scheme_dark .sc_list_style_iconed .sc_list_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_list_style_iconed li .sc_list_title {
@@ -10464,7 +10466,7 @@ figure figcaption,
 }
 
 .scheme_dark .match_block .player_country {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -10475,7 +10477,7 @@ figure figcaption,
 
 .scheme_dark .match_block .player_name a:hover {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .match_block .match_score {
@@ -10489,11 +10491,11 @@ figure figcaption,
 
 .scheme_dark .match_block .match_category a:hover,
 .scheme_dark .match_block .match_date {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .post_item_colored .match_date {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .matches_hover>a:after {
@@ -10501,7 +10503,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_matches.style_matches-1 .sc_matches_next {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -10524,15 +10526,15 @@ figure figcaption,
 }
 
 .scheme_dark .sc_matches.style_matches-2 .sc_matches_next .sc_item_title {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_matches.style_matches-2 .sc_matches_next .sc_match_date {
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .post_item_single_players .post_title:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .post_item_single_players .player_info span {
@@ -10545,11 +10547,11 @@ figure figcaption,
 
 .scheme_dark .sc_player .sc_player_info .sc_player_club,
 .scheme_dark .sc_player .sc_player_info .sc_player_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_player .sc_player_info {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_player .sc_player_avatar .sc_player_hover {
@@ -10563,7 +10565,7 @@ figure figcaption,
 }
 
 .scheme_dark .post_item_colored .player_info {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_players_table table tr .country {
@@ -10579,7 +10581,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_popup:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_price .sc_price_currency,
@@ -10606,13 +10608,13 @@ figure figcaption,
 }
 
 .scheme_dark .sc_price_block.sc_price_block_style_1 .sc_price_block_money .sc_price>* {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_price_block.sc_price_block_style_3,
 .scheme_dark .sc_price_block.sc_price_block_style_3 .sc_price_block_money * {
     color: #363636;
-    background-color: #1b1b1b
+    background-color: #00003d
 }
 
 .scheme_dark .sc_price_block.sc_price_block_style_3 .sc_price_block_title {
@@ -10648,7 +10650,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_promo .sc_promo_line {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_promo .sc_button.sc_button_style_simple {
@@ -10656,11 +10658,11 @@ figure figcaption,
 }
 
 .scheme_dark .sc_promo .sc_button.sc_button_style_simple:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .sc_promo .sc_button.sc_button_style_simple:hover::before {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .sc_section_inner {
@@ -10668,7 +10670,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_item .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_item .sc_services_item_readmore {
@@ -10676,7 +10678,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_item .sc_services_item_readmore span {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_item .sc_services_item_readmore:hover,
@@ -10711,7 +10713,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_style_services-2 .sc_services_item_overlay .sc_services_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-2 .sc_services_item_description .sc_button {
@@ -10720,11 +10722,11 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_style_services-2 .sc_services_item_overlay .sc_services_item_description .sc_button:hover {
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_dark .sc_services_style_services-3 .sc_services_item_title a:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark .sc_services_style_services-3 .sc_services_item_description .sc_button {
@@ -10733,22 +10735,22 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_style_services-3 .sc_services_item_description .sc_button:hover {
-    background-color: #004eb3 !important
+    background-color: #029ce2 !important
 }
 
 .scheme_dark .sc_services_style_services-3 a:hover .sc_icon,
 .scheme_dark .sc_services_style_services-3 .sc_icon:hover {
-    color: #004eb3;
+    color: #029ce2;
     background-color: #ffffff
 }
 
 .scheme_dark .sc_services_style_services-3 a:hover .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-4 .sc_icon {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-4 .sc_services_item_title {
@@ -10761,20 +10763,20 @@ figure figcaption,
 }
 
 .scheme_dark .sc_services_style_services-4 a:hover .sc_services_item_title {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-5 .sc_icon {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-5 .sc_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-5 .sc_icon:hover,
 .scheme_dark .sc_services_style_services-5 a:hover .sc_icon {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_services_style_services-5 .sc_icon:hover,
@@ -10783,7 +10785,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_scroll_controls_wrap a {
-    background-color: #004eb3;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -10797,7 +10799,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_scroll_bar .swiper-scrollbar-drag:before {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_scroll .sc_scroll_bar {
@@ -10809,7 +10811,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_skills_counter .sc_skills_item .sc_skills_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_skills_counter .sc_skills_item:hover .sc_skills_icon {
@@ -10825,7 +10827,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_skills_bar .sc_skills_item .sc_skills_count {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_skills_legend {
@@ -10842,11 +10844,11 @@ figure figcaption,
 }
 
 .scheme_dark .sc_skills_counter .sc_skills_item.sc_skills_style_1 .sc_skills_total {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_skills_counter .sc_skills_item.sc_skills_style_2 .sc_skills_total {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_skills_bar .sc_skills_item .sc_skills_count,
@@ -10854,7 +10856,7 @@ figure figcaption,
 .scheme_dark .sc_skills_counter .sc_skills_item.sc_skills_style_4 .sc_skills_count,
 .scheme_dark .sc_skills_counter .sc_skills_item.sc_skills_style_4 .sc_skills_info {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_skills_bar .sc_skills_info .sc_skills_label {
@@ -10871,14 +10873,14 @@ figure figcaption,
 }
 
 .scheme_dark .sc_slider_controls_wrap a:hover {
-    color: #004eb3 !important;
+    color: #029ce2 !important;
     background-color: transparent !important
 }
 
 .scheme_dark .sc_slider_swiper .sc_slider_pagination_wrap .swiper-pagination-bullet-active,
 .scheme_dark .sc_slider_swiper .sc_slider_pagination_wrap span:hover {
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_slider_swiper .sc_slider_info {
@@ -10899,8 +10901,8 @@ figure figcaption,
 
 .scheme_dark .sc_slider_pagination_over .sc_slider_pagination_wrap span:hover,
 .scheme_dark .sc_slider_pagination_over .sc_slider_pagination_wrap .swiper-pagination-bullet-active {
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_slider_pagination_over .sc_slider_pagination .post_title {
@@ -10921,8 +10923,8 @@ figure figcaption,
 .scheme_dark .widget_area_inner .widget_text .sc_socials a:hover,
 .scheme_dark .sc_socials.sc_socials_type_icons a:hover {
     color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_socials.sc_socials_share.sc_socials_dir_vertical .sc_socials_item a {
@@ -10937,12 +10939,12 @@ figure figcaption,
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.ui-state-active a,
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.sc_tabs_active a,
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.ui-state-active a:after,
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_titles li.sc_tabs_active a:after {
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_tabs.sc_tabs_style_1 .sc_tabs_content,
@@ -10951,8 +10953,8 @@ figure figcaption,
 }
 
 .scheme_dark .sc_tabs.sc_tabs_style_2 .sc_tabs_titles li a {
-    border-color: #004eb3;
-    background-color: #004eb3;
+    border-color: #029ce2;
+    background-color: #029ce2;
     color: #ffffff
 }
 
@@ -10980,7 +10982,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_team_style_team-1 .sc_team_item .sc_team_item_info .sc_team_item_title a {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_team_style_team-1 .sc_team_item .sc_team_item_info .sc_team_item_description {
@@ -10989,14 +10991,14 @@ figure figcaption,
 
 .scheme_dark .sc_team_style_team-1 .sc_team_item_info,
 .scheme_dark .sc_team_style_team-3 .sc_team_item_info {
-    border-color: #004eb3;
+    border-color: #029ce2;
     color: #3c3c3c
 }
 
 .scheme_dark .sc_team.sc_team_style_team-3 .sc_socials_item a {
     color: #ffffff;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_team.sc_team_style_team-3 .sc_socials_item a:hover {
@@ -11006,7 +11008,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_team_style_team-3 .sc_team_item_info .sc_team_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_team.sc_team_style_team-3 .sc_team_item_avatar .sc_team_item_hover {
@@ -11025,8 +11027,8 @@ figure figcaption,
 
 .scheme_dark .sc_team.sc_team_style_team-4 .sc_socials_item a:hover {
     color: #363636;
-    border-color: #004eb3;
-    background-color: #004eb3
+    border-color: #029ce2;
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_team.sc_team_style_team-4 .sc_team_item_avatar .sc_team_item_hover {
@@ -11038,7 +11040,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_team_style_team-4 .sc_team_item_info .sc_team_item_title a:hover {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_team_style_team-4 .sc_team_item_info .sc_team_item_position {
@@ -11046,7 +11048,7 @@ figure figcaption,
 }
 
 .scheme_dark .post_item_single_team .single_team_post_description .team_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_testimonials {
@@ -11067,7 +11069,7 @@ figure figcaption,
 
 .scheme_dark .sc_testimonials_style_testimonials-1 .sc_testimonial_content p:first-child:before,
 .scheme_dark .sc_testimonials_style_testimonials-1 .sc_testimonial_author_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_testimonials_style_testimonials-1 .sc_item_subtitle {
@@ -11105,15 +11107,15 @@ figure figcaption,
 
 .scheme_dark .sc_testimonials_style_testimonials-3 .sc_testimonial_content p:first-child:before,
 .scheme_dark .sc_testimonials_style_testimonials-3 .sc_testimonial_author_position {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_title_icon {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_title_underline::after {
-    border-color: #004eb3
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_title_underline_dark::after {
@@ -11139,13 +11141,13 @@ figure figcaption,
 }
 
 .scheme_dark .sc_toggles .sc_toggles_item .sc_toggles_title.ui-state-active {
-    color: #004eb3;
-    border-color: #004eb3
+    color: #029ce2;
+    border-color: #029ce2
 }
 
 .scheme_dark .sc_toggles .sc_toggles_item .sc_toggles_title.ui-state-active .sc_toggles_icon_opened {
     color: #ffffff;
-    background-color: #004eb3
+    background-color: #029ce2
 }
 
 .scheme_dark .sc_toggles .sc_toggles_item .sc_toggles_title:hover {
@@ -11162,7 +11164,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_tooltip_parent {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark .sc_tooltip_parent .sc_tooltip,
@@ -11202,7 +11204,7 @@ figure figcaption,
 }
 
 .scheme_dark .sc_blogger_button a.sc_button_style_simple:hover:before {
-    color: #004eb3
+    color: #029ce2
 }
 
 .scheme_dark body #booked-profile-page input[type=submit].button-primary:hover,
@@ -11229,7 +11231,7 @@ figure figcaption,
 
 .scheme_dark body table.booked-calendar thead th .page-right:hover,
 .scheme_dark body table.booked-calendar thead th .page-left:hover {
-    color: #004eb3 !important
+    color: #029ce2 !important
 }
 
 .scheme_dark body table.booked-calendar tr.days th,
@@ -11246,7 +11248,7 @@ figure figcaption,
 }
 
 .scheme_dark body table.booked-calendar td.today .date span {
-    border-color: #004eb3 !important
+    border-color: #029ce2 !important
 }
 
 .scheme_dark body table.booked-calendar td.today:hover .date span {
@@ -11254,7 +11256,7 @@ figure figcaption,
 }
 
 .scheme_dark body table.booked-calendar tbody td:nth-child(2n+1) span {
-    background-color: #1b1b1b !important;
+    background-color: #00003d !important;
     color: #ffffff
 }
 
@@ -11274,5 +11276,9 @@ figure figcaption,
 
 .scheme_dark body table.booked-calendar td.today:hover .date span {
     color: #070707 !important
+}
+
+.footer_logo{
+    max-height:350px
 }
 

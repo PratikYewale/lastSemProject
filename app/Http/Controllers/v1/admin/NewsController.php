@@ -48,7 +48,8 @@ class NewsController extends Controller
                 'img_description' => 'nullable',
                 'intro_para' => 'nullable',
                 'conclusion' => 'nullable',
-                'body_para' => 'nullable'
+                'body_para' => 'nullable',
+                'short_title'=>'nullable'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -68,6 +69,7 @@ class NewsController extends Controller
             $uploadNews->intro_para = $request->intro_para;
             $uploadNews->body_para = $request->body_para;
             $uploadNews->conclusion = $request->conclusion;
+            $uploadNews->short_title=$request->short_title;
             $uploadNews->save();
 
             return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
@@ -109,6 +111,9 @@ class NewsController extends Controller
             }
             if ($request->filled('conclusion')) {
                 $updateNews->conclusion = $request->conclusion;
+            }
+            if ($request->filled('short_title')) {
+                $updateNews->short_title = $request->short_title;
             }
             $updateNews->save();
             return $this->sendResponse($updateNews, 'News updated successfully.', true);
