@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
