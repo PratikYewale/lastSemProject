@@ -8,6 +8,7 @@ use App\Models\ContactUs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
@@ -29,6 +30,17 @@ class ContactUsController extends Controller
             $ContactUs->mobile_no = $request->mobile_no;
             $ContactUs->message = $request->message;
             $ContactUs->save();
+            $data = [
+                'to_name' => $request->name,
+                'email' => $request->email,
+                'message' => $request->message,
+            ];
+
+            Mail::send('emails.confirmationMail', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['to_name'])
+                    ->subject('Confirmation email');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
             return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);

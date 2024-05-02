@@ -18,8 +18,6 @@ class CreateMembersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->dateTime('birthday');
-            $table->bigInteger('membership_id')->unsigned();
-            $table->foreign('membership_id')->references('id')->on('membership');
             $table->json('achievements')->nullable();
             $table->longText('address_line1')->nullable();
             $table->longText('address_line2')->nullable();

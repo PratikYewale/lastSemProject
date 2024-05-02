@@ -76,6 +76,7 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+
     public function updateEvent(Request $request): JsonResponse
     {
         try {

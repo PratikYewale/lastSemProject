@@ -27,7 +27,7 @@ body {
             </div>
             <div style="text-align: center; color: red; padding-bottom: 20px;">Valid for 5 minutes only</div>
         </div>
-        <div style="text-align: center; padding-bottom: 20px;">© 2024 SKI AND SNOWBOARD INDIA All Rights Reserved</div>
+        <div style="text-align: center; padding-bottom: 20px;">© 2024 SKI AND SNOWBOARD INDIA / All Rights Reserved</div>
     </div>
 </body>
 </html>

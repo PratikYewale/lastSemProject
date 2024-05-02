@@ -4,12 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class member
+class athlete
 {
     /**
      * Handle an incoming request.
@@ -18,16 +17,15 @@ class member
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next): JsonResponse
+    public function handle(Request $request, Closure $next)
     {
-        
         try {
             $user = JWTAuth::parseToken()->authenticate();
             if (!$user) {
                 return response()->json(['error' => 'Unauthorized access.'], Response::HTTP_UNAUTHORIZED);
             }
             $role = $user->role;
-            if ($role != 'member') {
+            if ($role != 'athlete') {
                 $response = [
                     "success"=>false,
                     "message"=>"Unauthorized access."

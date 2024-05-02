@@ -9,4 +9,9 @@ class MembershipHistory extends Model
 {
     use HasFactory;
     protected $table='membership_history';
+
+    public function member()
+    {
+        return $this->hasMany(Member::class,'id')->with('user');
+    }
 }
