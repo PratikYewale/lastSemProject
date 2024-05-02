@@ -38,6 +38,7 @@ class MemberController extends Controller
                 'address_line1' => 'required|string',
                 'address_line2' => 'nullable',
                 'is_athlete' => 'boolean',
+                'is_featured'=>'boolean'
             ]);
 
             if ($validator->fails()) {
@@ -64,7 +65,9 @@ class MemberController extends Controller
             $newMember->links = json_encode($request->links);
             $newMember->bio = $request->bio;
             $newMember->quote = $request->quote;
-            $newMember->is_athlete = false;
+            $newMember->is_athlete = $request->is_athlete ?? false;
+            $newMember->is_featured = $request->is_featured ?? false;
+
             $newMember->save();
             DB::commit();
             $data = Member::query()->where('id', $newMember->id)->with('user')->get();
