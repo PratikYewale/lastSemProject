@@ -101,11 +101,11 @@
                                 <!-- Cart -->
                                 <div class="menu_main_cart top_panel_icon">
                                     <a href="#" class="top_panel_cart_button" data-items="2" data-summa="&#036;538.00">
-                                        <span class="contact_icon icon-basket"></span>
-                                        <span class="cart_summa">&#36;538.00</span>
-                                        <span class="contact_label contact_cart_label">Your cart:</span>
+                                        <span class="contact_icon icon-user"></span>
+                                        <span class="cart_summa">Login</span>
+                                        <span class="contact_label contact_cart_label">Your Account:</span>
                                     </a>
-                                    <ul class="widget_area sidebar_cart sidebar">
+                                    {{-- <ul class="widget_area sidebar_cart sidebar">
                                         <li>
                                             <div class="widget woocommerce widget_shopping_cart">
                                                 <div class="hide_cart_widget_if_empty">
@@ -116,15 +116,9 @@
                                                                 <a class="remove" href="#" title="Remove this item">×</a>
                                                                 <a href="#">
                                                                     <img src="{{ url('frontend/images/product_02-180x180.jpg') }}" alt="" >
-                                                                    Bogner Phoenix Mirror Goggles
+                                                                   Dashboard
                                                                 </a>
-                                                                <span class="quantity">
-                                                                    1 ×
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span class="woocommerce-Price-currencySymbol">$</span>
-                                                                        339.00
-                                                                    </span>
-                                                                </span>
+                                                               
                                                             </li>
                                                             <!-- /Cart item -->
                                                             <!-- Cart item -->
@@ -159,7 +153,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                                 <!-- /Cart -->
                                 <!-- Booking button block -->
@@ -202,7 +196,7 @@
                         <div class="menu_main_cart top_panel_icon">
                             <a href="#" class="top_panel_cart_button" data-items="2" data-summa="&#036;538.00">
                                 <span class="contact_icon icon-basket"></span>
-                                <span class="cart_summa">&#36;538.00</span>
+                                <span class="cart_summa">Login</span>
                                 <span class="contact_label contact_cart_label">Your cart:</span>
                             </a>
                             <ul class="widget_area sidebar_cart sidebar">

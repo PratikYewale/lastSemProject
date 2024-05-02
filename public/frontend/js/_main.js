@@ -47,7 +47,7 @@
         "site_url": "#",
         "site_protocol": "http",
         "vc_edit_mode": "",
-        "accent1_color": "#004eb3",
+        "accent1_color": "#029ce2",
         "accent1_hover": "#3c3c3c",
         "slider_height": "100",
         "user_logged_in": "",

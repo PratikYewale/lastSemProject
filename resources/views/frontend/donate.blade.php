@@ -48,7 +48,7 @@
                 </div>
                 <!-- /Single team info -->
                 <!-- Testimonials -->
-                <div class="testimonials_section">
+                <div class="">
                     <div class="content_wrap">
                         <div class="sc_testimonials sc_testimonials_style_testimonials-1 width_100_per">
 
@@ -234,13 +234,12 @@
 
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <button type="button" class="btn btn-primary bg-light">
-                                                        <img src="{{ url('frontend/images/paypal.svg') }}" alt=""
-                                                            title="product_01" />
+                                                    <button type="button" class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">
+                                                    UPI
                                                     </button>
-                                                    <button type="button" class="btn btn-secondary text-light"
-                                                        style="font-weight: 600"; color:"#fff !important">Credit
+                                                    <button type="button" class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Credit
                                                         Card</button>
+                                                    
                                                 </div>
                                             </div>
 

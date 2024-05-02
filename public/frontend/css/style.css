@@ -438,7 +438,7 @@ fieldset legend {
 	text-align:left !important;
 	width:100%;
 	border-radius: 3px;
-	padding: 1.75em 1.8em 1.6em;
+	padding: 1em 1.5em 1em;
 }
 [class*="sc_input_hover_"] input[type="text"]:focus,
 [class*="sc_input_hover_"] input[type="number"]:focus,
@@ -2184,7 +2184,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 	overflow:hidden;
 }
 .top_panel_wrap .logo_main {
-	max-height:100px;
+	max-height:200px;
 	width:auto;
 }
 .logo a {
@@ -2221,7 +2221,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 .top_panel_wrap .logo_main,
 .top_panel_wrap .logo_fixed {
-	height: 50px;
+	height: 150px;
 }
 .top_panel_style_6 .content_wrap,
 .top_panel_style_7 .content_wrap {
@@ -2284,7 +2284,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 	left:0;
 	right:0;
 	bottom:0;
-	background-color:rgba(2,75,94, 0.8);
+	/* background-color:rgba(2,75,94, 0.8 */
 }
 
 .top_panel_image_header {
@@ -7173,7 +7173,7 @@ body table.booked-calendar tr.days th{
 
 /* Support */
 .scheme_original .sc_call_to_action_accented.call_to_action_support .sc_item_button>a{
-	color: #004eb3 !important;
+	color: #029ce2 !important;
 }
 .scheme_original .sc_call_to_action_accented.call_to_action_support .sc_item_button>a:hover{
 	color: #ffffff !important;
