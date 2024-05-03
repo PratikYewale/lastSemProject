@@ -5,7 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\News;
+use App\Models\Announcement;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
-class NewsController extends Controller
+class AnnouncementController extends Controller
 {
     public function saveFile($file, $fileName)
     {
@@ -36,93 +36,95 @@ class NewsController extends Controller
         return "/$fileName/" . $newFileName;
     }
 
-    public function createNews(Request $request)
+    public function createAnnouncement(Request $request)
     {
 
         try {
             $validator = Validator::make($request->all(), [
-                'primary_img' => 'required|image',
-                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg',
+                'primary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'document'=>'nullable|mimes:pdf',
                 'title' => 'nullable',
-                'user_id' => 'nullable',
-                'img_description' => 'nullable',
+                'sub_title'=>'nullable',
                 'intro_para' => 'nullable',
                 'conclusion' => 'nullable',
-                'body_para' => 'nullable',
-                'short_title'=>'nullable'
+                'body_para' => 'nullable'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $uploadNews = new News();
+            $uploadAnnouncement = new Announcement();
             if ($request->hasFile('primary_img')) {
-                $uploadNews->primary_img = $this->saveFile($request->file('primary_img'), 'NewsPrimaryImage');
+                $uploadAnnouncement->primary_img = $this->saveFile($request->file('primary_img'), 'AnnouncementPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
-                $uploadNews->secondary_img = $this->saveFile($request->file('secondary_img'), 'NewsSecondaryImage');
+                $uploadAnnouncement->secondary_img = $this->saveFile($request->file('secondary_img'), 'AnnouncementSecondaryImage');
+            }
+            if ($request->hasFile('document')) {
+                $uploadAnnouncement->document = $this->saveFile($request->file('document'), 'AnnouncementDocument');
             }
             $userid = Auth::user()->id;
-            $uploadNews->user_id = $userid;
-            $uploadNews->title = $request->title;
-            $uploadNews->img_description = $request->img_description;
-            $uploadNews->intro_para = $request->intro_para;
-            $uploadNews->body_para = $request->body_para;
-            $uploadNews->conclusion = $request->conclusion;
-            $uploadNews->short_title=$request->short_title;
-            $uploadNews->save();
+            $uploadAnnouncement->user_id = $userid;
+            $uploadAnnouncement->title = $request->title;
+            $uploadAnnouncement->sub_title=$request->sub_title;
+            $uploadAnnouncement->intro_para = $request->intro_para;
+            $uploadAnnouncement->body_para = $request->body_para;
+            $uploadAnnouncement->conclusion = $request->conclusion;
+          
+            $uploadAnnouncement->save();
 
-            return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
+            return $this->sendResponse($uploadAnnouncement->id, 'Announcement uploaded successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function updateNews(Request $request)
+    public function updateAnnouncement(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id'
+                'id' => 'required|integer|exists:announcement,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $updateNews = News::query()->where('id', $request->id)->first();
+            $updateAnnouncement = Announcement::query()->where('id', $request->id)->first();
             if ($request->hasFile('primary_img')) {
-                $updateNews->primary_img = $this->saveFile($request->primary_img, 'NewsPrimaryImage');
+                $updateAnnouncement->primary_img = $this->saveFile($request->primary_img, 'AnnouncementPrimaryImage');
             }
             if ($request->hasFile('secondary_img')) {
-                $updateNews->secondary_img = $this->saveFile($request->secondary_img, 'NewsSecondaryImage');
+                $updateAnnouncement->secondary_img = $this->saveFile($request->secondary_img, 'AnnouncementSecondaryImage');
+            }
+            if ($request->hasFile('document')) {
+                $updateAnnouncement->document = $this->saveFile($request->document, 'AnnouncementDocument');
             }
             if ($request->filled('user_id')) {
-                $updateNews->user_id = $request->user_id;
+                $updateAnnouncement->user_id = $request->user_id;
             }
             if ($request->filled('title')) {
-                $updateNews->title = $request->title;
+                $updateAnnouncement->title = $request->title;
             }
-            if ($request->filled('img_description')) {
-                $updateNews->img_description = $request->img_description;
-            }
+            
             if ($request->filled('intro_para')) {
-                $updateNews->intro_para = $request->intro_para;
+                $updateAnnouncement->intro_para = $request->intro_para;
             }
             if ($request->filled('body_para')) {
-                $updateNews->body_para = $request->body_para;
+                $updateAnnouncement->body_para = $request->body_para;
             }
             if ($request->filled('short_title')) {
-                $updateNews->short_title = $request->short_title;
+                $updateAnnouncement->short_title = $request->short_title;
             }
-            if ($request->filled('short_title')) {
-                $updateNews->short_title = $request->short_title;
+            if ($request->filled('conclusion')) {
+                $updateAnnouncement->conclusion = $request->conclusion;
             }
-            $updateNews->save();
-            return $this->sendResponse($updateNews, 'News updated successfully.', true);
+            $updateAnnouncement->save();
+            return $this->sendResponse($updateAnnouncement, 'Announcement updated successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-    public function getAllNews(Request $request)
+    public function getAllAnnouncement(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -132,7 +134,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = Announcement::query()->with('user');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -143,7 +145,7 @@ class NewsController extends Controller
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
                 $response['count'] = $count;
-                $response['News'] = $data;
+                $response['Announcement'] = $data;
                 return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
                 return $this->sendError("No data found.");
@@ -152,40 +154,43 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function deleteNews(Request $request)
+
+    public function getAnnouncementById(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id'
+                'id' => 'required|integer|exists:announcement,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $announcement= Announcement::query()->where('id', $request->id)->with('user')->first();
+            if (!$announcement) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($announcement, "Announcement fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+
+    public function deleteAnnouncement(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:announcement,id'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
 
-            $deletenews = News::query()->where('id', $request->id)->first();
-            $deletenews->delete();
+            $deleteAnnouncement = Announcement::query()->where('id', $request->id)->first();
+            $deleteAnnouncement->delete();
 
-            return $this->sendResponse($deletenews, 'News deleted successfully.', true);
+            return $this->sendResponse($deleteAnnouncement, 'Announcement deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function getNewsById(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id',
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError("Validation failed.", $validator->errors());
-            }
-            $News = News::query()->where('id', $request->id)->first();
-            if (!$News) {
-                return $this->sendError('No data available.');
-            }
-            return $this->sendResponse($News, "News fetched successfully.", true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
+
 }
