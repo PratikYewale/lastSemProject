@@ -41,8 +41,8 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'primary_img' => 'required|image',
+                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg',
                 'title' => 'nullable',
                 'user_id' => 'nullable',
                 'img_description' => 'nullable',
@@ -108,6 +108,9 @@ class NewsController extends Controller
             }
             if ($request->filled('body_para')) {
                 $updateNews->body_para = $request->body_para;
+            }
+            if ($request->filled('short_title')) {
+                $updateNews->short_title = $request->short_title;
             }
             if ($request->filled('short_title')) {
                 $updateNews->short_title = $request->short_title;
