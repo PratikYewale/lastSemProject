@@ -1609,7 +1609,7 @@
                                                         <!-- /Post item -->
                                                     </div>
                                                 </div>
-                                                <a href="blog-classic-with-sidebar.html"
+                                                <a href="{{ url('/news') }}"
                                                     class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large aligncenter margin_top_small margin_bottom_tiny sc_button_iconed none">View
                                                     More News</a>
                                             </div>

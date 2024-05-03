@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\NewsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,3 +34,6 @@ Route::get('/programs', [HomeController::class, 'programs']);
 Route::get('/competition', [HomeController::class, 'competition']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
+
+// News
+Route::get('/news', [NewsController::class, 'news']);

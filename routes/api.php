@@ -12,7 +12,7 @@ use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
 use App\Http\Controllers\V1\Customer\JobApplicationController;
 use App\Http\Controllers\V1\Admin\JobApplicationController as AppliedJobController;
-
+use App\Http\Controllers\v1\Customer\NewsController as CustomerNewsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Admin\AdminAuthController;
@@ -178,7 +178,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
 
     //JobApplication
     Route::post('addJobApplication',[JobApplicationController::class,'addJobApplication']);
-    
+    //News
+    Route::get('getAllNews',[CustomerNewsController::class,'getAllNews']);
+    Route::get('getNewsById',[CustomerNewsController::class,'getNewsById']);
     
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
         
