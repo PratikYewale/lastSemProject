@@ -3381,7 +3381,10 @@ figure figcaption,
 }
 
 .scheme_original .sc_price_block .sc_price_block_description {
-    color: #aeaeae
+    color: #aeaeae;
+    text-transform: unset;
+    text-align: left;
+    
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_1 {
@@ -3394,12 +3397,13 @@ figure figcaption,
 
 .scheme_original .sc_price_block.sc_price_block_style_3,
 .scheme_original .sc_price_block.sc_price_block_style_3 .sc_price_block_money * {
-    color: #363636;
-    background-color: #00003d
+    color: #fff;
+    background-color: #00003d;
+    height:100%
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_3 .sc_price_block_title {
-    color: #363636
+    color: #029ce2
 }
 
 .scheme_original .sc_price_block .sc_price_block_line {

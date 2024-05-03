@@ -41,8 +41,8 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'primary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-                'secondary_img' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+                'primary_img' => 'required|image',
+                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg',
                 'title' => 'nullable',
                 'user_id' => 'nullable',
                 'img_description' => 'nullable',

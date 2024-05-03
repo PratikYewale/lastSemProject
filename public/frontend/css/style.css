@@ -3471,7 +3471,7 @@ li.opened > a > .open_child_menu:before {
 /* Post featured block */
 .post_featured {
 	overflow:hidden;
-	margin-bottom:2.5em;
+	margin-bottom:1.5em;
 	position:relative;
 }
 .article_style_boxed .post_featured {
@@ -7223,4 +7223,24 @@ body table.booked-calendar tr.days th{
 }
 .mt-10{
 	margin-top:10rem;
+}
+.news-card{
+border:none !important;
+box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+height: 100%;
+}
+
+.news-card img{
+	height:15rem;
+	object-fit: cover;
+}
+.news-title{
+	margin-top: 0 !important;
+	font-size: 18px;
+	font-weight: 500;
+	
+}
+.news-title a
+{
+	color:#00003d !important;
 }
