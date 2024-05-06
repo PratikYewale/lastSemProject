@@ -9,6 +9,7 @@ use App\Models\Announcement;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
+use App\Models\NewsAnnouncementImages;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -57,12 +58,6 @@ class AnnouncementController extends Controller
             }
 
             $uploadAnnouncement = new Announcement();
-            if ($request->hasFile('primary_img')) {
-                $uploadAnnouncement->primary_img = $this->saveFile($request->file('primary_img'), 'AnnouncementPrimaryImage');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $uploadAnnouncement->secondary_img = $this->saveFile($request->file('secondary_img'), 'AnnouncementSecondaryImage');
-            }
             if ($request->hasFile('document')) {
                 $uploadAnnouncement->document = $this->saveFile($request->file('document'), 'AnnouncementDocument');
             }
@@ -75,6 +70,13 @@ class AnnouncementController extends Controller
             $uploadAnnouncement->conclusion = $request->conclusion;
           
             $uploadAnnouncement->save();
+            $images = $request->file('images');
+            foreach ($images as $newsimage) {
+                $uploadNewsImage = new NewsAnnouncementImages();
+                $uploadNewsImage->announcement_id = $uploadAnnouncement->id;
+                $uploadNewsImage->images = $this->saveFile($newsimage, 'NewsImage'); 
+                $uploadNewsImage->save();
+            }
 
             return $this->sendResponse($uploadAnnouncement->id, 'Announcement uploaded successfully.', true);
         } catch (Exception $e) {
@@ -92,12 +94,6 @@ class AnnouncementController extends Controller
             }
 
             $updateAnnouncement = Announcement::query()->where('id', $request->id)->first();
-            if ($request->hasFile('primary_img')) {
-                $updateAnnouncement->primary_img = $this->saveFile($request->primary_img, 'AnnouncementPrimaryImage');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $updateAnnouncement->secondary_img = $this->saveFile($request->secondary_img, 'AnnouncementSecondaryImage');
-            }
             if ($request->hasFile('document')) {
                 $updateAnnouncement->document = $this->saveFile($request->document, 'AnnouncementDocument');
             }
@@ -107,7 +103,6 @@ class AnnouncementController extends Controller
             if ($request->filled('title')) {
                 $updateAnnouncement->title = $request->title;
             }
-            
             if ($request->filled('intro_para')) {
                 $updateAnnouncement->intro_para = $request->intro_para;
             }

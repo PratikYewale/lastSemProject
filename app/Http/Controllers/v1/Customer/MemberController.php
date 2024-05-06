@@ -25,6 +25,7 @@ class MemberController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
+                'middle_name'=>'nullable|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
@@ -50,6 +51,7 @@ class MemberController extends Controller
                 $user = new User();
                 $user->email = $request->email;
                 $user->first_name = $request->first_name;
+                $user->middle_name=$request->middle_name;
                 $user->last_name = $request->last_name;
                 $user->mobile_no = $request->mobile_no;
                 $user->password = Hash::make($request->password);

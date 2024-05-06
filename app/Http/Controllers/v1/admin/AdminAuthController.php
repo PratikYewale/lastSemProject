@@ -52,6 +52,7 @@ class AdminAuthController extends Controller
             }
             $newUser = new User();
             $newUser->first_name = $request->name;
+            $newUser->middle_name=$request->middle_name;
             $newUser->last_name = $request->name;
             $newUser->email = $request->email;
             $newUser->password = Hash::make($request->password);
