@@ -15,25 +15,27 @@ use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
-    public function saveFile($file, $fileName)
+    public function saveFile($file, $process)
     {
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
-        $uploadsPath = public_path('uploads');
-        $directoryPath = "$uploadsPath/$fileName";
-
-        if (!File::exists($uploadsPath)) {
-            File::makeDirectory($uploadsPath, 0755, true);
+        $extension = $file->getClientOriginalExtension();
+        $cur = Str::uuid();
+        $fileName = $process . '-' . $cur . '.' . $extension;
+        $basePath = public_path('\\Image\\');
+        if (env('APP_ENV') == 'prod') {
+            $basePath =  public_path('/Image/');
+        }
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
+        }
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath =  public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
         }
 
-        if (!File::exists($directoryPath)) {
-            File::makeDirectory($directoryPath, 0755, true);
-        }
+        $file->move($destinationPath, $fileName);
 
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
-
-        return "/$fileName/" . $newFileName;
+        return '/Image/' . $fileName;
     }
 
     public function createNews(Request $request)

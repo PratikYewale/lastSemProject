@@ -61,4 +61,27 @@ class JobApplicationController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+
+    public function updateJobApplicationStatus(Request $request): JsonResponse
+{
+    try {
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|integer|exists:job_application,id',
+            'status' => 'required|in:Applied,Shortlisted,Not Suitable,Other', 
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $jobApplication = JobApplication::find($request->id);
+        $jobApplication->status = $request->status;
+        $jobApplication->save();
+
+        return $this->sendResponse($jobApplication, 'Job application status updated successfully.', true);
+    } catch (Exception $e) {
+        return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+    }
+}
+
 }

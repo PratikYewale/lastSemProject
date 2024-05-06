@@ -56,6 +56,8 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getCurrentProfile', [AdminAuthController::class, 'getCurrentProfile']);
         
         // Donation
+        Route::post('addDonation',[AdminDonationController::class,'addDonation']);
+        Route::post('donationPaymentVerification',[AdminDonationController::class,'donationPaymentVerification']);
         Route::get('getAllDonors', [AdminDonationController::class, 'getAllDonors']);
         Route::get('getDonorById', [AdminDonationController::class, 'getDonorById']);
         
@@ -148,6 +150,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         //JobApplication
         Route::get('getJobApplicationByJobId',[AppliedJobController::class,'getJobApplicationByJobId']);
         Route::get('getJobApplicationById',[AppliedJobController::class,'getJobApplicationById']);
+        Route::post('updateJobApplicationStatus',[AppliedJobController::class,'updateJobApplicationStatus']);
 
         //MediaGallery
         Route::post('addMediaGallery',[MediaGalleryController::class,'addMediaGallery']);
@@ -201,6 +204,8 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
         //Athlete Registration
         Route::post('athleteRegistration',[MemberController::class,'athleteRegistration']);
         Route::post('paymentVerification',[MemberController::class,'paymentVerification']);
+        Route::post('addContactUsVerified', [ContactUsController::class, 'addContactUsVerified']);
+
     });
 
 
