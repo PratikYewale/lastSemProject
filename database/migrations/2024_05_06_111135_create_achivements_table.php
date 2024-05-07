@@ -17,9 +17,9 @@ class CreateAchivementsTable extends Migration
             $table->id();
             $table->bigInteger('atheletes_id')->unsigned()->nullable();
             $table->foreign('atheletes_id')->references('id')->on('atheletes');
-            $table->string('name');
-            $table->string('year');
-            $table->string('result');
+            $table->string('name')->nullable();
+            $table->string('year')->nullable();
+            $table->string('result')->nullable();
             $table->timestamps();
         });
     }

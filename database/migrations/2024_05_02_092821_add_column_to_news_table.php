@@ -14,7 +14,7 @@ class AddColumnToNewsTable extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->text('short_title');
+            $table->text('short_title')->nullable();
         });
     }
 

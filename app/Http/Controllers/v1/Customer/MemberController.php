@@ -39,7 +39,7 @@ class MemberController extends Controller
         }
         $destinationPath = "$directoryPath/$newFileName";
         $file->move($directoryPath, $newFileName);
-        return "/$fileName/" . $newFileName;
+        return "/uploads/$fileName/" . $newFileName;
     }
     public function addMember(Request $request): JsonResponse
     {
@@ -108,7 +108,11 @@ class MemberController extends Controller
                 'mobile_no' => 'required|string',
                 'password' => 'required|confirmed|string',
                 'date_of_birth' =>  'nullable|date',
-                'sport_certificate' => 'mimes:pdf',
+                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'acknowledge' => 'boolean',
             ]);
 
@@ -123,6 +127,7 @@ class MemberController extends Controller
                 $user->first_name = $request->first_name;
                 $user->last_name = $request->last_name;
                 $user->mobile_no = $request->mobile_no;
+                $user->role = "athlete";
                 $user->password = Hash::make($request->password);
                 $user->save();
             }
@@ -144,7 +149,7 @@ class MemberController extends Controller
                 $newAthlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
             }
             if ($request->hasFile('aadhar_card')) {
-                $newAthlete->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+                $newAthlete->addhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
             }
             if ($request->hasFile('passport')) {
                 $newAthlete->passport = $this->saveFile($request->file('passport'), 'Passport');
@@ -153,7 +158,7 @@ class MemberController extends Controller
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achivement();
-                    $newAchievment->athlete_id = $newAthlete->id;
+                    $newAchievment->atheletes_id = $newAthlete->id;
                     $newAchievment->name = $achievement['name'];
                     $newAchievment->year = $achievement['year'];
                     $newAchievment->result = $achievement['result'];
@@ -161,22 +166,138 @@ class MemberController extends Controller
                 }
             }
             if ($request->has('sport_certificates')) {
-                foreach ($request->sport_certificates as $sport_certificate) {
+                foreach ($request->file('sport_certificates') as $sport_certificate) {
                     $newCertificate = new SportCertificate();
-                    $newCertificate->athletes_id = $newAthlete->id;
-                    $newCertificate->certificate = $this->saveFile($sport_certificate->file('certificate'), 'Certificates');
+                    $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
+                    $newCertificate->atheletes_id = $newAthlete->id;
                     $newCertificate->save();
                 }
             }
             DB::commit();
-            $data = Member::query()->where('id', $newAthlete->id)->with('user')->get();
-            return $this->sendResponse($data, 'Athlete added successfully.', true);
+            return $this->sendResponse($newAthlete->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    // Testing remaining
+
+    public function updateAthlete(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:atheletes,id',
+                'achievement_id' => 'exists:achievement,id',
+                'email' => 'string|email|max:255|unique:users',
+                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'acknowledge' => 'boolean',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $athlete = Athelete::findOrFail($request->id);
+            if (!$athlete) {
+                return $this->sendError("User not found.");
+            }
+            $user = User::where('id', $athlete->user_id)->first();
+            if (!$user) {
+                return $this->sendError("User not found.");
+            }
+            if ($request->has('first_name')) {
+                $user->first_name = $request->first_name;
+            }
+            if ($request->has('middle_name')) {
+                $user->middle_name = $request->middle_name;
+            }
+            if ($request->has('last_name')) {
+                $user->last_name = $request->last_name;
+            }
+            if ($request->has('mobile_no')) {
+                $user->mobile_no = $request->mobile_no;
+            }
+            $user->save();
+
+            if ($request->has('gender')) {
+                $athlete->gender = $request->gender;
+            }
+            if ($request->has('date_of_birth')) {
+                $athlete->date_of_birth = $request->date_of_birth;
+            }
+            if ($request->has('city')) {
+                $athlete->city = $request->city;
+            }
+            if ($request->has('address')) {
+                $athlete->address = $request->address;
+            }
+            if ($request->has('state')) {
+                $athlete->state = $request->state;
+            }
+            if ($request->has('country')) {
+                $athlete->country = $request->country;
+            }
+            if ($request->has('postal_code')) {
+                $athlete->postal_code = $request->postal_code;
+            }
+            if ($request->has('aadhar_number')) {
+                $athlete->aadhar_number = $request->aadhar_number;
+            }
+            if ($request->has('passport_number')) {
+                $athlete->passport_number = $request->passport_number;
+            }
+            if ($request->hasFile('profile_picture')) {
+                $athlete->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
+            }
+            if ($request->hasFile('recommendation')) {
+                $athlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
+            }
+            if ($request->hasFile('aadhar_card')) {
+                $athlete->addhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+            }
+            if ($request->hasFile('passport')) {
+                $athlete->passport = $this->saveFile($request->file('passport'), 'Passport');
+            }
+            $athlete->save();
+            DB::commit();
+            return $this->sendResponse($athlete->id, 'Athlete updated successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function updateAchievement(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:achivements,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $achievement = Achivement::findOrFail($request->id);
+            if (!$achievement) {
+                return $this->sendError("User not found.");
+            }
+            if ($request->has('name')) {
+                $achievement->name = $request->name;
+            }
+            if ($request->has('year')) {
+                $achievement->year = $request->year;
+            }
+            if ($request->has('result')) {
+                $achievement->result = $request->result;
+            }
+            $achievement->save();
+            DB::commit();
+            return $this->sendResponse($achievement->id, 'Achievement updated successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
 
     public function loginMember(Request $request): JsonResponse
     {

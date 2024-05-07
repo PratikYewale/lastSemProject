@@ -17,7 +17,7 @@ class CreateSportCertificateTable extends Migration
             $table->id();
             $table->bigInteger('atheletes_id')->unsigned()->nullable();
             $table->foreign('atheletes_id')->references('id')->on('atheletes');
-            $table->string('certificate');
+            $table->string('certificate')->nullable();
             $table->timestamps();
         });
     }

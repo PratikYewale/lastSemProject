@@ -171,6 +171,11 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     // Member
     Route::post('addMember', [MemberController::class, 'addMember']);
     Route::post('loginMember', [MemberController::class, 'loginMember']);
+
+    // Athlete
+    Route::post('addAthlete', [MemberController::class, 'addAthlete']);
+    Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
+    Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
     
     // Auth
     Route::post('forgetPasswordMember',[MemberAuthController::class,'forgetPasswordMember']);
