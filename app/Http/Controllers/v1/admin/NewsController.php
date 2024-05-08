@@ -57,7 +57,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $uploadNews = new News();
             $uploadNews->user_id = Auth::user()->id;
             $uploadNews->title = $request->title;
@@ -74,9 +74,10 @@ class NewsController extends Controller
                 $uploadNewsImage->images = $this->saveFile($newsimage, 'NewsImage'); 
                 $uploadNewsImage->save();
             }
-            
+            DB::commit();
             return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -89,7 +90,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateNews = News::query()->where('id', $request->id)->first();
            if ($request->filled('user_id')) {
                 $updateNews->user_id = $request->user_id;
@@ -107,8 +108,19 @@ class NewsController extends Controller
                 $updateNews->short_title = $request->short_title;
             }
             $updateNews->save();
+            $updateNews->newsAnnouncementImages()->delete();
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $uploadNewsImage = new NewsAnnouncementImages();
+                    $uploadNewsImage->news_id = $updateNews->id;
+                    $uploadNewsImage->images = $this->saveFile($image, 'NewsImage');
+                    $uploadNewsImage->save();
+                }
+            }
+            DB::commit();
             return $this->sendResponse($updateNews, 'News updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

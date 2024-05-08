@@ -24,12 +24,15 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $addClub = new Club;
+            DB::beginTransaction();
+         $addClub = new Club;
             $addClub->name = $request->name;
             $addClub->description = $request->description;
             $addClub->save();
+            DB::commit();
             return $this->sendResponse($addClub, 'Club saved successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
@@ -42,7 +45,8 @@ class ClubController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $updateclub = Club::query()->where('id', $request->id)->first();
+            DB::beginTransaction();
+           $updateclub = Club::query()->where('id', $request->id)->first();
             if ($request->filled('name')) {
                 $updateclub->name = $request->name;
             }
@@ -50,8 +54,10 @@ class ClubController extends Controller
                 $updateclub->description = $request->description;
             }
             $updateclub->save();
+            DB::commit();
             return $this->sendResponse($updateclub, 'Club updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

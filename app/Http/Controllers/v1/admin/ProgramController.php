@@ -52,7 +52,7 @@ class ProgramController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $addprograms = new Program();
             $addprograms->type = $request->type;
             $addprograms->title = $request->title;
@@ -67,9 +67,10 @@ class ProgramController extends Controller
             $addprograms->body_para = $request->body_para;
             $addprograms->conclusion = $request->conclusion;
             $addprograms->save();
-
+            DB::commit();
             return $this->sendResponse($addprograms->id, 'Programs uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -84,6 +85,7 @@ class ProgramController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+            DB::beginTransaction();
             $updateProgram = Program::query()->where('id', $request->id)->first();
             if ($request->has('type')) {
                 $updateProgram->type = $request->type;
@@ -107,9 +109,10 @@ class ProgramController extends Controller
                 $updateProgram->secondary_img = $this->saveFile($request->file('secondary_img'), 'ProgramSecondaryImage');
             }
             $updateProgram->save();
-
+            DB::commit();
             return $this->sendResponse($updateProgram, "Program updated successfully.");
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

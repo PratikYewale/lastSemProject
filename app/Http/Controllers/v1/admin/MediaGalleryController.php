@@ -65,6 +65,7 @@ class MediaGalleryController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+            DB::beginTransaction();
             $media = $request->file('media');
             if (!is_array($media)) {
                 return $this->sendError('Media cannot be null.');
@@ -76,8 +77,10 @@ class MediaGalleryController extends Controller
                 $MediaGallery->media = $this->saveFile($file, 'Media');
                 $MediaGallery->save();
             }
+            DB::commit();
             return $this->sendResponse([$MediaGallery], 'Media gallery added successfully.');
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }

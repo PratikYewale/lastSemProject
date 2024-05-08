@@ -19,7 +19,7 @@ class CreateNewsAnnouncementImagesTable extends Migration
             $table->foreign('news_id')->references('id')->on('news');
             $table->bigInteger('announcement_id')->unsigned()->nullable();
             $table->foreign('announcement_id')->references('id')->on('announcement');
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->timestamps();
         });
     }
