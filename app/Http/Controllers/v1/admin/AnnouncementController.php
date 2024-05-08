@@ -9,6 +9,7 @@ use App\Models\Announcement;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
+use App\Models\NewsAnnouncementImages;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +23,13 @@ class AnnouncementController extends Controller
         $fileName = $process . '-' . $cur . '.' . $extension;
         $basePath = public_path('\\Image\\');
         if (env('APP_ENV') == 'prod') {
-            $basePath =  public_path('/Image/');
+            $basePath = public_path('/Image/');
         }
         if (!is_dir($basePath)) {
             mkdir($basePath, 0755, true);
         }
         if (env('APP_ENV') == 'prod') {
-            $destinationPath =  public_path('/Image');
+            $destinationPath = public_path('/Image');
         } else {
             $destinationPath = public_path('\\Image');
         }
@@ -43,11 +44,9 @@ class AnnouncementController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'primary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'secondary_img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'document'=>'nullable|mimes:pdf',
+                'document' => 'nullable|mimes:pdf',
                 'title' => 'nullable',
-                'sub_title'=>'nullable',
+                'sub_title' => 'nullable',
                 'intro_para' => 'nullable',
                 'conclusion' => 'nullable',
                 'body_para' => 'nullable'
@@ -55,29 +54,30 @@ class AnnouncementController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $uploadAnnouncement = new Announcement();
-            if ($request->hasFile('primary_img')) {
-                $uploadAnnouncement->primary_img = $this->saveFile($request->file('primary_img'), 'AnnouncementPrimaryImage');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $uploadAnnouncement->secondary_img = $this->saveFile($request->file('secondary_img'), 'AnnouncementSecondaryImage');
-            }
             if ($request->hasFile('document')) {
                 $uploadAnnouncement->document = $this->saveFile($request->file('document'), 'AnnouncementDocument');
             }
             $userid = Auth::user()->id;
             $uploadAnnouncement->user_id = $userid;
             $uploadAnnouncement->title = $request->title;
-            $uploadAnnouncement->sub_title=$request->sub_title;
+            $uploadAnnouncement->sub_title = $request->sub_title;
             $uploadAnnouncement->intro_para = $request->intro_para;
             $uploadAnnouncement->body_para = $request->body_para;
             $uploadAnnouncement->conclusion = $request->conclusion;
-          
             $uploadAnnouncement->save();
-
-            return $this->sendResponse($uploadAnnouncement->id, 'Announcement uploaded successfully.', true);
+            $images = $request->file('images');
+            foreach ($images as $newsimage) {
+                $uploadAnnouncementImage = new NewsAnnouncementImages();
+                $uploadAnnouncementImage->announcement_id = $uploadAnnouncement->id;
+                $uploadAnnouncementImage->images = $this->saveFile($newsimage, 'NewsImage');
+                $uploadAnnouncementImage->save();
+            }
+            DB::commit();
+          return $this->sendResponse($uploadAnnouncement->id, 'Announcement uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -90,14 +90,8 @@ class AnnouncementController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateAnnouncement = Announcement::query()->where('id', $request->id)->first();
-            if ($request->hasFile('primary_img')) {
-                $updateAnnouncement->primary_img = $this->saveFile($request->primary_img, 'AnnouncementPrimaryImage');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $updateAnnouncement->secondary_img = $this->saveFile($request->secondary_img, 'AnnouncementSecondaryImage');
-            }
             if ($request->hasFile('document')) {
                 $updateAnnouncement->document = $this->saveFile($request->document, 'AnnouncementDocument');
             }
@@ -107,7 +101,6 @@ class AnnouncementController extends Controller
             if ($request->filled('title')) {
                 $updateAnnouncement->title = $request->title;
             }
-            
             if ($request->filled('intro_para')) {
                 $updateAnnouncement->intro_para = $request->intro_para;
             }
@@ -121,8 +114,19 @@ class AnnouncementController extends Controller
                 $updateAnnouncement->conclusion = $request->conclusion;
             }
             $updateAnnouncement->save();
+            $updateAnnouncement->AnnouncementImages()->delete();
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $uploadAnnouncementImage = new NewsAnnouncementImages();
+                    $uploadAnnouncementImage->announcement_id = $updateAnnouncement->id;
+                    $uploadAnnouncementImage->images = $this->saveFile($image, 'NewsImage');
+                    $uploadAnnouncementImage->save();
+                }
+            }
+            DB::commit();
             return $this->sendResponse($updateAnnouncement, 'Announcement updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -166,7 +170,7 @@ class AnnouncementController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-            $announcement= Announcement::query()->where('id', $request->id)->with('user')->first();
+            $announcement = Announcement::query()->where('id', $request->id)->with('user')->first();
             if (!$announcement) {
                 return $this->sendError('No data available.');
             }

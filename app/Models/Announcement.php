@@ -13,4 +13,8 @@ class Announcement extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function AnnouncementImages()
+    {
+        return $this->hasMany(NewsAnnouncementImages::class, 'announcement_id');
+    }
 }
