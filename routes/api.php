@@ -125,6 +125,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         
         // Member
         Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+        Route::get('getAllAthletes', [AdminMemberController::class, 'getAllAthletes']);
         Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
         
         //ContactUs

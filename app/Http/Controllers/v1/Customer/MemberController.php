@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\v1\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Achievement;
 use App\Models\Achivement;
 use App\Models\Athelete;
+use App\Models\Athlete;
 use App\Models\Member;
 use App\Models\Membership;
 use App\Models\MembershipHistory;
@@ -131,7 +133,7 @@ class MemberController extends Controller
                 $user->password = Hash::make($request->password);
                 $user->save();
             }
-            $newAthlete = new Athelete();
+            $newAthlete = new Athlete();
             $newAthlete->user_id = $user->id;
             $newAthlete->gender = $request->gender;
             $newAthlete->date_of_birth = $request->date_of_birth;
@@ -149,7 +151,7 @@ class MemberController extends Controller
                 $newAthlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
             }
             if ($request->hasFile('aadhar_card')) {
-                $newAthlete->addhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+                $newAthlete->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
             }
             if ($request->hasFile('passport')) {
                 $newAthlete->passport = $this->saveFile($request->file('passport'), 'Passport');
@@ -157,8 +159,8 @@ class MemberController extends Controller
             $newAthlete->save();
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
-                    $newAchievment = new Achivement();
-                    $newAchievment->atheletes_id = $newAthlete->id;
+                    $newAchievment = new Achievement();
+                    $newAchievment->athlete_id = $newAthlete->id;
                     $newAchievment->name = $achievement['name'];
                     $newAchievment->year = $achievement['year'];
                     $newAchievment->result = $achievement['result'];
@@ -169,7 +171,7 @@ class MemberController extends Controller
                 foreach ($request->file('sport_certificates') as $sport_certificate) {
                     $newCertificate = new SportCertificate();
                     $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
-                    $newCertificate->atheletes_id = $newAthlete->id;
+                    $newCertificate->athlete_id = $newAthlete->id;
                     $newCertificate->save();
                 }
             }
@@ -180,13 +182,11 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
     public function updateAthlete(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:atheletes,id',
-                'achievement_id' => 'exists:achievement,id',
+                'id' => 'required|integer|exists:athletes,id',
                 'email' => 'string|email|max:255|unique:users',
                 'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
@@ -198,7 +198,7 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $athlete = Athelete::findOrFail($request->id);
+            $athlete = Athlete::findOrFail($request->id);
             if (!$athlete) {
                 return $this->sendError("User not found.");
             }
@@ -254,7 +254,7 @@ class MemberController extends Controller
                 $athlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
             }
             if ($request->hasFile('aadhar_card')) {
-                $athlete->addhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+                $athlete->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
             }
             if ($request->hasFile('passport')) {
                 $athlete->passport = $this->saveFile($request->file('passport'), 'Passport');
@@ -271,13 +271,13 @@ class MemberController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:achivements,id',
+                'id' => 'required|integer|exists:achievements,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $achievement = Achivement::findOrFail($request->id);
+            $achievement = Achievement::findOrFail($request->id);
             if (!$achievement) {
                 return $this->sendError("User not found.");
             }

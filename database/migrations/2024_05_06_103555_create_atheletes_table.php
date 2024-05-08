@@ -13,7 +13,7 @@ class CreateAtheletesTable extends Migration
      */
     public function up()
     {
-        Schema::create('atheletes', function (Blueprint $table) {
+        Schema::create('athletes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');       
@@ -28,7 +28,7 @@ class CreateAtheletesTable extends Migration
             $table->string('passport_number')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('recommendation')->nullable();
-            $table->string('addhar_card')->nullable();
+            $table->string('aadhar_card')->nullable();
             $table->string('passport')->nullable();
             $table->timestamps();
         });
@@ -41,6 +41,6 @@ class CreateAtheletesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('atheletes');
+        Schema::dropIfExists('athletes');
     }
 }

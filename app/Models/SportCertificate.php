@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class SportCertificate extends Model
 {
     use HasFactory;
-    protected $table = 'sport_certificate';
+    protected $table = 'sport_certificates';
 }
