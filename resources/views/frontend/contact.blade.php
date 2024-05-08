@@ -142,14 +142,7 @@
                     </div>
                     <!-- /Promo -->
                     <!-- /Contact form -->
-                    <!-- Google Map -->
-                    <div id="sc_googlemap_196270504" class="sc_googlemap width_100_per height_500 mt-5" data-zoom="14"
-                        data-style="dark">
-                        <div id="sc_googlemap_196270504_1" class="sc_googlemap_marker" data-title=""
-                            data-description="6486 Sycamore Lane Fort Lee" data-address="6486 Sycamore Lane Fort Lee"
-                            data-latlng="" data-point="images/map-marker.png"></div>
-                    </div>
-                    <!-- /Google Map -->
+         
                 </section>
             </article>
         </div>

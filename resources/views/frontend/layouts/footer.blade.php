@@ -36,18 +36,24 @@
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/teams') }}"><span class="ms-1">Teams</span></a>
                                         </li>
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/services') }}"><span
+                                                        class="ms-1">Services</span></a>
+                                        </li>
+
                                         <!-- /Menu: Rent -->
                                         <!-- Menu: Store -->
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/programs') }}"><span
+                                                    href="{{ url('/announcement') }}"><span
                                                         class="ms-1">Programs</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
                                         <!-- Menu: News -->
                                         <li class="menu-item ">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/competition') }}"><span
+                                                    href="{{ url('/registration') }}"><span
                                                         class="ms-1">Competition</span></a>
 
                                         </li>
@@ -75,16 +81,18 @@
 
                                     <li class="d-flex">
                                         <i class="icon icon-location"></i>
-                                        <div>2 Chemin de Bordeneuve, 31490 Brax, France<br /></div>
+                                        <div>Olympic Bhawan, B-29, <br />Qutub Institutional Area, <br />New Delhi
+                                            110016, INDIA.
+                                        </div>
                                     </li>
-                                    <li class="d-flex">
+                                    {{-- <li class="d-flex">
 
                                         <i class="icon icon-mobile"></i>
                                         <div>1 800 215 16 35</div>
-                                    </li>
+                                    </li> --}}
                                     <li class="d-flex">
                                         <i class="icon icon-pencil"></i>
-                                        <div>info@skisnowboardindia.com</div>
+                                        <div>skiandsnowboardindia@outlook.com</div>
                                     </li>
 
                                 </ul>
@@ -144,7 +152,7 @@
                                 </p>
                             </div>
                         </div>
-                      
+
                     </div>
 
 
@@ -157,7 +165,7 @@
         </div>
         <!-- /Body wrap -->
 
-        <a href="#" class="scroll_to_top icon-up-small" title="Scroll to top"></a>
+        @include('frontend.commonComponants.enquiryBtn')
 
         <script type="text/javascript" src="{{ url('frontend/js/jquery/jquery.js') }}"></script>
 
@@ -170,6 +178,7 @@
         <script type="text/javascript" src="{{ url('frontend/js/superfish.js') }}"></script>
         <script type="text/javascript" src="{{ url('frontend/js/core.utils.js') }}"></script>
 
+
         <script type="text/javascript" src="{{ url('frontend/js/core.init.js') }}"></script>
         <script type="text/javascript" src="{{ url('frontend/js/tpl.init.js') }}"></script>
 
@@ -181,10 +190,11 @@
 
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAA8O_i6YWSOXQn1vd9SSiIriIqewvBFWk">
         </script>
-        <script type="text/javascript" src="{{ url('frontend/js/core.googlemap.js') }}"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
+        <script type="text/javascript" src="{{ url('frontend/js/collapse.js') }}"></script>
         </body>
 
         </html>

@@ -67,6 +67,7 @@ input[type="number"],
 input[type="email"],
 input[type="search"],
 input[type="password"],
+input[type="date"],
 select,
 textarea {
     line-height: 1em
@@ -243,6 +244,7 @@ figure figcaption,
 [class*="sc_input_hover_"] input[type="tel"],
 [class*="sc_input_hover_"] input[type="password"],
 [class*="sc_input_hover_"] input[type="search"],
+[class*="sc_input_hover_"] input[type="date"],
 [class*="sc_input_hover_"] select,
 [class*="sc_input_hover_"] textarea {
     font-family: "Montserrat", sans-serif
@@ -518,6 +520,7 @@ figure figcaption,
 .scheme_original input[type="tel"],
 .scheme_original input[type="search"],
 .scheme_original input[type="password"],
+.scheme_original input[type="date"],
 .scheme_original select,
 .scheme_original textarea {
     color: #ffffff;
@@ -693,6 +696,7 @@ figure figcaption,
 .scheme_original .sc_input_hover_jump input[type="email"],
 .scheme_original .sc_input_hover_jump input[type="password"],
 .scheme_original .sc_input_hover_jump input[type="search"],
+.scheme_original .sc_input_hover_jump input[type="date"],
 .scheme_original .sc_input_hover_jump textarea {
     border-color: #dddddd;
 }
@@ -4285,6 +4289,7 @@ figure figcaption,
 .scheme_light input[type="tel"],
 .scheme_light input[type="search"],
 .scheme_light input[type="password"],
+.scheme_light input[type="date"],
 .scheme_light select,
 .scheme_light textarea {
     color: #ffffff;
@@ -4458,6 +4463,7 @@ figure figcaption,
 .scheme_light .sc_input_hover_jump input[type="email"],
 .scheme_light .sc_input_hover_jump input[type="password"],
 .scheme_light .sc_input_hover_jump input[type="search"],
+.scheme_light .sc_input_hover_jump input[type="date"],
 .scheme_light .sc_input_hover_jump textarea {
     border-color: #dddddd
 }
@@ -7907,6 +7913,7 @@ figure figcaption,
 .scheme_dark input[type="tel"],
 .scheme_dark input[type="search"],
 .scheme_dark input[type="password"],
+.scheme_dark input[type="date"],
 .scheme_dark select,
 .scheme_dark textarea {
     color: #ffffff;
@@ -8080,6 +8087,7 @@ figure figcaption,
 .scheme_dark .sc_input_hover_jump input[type="email"],
 .scheme_dark .sc_input_hover_jump input[type="password"],
 .scheme_dark .sc_input_hover_jump input[type="search"],
+.scheme_dark .sc_input_hover_jump input[type="date"],
 .scheme_dark .sc_input_hover_jump textarea {
     border-color: #dddddd
 }

@@ -58,15 +58,10 @@
                                         <!-- Menu: Home -->
                                         <li class="menu-item current-menu-ancestor ">
                                             <a href="{{ url('/') }}"><span>Home</span></a>
-                                      
+
                                         </li>
                                         <!-- /Menu: Home -->
-                                        <!-- Menu: Features -->
-                                        <li class="menu-item ">
-                                            <a href="{{ url('/donate') }}"><span>Donate</span></a>
-                                           
-                                        </li>
-                                        <!-- /Menu: Features -->
+                            
                                         <!-- Menu: Classes -->
                                         <li class="menu-item">
                                             <a href="{{ url('/about') }}"><span>About</span></a>
@@ -77,21 +72,25 @@
                                             <a href="{{ url('/teams') }}"><span>Teams</span></a>
                                         </li>
                                         <!-- /Menu: Rent -->
+                                        <li class="menu-item">
+                                            <a href="{{ url('/services') }}"><span>Services</span></a>
+                                        </li>
+                                        <!-- /Menu: Rent -->
                                         <!-- Menu: Store -->
                                         <li class="menu-item">
-                                            <a href="{{ url('/programs') }}"><span>Programs</span></a>
+                                            <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
                                         <!-- Menu: News -->
                                         <li class="menu-item ">
-                                            <a href="{{ url('/competition') }}"><span>Competition</span></a>
-                                           
+                                            <a href="{{ url('/registration') }}"><span>Registration</span></a>
+
                                         </li>
                                         <!-- /Menu: News -->
                                         <!-- Menu: Contact Us -->
-                                        <li class="menu-item">
+                                        {{-- <li class="menu-item">
                                             <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                                        </li>
+                                        </li> --}}
                                         <li class="menu-item">
                                             <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                         </li>
@@ -261,20 +260,15 @@
                         <div class="close">Close</div>
                         <div class="panel_top">
                             <nav class="menu_main_nav_area">
-                                <!-- Mobile Menu -->
-                                <ul id="menu_mobile" class="menu_main_nav">
+                                  <!-- Mobile Menu -->
+                                  <ul id="menu_mobile" class="menu_main_nav">
                                     <!-- Menu: Home -->
                                     <li class="menu-item ">
                                         <a href="{{ url('/') }}"><span>Home</span></a>
-                               
+    
                                     </li>
                                     <!-- /Menu: Home -->
-                                    <!-- Menu: Features -->
-                                    <li class="menu-item ">
-                                        <a href="{{ url('/donate') }}"><span>Donate</span></a>
-                                        
-                                    </li>
-                                    <!-- /Menu: Features -->
+                       
                                     <!-- Menu: Classes -->
                                     <li class="menu-item">
                                         <a href="{{ url('/about') }}"><span>About</span></a>
@@ -285,20 +279,27 @@
                                         <a href="{{ url('/teams') }}"><span>Teams</span></a>
                                     </li>
                                     <!-- /Menu: Rent -->
-                                   
+                                    <li class="menu-item">
+                                        <a href="{{ url('/services') }}"><span>Services</span></a>
+                                    </li>
+                                    <!-- Menu: Shop -->
+                                    <li class="menu-item">
+                                        <a href="shop-page.html"><span>Store</span></a>
+                                    </li>
+                                    <!-- /Menu: Shop -->
                                     <!-- Menu: News -->
                                     <li class="menu-item ">
-                                        <a href="{{ url('/programs') }}"><span>Programs</span></a>
-                                       
+                                        <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
+    
                                     </li>
                                     <li class="menu-item ">
-                                        <a href="{{ url('/competition') }}"><span>Competition</span></a>
-                                       
+                                        <a href="{{ url('/registration') }}"><span>Registration</span></a>
+    
                                     </li>
-                                    <li class="menu-item ">
+                                    {{-- <li class="menu-item ">
                                         <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                                       
-                                    </li>
+    
+                                    </li> --}}
                                     <li class="menu-item current-menu-item">
                                         <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                     </li>

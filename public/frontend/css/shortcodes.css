@@ -5314,7 +5314,7 @@ ul.sc_list_style_iconed {
 .sc_title_underline,
 .sc_title_underline_dark,
 .sc_title_underline_white {
-	padding-bottom:2.9rem;
+	padding-bottom:0.9rem;
 }
 .sc_title_underline:after,
 .sc_title_underline_dark:after,

@@ -78,12 +78,7 @@
 
                                         </li>
                                         <!-- /Menu: Home -->
-                                        <!-- Menu: Features -->
-                                        <li class="menu-item ">
-                                            <a href="{{ url('/donate') }}"><span>Donate</span></a>
 
-                                        </li>
-                                        <!-- /Menu: Features -->
                                         <!-- Menu: Classes -->
                                         <li class="menu-item">
                                             <a href="{{ url('/about') }}"><span>About</span></a>
@@ -94,21 +89,26 @@
                                             <a href="{{ url('/teams') }}"><span>Teams</span></a>
                                         </li>
                                         <!-- /Menu: Rent -->
+                                        <!-- Menu: Rent -->
+                                        <li class="menu-item">
+                                            <a href="{{ url('/services') }}"><span>Services</span></a>
+                                        </li>
+                                        <!-- /Menu: Rent -->
                                         <!-- Menu: Store -->
                                         <li class="menu-item">
-                                            <a href="{{ url('/programs') }}"><span>Programs</span></a>
+                                            <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
                                         <!-- Menu: News -->
                                         <li class="menu-item ">
-                                            <a href="{{ url('/competition') }}"><span>Competition</span></a>
+                                            <a href="{{ url('/registration') }}"><span>Registration</span></a>
 
                                         </li>
                                         <!-- /Menu: News -->
                                         <!-- Menu: Contact Us -->
-                                        <li class="menu-item">
+                                        {{-- <li class="menu-item">
                                             <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                                        </li>
+                                        </li> --}}
                                         <li class="menu-item">
                                             <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                         </li>
@@ -191,7 +191,7 @@
                                 <!-- Booking button block -->
                                 <div class="menu_main_additional_button top_panel_icon">
                                     <div class="menu_main_additional_button_container">
-                                        <a href="booking-page.html">
+                                        <a href="{{ url('/donate') }}">
                                             <img src="{{ url('frontend/images/booking_heared_img.png') }}"
                                                 alt="">
                                         </a>
@@ -219,7 +219,7 @@
                     <!-- Booking button block -->
                     <div class="menu_main_additional_button top_panel_icon">
                         <div class="menu_main_additional_button_container">
-                            <a href="booking-page.html">
+                            <a href="{{ url('/donate') }}">
                                 <img src="{{ url('frontend/images/booking_heared_img.png') }}" alt="">
                             </a>
                         </div>
@@ -303,12 +303,7 @@
 
                                 </li>
                                 <!-- /Menu: Home -->
-                                <!-- Menu: Features -->
-                                <li class="menu-item ">
-                                    <a href="{{ url('/donate') }}"><span>Donate</span></a>
 
-                                </li>
-                                <!-- /Menu: Features -->
                                 <!-- Menu: Classes -->
                                 <li class="menu-item">
                                     <a href="{{ url('/about') }}"><span>About</span></a>
@@ -319,6 +314,11 @@
                                     <a href="{{ url('/teams') }}"><span>Teams</span></a>
                                 </li>
                                 <!-- /Menu: Rent -->
+                                <!-- Menu: Rent -->
+                                <li class="menu-item">
+                                    <a href="{{ url('/services') }}"><span>Services</span></a>
+                                </li>
+                                <!-- /Menu: Rent -->
                                 <!-- Menu: Shop -->
                                 <li class="menu-item">
                                     <a href="shop-page.html"><span>Store</span></a>
@@ -326,17 +326,17 @@
                                 <!-- /Menu: Shop -->
                                 <!-- Menu: News -->
                                 <li class="menu-item ">
-                                    <a href="{{ url('/programs') }}"><span>Programs</span></a>
+                                    <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
 
                                 </li>
                                 <li class="menu-item ">
-                                    <a href="{{ url('/competition') }}"><span>Competition</span></a>
+                                    <a href="{{ url('/registration') }}"><span>Registration</span></a>
 
                                 </li>
-                                <li class="menu-item ">
+                                {{-- <li class="menu-item ">
                                     <a href="{{ url('/membership') }}"><span>Membership</span></a>
 
-                                </li>
+                                </li> --}}
                                 <li class="menu-item current-menu-item">
                                     <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                 </li>
@@ -669,109 +669,13 @@
                                 </div>
                             </div>
                             <!-- END REVOLUTION SLIDER -->
-                            <!-- Snowboard Schools -->
-                            <div class="hp_schools_section">
-                                <div class="content_wrap">
-                                    <div class="custom_title_1 text_align_center">WHAT WE OFFER</div>
-                                    <div class="sc_services_wrap">
-                                        <div
-                                            class="sc_services sc_services_style_services-3 sc_services_type_icons title_center width_100_per">
-                                            <h2 class="sc_services_title sc_item_title sc_item_title_with_descr">
-                                                Snowboard Schools</h2>
-                                            <div class="sc_services_descr sc_item_descr">Skiing and snowboarding still
-                                                rank among the undisputed winter sport highlights for all ages and
-                                                ability levels. The perfectly groomed ski slopes makes a real heaven for
-                                                skiers and riders. Our professional ski and snowboard instructors can
-                                                show you all the little details while improving your skiing techniques
-                                                and riding skills.</div>
-                                            <div class="sc_columns columns_wrap row">
-                                                <div class="col-lg-4 column_padding_bottom">
-                                                    <div class="sc_services_item sc_services_item_1 odd first">
-                                                        <div class="sc_services_item_featured post_featured">
-                                                            <div class="post_thumb" data-image=""
-                                                                data-title="Private Lessons for Beginners">
-                                                                <a class="hover_icon hover_icon_link"
-                                                                    href="service-single.html">
-                                                                    <img alt="service_image_4.png"
-                                                                        src="{{ url('frontend/images/service_image_4.png') }}">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sc_services_item_content">
-                                                            <h4 class="sc_services_item_subtitle">New to Snowboarding?
-                                                            </h4>
-                                                            <h4 class="sc_services_item_title">
-                                                                <a href="service-single.html">Private Lessons for
-                                                                    Beginners</a>
-                                                            </h4>
-                                                            <div class="sc_services_item_description">
-                                                                <a href="service-single.html"
-                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
-                                                                    $200</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 column_padding_bottom">
-                                                    <div class="sc_services_item sc_services_item_2 even">
-                                                        <div class="sc_services_item_featured post_featured">
-                                                            <div class="post_thumb" data-image=""
-                                                                data-title="Group Lessons for Beginners">
-                                                                <a class="hover_icon hover_icon_link"
-                                                                    href="service-single.html">
-                                                                    <img alt="service_image_5.png"
-                                                                        src="{{ url('frontend/images/service_image_5.png') }}">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sc_services_item_content">
-                                                            <h4 class="sc_services_item_subtitle">Need a Crew?</h4>
-                                                            <h4 class="sc_services_item_title">
-                                                                <a href="service-single.html">Group Lessons for
-                                                                    Beginners</a>
-                                                            </h4>
-                                                            <div class="sc_services_item_description">
-                                                                <a href="service-single.html"
-                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
-                                                                    $100</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-4 column_padding_bottom">
-                                                    <div class="sc_services_item sc_services_item_3 odd">
-                                                        <div class="sc_services_item_featured post_featured">
-                                                            <div class="post_thumb" data-image=""
-                                                                data-title="Advanced Group Lessons">
-                                                                <a class="hover_icon hover_icon_link"
-                                                                    href="service-single.html">
-                                                                    <img alt="service_image_6.png"
-                                                                        src="{{ url('frontend/images/service_image_6.png') }}">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="sc_services_item_content">
-                                                            <h4 class="sc_services_item_subtitle">Wanna More?</h4>
-                                                            <h4 class="sc_services_item_title">
-                                                                <a href="service-single.html">Advanced Group
-                                                                    Lessons</a>
-                                                            </h4>
-                                                            <div class="sc_services_item_description">
-                                                                <a href="service-single.html"
-                                                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">From
-                                                                    $300</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Snowboard Schools -->
+                            {{-- @include('frontend.commonComponants.aboutSection') --}}
+                            @include('frontend.commonComponants.three_sports')
+                            @include('frontend.commonComponants.chairmanWords')
+
+
                             <!-- Online Booking -->
-                            <div class="hp_booking_section">
+                            {{-- <div class="hp_booking_section">
                                 <div class="content_wrap">
                                     <div class="sc_columns columns_wrap">
                                         <div class="column-1_2">
@@ -786,22 +690,7 @@
                                                         disciplines under the International Ski Federation (FIS) in the
                                                         territory of India. SSI is also a recognised member of the
                                                         Indian Olympic Association </div>
-                                                    {{-- <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <h4 class="mt-0 mb-1">Mission</h4>
-                                                            <p>The mission of the National Sport Federation of Ski and
-                                                                Snowboard India is to promote and develop skiing and
-                                                                snowboarding as accessible and popular sports throughout
-                                                                India. </p>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <h4 class="mt-0 mb-1">Vision</h4>
-                                                            <p>Their vision is to create a vibrant skiing and
-                                                                snowboarding community that fosters talent, encourages
-                                                                participation, and achieves excellence on both national
-                                                                and international levels.</p>
-                                                        </div>
-                                                    </div> --}}
+                                           
                                                     <div class="sc_section_content_wrap">
                                                         <a href="#"
                                                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_tiny">Contact
@@ -812,9 +701,225 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- /Online Booking -->
                             <!-- The Essential Grid -->
+
+                            <div class="clear"></div>
+                            <!-- /The Essential Grid -->
+
+                            <!-- Crew -->
+                            <div class="hp_crew_section">
+                                <div class="content_wrap">
+                                    <div class="custom_title_1 text_align_center">Team</div>
+                                    <div class="sc_section title_center">
+                                        <div class="sc_section_inner">
+                                            <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">meet
+                                                our crew</h2>
+                                            <div class="sc_section_content_wrap">
+                                                <div class="sc_team_wrap margin_top_small">
+                                                    <div
+                                                        class="sc_team sc_team_style_team-3 title_center width_100_per">
+                                                        <div class="sc_columns columns_wrap row">
+                                                            <!-- Team item -->
+                                                            <div class="col-lg-3 column_padding_bottom">
+                                                                <div class="sc_team_item sc_team_item_1 odd first">
+                                                                    <div class="sc_team_item_avatar">
+                                                                        <img alt="Mr Shiva Keshavan"
+                                                                            src="{{ url('frontend/images/team-4-370x370.jpg') }}">
+                                                                        <div class="sc_team_item_hover">
+                                                                            <div class="sc_team_item_socials">
+                                                                                <div
+                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_facebook">
+                                                                                            <span
+                                                                                                class="icon-facebook"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_twitter">
+                                                                                            <span
+                                                                                                class="icon-twitter"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_instagram-3">
+                                                                                            <span
+                                                                                                class="icon-instagram-3"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc_team_item_info">
+                                                                        <h5 class="sc_team_item_title">
+                                                                            <a href="team-single.html">Mr Shiva
+                                                                                Keshavan</a>
+                                                                        </h5>
+                                                                        <div class="sc_team_item_position">Chairman
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /Team item --><!-- Team item -->
+                                                            <div class="col-lg-3 column_padding_bottom">
+                                                                <div class="sc_team_item sc_team_item_2 even">
+                                                                    <div class="sc_team_item_avatar">
+                                                                        <img alt="Bhavani TN "
+                                                                            src="{{ url('frontend/images/team-3-370x370.jpg') }}">
+                                                                        <div class="sc_team_item_hover">
+                                                                            <div class="sc_team_item_socials">
+                                                                                <div
+                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_facebook">
+                                                                                            <span
+                                                                                                class="icon-facebook"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_twitter">
+                                                                                            <span
+                                                                                                class="icon-twitter"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_instagram-3">
+                                                                                            <span
+                                                                                                class="icon-instagram-3"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc_team_item_info">
+                                                                        <h5 class="sc_team_item_title">
+                                                                            <a href="team-single.html">Bhavani TN </a>
+                                                                        </h5>
+                                                                        <div class="sc_team_item_position">Member
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /Team item --><!-- Team item -->
+                                                            <div class="col-lg-3 column_padding_bottom">
+                                                                <div class="sc_team_item sc_team_item_3 odd">
+                                                                    <div class="sc_team_item_avatar">
+                                                                        <img alt="Mr Arif Mohd Khan "
+                                                                            src="{{ url('frontend/images/team-2-370x370.jpg') }}">
+                                                                        <div class="sc_team_item_hover">
+                                                                            <div class="sc_team_item_socials">
+                                                                                <div
+                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_facebook">
+                                                                                            <span
+                                                                                                class="icon-facebook"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_twitter">
+                                                                                            <span
+                                                                                                class="icon-twitter"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_instagram-3">
+                                                                                            <span
+                                                                                                class="icon-instagram-3"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc_team_item_info">
+                                                                        <h5 class="sc_team_item_title">
+                                                                            <a href="team-single.html">Mr Arif Mohd
+                                                                                Khan </a>
+                                                                        </h5>
+                                                                        <div class="sc_team_item_position">Member
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div><!-- /Team item --><!-- Team item -->
+                                                            <div class="col-lg-3 column_padding_bottom">
+                                                                <div class="sc_team_item sc_team_item_4 even">
+                                                                    <div class="sc_team_item_avatar">
+                                                                        <img alt="Ms Jelena Dojcinovic "
+                                                                            src="{{ url('frontend/images/team-1-370x370.jpg') }}">
+                                                                        <div class="sc_team_item_hover">
+                                                                            <div class="sc_team_item_socials">
+                                                                                <div
+                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_facebook">
+                                                                                            <span
+                                                                                                class="icon-facebook"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_twitter">
+                                                                                            <span
+                                                                                                class="icon-twitter"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="sc_socials_item">
+                                                                                        <a href="#"
+                                                                                            target="_blank"
+                                                                                            class="social_icons social_instagram-3">
+                                                                                            <span
+                                                                                                class="icon-instagram-3"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc_team_item_info">
+                                                                        <h5 class="sc_team_item_title">
+                                                                            <a href="team-single.html">Ms Jelena
+                                                                                Dojcinovic </a>
+                                                                        </h5>
+                                                                        <div class="sc_team_item_position">Independent
+                                                                            Observer
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /Team item -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Crew -->
                             <article class="myportfolio-container custom-1" id="esg-grid-1-1-wrap">
                                 <div id="esg-grid-1-1" class="esg-grid">
                                     <ul>
@@ -963,222 +1068,8 @@
                                     </ul>
                                 </div>
                             </article>
-                            <div class="clear"></div>
-                            <!-- /The Essential Grid -->
-                            <!-- Crew -->
-                            <div class="hp_crew_section">
-                                <div class="content_wrap">
-                                    <div class="custom_title_1 text_align_center">Team</div>
-                                    <div class="sc_section title_center">
-                                        <div class="sc_section_inner">
-                                            <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">meet
-                                                our crew</h2>
-                                            <div class="sc_section_content_wrap">
-                                                <div class="sc_team_wrap margin_top_small">
-                                                    <div
-                                                        class="sc_team sc_team_style_team-3 title_center width_100_per">
-                                                        <div class="sc_columns columns_wrap row">
-                                                            <!-- Team item -->
-                                                            <div class="col-lg-3 column_padding_bottom">
-                                                                <div class="sc_team_item sc_team_item_1 odd first">
-                                                                    <div class="sc_team_item_avatar">
-                                                                        <img alt="Shannon Lorenz"
-                                                                            src="{{ url('frontend/images/team-4-370x370.jpg') }}">
-                                                                        <div class="sc_team_item_hover">
-                                                                            <div class="sc_team_item_socials">
-                                                                                <div
-                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_facebook">
-                                                                                            <span
-                                                                                                class="icon-facebook"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_twitter">
-                                                                                            <span
-                                                                                                class="icon-twitter"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_instagram-3">
-                                                                                            <span
-                                                                                                class="icon-instagram-3"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="sc_team_item_info">
-                                                                        <h5 class="sc_team_item_title">
-                                                                            <a href="team-single.html">Shannon
-                                                                                Lorenz</a>
-                                                                        </h5>
-                                                                        <div class="sc_team_item_position">Instructor
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="col-lg-3 column_padding_bottom">
-                                                                <div class="sc_team_item sc_team_item_2 even">
-                                                                    <div class="sc_team_item_avatar">
-                                                                        <img alt="Peter Colins"
-                                                                            src="{{ url('frontend/images/team-3-370x370.jpg') }}">
-                                                                        <div class="sc_team_item_hover">
-                                                                            <div class="sc_team_item_socials">
-                                                                                <div
-                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_facebook">
-                                                                                            <span
-                                                                                                class="icon-facebook"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_twitter">
-                                                                                            <span
-                                                                                                class="icon-twitter"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_instagram-3">
-                                                                                            <span
-                                                                                                class="icon-instagram-3"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="sc_team_item_info">
-                                                                        <h5 class="sc_team_item_title">
-                                                                            <a href="team-single.html">Peter
-                                                                                Colins</a>
-                                                                        </h5>
-                                                                        <div class="sc_team_item_position">Instructor
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="col-lg-3 column_padding_bottom">
-                                                                <div class="sc_team_item sc_team_item_3 odd">
-                                                                    <div class="sc_team_item_avatar">
-                                                                        <img alt="James Billings"
-                                                                            src="{{ url('frontend/images/team-2-370x370.jpg') }}">
-                                                                        <div class="sc_team_item_hover">
-                                                                            <div class="sc_team_item_socials">
-                                                                                <div
-                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_facebook">
-                                                                                            <span
-                                                                                                class="icon-facebook"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_twitter">
-                                                                                            <span
-                                                                                                class="icon-twitter"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_instagram-3">
-                                                                                            <span
-                                                                                                class="icon-instagram-3"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="sc_team_item_info">
-                                                                        <h5 class="sc_team_item_title">
-                                                                            <a href="team-single.html">James
-                                                                                Billings</a>
-                                                                        </h5>
-                                                                        <div class="sc_team_item_position">Instructor
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div><!-- /Team item --><!-- Team item -->
-                                                            <div class="col-lg-3 column_padding_bottom">
-                                                                <div class="sc_team_item sc_team_item_4 even">
-                                                                    <div class="sc_team_item_avatar">
-                                                                        <img alt="Samantha Allen"
-                                                                            src="{{ url('frontend/images/team-1-370x370.jpg') }}">
-                                                                        <div class="sc_team_item_hover">
-                                                                            <div class="sc_team_item_socials">
-                                                                                <div
-                                                                                    class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_facebook">
-                                                                                            <span
-                                                                                                class="icon-facebook"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_twitter">
-                                                                                            <span
-                                                                                                class="icon-twitter"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                    <div class="sc_socials_item">
-                                                                                        <a href="#"
-                                                                                            target="_blank"
-                                                                                            class="social_icons social_instagram-3">
-                                                                                            <span
-                                                                                                class="icon-instagram-3"></span>
-                                                                                        </a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="sc_team_item_info">
-                                                                        <h5 class="sc_team_item_title">
-                                                                            <a href="team-single.html">Samantha
-                                                                                Allen</a>
-                                                                        </h5>
-                                                                        <div class="sc_team_item_position">Instructor
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- /Team item -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Crew -->
                             <!-- School Info -->
-                            <div class="hp_school_info">
+                            {{-- <div class="hp_school_info">
                                 <div class="content_wrap">
                                     <div class="sc_columns columns_wrap">
                                         <div class="column-9_12">
@@ -1224,8 +1115,8 @@
                                                         <div class="sc_skills_item sc_skills_style_2 odd first">
                                                             <div class="sc_skills_total" data-start="0"
                                                                 data-stop="2300" data-step="23" data-max="2300"
-                                                                data-speed="13" data-duration="1300"
-                                                                data-ed="">0</div>
+                                                                data-speed="13" data-duration="1300" data-ed="">0
+                                                            </div>
                                                             <div class="sc_skills_count"></div>
                                                             <div class="sc_skills_info">
                                                                 <div class="sc_skills_label">Happy Clients</div>
@@ -1261,171 +1152,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- /School Info -->
                             <!-- Equipment -->
-                            {{-- <div class="hp_equipment_section">
-                                <div class="content_wrap">
-                                    <div class="sc_section margin_top_6em">
-                                        <div class="sc_section_inner">
-                                            <div class="sc_section_content_wrap">
-                                                <div class="custom_title_1 text_align_center">FROM THE SHOP</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sc_section margin_bottom_large margin_bottom_tiny title_center">
-                                        <div class="sc_section_inner">
-                                            <h2 class="sc_section_title sc_item_title sc_item_title_with_descr">Need
-                                                Some Equipment?</h2>
-                                            <div class="sc_section_descr sc_item_descr">Risus tempor in. Integer a
-                                                quam sodales, sollicitudin metus ac, posuere mauris. Aliquam faucibus in
-                                                tellus non sollicitudin lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit. Duis placerat, justo at dapibus egestas, risus odio
-                                                fermentum urna, at molestie mauris nibh at orci phasellus accumsan
-                                                sapien eget sodales porttitor suspendisse sed.</div>
-                                            <div class="sc_section_content_wrap">
-                                                <div class="woocommerce columns-4">
-                                                    <ul class="products">
-                                                        <!-- Product item -->
-                                                        <li class="product first">
-                                                            <div class="post_item_wrap">
-                                                                <div class="post_featured">
-                                                                    <div class="post_thumb">
-                                                                        <img src="{{ url('frontend/images/product_01-300x300.jpg') }}"
-                                                                            alt="" title="product_01" />
-                                                                        <a href="#"
-                                                                            class="button add_to_cart_button">Add to
-                                                                            cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="post_content">
-                                                                    <h3><a href="shop-product.html">Bogner Ginkgo
-                                                                            Snowboard</a></h3>
-                                                                    <div class="star-rating"
-                                                                        title="Rated 5 out of 5">
-                                                                        <span style="width:100%">
-                                                                            <strong class="rating">5</strong> out of 5
-                                                                        </span>
-                                                                    </div>
-                                                                    <span class="price">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">&#36;</span>199.00
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- /Product item -->
-                                                        <!-- Product item -->
-                                                        <li class="product">
-                                                            <div class="post_item_wrap">
-                                                                <div class="post_featured">
-                                                                    <div class="post_thumb">
-                                                                        <img src="{{ url('frontend/images/product_02-300x300.jpg') }}"
-                                                                            alt="" title="product_02" />
-                                                                        <a href="#"
-                                                                            class="button add_to_cart_button">Add to
-                                                                            cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="post_content">
-                                                                    <h3><a href="shop-product.html">Bogner Phoenix
-                                                                            Mirror Goggles</a></h3>
-                                                                    <div class="star-rating"
-                                                                        title="Rated 5 out of 5">
-                                                                        <span style="width:100%">
-                                                                            <strong class="rating">5</strong> out of 5
-                                                                        </span>
-                                                                    </div>
-                                                                    <span class="price">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">&#36;</span>339.00
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- /Product item -->
-                                                        <!-- Product item -->
-                                                        <li class="product">
-                                                            <div class="post_item_wrap">
-                                                                <div class="post_featured">
-                                                                    <div class="post_thumb">
-                                                                        <img src="{{ url('frontend/images/product_03-300x300.jpg') }}"
-                                                                            alt="" title="product_03" />
-                                                                        <a href="#"
-                                                                            class="button add_to_cart_button">Add to
-                                                                            cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="post_content">
-                                                                    <h3><a href="shop-product.html">Burton Blue
-                                                                            Midnight Pullover</a></h3>
-                                                                    <div class="star-rating"
-                                                                        title="Rated 4 out of 5">
-                                                                        <span style="width:80%">
-                                                                            <strong class="rating">4</strong> out of 5
-                                                                        </span>
-                                                                    </div>
-                                                                    <span class="price">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">&#36;</span>149.00
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- /Product item -->
-                                                        <!-- Product item -->
-                                                        <li class="product last">
-                                                            <div class="post_item_wrap">
-                                                                <div class="post_featured">
-                                                                    <div class="post_thumb">
-                                                                        <img src="{{ url('frontend/images/product_04-300x300.jpg') }}"
-                                                                            alt="" title="product_04" />
-                                                                        <a href="#"
-                                                                            class="button add_to_cart_button">Add to
-                                                                            cart</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="post_content">
-                                                                    <h3><a href="shop-product.html">Gilson Nine.10
-                                                                            Snow Helmet</a></h3>
-                                                                    <div class="star-rating"
-                                                                        title="Rated 3 out of 5">
-                                                                        <span style="width:60%">
-                                                                            <strong class="rating">3</strong> out of 5
-                                                                        </span>
-                                                                    </div>
-                                                                    <span class="price">
-                                                                        <span class="woocommerce-Price-amount amount">
-                                                                            <span
-                                                                                class="woocommerce-Price-currencySymbol">&#36;</span>86.00
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <!-- /Product item -->
-                                                    </ul>
-                                                </div>
-                                                <div class="sc_section sc_section_block margin_top_tiny aligncenter">
-                                                    <div class="sc_section_inner">
-                                                        <div class="sc_section_content_wrap">
-                                                            <a href="shop-page.html"
-                                                                class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large sc_button_iconed none">View
-                                                                All Products</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+                            @include('frontend.commonComponants.pricingPlan')
                             <!-- /Equipment -->
                             <!-- From the Blog -->
                             <div class="hp_blog_section">
@@ -1455,8 +1185,7 @@
                                                                         </a>
                                                                     </div>
                                                                     <div class="post_content_overlay">
-                                                                        <div
-                                                                            class="post_content isotope_item_content">
+                                                                        <div class="post_content isotope_item_content">
                                                                             <div class="post_info">
                                                                                 <span
                                                                                     class="post_info_item post_info_posted">
@@ -1473,8 +1202,7 @@
                                                                                             class="post_counters_number">0</span>
                                                                                     </a>
                                                                                     <a class="post_counters_item post_counters_likes icon-heart-1"
-                                                                                        title="Like"
-                                                                                        href="#">
+                                                                                        title="Like" href="#">
                                                                                         <span
                                                                                             class="post_counters_number">1</span>
                                                                                     </a>
@@ -1618,62 +1346,8 @@
                                 </div>
                             </div>
                             <!-- /From the Blog -->
-                            <!-- Services-->
-                            <div class="content_wrap">
-                                <div class="sc_services_wrap">
-                                    <div
-                                        class="sc_services sc_services_style_services-1 sc_services_type_icons margin_top_medium margin_bottom_medium width_100_per">
-                                        <div class="sc_columns columns_wrap row">
-                                            <div class="col-lg-4 column_padding_bottom">
-                                                <div class="sc_services_item sc_services_item_1 odd first">
-                                                    <span class="sc_icon icon-mobile-1"></span>
-                                                    <div class="sc_services_item_content">
-                                                        <h4 class="sc_services_item_title">How to Call?</h4>
-                                                        <div class="sc_services_item_description">
-                                                            <p>1 800 215 16 35</p>
-                                                            <p> We'll Call You Back</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 column_padding_bottom">
-                                                <div class="sc_services_item sc_services_item_2 even">
-                                                    <span class="sc_icon icon-location-1"></span>
-                                                    <div class="sc_services_item_content">
-                                                        <h4 class="sc_services_item_title">Where We Are?</h4>
-                                                        <div class="sc_services_item_description">
-                                                            <p>2 Chemin de Bordeneuve,</p>
-                                                            <p> 31490 Brax, France</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 column_padding_bottom">
-                                                <div class="sc_services_item sc_services_item_3 odd">
-                                                    <span class="sc_icon icon-clock-1"></span>
-                                                    <div class="sc_services_item_content">
-                                                        <h4 class="sc_services_item_title">When We Work?</h4>
-                                                        <div class="sc_services_item_description">
-                                                            <p>8.00 am &#8211; 10.00 pm</p>
-                                                            <p> Monday &#8211; Sunday</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Services-->
-                            <!-- Google Map -->
-                            <div id="sc_googlemap_196270504" class="sc_googlemap width_100_per height_500"
-                                data-zoom="14" data-style="dark">
-                                <div id="sc_googlemap_196270504_1" class="sc_googlemap_marker" data-title=""
-                                    data-description="6486 Sycamore Lane Fort Lee"
-                                    data-address="6486 Sycamore Lane Fort Lee" data-latlng=""
-                                    data-point="{{ url('frontend/images/map-marker.png') }}"></div>
-                            </div>
-                            <!-- /Google Map -->
+                            @include('frontend.commonComponants.three_org_details')
+
                         </section>
                     </article>
                 </div>
@@ -1707,11 +1381,7 @@
                                                         href="{{ url('/') }}"><span
                                                             class="ms-1">Home</span></a>
                                             </li>
-                                            <li class="menu-item">
-                                                <span class="sc_list_icon icon-right-small"> <a
-                                                        href="{{ url('/donate') }}"><span
-                                                            class="ms-1">Donate</span></a>
-                                            </li>
+
                                             <li class="menu-item">
                                                 <span class="sc_list_icon icon-right-small"> <a
                                                         href="{{ url('/about') }}"><span
@@ -1723,17 +1393,22 @@
                                                             class="ms-1">Teams</span></a>
                                             </li>
                                             <!-- /Menu: Rent -->
+                                            <li class="menu-item">
+                                                <span class="sc_list_icon icon-right-small"> <a
+                                                        href="{{ url('/services') }}"><span
+                                                            class="ms-1">Services</span></a>
+                                            </li>
                                             <!-- Menu: Store -->
                                             <li class="menu-item">
                                                 <span class="sc_list_icon icon-right-small"> <a
-                                                        href="{{ url('/programs') }}"><span
+                                                        href="{{ url('/announcement') }}"><span
                                                             class="ms-1">Programs</span></a>
                                             </li>
                                             <!-- /Menu: Store -->
                                             <!-- Menu: News -->
                                             <li class="menu-item ">
                                                 <span class="sc_list_icon icon-right-small"> <a
-                                                        href="{{ url('/competition') }}"><span
+                                                        href="{{ url('/registration') }}"><span
                                                             class="ms-1">Competition</span></a>
 
                                             </li>
@@ -1761,16 +1436,18 @@
 
                                         <li class="d-flex">
                                             <i class="icon icon-location"></i>
-                                            <div>2 Chemin de Bordeneuve, 31490 Brax, France<br /></div>
+                                            <div>Olympic Bhawan, B-29, <br />Qutub Institutional Area, <br />New Delhi
+                                                110016, INDIA.
+                                            </div>
                                         </li>
-                                        <li class="d-flex">
+                                        {{-- <li class="d-flex">
 
                                             <i class="icon icon-mobile"></i>
                                             <div>1 800 215 16 35</div>
-                                        </li>
+                                        </li> --}}
                                         <li class="d-flex">
                                             <i class="icon icon-pencil"></i>
-                                            <div>info@skisnowboardindia.com</div>
+                                            <div>skiandsnowboardindia@outlook.com</div>
                                         </li>
 
                                     </ul>
@@ -1830,7 +1507,7 @@
                                     </p>
                                 </div>
                             </div>
-                         
+
                         </div>
 
 
@@ -1844,7 +1521,7 @@
     </div>
     <!-- /Body wrap -->
 
-    <a href="#" class="scroll_to_top icon-up-small" title="Scroll to top"></a>
+    @include('frontend.commonComponants.enquiryBtn')
 
     <script type="text/javascript" src="{{ url('frontend/js/jquery/jquery.js') }}"></script>
 
@@ -1890,10 +1567,11 @@
     <script type="text/javascript" src="{{ url('frontend/js/vendor/isotope/dist/isotope.pkgd.min.js') }}"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAA8O_i6YWSOXQn1vd9SSiIriIqewvBFWk">
     </script>
-    <script type="text/javascript" src="{{ url('frontend/js/core.googlemap.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="{{ url('frontend/js/collapse.js') }}"></script>
 </body>
 
 </html>
