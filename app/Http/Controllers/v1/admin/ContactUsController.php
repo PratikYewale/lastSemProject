@@ -40,7 +40,7 @@ class ContactUsController extends Controller
         $destinationPath = "$directoryPath/$newFileName";
         $file->move($directoryPath, $newFileName);
 
-        return "/$fileName/" . $newFileName;
+        return "/uploads/$fileName/" . $newFileName;
     }
 
     public function getAllContactUs(Request $request)

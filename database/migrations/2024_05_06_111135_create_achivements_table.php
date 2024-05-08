@@ -13,13 +13,13 @@ class CreateAchivementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('achivements', function (Blueprint $table) {
+        Schema::create('achievements', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('atheletes_id')->unsigned()->nullable();
-            $table->foreign('atheletes_id')->references('id')->on('atheletes');
-            $table->string('name');
-            $table->string('year');
-            $table->string('result');
+            $table->bigInteger('athlete_id')->unsigned()->nullable();
+            $table->foreign('athlete_id')->references('id')->on('athletes');
+            $table->string('name')->nullable();
+            $table->string('year')->nullable();
+            $table->string('result')->nullable();
             $table->timestamps();
         });
     }

@@ -140,6 +140,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
         // Member
         Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+        Route::get('getAllAthletes', [AdminMemberController::class, 'getAllAthletes']);
         Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
 
         //ContactUs
@@ -187,6 +188,11 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::post('addMember', [MemberController::class, 'addMember']);
     Route::post('loginMember', [MemberController::class, 'loginMember']);
 
+    // Athlete
+    Route::post('addAthlete', [MemberController::class, 'addAthlete']);
+    Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
+    Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
+    
     // Auth
     Route::post('forgetPasswordMember', [MemberAuthController::class, 'forgetPasswordMember']);
     Route::post('checkOtpAndVerify', [MemberAuthController::class, 'checkOtpAndVerify']);

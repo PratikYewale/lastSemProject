@@ -35,7 +35,7 @@ class AdminAuthController extends Controller
         }
         $destinationPath = "$directoryPath/$newFileName";
         $file->move($directoryPath, $newFileName);
-        return "/$fileName/" . $newFileName;
+        return "/uploads/$fileName/" . $newFileName;
     }
     public function adminRegister(Request $request): JsonResponse
     {

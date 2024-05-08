@@ -14,7 +14,7 @@ class AddColumnToContactUsTable extends Migration
     public function up()
     {
         Schema::table('contact_us', function (Blueprint $table) {
-            $table->string('created_by');
+            $table->string('created_by')->nullable();
         });
     }
 

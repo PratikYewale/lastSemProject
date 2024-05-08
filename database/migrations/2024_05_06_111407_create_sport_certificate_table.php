@@ -13,11 +13,11 @@ class CreateSportCertificateTable extends Migration
      */
     public function up()
     {
-        Schema::create('sport_certificate', function (Blueprint $table) {
+        Schema::create('sport_certificates', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('atheletes_id')->unsigned()->nullable();
-            $table->foreign('atheletes_id')->references('id')->on('atheletes');
-            $table->string('certificate');
+            $table->bigInteger('athlete_id')->unsigned()->nullable();
+            $table->foreign('athlete_id')->references('id')->on('athletes');
+            $table->string('certificate')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateSportCertificateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sport_certificate');
+        Schema::dropIfExists('sport_certificates');
     }
 }
