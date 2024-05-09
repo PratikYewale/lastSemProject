@@ -191,6 +191,9 @@ class NewsController extends Controller
             if ($request->filled('short_title')) {
                 $updateNews->short_title = $request->short_title;
             }
+            if ($request->filled('short_title')) {
+                $updateNews->short_title = $request->short_title;
+            }
             $updateNews->save();
             $updateNews->newsAnnouncementImages()->delete();
             if ($request->hasFile('images')) {
