@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToNewsTable extends Migration
+class Add2ColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnToNewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->text('short_title');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('last_name')->after('first_name')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddColumnToNewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

@@ -62,5 +62,8 @@
             © 2024 SKI AND SNOWBOARD INDIA / All Rights Reserved
         </div>
     </div>
+    <div class="footer">
+        <p>This email was generated automatically. Please do not reply.</p>
+    </div>
 </body>
 </html>

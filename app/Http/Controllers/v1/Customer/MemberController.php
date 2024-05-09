@@ -11,6 +11,7 @@ use App\Models\Athlete;
 use App\Models\Member;
 use App\Models\Membership;
 use App\Models\MembershipHistory;
+use Illuminate\Support\Facades\Mail;
 use App\Models\SportCertificate;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -114,7 +115,7 @@ class MemberController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'last_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
                 'password' => 'required|confirmed|string',
@@ -141,36 +142,34 @@ class MemberController extends Controller
                 $user->role = "athlete";
                 $user->password = Hash::make($request->password);
                 $user->save();
+                $user->gender = $request->gender;
+                $user->date_of_birth = $request->date_of_birth;
+                $user->city = $request->city;
+                $user->address = $request->address;
+                $user->state = $request->state;
+                $user->country = $request->country;
+                $user->postal_code = $request->postal_code;
+                $user->aadhar_number = $request->aadhar_number;
+                $user->passport_number = $request->passport_number;
+                if ($request->hasFile('profile_picture')) {
+                    $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
+                }
+                if ($request->hasFile('recommendation')) {
+                    $user->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
+                }
+                if ($request->hasFile('aadhar_card')) {
+                    $user->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+                }
+                if ($request->hasFile('passport')) {
+                    $user->passport = $this->saveFile($request->file('passport'), 'Passport');
+                }
             }
-            $newAthlete = new Athlete();
-            $newAthlete->user_id = $user->id;
-            $newAthlete->gender = $request->gender;
-            $newAthlete->date_of_birth = $request->date_of_birth;
-            $newAthlete->city = $request->city;
-            $newAthlete->address = $request->address;
-            $newAthlete->state = $request->state;
-            $newAthlete->country = $request->country;
-            $newAthlete->postal_code = $request->postal_code;
-            $newAthlete->aadhar_number = $request->aadhar_number;
-            $newAthlete->passport_number = $request->passport_number;
-            if ($request->hasFile('profile_picture')) {
-                $newAthlete->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
-            }
-            if ($request->hasFile('recommendation')) {
-                $newAthlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
-            }
-            if ($request->hasFile('aadhar_card')) {
-                $newAthlete->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
-            }
-            if ($request->hasFile('passport')) {
-                $newAthlete->passport = $this->saveFile($request->file('passport'), 'Passport');
-            }
-            $newAthlete->save();
+
 
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achievement();
-                    $newAchievment->athlete_id = $newAthlete->id;
+                    $newAchievment->user_id = $user->id;
                     $newAchievment->name = $achievement['name'];
                     $newAchievment->year = $achievement['year'];
                     $newAchievment->result = $achievement['result'];
@@ -181,27 +180,49 @@ class MemberController extends Controller
                 foreach ($request->file('sport_certificates') as $sport_certificate) {
                     $newCertificate = new SportCertificate();
                     $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
-                    $newCertificate->athlete_id = $newAthlete->id;
+                    $newCertificate->user_id = $user->id;
                     $newCertificate->save();
                 }
             }
-            $newAthlete->currency=$request->currency;
-            $newAthlete->amount=$request->amount;
-            if ($newAthlete->save()) {
+            $user->currency = $request->currency;
+            $user->amount = $request->amount;
+            if ($user->save()) {
                 $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
                 $orderDetails = $api->order->create([
-                    'receipt' => 'Inv-' . $newAthlete->id,
+                    'receipt' => 'Inv-' . $user->id,
                     'amount' => intval($request->amount * 100),
                     'currency' => $request->currency,
                     'notes' => [],
                 ]);
-                $newAthlete->payment_gateway = "razor-pay";
-                $newAthlete->payment_gateway_id = $orderDetails->id;
-                $newAthlete->save();
+                $user->payment_gateway = "razor-pay";
+                $user->payment_gateway_id = $orderDetails->id;
+                $user->save();
             }
-            $newAthlete->save();
+            $user->save();
+            $data = [
+                'to_name' => $request->name,
+                'email' => $request->email,
+                'message' => $request->message,
+            ];
+
+            Mail::send('emails.athleteRegister', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['to_name'])
+                    ->subject('Confirmation email');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+            $adminData = [
+                'to_name' => 'Admin',
+                'email' => 'achalbhujbal2003@gmail.com', 
+                'message' => 'A new athlete have registered.',
+                'query' => $user,
+            ];
+            Mail::send('emails.adminAthleteRegister', $adminData, function ($message) use ($adminData) {
+                $message->to($adminData['email'], $adminData['to_name'])
+                    ->subject('New Athlete Registration');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
             DB::commit();
-            return $this->sendResponse($newAthlete->id, 'Athlete added successfully.', true);
+            return $this->sendResponse($user->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -212,13 +233,13 @@ class MemberController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'athlete_id'=>'required|numeric',
+                'user_id' => 'required|numeric',
                 'payment_gateway_id' => 'required|string',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $payment = Association::where('payment_gateway_id', $request->payment_gateway_id)->find($request->athlete_id);
+            $payment = User::where('payment_gateway_id', $request->payment_gateway_id)->find($request->user_id);
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -231,7 +252,7 @@ class MemberController extends Controller
                 $payment->status = "paid";
                 $payment->save();
             } else {
-                $payment -> status = "pending";
+                $payment->status = "pending";
                 $payment->save();
                 return $this->sendError('Payment pending.');
             }
@@ -276,55 +297,87 @@ class MemberController extends Controller
             if ($request->has('mobile_no')) {
                 $user->mobile_no = $request->mobile_no;
             }
-            $user->save();
+           
 
             if ($request->has('gender')) {
-                $athlete->gender = $request->gender;
+                $user->gender = $request->gender;
             }
             if ($request->has('date_of_birth')) {
-                $athlete->date_of_birth = $request->date_of_birth;
+                $user->date_of_birth = $request->date_of_birth;
             }
             if ($request->has('city')) {
-                $athlete->city = $request->city;
+                $user->city = $request->city;
             }
             if ($request->has('address')) {
-                $athlete->address = $request->address;
+                $user->address = $request->address;
             }
             if ($request->has('state')) {
-                $athlete->state = $request->state;
+                $user->state = $request->state;
             }
             if ($request->has('country')) {
-                $athlete->country = $request->country;
+                $user->country = $request->country;
             }
             if ($request->has('postal_code')) {
-                $athlete->postal_code = $request->postal_code;
+                $user->postal_code = $request->postal_code;
             }
             if ($request->has('aadhar_number')) {
-                $athlete->aadhar_number = $request->aadhar_number;
+                $user->aadhar_number = $request->aadhar_number;
             }
             if ($request->has('passport_number')) {
-                $athlete->passport_number = $request->passport_number;
+                $user->passport_number = $request->passport_number;
             }
             if ($request->hasFile('profile_picture')) {
-                $athlete->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
+                $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
             }
             if ($request->hasFile('recommendation')) {
-                $athlete->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
+                $user->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
             }
             if ($request->hasFile('aadhar_card')) {
-                $athlete->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
+                $user->aadhar_card = $this->saveFile($request->file('aadhar_card'), 'AadharCard');
             }
             if ($request->hasFile('passport')) {
-                $athlete->passport = $this->saveFile($request->file('passport'), 'Passport');
+                $user->passport = $this->saveFile($request->file('passport'), 'Passport');
             }
-            $athlete->save();
+            $user->save();
             DB::commit();
-            return $this->sendResponse($athlete->id, 'Athlete updated successfully.');
+            return $this->sendResponse($user->id, 'Athlete updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+    public function getAllAthletes(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'pageNo' => 'numeric',
+                'limit' => 'numeric',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+            $query = User::query()->with(['achievements','sport_certificates'])->where('role', 'athlete');
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query = $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            if (count($data) > 0) {
+                $response['Athlete'] = $data;
+                $response['count'] = $count;
+                return $this->sendResponse($response, 'Athlete fetched successfully.', true);
+            } else {
+                return $this->sendError("No data found.");
+            }
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    
+
     public function updateAchievement(Request $request): JsonResponse
     {
         try {
@@ -384,7 +437,7 @@ class MemberController extends Controller
             }
         } catch (\Exception $e) {
             return redirect()->route('login')
-            ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
+                ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
         }
     }
 
@@ -498,7 +551,6 @@ class MemberController extends Controller
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
                 'middle_name' => 'nullable|string|max:255',
-                'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
                 'password' => 'nullable|string',
@@ -535,61 +587,79 @@ class MemberController extends Controller
             if (!$user) {
                 $user = new User();
                 $user->email = $request->email;
-                $user->first_name = $request->name_of_state_unit;
+                $user->first_name = $request->first_name;
                 $user->middle_name = $request->middle_name;
-                $user->last_name = $request->last_name;
                 $user->mobile_no = $request->mobile_no;
                 $user->password = Hash::make($request->password);
+                if ($request->hasFile('logo')) {
+                    $user->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
+                }
+                $user->date_of_establishment = $request->date_of_establishment;
+                $user->incorporation_certificate_number = $request->incorporation_certificate_number;
+                $user->recognition_by_state_government = $request->recognition_by_state_government;
+                $user->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
+                $user->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
+                $user->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+                $user->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
+                $user->registered_address = $request->registered_address;
+                $user->city = $request->city;
+                $user->state = $request->state;
+                $user->postal_code = $request->postal_code;
+                $user->website = $request->website;
+                $user->president_name = $request->president_name;
+                $user->president_email = $request->president_email;
+                $user->president_phone_number = $request->president_phone_number;
+                if ($request->hasFile('president_signature')) {
+                    $user->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
+                }
+                if ($request->hasFile('signature_of_bearer_1')) {
+                    $user->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
+                }
+                if ($request->hasFile('signature_of_bearer_2')) {
+                    $user->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
+                }
+                $user->acknowledgement = $request->acknowledgement;
+                $user->currency = $request->currency;
+                $user->amount = $request->amount;
+                if ($user->save()) {
+                    $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+                    $orderDetails = $api->order->create([
+                        'receipt' => 'Inv-' . $user->id,
+                        'amount' => intval($request->amount * 100),
+                        'currency' => $request->currency,
+                        'notes' => [],
+                    ]);
+                    $user->payment_gateway = "razor-pay";
+                    $user->payment_gateway_id = $orderDetails->id;
+                    $user->save();
+                }
                 $user->save();
             }
-            $newMember = new Association();
-            $newMember->user_id = $user->id;
-            if ($request->hasFile('logo')) {
-                $newMember->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
-            }
-            $newMember->name_of_state_unit = $request->name_of_state_unit;
-            $newMember->date_of_establishment = $request->date_of_establishment;
-            $newMember->incorporation_certificate_number = $request->incorporation_certificate_number;
-            $newMember->recognition_by_state_government = $request->recognition_by_state_government;
-            $newMember->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
-            $newMember->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
-            $newMember->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
-            $newMember->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
-            $newMember->registered_address = $request->registered_address;
-            $newMember->city = $request->city;
-            $newMember->state = $request->state;
-            $newMember->postal_code = $request->postal_code;
-            $newMember->website = $request->website;
-            $newMember->president_name = $request->president_name;
-            $newMember->president_email = $request->president_email;
-            $newMember->president_phone_number = $request->president_phone_number;
-            if ($request->hasFile('president_signature')) {
-                $newMember->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
-            }
-            if ($request->hasFile('signature_of_bearer_1')) {
-                $newMember->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
-            }
-            if ($request->hasFile('signature_of_bearer_2')) {
-                $newMember->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
-            }
-            $newMember->acknowledgement = $request->acknowledgement;
-            $newMember->currency=$request->currency;
-            $newMember->amount=$request->amount;
-            if ($newMember->save()) {
-                $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
-                $orderDetails = $api->order->create([
-                    'receipt' => 'Inv-' . $newMember->id,
-                    'amount' => intval($request->amount * 100),
-                    'currency' => $request->currency,
-                    'notes' => [],
-                ]);
-                $newMember->payment_gateway = "razor-pay";
-                $newMember->payment_gateway_id = $orderDetails->id;
-                $newMember->save();
-            }
-            $newMember->save();
+            $data = [
+                'to_name' => $request->name,
+                'email' => $request->email,
+                'message' => $request->message,
+            ];
+
+            Mail::send('emails.memberRegister', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['to_name'])
+                    ->subject('New Athelete Registartion');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+            $adminData = [
+                'to_name' => 'Admin',
+                'email' => 'achalbhujbal2003@gmail.com', 
+                'message' => 'A new association have registered.',
+                
+            ];
+            Mail::send('emails.adminAssociationRegister', $adminData, function ($message) use ($adminData) {
+                $message->to($adminData['email'], $adminData['to_name'])
+                    ->subject('New association have registered');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+
             DB::commit();
-            $data = Member::query()->where('id', $newMember->id)->with('user')->get();
+            $data = Member::query()->where('id', $user->id)->with('user')->get();
             return $this->sendResponse($data, 'Association Member added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
@@ -601,13 +671,13 @@ class MemberController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'association_id'=>'required|numeric',
+                'user_id' => 'required|numeric',
                 'payment_gateway_id' => 'required|string',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $payment = Association::where('payment_gateway_id', $request->payment_gateway_id)->find($request->association_id);
+            $payment = User::where('payment_gateway_id', $request->payment_gateway_id)->find($request->user_id);
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -620,7 +690,7 @@ class MemberController extends Controller
                 $payment->status = "paid";
                 $payment->save();
             } else {
-                $payment -> status = "pending";
+                $payment->status = "pending";
                 $payment->save();
                 return $this->sendError('Payment pending.');
             }
@@ -633,7 +703,7 @@ class MemberController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:association,id',
+                'id' => 'required|integer|exists:users,id',
                 'name_of_state_unit' => 'nullable|string',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'date_of_establishment' => 'nullable|date',
@@ -682,76 +752,73 @@ class MemberController extends Controller
             if ($request->has('mobile_no')) {
                 $user->mobile_no = $request->mobile_no;
             }
-            $user->save();
 
-            if ($request->has('name_of_state_unit')) {
-                $Association->name_of_state_unit = $request->name_of_state_unit;
-            }
             if ($request->has('date_of_establishment')) {
-                $Association->date_of_establishment = $request->date_of_establishment;
+                $user->date_of_establishment = $request->date_of_establishment;
             }
             if ($request->has('incorporation_certificate_number')) {
-                $Association->incorporation_certificate_number = $request->incorporation_certificate_number;
+                $user->incorporation_certificate_number = $request->incorporation_certificate_number;
             }
             if ($request->has('recognition_by_state_government')) {
-                $Association->recognition_by_state_government = $request->recognition_by_state_government;
+                $user->recognition_by_state_government = $request->recognition_by_state_government;
             }
             if ($request->has('recognition_by_state_olympic_association')) {
-                $Association->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
+                $user->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
             }
             if ($request->has('hosted_national_event_in_past_3_yrs')) {
-                $Association->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
+                $user->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
             }
             if ($request->has('postal_code')) {
-                $Association->postal_code = $request->postal_code;
+                $user->postal_code = $request->postal_code;
             }
             if ($request->has('hosted_international_event_in_past_4_yrs')) {
-                $Association->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+                $user->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
             }
             if ($request->has('active_athletes_competed_in_past_2_yrs')) {
-                $Association->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
+                $user->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
             }
             if ($request->has('registered_address')) {
-                $Association->registered_address = $request->registered_address;
+                $user->registered_address = $request->registered_address;
             }
             if ($request->has('hosted_international_event_in_past_4_yrs')) {
-                $Association->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+                $user->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
             }
             if ($request->has('city')) {
-                $Association->city = $request->city;
+                $user->city = $request->city;
             }
             if ($request->has('state')) {
-                $Association->state = $request->state;
+                $user->state = $request->state;
             }
             if ($request->has('postal_code')) {
-                $Association->postal_code = $request->postal_code;
+                $user->postal_code = $request->postal_code;
             }
             if ($request->has('website')) {
-                $Association->website = $request->website;
+                $user->website = $request->website;
             }
             if ($request->has('president_name')) {
-                $Association->president_name = $request->president_name;
+                $user->president_name = $request->president_name;
             }
             if ($request->has('president_email')) {
-                $Association->president_email = $request->president_email;
+                $user->president_email = $request->president_email;
             }
             if ($request->has('president_phone_number')) {
-                $Association->president_phone_number = $request->president_phone_number;
+                $user->president_phone_number = $request->president_phone_number;
             }
 
             if ($request->hasFile('logo')) {
-                $Association->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
+                $user->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
             }
             if ($request->hasFile('president_signature')) {
-                $Association->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
+                $user->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
             }
             if ($request->hasFile('signature_of_bearer_1')) {
-                $Association->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
+                $user->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
             }
             if ($request->hasFile('signature_of_bearer_2')) {
-                $Association->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
+                $user->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
             }
-            $Association->save();
+
+            $user->save();
             DB::commit();
             return $this->sendResponse($Association->id, 'Association updated successfully.');
         } catch (Exception $e) {
@@ -759,5 +826,23 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+    public function getAssociationById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id'
+            ]);
 
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $association = User::query()->where('id', $request->id)->first();
+            if (!$association) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($association, "Association fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
 }
