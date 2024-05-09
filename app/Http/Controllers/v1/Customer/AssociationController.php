@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Association;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
@@ -22,7 +23,7 @@ class AssociationController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Association::query()->with('user');
+            $query = User::query()->where('role', 'member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;

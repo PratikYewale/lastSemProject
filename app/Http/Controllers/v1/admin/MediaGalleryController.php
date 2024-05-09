@@ -80,53 +80,107 @@ class MediaGalleryController extends Controller
 
         return '/Image/' . $fileName;
     }
-    public function addMediaGallery(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'media_type.*' => [Rule::in(['photo', 'video'])],
-                'media.*' => [
-                    'required',
-                    function ($attribute, $value, $fail) use ($request) {
-                        $index = str_replace('media.', '', $attribute);
-                        if (isset ($request->media_type[$index])) {
-                            $mediaType = $request->media_type[$index];
+    // public function addMediaGallery(Request $request): JsonResponse
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'media_type' => [Rule::in(['photo', 'video'])],
+    //             'media.*' => [
+    //                 'required',
+    //                 function ($attribute, $value, $fail) use ($request) {
+    //                     $index = str_replace('media.', '', $attribute);
+    //                     if (isset ($request->media_type[$index])) {
+    //                         $mediaType = $request->media_type[$index];
 
-                            if ($mediaType === 'photo') {
-                                if (!$value->isValid() || !in_array($value->getClientOriginalExtension(), ['jpeg', 'png', 'jpg'])) {
-                                    $fail('The ' . $attribute . ' must be a valid image file (jpeg, png, jpg).');
-                                }
-                            } elseif ($mediaType === 'video') {
-                                if (!$value->isValid() || !in_array($value->getClientOriginalExtension(), ['mp4', 'avi', 'mov'])) {
-                                    $fail('The ' . $attribute . ' must be a valid video file (mp4, avi, mov).');
-                                }
-                            }
-                        }
-                    },
-                ],
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-            DB::beginTransaction();
-            $media = $request->file('media');
-            if (!is_array($media)) {
-                return $this->sendError('Media cannot be null.');
-            }
-            foreach ($media as $key => $file) {
-                $MediaGallery = new MediaGallery();
-                $MediaGallery->user_id = Auth::user()->id;
-                $MediaGallery->media_type = $request->media_type[$key];
-                $MediaGallery->media = $this->saveFile($file, 'Media');
-                $MediaGallery->save();
-            }
-            DB::commit();
-            return $this->sendResponse([$MediaGallery], 'Media gallery added successfully.');
-        } catch (Exception $e) {
-            DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+    //                         if ($mediaType === 'photo') {
+    //                             if (!$value->isValid() || !in_array($value->getClientOriginalExtension(), ['jpeg', 'png', 'jpg'])) {
+    //                                 $fail('The ' . $attribute . ' must be a valid image file (jpeg, png, jpg).');
+    //                             }
+    //                         } elseif ($mediaType === 'video') {
+    //                             if (!$value->isValid() || !in_array($value->getClientOriginalExtension(), ['mp4', 'avi', 'mov'])) {
+    //                                 $fail('The ' . $attribute . ' must be a valid video file (mp4, avi, mov).');
+    //                             }
+    //                         }
+    //                     }
+    //                 },
+    //             ],
+    //         ]);
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         DB::beginTransaction();
+    //         $media = $request->file('media');
+    //         if (!is_array($media)) {
+    //             return $this->sendError('Media cannot be null.');
+    //         }
+    //         foreach ($media as $key => $file) {
+    //             $MediaGallery = new MediaGallery();
+    //             $MediaGallery->user_id = Auth::user()->id;
+    //             $MediaGallery->media_type = $request->media_type[$key];
+    //             $MediaGallery->media = $this->saveFile($file, 'Media');
+    //             $MediaGallery->save();
+    //         }
+    //         DB::commit();
+    //         return $this->sendResponse([$MediaGallery], 'Media gallery added successfully.');
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+    //     }
+    // }
+
+    public function addMediaGallery(Request $request): JsonResponse
+{
+    try {
+        $validator = Validator::make($request->all(), [
+            'media_type' => 'required|array',
+            'media_type.*' => ['required', Rule::in(['photo', 'video'])],
+            'media' => 'required|array',
+            'media.*' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Get the index of the current media file
+                    $index = str_replace('media.', '', $attribute);
+                    
+                    // Get the media type for the current index
+                    $mediaType = $request->media_type[$index];
+        
+                    // Determine valid extensions based on media type
+                    $validExtensions = ($mediaType === 'photo') ? ['jpeg', 'png', 'jpg'] : ['mp4', 'avi', 'mov'];
+        
+                    // Check if the file extension is valid
+                    if (!in_array(strtolower(pathinfo($value, PATHINFO_EXTENSION)), $validExtensions)) {
+                        $fail('The ' . $attribute . ' must be a valid ' . $mediaType . ' file (' . implode(', ', $validExtensions) . ').');
+                    }
+                },
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
+
+        DB::beginTransaction();
+
+        $uploadedMedia = [];
+        foreach ($request->media as $index => $base64Media) {
+            $media = new MediaGallery();
+            $media->media_type = $request->media_type[$index];
+            $media->media = $this->storeBase64Image($base64Media, $media->media_type); 
+            $media->save();
+            $uploadedMedia[] = $media;
+        }
+
+        DB::commit();
+
+        return $this->sendResponse($uploadedMedia, 'Media gallery added successfully.');
+    } catch (Exception $e) {
+        DB::rollBack();
+        return $this->sendError($e->getMessage(), $e->getTrace(), 413);
     }
+}
+
+
     public function deleteMediaGallery(Request $request): JsonResponse
     {
         try {

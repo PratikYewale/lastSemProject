@@ -43,7 +43,18 @@ class ContactUsController extends Controller
                     ->subject('Confirmation email');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
-            return redirect();
+            $adminData = [
+                'to_name' => 'Admin',
+                'email' => 'achalbhujbal2003@gmail.com', 
+                'message' => 'A new contact query has been received.',
+                'query' => $ContactUs,
+            ];
+            Mail::send('emails.contactQuery', $adminData, function ($message) use ($adminData) {
+                $message->to($adminData['email'], $adminData['to_name'])
+                    ->subject('New Contact Query');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+            return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {
             dd($e);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);

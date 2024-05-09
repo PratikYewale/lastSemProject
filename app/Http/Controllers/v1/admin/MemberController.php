@@ -99,7 +99,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Athlete::query()->with(['achievements','sport_certificates']);
+            $query = Athlete::query()->with(['achievements','sport_certificates'])->with('role','athlete');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;

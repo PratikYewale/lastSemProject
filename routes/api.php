@@ -196,6 +196,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
     Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
     Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
+    Route::get('getAllAthletes',[MemberController::class,'getAllAthletes']);
+    Route::get('getAssociationById',[MemberController::class,'getAssociationById']);
+
     
     // Auth
     Route::post('forgetPasswordMember', [MemberAuthController::class, 'forgetPasswordMember']);
@@ -228,7 +231,7 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::post('sponsorshipPaymentVerification', [CustomerSponsorshipController::class, 'sponsorshipPaymentVerification']);
     //Association
     Route::get('getAllAssociation', [CustomerAssociationController::class, 'getAllAssociation']);
-    Route::get('getAssociationById',[CustomerAssociationController::class,'getAssociationById']);
+    // Route::get('getAssociationById',[CustomerAssociationController::class,'getAssociationById']);
 
     //Media Gallery
     Route::get('getMediaGalleryById',[CustomerMediaGalleryController::class,'getMediaGalleryById']);

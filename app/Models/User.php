@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -57,6 +58,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Member::class);
     }
 
-   
+    public function achievements()
+    {
+        return $this->hasMany(Achievement::class,'id');
+    }
+    public function sport_certificates()
+    {
+        return $this->hasMany(SportCertificate::class,'id');
+    }
+    
     
 }
