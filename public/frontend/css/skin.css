@@ -523,7 +523,7 @@ figure figcaption,
 .scheme_original input[type="date"],
 .scheme_original select,
 .scheme_original textarea {
-    color: #ffffff;
+    color: #000;
     border: 1px solid ;
     border-color: #2b2b2b;
     background-color: #fff

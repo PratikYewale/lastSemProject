@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Frontend\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\v1\Customer\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,9 @@ Route::get('/contact', [HomeController::class, 'contact']);
 // News
 Route::get('/news', [NewsController::class, 'news']);
 Route::get('/news/{id}', [NewsController::class, 'newsDetails'])->name('newsDetails');
+
+
+// Login
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [MemberController::class, 'loginMember'])->name('loginMember');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
