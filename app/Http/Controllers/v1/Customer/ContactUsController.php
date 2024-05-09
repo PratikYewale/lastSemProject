@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
-    public function addContactUs(Request $request)
+    public function addContactUs(Request $request):JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'nullable',
+                'name' => 'required',
                 'email' => 'required|email',
                 'mobile_no' => 'required|nullable',
                 'message' => 'nullable',

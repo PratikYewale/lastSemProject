@@ -22,7 +22,7 @@ class AssociationController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Association::query();
+            $query = Association::query()->with('user');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;

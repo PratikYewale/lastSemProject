@@ -4,7 +4,9 @@ use App\Http\Controllers\Frontend\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\v1\Customer\ContactUsController;
 use App\Http\Controllers\v1\Customer\MemberController;
+use App\Http\Controllers\v1\Customer\SponsorshipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,7 @@ Route::get('/announcement', [HomeController::class, 'announcement']);
 Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
+Route::post('/addContactUs', [ContactUsController::class, 'addContactUs'])->name('addContactUs');
 
 // News
 Route::get('/news', [NewsController::class, 'news']);
@@ -47,3 +50,4 @@ Route::get('/news/{id}', [NewsController::class, 'newsDetails'])->name('newsDeta
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [MemberController::class, 'loginMember'])->name('loginMember');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/createSponsorship', [SponsorshipController::class, 'createSponsorship'])->name('createSponsorship');
