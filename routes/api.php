@@ -142,6 +142,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
         Route::get('getAllAthletes', [AdminMemberController::class, 'getAllAthletes']);
         Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
+        Route::get('getAllAssociation',[AdminMemberController::class,'getAllAssociation']);
 
         //ContactUs
         Route::get('getAllContactUs', [AdminContactUsController::class, 'getAllContactUs']);
@@ -187,9 +188,12 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     // Member
     Route::post('addMember', [MemberController::class, 'addMember']);
     Route::post('loginMember', [MemberController::class, 'loginMember']);
-
+    Route::post('addAssociationMember',[MemberController::class,'addAssociationMember']);
+    Route::post('associationMemberPaymentVerification',[MemberController::class,'associationMemberPaymentVerification']);
+    Route::post('updateAssociationMember',[MemberController::class,'updateAssociationMember']);
     // Athlete
     Route::post('addAthlete', [MemberController::class, 'addAthlete']);
+    Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
     Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
     Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
     

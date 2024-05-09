@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
+use Illuminate\Support\Facades\DB;
 use App\Models\JobApplicationDocuments;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;

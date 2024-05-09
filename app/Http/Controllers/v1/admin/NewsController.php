@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsAnnouncementImages;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -38,14 +41,96 @@ class NewsController extends Controller
 
         return '/Image/' . $fileName;
     }
+    public function storeBase64Image($base64String, $uploadDir)
+    {
+        $UPLOADS_PATH = public_path('uploads/' . $uploadDir);
+        $UPLOADS_FOLDER = public_path('uploads/' . $uploadDir);
+    
+        if (!file_exists($UPLOADS_FOLDER)) {
+            mkdir($UPLOADS_FOLDER, 0777, true);
+        }
+    
+        $matches = [];
+        preg_match('/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/', $base64String, $matches);
+    
+        if (empty($matches)) {
+            throw new \Exception("Invalid base64 string format");
+        }
+    
+        $extension = $matches[1];
+        if (!in_array($extension, ['jpeg', 'png', 'webp', 'jpg'])) {
+            throw new \Exception("Invalid image file type");
+        }
+    
+        // Decode the base64 string and save the image
+        $image = base64_decode($matches[2]);
+    
+        // Resize the image
+        $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+    
+        // Generate a unique filename
+        $filename = Str::uuid() . '.' . $extension;
+    
+        // Save the resized image to the uploads folder
+        $resizedImage->save($UPLOADS_FOLDER . '/' . $filename);
+    
+        // Return the URL path of the saved image
+        $imagePath = '/'.'uploads/' . $uploadDir . '/' . $filename;
+        return $imagePath;
+    }
+
+    // public function createNews(Request $request)
+    // {
+
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'images' => 'nullable',
+    //             'images.*' => 'image|mimes:jpg,png,jpeg|max:2048',
+    //             'title' => 'nullable',
+    //             'user_id' => 'nullable',
+    //             'img_description' => 'nullable',
+    //             'intro_para' => 'nullable',
+    //             'conclusion' => 'nullable',
+    //             'body_para' => 'nullable',
+    //             'short_title' => 'nullable'
+    //         ]);
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         DB::beginTransaction();
+    //         $uploadNews = new News();
+    //         $uploadNews->user_id = Auth::user()->id;
+    //         $uploadNews->title = $request->title;
+    //         $uploadNews->intro_para = $request->intro_para;
+    //         $uploadNews->body_para = $request->body_para;
+    //         $uploadNews->conclusion = $request->conclusion;
+    //         $uploadNews->short_title = $request->short_title;
+    //         $uploadNews->save();
+            
+    //         $images = $request->file('images');
+    //         foreach ($images as $newsimage) {
+    //             $uploadNewsImage = new NewsAnnouncementImages();
+    //             $uploadNewsImage->news_id = $uploadNews->id;
+    //             $uploadNewsImage->images = $this->saveFile($newsimage, 'NewsImage'); 
+    //             $uploadNewsImage->save();
+    //         }
+    //         DB::commit();
+    //         return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+    //     }
+    // }
 
     public function createNews(Request $request)
     {
 
         try {
             $validator = Validator::make($request->all(), [
-                'images' => 'nullable',
-                'images.*' => 'image|mimes:jpg,png,jpeg|max:2048',
+                
+                'images.*' => 'required|string', 
                 'title' => 'nullable',
                 'user_id' => 'nullable',
                 'img_description' => 'nullable',
@@ -67,11 +152,10 @@ class NewsController extends Controller
             $uploadNews->short_title = $request->short_title;
             $uploadNews->save();
             
-            $images = $request->file('images');
-            foreach ($images as $newsimage) {
+            foreach ($request->images as $base64Image) {
                 $uploadNewsImage = new NewsAnnouncementImages();
                 $uploadNewsImage->news_id = $uploadNews->id;
-                $uploadNewsImage->images = $this->saveFile($newsimage, 'NewsImage'); 
+                $uploadNewsImage->images = $this->storeBase64Image($base64Image, 'NewsImage');
                 $uploadNewsImage->save();
             }
             DB::commit();

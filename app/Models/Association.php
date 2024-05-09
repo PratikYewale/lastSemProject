@@ -9,4 +9,8 @@ class Association extends Model
 {
     use HasFactory;
     protected $table='association';
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

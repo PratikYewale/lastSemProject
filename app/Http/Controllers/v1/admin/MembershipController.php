@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Membership;
+use Illuminate\Support\Facades\DB;
 use App\Models\MembershipHistory;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Customer;
 use App\Http\Controllers\Controller;
 use App\Models\Achievement;
 use App\Models\Achivement;
+use App\Models\Association;
 use App\Models\Athelete;
 use App\Models\Athlete;
 use App\Models\Member;
@@ -27,33 +28,39 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MemberController extends Controller
 {
-    public function saveFile($file, $fileName)
+    public function saveFile($file, $process)
     {
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
-        $uploadsPath = public_path('uploads');
-        $directoryPath = "$uploadsPath/$fileName";
-        if (!File::exists($uploadsPath)) {
-            File::makeDirectory($uploadsPath, 0755, true);
+        $extension = $file->getClientOriginalExtension();
+        $cur = Str::uuid();
+        $fileName = $process . '-' . $cur . '.' . $extension;
+        $basePath = public_path('\\Image\\');
+        if (env('APP_ENV') == 'prod') {
+            $basePath = public_path('/Image/');
         }
-        if (!File::exists($directoryPath)) {
-            File::makeDirectory($directoryPath, 0755, true);
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
         }
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
-        return "/uploads/$fileName/" . $newFileName;
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath = public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
+        }
+
+        $file->move($destinationPath, $fileName);
+
+        return '/Image/' . $fileName;
     }
     public function addMember(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
-                'middle_name'=>'nullable|string|max:255',
+                'middle_name' => 'nullable|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
                 'password' => 'required|string',
-                'birthdate' =>  'nullable|date',
+                'birthdate' => 'nullable|date',
                 'achievements' => 'array',
                 'schools' => 'nullable',
                 'links' => 'nullable',
@@ -74,7 +81,7 @@ class MemberController extends Controller
                 $user = new User();
                 $user->email = $request->email;
                 $user->first_name = $request->first_name;
-                $user->middle_name=$request->middle_name;
+                $user->middle_name = $request->middle_name;
                 $user->last_name = $request->last_name;
                 $user->mobile_no = $request->mobile_no;
                 $user->password = Hash::make($request->password);
@@ -111,7 +118,7 @@ class MemberController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|string',
                 'password' => 'required|confirmed|string',
-                'date_of_birth' =>  'nullable|date',
+                'date_of_birth' => 'nullable|date',
                 'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
@@ -159,6 +166,7 @@ class MemberController extends Controller
                 $newAthlete->passport = $this->saveFile($request->file('passport'), 'Passport');
             }
             $newAthlete->save();
+
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achievement();
@@ -177,10 +185,58 @@ class MemberController extends Controller
                     $newCertificate->save();
                 }
             }
+            $newAthlete->currency=$request->currency;
+            $newAthlete->amount=$request->amount;
+            if ($newAthlete->save()) {
+                $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+                $orderDetails = $api->order->create([
+                    'receipt' => 'Inv-' . $newAthlete->id,
+                    'amount' => intval($request->amount * 100),
+                    'currency' => $request->currency,
+                    'notes' => [],
+                ]);
+                $newAthlete->payment_gateway = "razor-pay";
+                $newAthlete->payment_gateway_id = $orderDetails->id;
+                $newAthlete->save();
+            }
+            $newAthlete->save();
             DB::commit();
             return $this->sendResponse($newAthlete->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+
+    public function athletePaymentVerification(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'athlete_id'=>'required|numeric',
+                'payment_gateway_id' => 'required|string',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            $payment = Association::where('payment_gateway_id', $request->payment_gateway_id)->find($request->athlete_id);
+            if (is_null($payment)) {
+                return $this->sendError('Wrong payment id.');
+            }
+            if ($payment->status == "paid") {
+                return $this->sendError('Payment already done.');
+            }
+            $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+            $razorpay_order = $api->order->fetch($request->payment_gateway_id);
+            if ($razorpay_order->status == 'paid' || true) {
+                $payment->status = "paid";
+                $payment->save();
+            } else {
+                $payment -> status = "pending";
+                $payment->save();
+                return $this->sendError('Payment pending.');
+            }
+            return $this->sendResponse([], 'Athlete payment status saved successfully.', true);
+        } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
@@ -431,4 +487,273 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+
+    public function addAssociationMember(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'first_name' => 'required|string|max:255',
+                'middle_name' => 'nullable|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'mobile_no' => 'required|string',
+                'password' => 'nullable|string',
+                'name_of_state_unit' => 'nullable|string',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'date_of_establishment' => 'nullable|date',
+                'incorporation_certificate_number' => 'nullable|string|max:255',
+                'recognition_by_state_government' => 'nullable|boolean|max:255',
+                'recognition_by_state_olympic_association' => 'nullable|boolean|max:255',
+                'hosted_national_event_in_past_3_yrs' => 'nullable|boolean|max:255',
+                'hosted_international_event_in_past_4_yrs' => 'nullable|boolean|max:255',
+                'active_athletes_competed_in_past_2_yrs' => 'nullable|boolean|max:255',
+                'registered_address' => 'nullable|string|max:255',
+                'city' => 'nullable|string|max:255',
+                'state' => 'nullable|string|max:255',
+                'postal_code' => 'nullable|string|max:255',
+                'website' => 'nullable|string|max:255',
+                'president_name' => 'nullable|string|max:255',
+                'president_email' => 'nullable|string|email|max:255',
+                'president_phone_number' => 'nullable|string|max:255',
+                'president_signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'signature_of_bearer_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'signature_of_bearer_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'acknowledgement' => 'nullable|boolean|max:255',
+
+
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
+                $user = new User();
+                $user->email = $request->email;
+                $user->first_name = $request->name_of_state_unit;
+                $user->middle_name = $request->middle_name;
+                $user->last_name = $request->last_name;
+                $user->mobile_no = $request->mobile_no;
+                $user->password = Hash::make($request->password);
+                $user->save();
+            }
+            $newMember = new Association();
+            $newMember->user_id = $user->id;
+            if ($request->hasFile('logo')) {
+                $newMember->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
+            }
+            $newMember->name_of_state_unit = $request->name_of_state_unit;
+            $newMember->date_of_establishment = $request->date_of_establishment;
+            $newMember->incorporation_certificate_number = $request->incorporation_certificate_number;
+            $newMember->recognition_by_state_government = $request->recognition_by_state_government;
+            $newMember->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
+            $newMember->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
+            $newMember->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+            $newMember->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
+            $newMember->registered_address = $request->registered_address;
+            $newMember->city = $request->city;
+            $newMember->state = $request->state;
+            $newMember->postal_code = $request->postal_code;
+            $newMember->website = $request->website;
+            $newMember->president_name = $request->president_name;
+            $newMember->president_email = $request->president_email;
+            $newMember->president_phone_number = $request->president_phone_number;
+            if ($request->hasFile('president_signature')) {
+                $newMember->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
+            }
+            if ($request->hasFile('signature_of_bearer_1')) {
+                $newMember->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
+            }
+            if ($request->hasFile('signature_of_bearer_2')) {
+                $newMember->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
+            }
+            $newMember->acknowledgement = $request->acknowledgement;
+            $newMember->currency=$request->currency;
+            $newMember->amount=$request->amount;
+            if ($newMember->save()) {
+                $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+                $orderDetails = $api->order->create([
+                    'receipt' => 'Inv-' . $newMember->id,
+                    'amount' => intval($request->amount * 100),
+                    'currency' => $request->currency,
+                    'notes' => [],
+                ]);
+                $newMember->payment_gateway = "razor-pay";
+                $newMember->payment_gateway_id = $orderDetails->id;
+                $newMember->save();
+            }
+            $newMember->save();
+            DB::commit();
+            $data = Member::query()->where('id', $newMember->id)->with('user')->get();
+            return $this->sendResponse($data, 'Association Member added successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+
+    public function associationMemberPaymentVerification(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'association_id'=>'required|numeric',
+                'payment_gateway_id' => 'required|string',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            $payment = Association::where('payment_gateway_id', $request->payment_gateway_id)->find($request->association_id);
+            if (is_null($payment)) {
+                return $this->sendError('Wrong payment id.');
+            }
+            if ($payment->status == "paid") {
+                return $this->sendError('Payment already done.');
+            }
+            $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+            $razorpay_order = $api->order->fetch($request->payment_gateway_id);
+            if ($razorpay_order->status == 'paid' || true) {
+                $payment->status = "paid";
+                $payment->save();
+            } else {
+                $payment -> status = "pending";
+                $payment->save();
+                return $this->sendError('Payment pending.');
+            }
+            return $this->sendResponse([], 'Association member payment status saved successfully.', true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function updateAssociationMember(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:association,id',
+                'name_of_state_unit' => 'nullable|string',
+                'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'date_of_establishment' => 'nullable|date',
+                'incorporation_certificate_number' => 'nullable|string|max:255',
+                'recognition_by_state_government' => 'nullable|boolean|max:255',
+                'recognition_by_state_olympic_association' => 'nullable|boolean|max:255',
+                'hosted_national_event_in_past_3_yrs' => 'nullable|boolean|max:255',
+                'hosted_international_event_in_past_4_yrs' => 'nullable|boolean|max:255',
+                'active_athletes_competed_in_past_2_yrs' => 'nullable|boolean|max:255',
+                'registered_address' => 'nullable|string|max:255',
+                'city' => 'nullable|string|max:255',
+                'state' => 'nullable|string|max:255',
+                'postal_code' => 'nullable|string|max:255',
+                'website' => 'nullable|string|max:255',
+                'president_name' => 'nullable|string|max:255',
+                'president_email' => 'nullable|string|email|max:255',
+                'president_phone_number' => 'nullable|string|max:255',
+                'president_signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'signature_of_bearer_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'signature_of_bearer_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'acknowledgement' => 'nullable|boolean|max:255',
+
+
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $Association = Association::findOrFail($request->id);
+            if (!$Association) {
+                return $this->sendError("User not found.");
+            }
+            $user = User::where('id', $Association->user_id)->first();
+            if (!$user) {
+                return $this->sendError("User not found.");
+            }
+            if ($request->has('first_name')) {
+                $user->first_name = $request->first_name;
+            }
+            if ($request->has('middle_name')) {
+                $user->middle_name = $request->middle_name;
+            }
+            if ($request->has('last_name')) {
+                $user->last_name = $request->last_name;
+            }
+            if ($request->has('mobile_no')) {
+                $user->mobile_no = $request->mobile_no;
+            }
+            $user->save();
+
+            if ($request->has('name_of_state_unit')) {
+                $Association->name_of_state_unit = $request->name_of_state_unit;
+            }
+            if ($request->has('date_of_establishment')) {
+                $Association->date_of_establishment = $request->date_of_establishment;
+            }
+            if ($request->has('incorporation_certificate_number')) {
+                $Association->incorporation_certificate_number = $request->incorporation_certificate_number;
+            }
+            if ($request->has('recognition_by_state_government')) {
+                $Association->recognition_by_state_government = $request->recognition_by_state_government;
+            }
+            if ($request->has('recognition_by_state_olympic_association')) {
+                $Association->recognition_by_state_olympic_association = $request->recognition_by_state_olympic_association;
+            }
+            if ($request->has('hosted_national_event_in_past_3_yrs')) {
+                $Association->hosted_national_event_in_past_3_yrs = $request->hosted_national_event_in_past_3_yrs;
+            }
+            if ($request->has('postal_code')) {
+                $Association->postal_code = $request->postal_code;
+            }
+            if ($request->has('hosted_international_event_in_past_4_yrs')) {
+                $Association->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+            }
+            if ($request->has('active_athletes_competed_in_past_2_yrs')) {
+                $Association->active_athletes_competed_in_past_2_yrs = $request->active_athletes_competed_in_past_2_yrs;
+            }
+            if ($request->has('registered_address')) {
+                $Association->registered_address = $request->registered_address;
+            }
+            if ($request->has('hosted_international_event_in_past_4_yrs')) {
+                $Association->hosted_international_event_in_past_4_yrs = $request->hosted_international_event_in_past_4_yrs;
+            }
+            if ($request->has('city')) {
+                $Association->city = $request->city;
+            }
+            if ($request->has('state')) {
+                $Association->state = $request->state;
+            }
+            if ($request->has('postal_code')) {
+                $Association->postal_code = $request->postal_code;
+            }
+            if ($request->has('website')) {
+                $Association->website = $request->website;
+            }
+            if ($request->has('president_name')) {
+                $Association->president_name = $request->president_name;
+            }
+            if ($request->has('president_email')) {
+                $Association->president_email = $request->president_email;
+            }
+            if ($request->has('president_phone_number')) {
+                $Association->president_phone_number = $request->president_phone_number;
+            }
+
+            if ($request->hasFile('logo')) {
+                $Association->logo = $this->saveFile($request->file('logo'), 'AssociationMemberLogo');
+            }
+            if ($request->hasFile('president_signature')) {
+                $Association->president_signature = $this->saveFile($request->file('president_signature'), 'PresidentSignature');
+            }
+            if ($request->hasFile('signature_of_bearer_1')) {
+                $Association->signature_of_bearer_1 = $this->saveFile($request->file('signature_of_bearer_1'), 'Bearer1Signature');
+            }
+            if ($request->hasFile('signature_of_bearer_2')) {
+                $Association->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
+            }
+            $Association->save();
+            DB::commit();
+            return $this->sendResponse($Association->id, 'Association updated successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+
 }

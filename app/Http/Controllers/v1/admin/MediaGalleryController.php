@@ -7,14 +7,57 @@ use App\Http\Controllers\Controller;
 use App\Models\MediaGallery;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Intervention\Image\Facades\Image;
+
 use Illuminate\Support\Facades\Auth;
 
 class MediaGalleryController extends Controller
 {
+
+    public function storeBase64Image($base64String, $uploadDir)
+    {
+        $UPLOADS_PATH = public_path('uploads/' . $uploadDir);
+        $UPLOADS_FOLDER = public_path('uploads/' . $uploadDir);
+    
+        if (!file_exists($UPLOADS_FOLDER)) {
+            mkdir($UPLOADS_FOLDER, 0777, true);
+        }
+    
+        $matches = [];
+        preg_match('/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/', $base64String, $matches);
+    
+        if (empty($matches)) {
+            throw new \Exception("Invalid base64 string format");
+        }
+    
+        $extension = $matches[1];
+        if (!in_array($extension, ['jpeg', 'png', 'webp', 'jpg'])) {
+            throw new \Exception("Invalid image file type");
+        }
+    
+        // Decode the base64 string and save the image
+        $image = base64_decode($matches[2]);
+    
+        // Resize the image
+        $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+    
+        // Generate a unique filename
+        $filename = Str::uuid() . '.' . $extension;
+    
+        // Save the resized image to the uploads folder
+        $resizedImage->save($UPLOADS_FOLDER . '/' . $filename);
+    
+        // Return the URL path of the saved image
+        $imagePath = '/'.'uploads/' . $uploadDir . '/' . $filename;
+        return $imagePath;
+    }
     public function saveFile($file, $process)
     {
         $extension = $file->getClientOriginalExtension();
