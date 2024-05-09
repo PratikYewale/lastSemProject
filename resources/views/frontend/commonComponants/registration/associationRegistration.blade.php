@@ -150,107 +150,177 @@
                              class="donationForm sc_input_hover_default">
                              <div class="row">
                                  <div class="col-lg-12">
-                                     <h4 class="mt-auto">Association Information</h4>
+                                     <h4 class="mt-auto form-section-title">Association Information</h4>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="first_name" class="form-label">Name of State Unit</label>
-                                         <input type="text" class="form-control" id="first_name"
-                                             name="first_name">
+                                         <label for="name_of_state_unit" class="form-label">Name of State Unit</label>
+                                         <input type="text" class="form-control" id="name_of_state_unit"
+                                             name="name_of_state_unit">
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="last_name" class="form-label">Date of Establishment</label>
-                                         <input type="date" class="form-control" id="last_name" name="last_name">
+                                         <label for="date_of_establishment" class="form-label">Date of Establishment</label>
+                                         <input type="date" class="form-control" id="date_of_establishment" name="date_of_establishment">
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="last_name" class="form-label">Incorporation Certificate
+                                         <label for="incorporation_certificate_number" class="form-label">Incorporation Certificate
                                              Number</label>
-                                         <input type="text" class="form-control" id="last_name" name="last_name">
+                                         <input type="text" class="form-control" id="incorporation_certificate_number" name="incorporation_certificate_number">
                                      </div>
                                  </div>
-
-
+                                 
                                  <div class="col-lg-6">
-                                     <div class="mb-3">
-                                         <input class="form-check-input" type="checkbox" value=""
-                                             id="flexCheckChecked">
-                                         <label class="form-check-label" for="flexCheckChecked">
-                                             Recognition by State Government (Y/N)
-                                         </label>
-                                     </div>
+                                    <div class="mb-3">
+                                        <label for="recognition_by_state_government" class="form-label">Recognition by State Government (Yes/No)</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="radio"
+                                                    name="recognition_by_state_government" id="recognition_by_state_government" value="true" >
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio"
+                                                name="recognition_by_state_government" id="recognition_by_state_government" value="false" >
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                 </div>
-                                 <div class="col-lg-6">
-                                     <div class="mb-3">
-                                         <input class="form-check-input" type="checkbox" value=""
-                                             id="flexCheckChecked">
-                                         <label class="form-check-label" for="flexCheckChecked">
-                                             Recognition by State Olympic Association (Y/N)
-                                         </label>
-                                     </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="recognition_by_state_olympic_association" class="form-label"> Recognition by State Olympic Association (Yes/No)</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="radio"
+                                                    name="recognition_by_state_olympic_association" id="recognition_by_state_olympic_association" value="true" >
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio"
+                                                name="recognition_by_state_olympic_association" id="recognition_by_state_olympic_association" value="false" >
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                 </div>
-                                 <div class="col-lg-6">
-                                     <div class="mb-3">
-                                         <input class="form-check-input" type="checkbox" value=""
-                                             id="flexCheckChecked">
-                                         <label class="form-check-label" for="flexCheckChecked">
-                                             Hosted National Event in Past 3 yrs (Y/N)
-                                         </label>
-                                     </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="hosted_national_event_in_past_3_yrs" class="form-label"> Hosted National Event in Past 3 yrs (Yes/No)</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="radio"
+                                                    name="hosted_national_event_in_past_3_yrs" id="hosted_national_event_in_past_3_yrs" value="true" >
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio"
+                                                name="hosted_national_event_in_past_3_yrs" id="hosted_national_event_in_past_3_yrs" value="false" >
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="hosted_international_event_in_past_4_yrs" class="form-label"> Hosted International Event in Past 4 yrs (Yes/No)</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="radio"
+                                                    name="hosted_international_event_in_past_4_yrs" id="hosted_international_event_in_past_4_yrs" value="true" >
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio"
+                                                name="hosted_international_event_in_past_4_yrs" id="hosted_international_event_in_past_4_yrs" value="false" >
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="active_athletes_competed_in_past_2_yrs" class="form-label"> Active athletes that competed in national level events in past 2 yrs (Yes/No)</label>
+                                        <div class="d-flex ">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="radio"
+                                                    name="active_athletes_competed_in_past_2_yrs" id="active_athletes_competed_in_past_2_yrs" value="true" >
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-3">
+                                                <input class="form-check-input" type="radio"
+                                                name="active_athletes_competed_in_past_2_yrs" id="active_athletes_competed_in_past_2_yrs" value="false" >
+                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                    No
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            
+                       
+                         
 
-                                 </div>
-                                 <div class="col-lg-6">
-                                     <div class="mb-3">
-                                         <input class="form-check-input" type="checkbox" value=""
-                                             id="flexCheckChecked">
-                                         <label class="form-check-label" for="flexCheckChecked">
-                                             Hosted International event in past 4 yrs (Y/N)
-                                         </label>
-                                     </div>
 
-                                 </div>
                                  <div class="col-lg-12">
+                                    <h4 class="mt-auto form-section-title">Address Information</h4>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="country" class="form-label">Select Country</label>
+                                        <input type="text" class="form-control" id="country" name="country">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="state" class="form-label">Select State / Province</label>
+                                        <input type="text" class="form-control" id="state" name="state">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" id="city" name="city">
+                                    </div>
+                                </div>
+                            
+                                <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <input class="form-check-input" type="checkbox" value=""
-                                             id="flexCheckChecked">
-                                         <label class="form-check-label" for="flexCheckChecked">
-                                             Active athletes that competed in national level events in past 2 yrs (Y/N)
-                                         </label>
+                                         <label for="registered_address" class="form-label">Registered Address</label>
+                                         <input type="text" class="form-control" id="registered_address"
+                                             name="registered_address">
                                      </div>
-
                                  </div>
-
-
+                       
 
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="address_line1" class="form-label">Registered Address</label>
-                                         <input type="text" class="form-control" id="address_line1"
-                                             name="address_line1">
-                                     </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                     <div class="mb-3">
-                                         <label for="city" class="form-label">City</label>
-                                         <input type="text" class="form-control" id="city" name="city">
-                                     </div>
-                                 </div>
-                                 <div class="col-lg-4">
-                                     <div class="mb-3">
-                                         <label for="state" class="form-label">State / Province</label>
-                                         <input type="text" class="form-control" id="state" name="state">
-                                     </div>
-                                 </div>
-
-                                 <div class="col-lg-4">
-                                     <div class="mb-3">
-                                         <label for="zip " class="form-label">Postal Code</label>
-                                         <input type="text" class="form-control" id="zip " name="zip">
+                                         <label for="postal_code " class="form-label">Postal Code</label>
+                                         <input type="number" pattern="[0-9]{6}" maxlength="6" minlength="6" class="form-control" id="postal_code" name="postal_code">
                                      </div>
                                  </div>
 
@@ -271,7 +341,7 @@
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="text" class="form-label">Website (if applicable)</label>
+                                         <label for="website" class="form-label">Website (if applicable)</label>
                                          <input type="text" class="form-control" id="website" name="website">
                                      </div>
                                  </div>
@@ -284,7 +354,7 @@
                                  </div>
 
                                  <div class="col-lg-12 mt-5">
-                                     <h4 class="mt-auto">President's Information</h4>
+                                     <h4 class="mt-auto form-section-title">President's Information</h4>
                                  </div>
 
                                  <div class="col-lg-4">

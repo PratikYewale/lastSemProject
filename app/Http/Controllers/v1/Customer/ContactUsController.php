@@ -17,7 +17,7 @@ class ContactUsController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name' => 'nullable',
+                'name' => 'required',
                 'email' => 'required|email',
                 'mobile_no' => 'required|nullable',
                 'message' => 'nullable',
@@ -43,8 +43,9 @@ class ContactUsController extends Controller
                     ->subject('Confirmation email');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
-            return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
+            return redirect();
         } catch (Exception $e) {
+            dd($e);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -82,6 +83,33 @@ class ContactUsController extends Controller
             return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+
+    public function ContactUs(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'nullable',
+                'email' => 'required|string|email|max:255',
+                'mobile_number' => 'required|regex:/^[0-9]{0,255}$/',
+
+                'message' => 'nullable',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            $ContactUs = new ContactUs;
+            $ContactUs->name = $request->name;
+            $ContactUs->mobile_number = $request->mobile_number;
+            $ContactUs->message = $request->message;
+            $ContactUs->email = $request->email;
+            $ContactUs->save();
+            return back()->with('success', 'Enquiry added Successfully');
+            // return $this->sendResponse([], 'Contact added Successfully.', true);
+        } catch (Exception $e) {
+            return back()->with('false', 'Something went wrong. Please try again later.');
         }
     }
 }
