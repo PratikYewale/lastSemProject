@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
@@ -15,25 +15,27 @@ use Exception;
 
 class ProgramController extends Controller
 {
-    public function saveFile($file, $fileName)
+    public function saveFile($file, $process)
     {
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
-        $uploadsPath = public_path('uploads');
-        $directoryPath = "$uploadsPath/$fileName";
-
-        if (!File::exists($uploadsPath)) {
-            File::makeDirectory($uploadsPath, 0755, true);
+        $extension = $file->getClientOriginalExtension();
+        $cur = Str::uuid();
+        $fileName = $process . '-' . $cur . '.' . $extension;
+        $basePath = public_path('\\Image\\');
+        if (env('APP_ENV') == 'prod') {
+            $basePath =  public_path('/Image/');
+        }
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
+        }
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath =  public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
         }
 
-        if (!File::exists($directoryPath)) {
-            File::makeDirectory($directoryPath, 0755, true);
-        }
+        $file->move($destinationPath, $fileName);
 
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
-
-        return "/$fileName/" . $newFileName;
+        return '/Image/' . $fileName;
     }
     public function createPrograms(Request $request): JsonResponse
     {
@@ -50,7 +52,7 @@ class ProgramController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $addprograms = new Program();
             $addprograms->type = $request->type;
             $addprograms->title = $request->title;
@@ -65,9 +67,10 @@ class ProgramController extends Controller
             $addprograms->body_para = $request->body_para;
             $addprograms->conclusion = $request->conclusion;
             $addprograms->save();
-
+            DB::commit();
             return $this->sendResponse($addprograms->id, 'Programs uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -82,6 +85,7 @@ class ProgramController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+            DB::beginTransaction();
             $updateProgram = Program::query()->where('id', $request->id)->first();
             if ($request->has('type')) {
                 $updateProgram->type = $request->type;
@@ -105,9 +109,10 @@ class ProgramController extends Controller
                 $updateProgram->secondary_img = $this->saveFile($request->file('secondary_img'), 'ProgramSecondaryImage');
             }
             $updateProgram->save();
-
+            DB::commit();
             return $this->sendResponse($updateProgram, "Program updated successfully.");
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

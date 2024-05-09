@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Membership;
+use Illuminate\Support\Facades\DB;
 use App\Models\MembershipHistory;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +32,7 @@ class MembershipController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $addMembership = new Membership();
             $addMembership->name = $request->name;
             $addMembership->description = $request->description ?? null;
@@ -41,9 +42,10 @@ class MembershipController extends Controller
             $addMembership->discount = $addMembership->mrp > $request->selling_price ? $addMembership->mrp - $addMembership->selling_price : 0;
             $addMembership->is_active = true;
             $addMembership->save();
-
+            DB::commit();
             return $this->sendResponse($addMembership, 'Membership uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -57,7 +59,7 @@ class MembershipController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateMembership = Membership::query()->where('id', $request->id)->first();
             if ($request->filled('name')) {
                 $updateMembership->name = $request->name;
@@ -78,8 +80,10 @@ class MembershipController extends Controller
                 $updateMembership->is_active = $request->is_active;
             }
             $updateMembership->save();
+            DB::commit();
             return $this->sendResponse($updateMembership, 'Membership updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

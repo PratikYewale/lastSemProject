@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
@@ -54,7 +55,7 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $addEvent = new Event();
             $addEvent->program_id = $request->program_id;
             $addEvent->team_id = $request->team_id;
@@ -72,9 +73,10 @@ class EventController extends Controller
             $addEvent->end_date = $request->end_date;
             $addEvent->is_competition = $request->is_competition;
             $addEvent->save();
-
+            DB::commit();
             return $this->sendResponse($addEvent, 'Event uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
@@ -88,7 +90,7 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateEvent = Event::query()->where('id', $request->id)->first();
             if ($request->filled('program_id')) {
                 $updateEvent->program_id = $request->program_id;
@@ -120,11 +122,11 @@ class EventController extends Controller
             if ($request->filled('conclusion')) {
                 $updateEvent->conclusion = $request->conclusion;
             }
-
-
             $updateEvent->save();
+            DB::commit();
             return $this->sendResponse($updateEvent, 'Event Updated Successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

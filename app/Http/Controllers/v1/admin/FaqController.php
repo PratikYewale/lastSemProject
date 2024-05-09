@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\FAQ;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
@@ -24,16 +25,17 @@ class FaqController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $faq = new FAQ;
             $faq->question = $request->question;
             $faq->answer = $request->answer;
             $faq->for_whom = $request->for_whom;
             $faq->is_active = $request->is_active;
             $faq->save();
-
+            DB::commit();
             return $this->sendResponse($faq, 'FAQ saved successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
@@ -47,7 +49,7 @@ class FaqController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateFaq = FAQ::query()->where('id', $request->id)->first();
 
             if ($request->filled('question')) {
@@ -63,8 +65,10 @@ class FaqController extends Controller
                 $updateFaq->is_active = $request->is_active;
             }
             $updateFaq->save();
+            DB::commit();
             return $this->sendResponse($updateFaq, 'FAQ updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

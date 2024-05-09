@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\v1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Association;
+use App\Models\Athlete;
 use App\Models\Member;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,4 +89,66 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    public function getAllAthletes(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'pageNo' => 'numeric',
+                'limit' => 'numeric',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+            $query = Athlete::query()->with(['achievements','sport_certificates']);
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query = $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            if (count($data) > 0) {
+                $response['Athlete'] = $data;
+                $response['count'] = $count;
+                return $this->sendResponse($response, 'Athlete fetched successfully.', true);
+            } else {
+                return $this->sendError("No data found.");
+            }
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+
+    public function getAllAssociation(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'pageNo' => 'numeric',
+                'limit' => 'numeric',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+            $query = Association::query()->with('user');
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query = $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            if (count($data) > 0) {
+                $response['Association'] = $data;
+                $response['count'] = $count;
+                return $this->sendResponse($response, 'Association fetched successfully.', true);
+            } else {
+                return $this->sendError("No data found.");
+            }
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    
 }

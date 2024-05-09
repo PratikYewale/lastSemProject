@@ -5,12 +5,12 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -38,6 +38,7 @@ class JobController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+            DB::beginTransaction();
             $user = Auth::user()->id;
             $addjob = new Job;
             $addjob->company_name = $request->company_name;
@@ -57,9 +58,11 @@ class JobController extends Controller
             $addjob->vacancy = $request->vacancy;
             $addjob->status = "active";
             $addjob->save();
-            return $this->sendResponse($addjob, 'Job saved successfully.', true);
+            DB::commit();
+             return $this->sendResponse($addjob, 'Job saved successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+            DB::rollBack();
+             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function deleteJob(Request $request): JsonResponse
@@ -135,7 +138,7 @@ class JobController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateJob = Job::query()->where('id', $request->id)->first();
             if ($request->filled('company_name')) {
                 $updateJob->company_name = $request->company_name;
@@ -183,8 +186,10 @@ class JobController extends Controller
                 $updateJob->vacancy = $request->vacancy;
             }
             $updateJob->save();
+            DB::commit();
             return $this->sendResponse($updateJob, 'Job updated successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

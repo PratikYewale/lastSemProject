@@ -33,15 +33,9 @@ public function saveFile($file, $process)
         if (!is_dir($basePath)) {
             mkdir($basePath, 0755, true);
         }
-        if (env('APP_ENV') == 'prod') {
-            $destinationPath =  public_path('/Image');
-        } else {
-            $destinationPath = public_path('\\Image');
-        }
-
-        $file->move($destinationPath, $fileName);
-
-        return '/Image/' . $fileName;
+        $destinationPath = "$directoryPath/$newFileName";
+        $file->move($directoryPath, $newFileName);
+        return "/uploads/$fileName/" . $newFileName;
     }
     public function adminRegister(Request $request): JsonResponse
     {
@@ -58,6 +52,7 @@ public function saveFile($file, $process)
             }
             $newUser = new User();
             $newUser->first_name = $request->name;
+            $newUser->middle_name=$request->middle_name;
             $newUser->last_name = $request->name;
             $newUser->email = $request->email;
             $newUser->password = Hash::make($request->password);

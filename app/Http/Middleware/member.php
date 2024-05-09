@@ -18,25 +18,31 @@ class member
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next): JsonResponse
+    public function handle($request, Closure $next)
     {
-        
+        $response = [
+            'success' => false,
+            'message' => 'Unauthenticated User. Please Login',
+        ];
         try {
             $user = JWTAuth::parseToken()->authenticate();
-            if (!$user) {
-                return response()->json(['error' => 'Unauthorized access.'], Response::HTTP_UNAUTHORIZED);
+            if ($user && $user->role !== 'member') {
+                $response['message'] = 'Unauthorized Access. Only admin is allowed.';
+                return response()->json($response, 403, [], JSON_NUMERIC_CHECK);
             }
-            $role = $user->role;
-            if ($role != 'member') {
-                $response = [
-                    "success"=>false,
-                    "message"=>"Unauthorized access."
-                ];
-                return response()->json($response, 401  );
-            }
-            return $next($request);
         } catch (Exception $e) {
-            return response()->json($e->getMessage(),$e->getTrace());
+            if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                $response['message'] = 'Token is Invalid';
+                return response()->json($response , 403 ,[],JSON_NUMERIC_CHECK);
+            }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                $response['message'] = 'Token is Expired';
+                return response()->json($response , 403 ,[],JSON_NUMERIC_CHECK);
+            }else{
+                $response['message'] = 'Authorization Token not found';
+                return response()->json($response , 401 ,[],JSON_NUMERIC_CHECK);
+            }
         }
+        return $next($request);
     }
 }
+

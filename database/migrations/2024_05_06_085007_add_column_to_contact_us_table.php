@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToNewsTable extends Migration
+class AddColumnToContactUsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnToNewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->text('short_title')->nullable();
+        Schema::table('contact_us', function (Blueprint $table) {
+            $table->string('created_by')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddColumnToNewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::table('contact_us', function (Blueprint $table) {
             //
         });
     }

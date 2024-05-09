@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToNewsTable extends Migration
+class DropColumnsFromAssociationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnToNewsTable extends Migration
      */
     public function up()
     {
-        Schema::table('news', function (Blueprint $table) {
-            $table->text('short_title')->nullable();
+        Schema::table('association', function (Blueprint $table) {
+            $table->dropColumn('hosted_national_event_in_past_3-yrs');
         });
     }
 
@@ -25,7 +25,7 @@ class AddColumnToNewsTable extends Migration
      */
     public function down()
     {
-        Schema::table('news', function (Blueprint $table) {
+        Schema::table('association', function (Blueprint $table) {
             //
         });
     }
