@@ -112,41 +112,44 @@
                                         <li class="menu-item">
                                             <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                         </li>
-                                        <!-- /Menu: Contact Us -->
-                                        <li class="menu-item">
-                                            @if (Auth::user())
-                                                <a href="{{ url('/') }}"><span>{{ Auth::user()->first_name }}
-                                                        {{ Auth::user()->last_name }}</span></a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item">
-                                                        <a href=""><span>Profile</span></a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href=""><span>Media</span></a>
-                                                    </li>
-                                                    <li class="menu-item current-menu-item">
-                                                        <a href="{{ route('logout') }}"><span>Logout</span></a>
-                                                    </li>
-                                                </ul>
-                                            @else
-                                                <a href="{{ url('/login') }}"><span>Login</span></a>
-                                            @endif
-                                        </li>
+
 
 
 
                                     </ul>
                                 </nav>
+              <!-- Cart -->
+              <div class="menu_main_cart top_panel_icon">
+                @if (Auth::user())
+                    <a href="{{ url('/') }}">
+                        <span class="contact_icon icon-user"></span>
+                        <span class="cart_summa">{{ Auth::user()->first_name }}
+                            {{ Auth::user()->last_name }}</span>
 
-                                <!-- Booking button block -->
-                                <div class="menu_main_additional_button top_panel_icon">
-                                    <a class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_tiny margin_bottom_null sc_button_hover_fade"
-                                        href="{{ url('/donate') }}"><b>Donate</b></a>
+                    </a>
+                @else
+                    <a href="{{ url('/login') }}">
+                        <span class="contact_icon icon-user"></span>
+                        <span class="cart_summa">Login</span>
 
+                    </a>
+                @endif
 
-                                </div>
+            </div>
+            <!-- /Cart -->
+            <!-- Booking button block -->
+            <div class="menu_main_additional_button top_panel_icon">
+                <div class="menu_main_additional_button_container">
+                    <a href="#">
+                        <img src="{{ url('frontend/images/booking_heared_img.png') }}"
+                            alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- /Booking button block -->
+                          
                             </div>
-                            <!-- /Booking button block -->
+                       
                         </div>
                         <!-- /Main menu -->
                     </div>

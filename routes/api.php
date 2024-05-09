@@ -251,8 +251,8 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
         Route::post('athleteRegistration', [MemberController::class, 'athleteRegistration']);
         Route::post('paymentVerification', [MemberController::class, 'paymentVerification']);
         Route::post('addContactUsVerified', [ContactUsController::class, 'addContactUsVerified']);
-
-
+        Route::post('ContactUs', [ContactUsController::class, 'ContactUs']);
+        
     });
 
 
