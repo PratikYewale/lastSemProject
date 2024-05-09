@@ -32,7 +32,7 @@
                                         <div class="post_featured">
                                             <div class="post_thumb" data-image=""
                                                 data-title="Serving Cookies at Alpine Nationals">
-                                                <a class="hover_icon hover_icon_link" href="post-single.html">
+                                                <a class="hover_icon hover_icon_link" href="{{ route('newsDetails', ['id' => $news->id]) }}">
                                                     <img alt="Serving Cookies at Alpine Nationals"
                                                         src="http://placehold.it/1170x659">
                                                 </a>
@@ -40,7 +40,7 @@
                                         </div>
 
                                         <h4 class="news-title">
-                                            <a href="post-single.html">{{ $news['title'] }}</a>
+                                            <a href="{{ route('newsDetails', ['id' => $news->id]) }}">{{ $news['title'] }}</a>
                                         </h4>
 
                                         <div class="post_descr">
@@ -55,7 +55,7 @@
                                             </span>
                                             <span class="post_info_item post_info_posted_by"><span
                                                     class="contact_icon icon-user"></span> <a href="#"
-                                                    class="post_info_author">John Doe</a>
+                                                    class="post_info_author">{{ $news['user']['first_name']}} {{ $news['user']['last_name'] }}</a>
                                             </span>
 
                                         </div>

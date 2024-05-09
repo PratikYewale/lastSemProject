@@ -23,18 +23,23 @@ class HomeController extends Controller
     {
         return view('frontend.teams');
     }
-    public function programs()
+    public function services()
     {
-        return view('frontend.programs');
+        return view('frontend.services');
     }
-    public function competition()
+    public function announcement()
     {
-        return view('frontend.competition');
+        return view('frontend.announcement');
+    }
+    public function registration()
+    {
+        return view('frontend.registration');
     }
     public function membership()
     {
         return view('frontend.membership');
     }
+
     public function contact()
     {
         return view('frontend.contact');

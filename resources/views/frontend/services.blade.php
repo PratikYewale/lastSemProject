@@ -5,11 +5,11 @@
         <div class="top_panel_image_hover"></div>
         <div class="content_wrap">
             <div class="top_panel_image_header">
-                <h1 class="top_panel_image_title">Teams</h1>
+                <h1 class="top_panel_image_title">Services</h1>
                 <div class="breadcrumbs">
                     <a class="breadcrumbs_item home" href="index.html">Home</a>
                     <span class="breadcrumbs_delimiter"></span>
-                    <span class="breadcrumbs_item current">Teams</span>
+                    <span class="breadcrumbs_item current">Services</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                     <!-- Greeting -->
                     <div class="content_wrap">
                         <div
-                            class="columns_wrap sc_columns columns_nofluid sc_columns_count_2 columns_1_2_xs margin_top_large row">
+                            class="columns_wrap sc_columns columns_nofluid sc_columns_count_2 columns_1_2_xs margin_top_large margin_bottom_large row">
                             <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
                                 <figure class="sc_image sc_image_shape_square">
                                     <img src="{{ url('frontend/images/depositphotos-86257350-570.png') }}" alt="" />
@@ -36,7 +36,8 @@
                                         <div class="sc_section_content_wrap">
                                             <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">Ski and
                                                 Snowboard India (SSI)</h5>
-                                            <h2 class="sc_title sc_title_underline margin_top_null margin_bottom_null">Teams
+                                            <h2 class="sc_title sc_title_underline margin_top_null margin_bottom_null pb-auto">
+                                                Services
                                             </h2>
                                             <p class="margin_top_1_5em margin_bottom_tiny">Ski and Snowboard India (SSI) is
                                                 the National Sports Association governing sport disciplines under the
@@ -55,9 +56,9 @@
                     </div>
                     <!-- /Greeting -->
                     <!-- Sports -->
-                    @include('frontend.commonComponants.three_sports')
+                    @include('frontend.commonComponants.services')
                     <!-- /Sports -->
-                    @include('frontend.commonComponants.IntroductionNationalTeam')
+                 
 
                     @include('frontend.commonComponants.athletesHistory')
                     <!-- E-mailer -->

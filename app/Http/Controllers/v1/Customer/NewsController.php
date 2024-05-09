@@ -22,7 +22,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = News::query()->with('user');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -52,7 +52,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-            $News = News::query()->where('id', $request->id)->first();
+            $News = News::query()->where('id', $request->id)->with('user')->first();
             if (!$News) {
                 return $this->sendError('No data available.');
             }

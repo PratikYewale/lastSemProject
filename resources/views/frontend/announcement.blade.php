@@ -5,11 +5,11 @@
         <div class="top_panel_image_hover"></div>
         <div class="content_wrap">
             <div class="top_panel_image_header">
-                <h1 class="top_panel_image_title">Programs</h1>
+                <h1 class="top_panel_image_title">Announcement</h1>
                 <div class="breadcrumbs">
                     <a class="breadcrumbs_item home" href="{{ url('/') }}">Home</a>
                     <span class="breadcrumbs_delimiter"></span>
-                    <span class="breadcrumbs_item current">Programs</span>
+                    <span class="breadcrumbs_item current">Announcement</span>
                 </div>
             </div>
         </div>
@@ -30,12 +30,12 @@
                         </div>
                     </section>
                     <section class="single_team_post_description">
-                        <h2 class="team_title">Programs Of Ski and Snowboard India (SSI)</h2>
+                        <h2 class="team_title">Announcement Of SSI</h2>
                         {{-- <h6 class="team_position">Instructor</h6> --}}
                         <div class="team_meta"></div>
                         <div class="team_brief_info">
                             <div class="team_brief_info_text">
-                                <p>Ski and Snowboard India encompass a variety of Sport Programs, Development Programs and Competitions, all aimed at developing athletes and supporting coaches, officials, parents, and volunteers while accomplishing the vision and mission to make the India the "Best in the World" in Olympic skiing and snowboarding. </p>
+                                <p>Ski and Snowboard India encompass a variety of Sport Announcement, Development Announcement and Competitions, all aimed at developing athletes and supporting coaches, officials, parents, and volunteers while accomplishing the vision and mission to make the India the "Best in the World" in Olympic skiing and snowboarding. </p>
                             </div>
                         </div>
                         <a href="#"

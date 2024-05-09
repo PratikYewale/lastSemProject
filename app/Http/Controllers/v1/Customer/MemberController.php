@@ -78,7 +78,7 @@ class MemberController extends Controller
         }
     }
 
-    public function loginMember(Request $request): JsonResponse
+    public function loginMember(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -86,22 +86,26 @@ class MemberController extends Controller
                 'password' => 'required|string',
             ]);
             if ($validator->fails()) {
-                return $this->sendResponse("Validation failed.", $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             $user = User::query()->where('email', $request->email)->where('role', 'member')->first();
             if (!$user) {
-                return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
+                // return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
+                return back()->withErrors(['error' => 'User does not exist or user doesn\'t have access']);
             }
             if (Hash::check($request->password, $user->password)) {
                 $token = JWTAuth::fromUser($user);
                 $response = ['token' => $token];
                 $response['userData'] = $user;
-                return $this->sendResponse($response, 'Login success.', 200);
+                Auth::login($user);
+                return redirect('/');
             } else {
-                return $this->sendError('Invalid credentials.', [], 401);
+                // return $this->sendError('Invalid credentials.', [], 401);
+                return back()->withErrors(['error' => 'Invalid credentials']);
             }
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+            return redirect()->route('login')
+            ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
         }
     }
 

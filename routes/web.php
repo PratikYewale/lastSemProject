@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Frontend\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\v1\Customer\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +32,18 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/donate', [HomeController::class, 'donate']);
 Route::get('/about', [HomeController::class, 'about']);
 Route::get('/teams', [HomeController::class, 'teams']);
-Route::get('/programs', [HomeController::class, 'programs']);
-Route::get('/competition', [HomeController::class, 'competition']);
+Route::get('/services', [HomeController::class, 'services']);
+Route::get('/announcement', [HomeController::class, 'announcement']);
+Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
 
 // News
 Route::get('/news', [NewsController::class, 'news']);
+Route::get('/news/{id}', [NewsController::class, 'newsDetails'])->name('newsDetails');
+
+
+// Login
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [MemberController::class, 'loginMember'])->name('loginMember');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
