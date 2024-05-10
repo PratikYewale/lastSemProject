@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 
@@ -54,7 +56,29 @@ class SponsorshipController extends Controller
                 $addSponsorship->save();
             }
             $addSponsorship->save();
+            $data = [
+                'to_name' => $request->organization_name,
+                'email' => $request->organization_mail,
+                'message' => $request->message,
+                'query'=>$addSponsorship,
+            ];
 
+            Mail::send('emails.sponsorship', $data, function ($message) use ($data) {
+                $message->to($data['email'], $data['to_name'])
+                    ->subject('Confirmation email');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
+            $adminData = [
+                'to_name' => 'Admin',
+                'email' => 'achalbhujbal2003@gmail.com', 
+                'message' => 'A new sponsorship have is recived.',
+            ];
+
+            Mail::send('emails.adminSponsorship', $adminData, function ($message) use ($adminData) {
+                $message->to($adminData['email'], $adminData['to_name'])
+                    ->subject('New Sponsorship recived');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+            });
             return $this->sendResponse($addSponsorship, 'Sponsorship saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);

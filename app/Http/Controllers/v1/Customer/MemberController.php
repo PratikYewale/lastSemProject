@@ -59,7 +59,7 @@ class MemberController extends Controller
                 'middle_name' => 'nullable|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'mobile_no' => 'required|string',
+                'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|string',
                 'birthdate' => 'nullable|date',
                 'achievements' => 'array',
@@ -117,7 +117,7 @@ class MemberController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'mobile_no' => 'required|string',
+                'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
                 'date_of_birth' => 'nullable|date',
                 'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
@@ -265,7 +265,7 @@ class MemberController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:athletes,id',
+                'id' => 'required|integer|exists:users,id',
                 'email' => 'string|email|max:255|unique:users',
                 'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
@@ -277,11 +277,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $athlete = Athlete::findOrFail($request->id);
-            if (!$athlete) {
-                return $this->sendError("User not found.");
-            }
-            $user = User::where('id', $athlete->user_id)->first();
+           
+            $user = User::query()->where('id', $request->id)->first();
             if (!$user) {
                 return $this->sendError("User not found.");
             }
@@ -552,7 +549,7 @@ class MemberController extends Controller
                 'first_name' => 'required|string|max:255',
                 'middle_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'mobile_no' => 'required|string',
+                'mobile_no' => 'required|min:10|max:10',
                 'password' => 'nullable|string',
                 'name_of_state_unit' => 'nullable|string',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -732,11 +729,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $Association = Association::findOrFail($request->id);
-            if (!$Association) {
-                return $this->sendError("User not found.");
-            }
-            $user = User::where('id', $Association->user_id)->first();
+           
+            $user = User::query()->where('id', $request->id)->first();
             if (!$user) {
                 return $this->sendError("User not found.");
             }
@@ -820,7 +814,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse($Association->id, 'Association updated successfully.');
+            return $this->sendResponse($user->id, 'Association updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -846,8 +840,34 @@ class MemberController extends Controller
         }
     }
 
-    public function test(Request $request)
+    public function getAllAssociation(Request $request)
     {
-        return response()->json(['message' => 'Form submitted successfully']);
+        try {
+            $validator = Validator::make($request->all(), [
+                'pageNo' => 'numeric',
+                'limit' => 'numeric',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 400);
+            }
+            $query = User::query()->where('role','member');
+            $count = $query->count();
+            if ($request->has('pageNo') && $request->has('limit')) {
+                $limit = $request->limit;
+                $pageNo = $request->pageNo;
+                $skip = $limit * $pageNo;
+                $query = $query->skip($skip)->limit($limit);
+            }
+            $data = $query->orderBy('id', 'DESC')->get();
+            if (count($data) > 0) {
+                $response['Association'] = $data;
+                $response['count'] = $count;
+                return $this->sendResponse($response, 'Association fetched successfully.', true);
+            } else {
+                return $this->sendError("No data found.");
+            }
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
     }
 }

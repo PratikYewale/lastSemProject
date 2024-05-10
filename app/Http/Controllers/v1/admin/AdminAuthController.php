@@ -44,7 +44,7 @@ public function saveFile($file, $process)
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6',
-                'mobile_no' => 'required|string',
+                'mobile_no' => 'required|min:10|max:10',
             ]);
 
             if ($validator->fails()) {

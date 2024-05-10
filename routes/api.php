@@ -12,6 +12,7 @@ use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
+use App\Http\Controllers\v1\Customer\AddressController;
 use App\Http\Controllers\v1\Customer\JobApplicationController;
 use App\Http\Controllers\v1\Admin\JobApplicationController as AppliedJobController;
 use App\Http\Controllers\v1\Customer\AnnouncementController as CustomerAnnouncementController;
@@ -185,6 +186,11 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 });
 
 Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
+
+    //Address
+    Route::get('getAllCity',[AddressController::class,'getAllCity']);
+    Route::get('getAllState',[AddressController::class,'getAllState']);
+    Route::get('getAllCountry',[AddressController::class,'getAllCountry']);
     // Member
     Route::post('addMember', [MemberController::class, 'addMember']);
     Route::post('loginMember', [MemberController::class, 'loginMember']);

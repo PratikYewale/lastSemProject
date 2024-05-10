@@ -19,7 +19,7 @@ class ContactUsController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|email',
-                'mobile_no' => 'nullable',
+                'mobile_no' => 'required|min:10|max:10',
                 'message' => 'nullable',
             ]);
             if ($validator->fails()) {
@@ -66,7 +66,7 @@ class ContactUsController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'nullable',
                 'email' => 'required|email',
-                'mobile_no' => 'required|nullable',
+                'mobile_no' => 'required|min:10|max:10',
                 'message' => 'nullable',
             ]);
             if ($validator->fails()) {
@@ -103,7 +103,7 @@ class ContactUsController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'nullable',
                 'email' => 'required|string|email|max:255',
-                'mobile_number' => 'required|regex:/^[0-9]{0,255}$/',
+                'mobile_no' => 'required|min:10|max:10',
 
                 'message' => 'nullable',
             ]);
