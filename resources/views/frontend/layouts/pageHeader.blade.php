@@ -2,7 +2,7 @@
 <html lang="en-US" class="scheme_original">
 
 <head>
-    <title>Contact Us &#8211; Mounthood &#8211; Snowboard School</title>
+    <title>Ski Snowboard India</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="format-detection" content="telephone=no">
