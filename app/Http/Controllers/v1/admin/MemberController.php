@@ -99,7 +99,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Athlete::query()->with(['achievements','sport_certificates'])->with('role','athlete');
+            $query = User::query()->with(['achievements','sport_certificates'])->where('role', 'athlete');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -130,7 +130,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Association::query()->with('user');
+            $query = User::query()->where('role','member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;

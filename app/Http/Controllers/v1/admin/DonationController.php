@@ -26,7 +26,7 @@ class DonationController extends Controller
                 'last_name' => 'required|string|max:255',
                 'honoree_last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'mobile_no' => 'required|string',
+                'mobile_no' => 'required|min:10|max:10',
                 'address_line1' => 'required|string',
                 'zip' => 'required|numeric',
                 'city' => 'required|string',
