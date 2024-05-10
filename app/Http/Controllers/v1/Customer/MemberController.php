@@ -845,4 +845,9 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+
+    public function test(Request $request)
+    {
+        return response()->json(['message' => 'Form submitted successfully']);
+    }
 }

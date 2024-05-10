@@ -19,7 +19,7 @@ class ContactUsController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required|email',
-                'mobile_no' => 'required|nullable',
+                'mobile_no' => 'nullable',
                 'message' => 'nullable',
             ]);
             if ($validator->fails()) {

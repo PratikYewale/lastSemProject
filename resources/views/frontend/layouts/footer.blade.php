@@ -182,7 +182,7 @@
         <script type="text/javascript" src="{{ url('frontend/js/core.init.js') }}"></script>
         <script type="text/javascript" src="{{ url('frontend/js/tpl.init.js') }}"></script>
 
-        <script type="text/javascript" src="{{ url('frontend/js/shortcodes.js') }}"></script>
+        {{-- <script type="text/javascript" src="{{ url('frontend/js/shortcodes.js') }}"></script> --}}
 
         <script type="text/javascript" src="{{ url('frontend/js/vendor/photostack/modernizr.min.js') }}"></script>
         <script type="text/javascript" src="{{ url('frontend/js/vendor/magnific/jquery.magnific-popup.min.js') }}"></script>

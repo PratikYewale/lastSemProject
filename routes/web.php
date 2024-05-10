@@ -40,6 +40,8 @@ Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::post('/addContactUs', [ContactUsController::class, 'addContactUs'])->name('addContactUs');
+Route::post('/addContactUsVerified', [ContactUsController::class, 'addContactUsVerified'])->name('addContactUsVerified');
+
 
 // News
 Route::get('/news', [NewsController::class, 'news']);
@@ -51,3 +53,6 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [MemberController::class, 'loginMember'])->name('loginMember');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/createSponsorship', [SponsorshipController::class, 'createSponsorship'])->name('createSponsorship');
+Route::post('/addAssociationMember', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
+Route::post('/addAssociationMember', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
+Route::post('/test', [MemberController::class, 'test'])->name('test');
