@@ -22,7 +22,7 @@
             <div class="modal-body px-5">
                 <div class="comments_form">
                     <div id="respond" class="comment-respond">
-                        <form action="{{ Auth::check() ? route('addContactUs') : route('addContactUsVerified') }}" method="post" id="donationForm"
+                        <form action="{{ Auth::user() ? route('addContactUs') : route('addContactUsVerified') }}" method="post" id="donationForm"
                             class="donationForm sc_input_hover_default">
                             {{ csrf_field()}}
                             <div class="row">

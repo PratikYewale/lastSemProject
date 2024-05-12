@@ -233,18 +233,18 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="">
+                                <button type="button"
+                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
+                                    data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit"
+                                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button"
-                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                    data-bs-dismiss="modal">Cancel</button>
-                <button type="submit"
-                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
-            </div>
+           
         </div>
     </div>
 </div>

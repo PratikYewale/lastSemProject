@@ -4,6 +4,7 @@ use App\Http\Controllers\Frontend\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
+use App\Http\Controllers\Frontend\RazorpayPaymentController;
 use App\Http\Controllers\v1\Customer\ContactUsController;
 use App\Http\Controllers\v1\Customer\MemberController;
 use App\Http\Controllers\v1\Customer\SponsorshipController;
@@ -53,6 +54,14 @@ Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [MemberController::class, 'loginMember'])->name('loginMember');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/createSponsorship', [SponsorshipController::class, 'createSponsorship'])->name('createSponsorship');
-Route::post('/addAssociationMember', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
-Route::post('/addAssociationMember', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
-Route::post('/test', [MemberController::class, 'test'])->name('test');
+Route::post('/registration', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
+Route::post('/athleteRegistration', [MemberController::class, 'addAthlete'])->name('addAthlete');
+// =============Rozerpay ==============
+// web.php
+
+
+
+Route::get('/razorpay-payment', [RazorpayPaymentController::class, 'index']);
+Route::post('/razorpay-payment', [RazorpayPaymentController::class, 'payment'])->name('payment');
+
+Route::post('/paymentVerification', [MemberController::class, 'paymentVerification'])->name('paymentVerification');

@@ -162,8 +162,10 @@
               <div class="modal-body px-5">
                   <div class="comments_form">
                       <div id="respond" class="comment-respond">
-                          <form action="#" method="post" id="donationForm"
-                              class="donationForm sc_input_hover_default">
+                          <form id="addAthlete" action="{{ route('addAssociationMember') }}" method="POST"
+                              enctype="multipart/form-data" class="donationForm sc_input_hover_default"
+                              onsubmit="return validateForm()">
+                              @csrf <!-- CSRF token -->
                               <div class="row">
                                   <div class="col-lg-12">
                                       <h4 class="mt-auto">Athletes Information</h4>
@@ -176,9 +178,9 @@
                                   </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="last_name" class="form-label">Middle Name</label>
-                                          <input type="text" class="form-control" id="last_name"
-                                              name="last_name">
+                                          <label for="middle_name" class="form-label">Middle Name</label>
+                                          <input type="text" class="form-control" id="middle_name"
+                                              name="middle_name">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
@@ -188,69 +190,42 @@
                                               name="last_name">
                                       </div>
                                   </div>
+
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="last_name" class="form-label">Date Of Birth</label>
-                                          <input type="date" class="form-control" id="last_name"
-                                              name="last_name">
+                                          <label for="date_of_birth" class="form-label">Date Of Birth</label>
+                                          <input type="date" class="form-control" id="date_of_birth"
+                                              name="date_of_birth">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="profile_picture" class="form-label">Profile Picture</label>
+                                          <input type="file" class="form-control" id="profile_picture"
+                                              name="profile_picture">
                                       </div>
                                   </div>
 
 
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="address_line1" class="form-label">Gender</label>
+                                          <label for="gender" class="form-label">Gender</label>
                                           <div class="d-flex ">
                                               <div class="form-check ">
-                                                  <input class="form-check-input" type="radio"
-                                                      name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                                  <label class="form-check-label" for="flexRadioDefault1">
+                                                  <input class="form-check-input" type="radio" name="gender"
+                                                      id="gender" value="1" checked>
+                                                  <label class="form-check-label" for="gender">
                                                       Male
                                                   </label>
                                               </div>
                                               <div class="form-check ms-3">
-                                                  <input class="form-check-input" type="radio"
-                                                      name="flexRadioDefault" id="flexRadioDefault2" >
-                                                  <label class="form-check-label" for="flexRadioDefault2">
+                                                  <input class="form-check-input" type="radio" name="gender"
+                                                      id="gender" value="0">
+                                                  <label class="form-check-label" for="gender">
                                                       Female
                                                   </label>
                                               </div>
                                           </div>
-                                      </div>
-                                  </div>
-
-
-
-                                  <div class="col-lg-4">
-                                      <div class="mb-3">
-                                          <label for="address_line1" class="form-label">Registered Address</label>
-                                          <input type="text" class="form-control" id="address_line1"
-                                              name="address_line1">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-4">
-                                      <div class="mb-3">
-                                          <label for="city" class="form-label">City</label>
-                                          <input type="text" class="form-control" id="city" name="city">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-4">
-                                      <div class="mb-3">
-                                          <label for="state" class="form-label">State / Province</label>
-                                          <input type="text" class="form-control" id="state" name="state">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <label for="state" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="state" name="state">
-                                    </div>
-                                </div>
-
-                                  <div class="col-lg-4">
-                                      <div class="mb-3">
-                                          <label for="zip " class="form-label">Postal Code</label>
-                                          <input type="text" class="form-control" id="zip " name="zip">
                                       </div>
                                   </div>
 
@@ -267,115 +242,179 @@
                                       <div class="mb-3">
                                           <label for="mobile_no" class="form-label">Mobile Number</label>
                                           <input type="tel" class="form-control" id="mobile_no"
-                                              name="mobile_no">
+                                              name="mobile_no" pattern="[0-9]{10}" maxlength="10">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-12">
+                                      <h4 class="mt-auto form-section-title">Address Information</h4>
+                                  </div>
+
+
+
+
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="country" class="form-label">Country</label>
+                                          <input type="text" class="form-control" id="country" name="country">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="text" class="form-label">Adhar Card Number</label>
-                                          <input type="text" class="form-control" id="website" name="website">
+                                          <label for="state" class="form-label">State / Province</label>
+                                          <input type="text" class="form-control" id="state" name="state">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <label for="text" class="form-label">Passport Number</label>
-                                        <input type="text" class="form-control" id="website" name="website">
-                                    </div>
-                                </div>
-                             
+                                      <div class="mb-3">
+                                          <label for="city" class="form-label">City</label>
+                                          <input type="text" class="form-control" id="city" name="city">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="postal_code" class="form-label">Postal Code</label>
+                                          <input type="text" class="form-control" id="postal_code"
+                                              name="postal_code">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="address" class="form-label">Address</label>
+                                          <input type="text" class="form-control" id="address" name="address">
+                                      </div>
+                                  </div>
+
+                                  <div class="col-lg-12">
+                                      <h4 class="mt-auto form-section-title">Documents Upload</h4>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="aadhar_number" class="form-label">Aadhar Card Number</label>
+                                          <input type="text" class="form-control" id="aadhar_number"
+                                              name="aadhar_number">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="aadhar_card" class="form-label">Aadhar Card </label>
+                                          <input type="file" class="form-control" id="aadhar_card"
+                                              name="aadhar_card">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4 d-none d-lg-block"></div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="passport_number" class="form-label">Passport Number</label>
+                                          <input type="text" class="form-control" id="passport_number"
+                                              name="passport_number">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="passport" class="form-label">Passport (Upload)</label>
+                                          <input type="file" class="form-control" id="passport" name="passport">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4 d-none d-lg-block"></div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="recommendation" class="form-label">Recommendation from State
+                                              Sports
+                                              Federation (if available)</label>
+                                          <input type="file" class="form-control" id="recommendation"
+                                              name="recommendation">
+                                      </div>
+                                  </div>
 
                                   <div class="col-lg-12 mt-5">
                                       <h4 class="mt-auto mb-auto">Sport Achievements</h4>
-                                      <p class="mt-auto">Please provide details of your sports achievements, including competitions participated in, awards won, and any relevant accomplishments.</p>
+                                      <p class="mt-auto">Please provide details of your sports achievements, including
+                                          competitions participated in, awards won, and any relevant accomplishments.
+                                      </p>
                                   </div>
 
-                                  <div class="col-lg-2">
-                                      <div class="mb-3">
-                                          <label for="first_name" class="form-label">Year</label>
-                                          <input type="text" class="form-control" id="first_name"
-                                              name="first_name">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-2">
-                                      <div class="mb-3">
-                                          <label for="last_name" class="form-label">Result</label>
-                                          <input type="text" class="form-control" id="email" name="email">
-                                      </div>
-                                  </div>
-                                  <div class="col-lg-2">
-                                    <div class="mb-3">
-                                        <label for="first_name" class="form-label">Year</label>
-                                        <input type="text" class="form-control" id="first_name"
-                                            name="first_name">
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="mb-3">
-                                        <label for="last_name" class="form-label">Result</label>
-                                        <input type="text" class="form-control" id="email" name="email">
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="mb-3">
-                                        <label for="first_name" class="form-label">Year</label>
-                                        <input type="text" class="form-control" id="first_name"
-                                            name="first_name">
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="mb-3">
-                                        <label for="last_name" class="form-label">Result</label>
-                                        <input type="text" class="form-control" id="email" name="email">
-                                    </div>
-                                </div>
-                                
-                                <div class="col-lg-12 mt-5">
-                                    <h4 class="mt-auto mb-auto">Documents Upload</h4>
-                                    <p class="mt-auto">Please upload the following documents</p>
-                                </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="last_name" class="form-label">Profile Picture</label>
-                                          <input type="file" class="form-control" id="last_name"
-                                              name="last_name">
+                                          <label for="achievements_name" class="form-label">Year</label>
+                                          <input type="text" class="form-control" id="achievements_name"
+                                              name="achievements_name">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="last_name" class="form-label">Sports Certificates/Awards</label>
-                                          <input type="file" class="form-control" id="last_name"
-                                              name="last_name">
+                                          <label for="achievements_result" class="form-label">Result</label>
+                                          <input type="text" class="form-control" id="achievements_result"
+                                              name="achievements_result">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="sport_certificates" class="form-label">Sports
+                                            Certificates/Awards</label>
+                                        <input type="file" class="form-control" id="sport_certificates"
+                                            name="sport_certificates">
+                                    </div>
+                                </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="achievements_name" class="form-label">Year</label>
+                                          <input type="text" class="form-control" id="achievements_name"
+                                              name="achievements_name">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
-                                          <label for="last_name" class="form-label">Recommendation from State Sports Federation (if available)</label>
-                                          <input type="file" class="form-control" id="last_name"
-                                              name="last_name">
+                                          <label for="achievements_result" class="form-label">Result</label>
+                                          <input type="text" class="form-control" id="achievements_result"
+                                              name="achievements_result">
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label for="last_name" class="form-label">Aadhar Card </label>
-                                        <input type="file" class="form-control" id="last_name"
-                                            name="last_name">
+                                        <label for="sport_certificates" class="form-label">Sports
+                                            Certificates/Awards</label>
+                                        <input type="file" class="form-control" id="sport_certificates"
+                                            name="sport_certificates">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="achievements_name" class="form-label">Year</label>
+                                          <input type="text" class="form-control" id="achievements_name"
+                                              name="achievements_name">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="achievements_result" class="form-label">Result</label>
+                                          <input type="text" class="form-control" id="achievements_result"
+                                              name="achievements_result">
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
                                     <div class="mb-3">
-                                        <label for="last_name" class="form-label">Passport (Upload)</label>
-                                        <input type="file" class="form-control" id="last_name"
-                                            name="last_name">
+                                        <label for="sport_certificates" class="form-label">Sports
+                                            Certificates/Awards</label>
+                                        <input type="file" class="form-control" id="sport_certificates"
+                                            name="sport_certificates">
                                     </div>
                                 </div>
+
+                            
+
+                               
+
+
+
 
                                   <div class="col-lg-12">
                                       <div class="mb-3 d-flex">
                                           <input class="form-check-input" type="checkbox" value=""
-                                              id="flexCheckChecked">
-                                          <label class="form-check-label ms-3" for="flexCheckChecked">
+                                              id="acknowledge" name="acknowledge">
+                                          <label class="form-check-label ms-3" for="acknowledge">
                                               <b>Disclaimer:</b><br />
-                                              By submitting this form, I certify that all information provided is true and accurate to the best of my knowledge.
+                                              By submitting this form, I certify that all information provided is true
+                                              and accurate to the best of my knowledge.
 
                                           </label>
                                       </div>
@@ -385,18 +424,18 @@
 
 
                               </div>
-
+                              <div class="">
+                                  <button type="button"
+                                      class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
+                                      data-bs-dismiss="modal">Cancel</button>
+                                  <button type="submit"
+                                      class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
+                              </div>
                           </form>
                       </div>
                   </div>
               </div>
-              <div class="modal-footer">
-                  <button type="button"
-                      class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                      data-bs-dismiss="modal">Cancel</button>
-                  <button type="button"
-                      class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
-              </div>
+
           </div>
       </div>
   </div>
