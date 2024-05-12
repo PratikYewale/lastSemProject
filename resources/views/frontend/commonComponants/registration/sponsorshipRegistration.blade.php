@@ -160,7 +160,8 @@
                 <div class="sponsership_form">
                     <div id="sponsership_form" class="comment-respond">
                         <form id="sponsershipForm" action="{{ route('createSponsorship') }}" method="POST"
-                            enctype="multipart/form-data" class="sponsershipForm sc_input_hover_default">
+                            enctype="multipart/form-data" class="sponsershipForm sc_input_hover_default"
+                            onsubmit="return validateForm()">
                             @csrf <!-- CSRF token -->
                             <div class="row">
 
@@ -169,6 +170,7 @@
                                         <label for="organization_name" class="form-label">Organisation Name</label>
                                         <input type="text" placeholder="Name" class="form-control"
                                             id="organization_name" name="organization_name">
+                                        <div id="orgNameError" class="text-danger"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -176,6 +178,7 @@
                                         <label for="organization_mail" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="organization_mail"
                                             name="organization_mail">
+                                        <div id="orgMailError" class="text-danger"></div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -183,49 +186,35 @@
                                         <label for="organization_contact" class="form-label">Contact Number</label>
                                         <input type="text" class="form-control" id="organization_contact"
                                             name="organization_contact">
+                                        <div id="orgContactError" class="text-danger"></div>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label for="plan" class="form-label">Select Package</label>
-                                        <select class="form-select" id="plan" name="plan">
+                                        <select class="form-select" id="plan" name="plan"
+                                            onchange="updateAmount()">
                                             <option value="" disabled selected>Select Plan</option>
                                             <option value="gold">GOLD PACKAGE</option>
                                             <option value="silver">SILVER PACKAGE</option>
                                             <option value="bronze">BRONZE PACKAGE</option>
                                         </select>
+                                        <p>Your Total Amount is: ₹ <span id="totalAmount"></span></p>
+                                        <div id="planError" class="text-danger"></div>
                                     </div>
                                 </div>
 
-
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 d-none">
                                     <div class="mb-3">
                                         <label for="amount" class="form-label">Amount</label>
-                                        <input type="text" class="form-control" id="amount" name="amount">
+                                        <input type="text" class="form-control" id="amount" name="amount"
+                                            disabled>
+                                        <div id="amountError" class="text-danger"></div>
                                     </div>
                                 </div>
 
-                                <!-- Add an event listener to the select element to detect changes -->
-                                <script>
-                                    document.getElementById('plan').addEventListener('change', function() {
-                                        // Get the selected package value
-                                        var selectedPackage = this.value;
-
-                                        // Define the amounts for each package
-                                        var amounts = {
-                                            'gold': 500, // Update amounts as per your requirements
-                                            'silver': 400,
-                                            'bronze': 300
-                                        };
-
-                                        // Set the amount field value based on the selected package
-                                        document.getElementById('amount').value = amounts[selectedPackage];
-                                    });
-                                </script>
-
-
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 d-none">
                                     <div class="mb-3">
                                         <label for="currency" class="form-label">Currency</label>
                                         <input type="text" class="form-control" id="currency" value="INR"
@@ -241,10 +230,120 @@
                                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
                             </div>
                         </form>
+
+                        <script>
+                            // Function to set amount based on selected package
+                            function setAmount() {
+                                var selectedPackage = document.getElementById('plan').value;
+                                var amountField = document.getElementById('amount');
+
+                                // Set amount based on selected package
+                                switch (selectedPackage) {
+                                    case 'gold':
+                                        amountField.value = '1000';
+                                        break;
+                                    case 'silver':
+                                        amountField.value = '700';
+                                        break;
+                                    case 'bronze':
+                                        amountField.value = '500';
+                                        break;
+                                    default:
+                                        amountField.value = '';
+                                        break;
+                                }
+                            }
+
+                            // Function to update total amount
+                            function updateAmount() {
+                                var selectedPackage = document.getElementById('plan').value;
+                                var totalAmountElement = document.getElementById('totalAmount');
+
+                                // Update total amount based on selected package
+                                switch (selectedPackage) {
+                                    case 'gold':
+                                        totalAmountElement.textContent = '1000';
+                                        break;
+                                    case 'silver':
+                                        totalAmountElement.textContent = '700';
+                                        break;
+                                    case 'bronze':
+                                        totalAmountElement.textContent = '500';
+                                        break;
+                                    default:
+                                        totalAmountElement.textContent = '';
+                                        break;
+                                }
+                            }
+
+                            // Event listener to update amount field when package selection changes
+                            document.getElementById('plan').addEventListener('change', function() {
+                                setAmount();
+                                updateAmount();
+                            });
+
+                            // Set amount when page loads
+                            window.addEventListener('load', function() {
+                                setAmount();
+                            });
+
+                            // Form validation function
+                            function validateForm() {
+                                var organizationName = document.getElementById('organization_name').value;
+                                var organizationMail = document.getElementById('organization_mail').value;
+                                var organizationContact = document.getElementById('organization_contact').value;
+                                var selectedPackage = document.getElementById('plan').value;
+                                var amount = document.getElementById('amount').value;
+
+                                var isValid = true;
+
+                                if (organizationName.trim() === "") {
+                                    document.getElementById('orgNameError').innerText = "Organization Name is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgNameError').innerText = "";
+                                }
+
+                                if (organizationMail.trim() === "") {
+                                    document.getElementById('orgMailError').innerText = "Organization Mail is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgMailError').innerText = "";
+                                }
+
+                                if (organizationContact.trim() === "") {
+                                    document.getElementById('orgContactError').innerText = "Organization Contact is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgContactError').innerText = "";
+                                }
+
+                                if (selectedPackage === "") {
+                                    document.getElementById('planError').innerText = "Please select a package";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('planError').innerText = "";
+                                }
+
+                                if (amount.trim() === "") {
+                                    document.getElementById('amountError').innerText = "Amount is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('amountError').innerText = "";
+                                }
+
+                                return isValid;
+                            }
+                        </script>
+
+
+
+
+
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </div>

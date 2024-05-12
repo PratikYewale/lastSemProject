@@ -31,7 +31,7 @@ class SponsorshipController extends Controller
                 'currency'=>'required'
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
 
             $addSponsorship = new Sponsorship;
@@ -44,6 +44,7 @@ class SponsorshipController extends Controller
             $addSponsorship->currency=$request->currency;
             $addSponsorship->amount=$request->amount;
             if ($addSponsorship->save()) {
+                
                 $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
                 $orderDetails = $api->order->create([
                     'receipt' => 'Inv-' . $addSponsorship->id,
@@ -84,6 +85,7 @@ class SponsorshipController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    
     public function sponsorshipPaymentVerification(Request $request)
     {
         try {
