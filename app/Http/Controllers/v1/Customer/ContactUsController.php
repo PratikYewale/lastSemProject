@@ -23,7 +23,7 @@ class ContactUsController extends Controller
                 'message' => 'nullable',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             $ContactUs = new ContactUs;
             $ContactUs->name = $request->name;
@@ -54,12 +54,15 @@ class ContactUsController extends Controller
                     ->subject('New Contact Query');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
-            return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
+            return back()->with('success', 'Enquiry added Successfully');
+           
         } catch (Exception $e) {
             dd($e);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+   
+   
     public function addContactUsVerified(Request $request)
     {
         try {

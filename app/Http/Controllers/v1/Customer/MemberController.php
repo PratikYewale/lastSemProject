@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Razorpay\Api\Api;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Toastr;
 
 class MemberController extends Controller
 {
@@ -74,7 +75,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -104,7 +105,8 @@ class MemberController extends Controller
             $newMember->save();
             DB::commit();
             $data = Member::query()->where('id', $newMember->id)->with('user')->get();
-            return $this->sendResponse($data, 'Member added successfully.', true);
+            // return $this->sendResponse($data, 'Member added successfully.', true);
+            return back()->with('success', 'Member added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -212,7 +214,7 @@ class MemberController extends Controller
             });
             $adminData = [
                 'to_name' => 'Admin',
-                'email' => 'achalbhujbal2003@gmail.com', 
+                'email' => 'achalbhujbal2003@gmail.com',
                 'message' => 'A new athlete have registered.',
                 'query' => $user,
             ];
@@ -277,7 +279,7 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-           
+
             $user = User::query()->where('id', $request->id)->first();
             if (!$user) {
                 return $this->sendError("User not found.");
@@ -294,7 +296,7 @@ class MemberController extends Controller
             if ($request->has('mobile_no')) {
                 $user->mobile_no = $request->mobile_no;
             }
-           
+
 
             if ($request->has('gender')) {
                 $user->gender = $request->gender;
@@ -353,7 +355,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->with(['achievements','sport_certificates'])->where('role', 'athlete');
+            $query = User::query()->with(['achievements', 'sport_certificates'])->where('role', 'athlete');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -373,7 +375,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
+
 
     public function updateAchievement(Request $request): JsonResponse
     {
@@ -429,12 +431,13 @@ class MemberController extends Controller
                 Auth::login($user);
                 return redirect('/');
             } else {
-                // return $this->sendError('Invalid credentials.', [], 401);
+                Toastr::error('Invalid credentials', 'Error');
                 return back()->withErrors(['error' => 'Invalid credentials']);
             }
         } catch (\Exception $e) {
-            return redirect()->route('login')
-                ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
+            // Exception occurred
+            Toastr::error('Something went wrong: ' . $e->getMessage(), 'Error');
+            return redirect()->route('login')->withErrors(['error' => 'Something went wrong']);
         }
     }
 
@@ -542,7 +545,7 @@ class MemberController extends Controller
         }
     }
 
-    public function addAssociationMember(Request $request): JsonResponse
+    public function addAssociationMember(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -577,7 +580,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -645,9 +648,9 @@ class MemberController extends Controller
             });
             $adminData = [
                 'to_name' => 'Admin',
-                'email' => 'achalbhujbal2003@gmail.com', 
+                'email' => 'achalbhujbal2003@gmail.com',
                 'message' => 'A new association have registered.',
-                
+
             ];
             Mail::send('emails.adminAssociationRegister', $adminData, function ($message) use ($adminData) {
                 $message->to($adminData['email'], $adminData['to_name'])
@@ -657,7 +660,10 @@ class MemberController extends Controller
 
             DB::commit();
             $data = Member::query()->where('id', $user->id)->with('user')->get();
-            return $this->sendResponse($data, 'Association Member added successfully.', true);
+            // return $this->sendResponse($data, 'Association Member added successfully.', true);
+            return redirect('/registration');
+        
+            
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -729,7 +735,7 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-           
+
             $user = User::query()->where('id', $request->id)->first();
             if (!$user) {
                 return $this->sendError("User not found.");
@@ -850,7 +856,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->where('role','member');
+            $query = User::query()->where('role', 'member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
