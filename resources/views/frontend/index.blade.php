@@ -194,64 +194,72 @@
                 <div class="panel_top">
                     <nav class="menu_main_nav_area">
                         <!-- Mobile Menu -->
+                        <!-- Mobile Menu -->
                         <ul id="menu_mobile" class="menu_main_nav">
                             <!-- Menu: Home -->
-                            <li class="{{ request()->is('/') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <li
+                                class="{{ Route::currentRouteName() == 'home' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/') }}"><span>Home</span></a>
                             </li>
                             <!-- /Menu: Home -->
 
                             <!-- Menu: About -->
-                            <li class="{{ request()->is('about*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <li
+                                class="{{ Route::currentRouteName() == 'about' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/about') }}"><span>About</span></a>
                             </li>
                             <!-- /Menu: About -->
 
                             <!-- Menu: Teams -->
-                            <li class="{{ request()->is('teams*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <li
+                                class="{{ Route::currentRouteName() == 'teams' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/teams') }}"><span>Teams</span></a>
                             </li>
                             <!-- /Menu: Teams -->
 
                             <!-- Menu: Services -->
                             <li
-                                class="{{ request()->is('services*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                class="{{ Route::currentRouteName() == 'services' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/services') }}"><span>Services</span></a>
                             </li>
                             <!-- /Menu: Services -->
 
                             <!-- Menu: Store -->
-                            <li class="{{ request()->is('shop*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <li
+                                class="{{ Route::currentRouteName() == 'shop' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="shop-page.html"><span>Store</span></a>
                             </li>
                             <!-- /Menu: Store -->
 
                             <!-- Menu: Announcement -->
                             <li
-                                class="{{ request()->is('announcement*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                class="{{ Route::currentRouteName() == 'announcement' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                             </li>
 
                             <!-- Menu: Media Gallery or Registration -->
                             @if (Auth::user())
                                 <li
-                                    class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    class="{{ Route::currentRouteName() == 'media-gallery' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                     <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
                                 </li>
                             @else
                                 <li
-                                    class="{{ request()->is('registration*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    class="{{ Route::currentRouteName() == 'registration' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                     <a href="{{ url('/registration') }}"><span>Registration</span></a>
                                 </li>
                             @endif
                             <!-- /Menu: Media Gallery or Registration -->
 
                             <!-- Menu: Contact Us -->
-                            <li class="{{ request()->is('contact*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <li
+                                class="{{ Route::currentRouteName() == 'contact' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                             </li>
                             <!-- /Menu: Contact Us -->
                         </ul>
+                        <!-- /Mobile Menu -->
+
                         <!-- /Mobile Menu -->
 
                     </nav>
