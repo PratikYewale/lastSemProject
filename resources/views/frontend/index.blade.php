@@ -73,83 +73,94 @@
                                 <nav class="menu_main_nav_area menu_hover_slide_line">
                                     <ul id="menu_main" class="menu_main_nav">
                                         <!-- Menu: Home -->
-                                        <li class="menu-item current-menu-ancestor ">
+                                        <li
+                                            class="{{ request()->is('/') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/') }}"><span>Home</span></a>
-
                                         </li>
                                         <!-- /Menu: Home -->
 
-                                        <!-- Menu: Classes -->
-                                        <li class="menu-item">
+                                        <!-- Menu: About -->
+                                        <li
+                                            class="{{ request()->is('about*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/about') }}"><span>About</span></a>
                                         </li>
-                                        <!-- /Menu: Classes -->
-                                        <!-- Menu: Rent -->
-                                        <li class="menu-item">
+                                        <!-- /Menu: About -->
+
+                                        <!-- Menu: Teams -->
+                                        <li
+                                            class="{{ request()->is('teams*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/teams') }}"><span>Teams</span></a>
                                         </li>
-                                        <!-- /Menu: Rent -->
-                                        <!-- Menu: Rent -->
-                                        <li class="menu-item">
+                                        <!-- /Menu: Teams -->
+
+                                        <!-- Menu: Services -->
+                                        <li
+                                            class="{{ request()->is('services*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/services') }}"><span>Services</span></a>
                                         </li>
-                                        <!-- /Menu: Rent -->
-                                        <!-- Menu: Store -->
-                                        <li class="menu-item">
+                                        <!-- /Menu: Services -->
+
+                                        <!-- Menu: Announcement -->
+                                        <li
+                                            class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
-                                        <!-- /Menu: Store -->
-                                        <!-- Menu: News -->
-                                        <li class="menu-item ">
-                                            <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                        <!-- /Menu: Announcement -->
 
-                                        </li>
-                                        <!-- /Menu: News -->
+                                        <!-- Menu: Media Gallery or Registration -->
+                                        @if (Auth::user())
+                                            <li
+                                                class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                                <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
+                                            </li>
+                                        @else
+                                            <li
+                                                class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                                <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                            </li>
+                                        @endif
+                                        <!-- /Menu: Media Gallery or Registration -->
+
                                         <!-- Menu: Contact Us -->
-                                        {{-- <li class="menu-item">
-                                            <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                                        </li> --}}
-                                        <li class="menu-item">
+                                        <li
+                                            class="{{ request()->is('contact*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                         </li>
-
-
-
-
+                                        <!-- /Menu: Contact Us -->
                                     </ul>
                                 </nav>
-              <!-- Cart -->
-              <div class="menu_main_cart top_panel_icon">
-                @if (Auth::user())
-                    <a href="{{ url('/') }}">
-                        <span class="contact_icon icon-user"></span>
-                        <span class="cart_summa">{{ Auth::user()->first_name }}
-                            {{ Auth::user()->last_name }}</span>
+                                <!-- Cart -->
+                                <div class="menu_main_cart top_panel_icon">
+                                    @if (Auth::user())
+                                        <a href="{{ url('/') }}">
+                                            <span class="contact_icon icon-user"></span>
+                                            <span class="cart_summa">{{ Auth::user()->first_name }}
+                                                {{ Auth::user()->last_name }}</span>
 
-                    </a>
-                @else
-                    <a href="{{ url('/login') }}">
-                        <span class="contact_icon icon-user"></span>
-                        <span class="cart_summa">Login</span>
+                                        </a>
+                                    @else
+                                        <a href="{{ url('/login') }}">
+                                            <span class="contact_icon icon-user"></span>
+                                            <span class="cart_summa">Login</span>
 
-                    </a>
-                @endif
+                                        </a>
+                                    @endif
 
-            </div>
-            <!-- /Cart -->
-            <!-- Booking button block -->
-            <div class="menu_main_additional_button top_panel_icon">
-                <div class="menu_main_additional_button_container">
-                    <a href="#">
-                        <img src="{{ url('frontend/images/booking_heared_img.png') }}"
-                            alt="">
-                    </a>
-                </div>
-            </div>
-            <!-- /Booking button block -->
-                          
+                                </div>
+                                <!-- /Cart -->
+                                <!-- Booking button block -->
+                                <div class="menu_main_additional_button top_panel_icon">
+                                    <div class="menu_main_additional_button_container">
+                                        <a href="#">
+                                            <img src="{{ url('frontend/images/booking_heared_img.png') }}"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- /Booking button block -->
+
                             </div>
-                       
+
                         </div>
                         <!-- /Main menu -->
                     </div>
@@ -185,50 +196,64 @@
                         <!-- Mobile Menu -->
                         <ul id="menu_mobile" class="menu_main_nav">
                             <!-- Menu: Home -->
-                            <li class="menu-item ">
+                            <li class="{{ request()->is('/') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/') }}"><span>Home</span></a>
-
                             </li>
                             <!-- /Menu: Home -->
 
-                            <!-- Menu: Classes -->
-                            <li class="menu-item">
+                            <!-- Menu: About -->
+                            <li class="{{ request()->is('about*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/about') }}"><span>About</span></a>
                             </li>
-                            <!-- /Menu: Classes -->
-                            <!-- Menu: Rent -->
-                            <li class="menu-item">
+                            <!-- /Menu: About -->
+
+                            <!-- Menu: Teams -->
+                            <li class="{{ request()->is('teams*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/teams') }}"><span>Teams</span></a>
                             </li>
-                            <!-- /Menu: Rent -->
-                            <!-- Menu: Rent -->
-                            <li class="menu-item">
+                            <!-- /Menu: Teams -->
+
+                            <!-- Menu: Services -->
+                            <li
+                                class="{{ request()->is('services*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/services') }}"><span>Services</span></a>
                             </li>
-                            <!-- /Menu: Rent -->
-                            <!-- Menu: Shop -->
-                            <li class="menu-item">
+                            <!-- /Menu: Services -->
+
+                            <!-- Menu: Store -->
+                            <li class="{{ request()->is('shop*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="shop-page.html"><span>Store</span></a>
                             </li>
-                            <!-- /Menu: Shop -->
-                            <!-- Menu: News -->
-                            <li class="menu-item ">
+                            <!-- /Menu: Store -->
+
+                            <!-- Menu: Announcement -->
+                            <li
+                                class="{{ request()->is('announcement*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
-
                             </li>
-                            <li class="menu-item ">
-                                <a href="{{ url('/registration') }}"><span>Registration</span></a>
 
-                            </li>
-                            {{-- <li class="menu-item ">
-                                    <a href="{{ url('/membership') }}"><span>Membership</span></a>
+                            <!-- Menu: Media Gallery or Registration -->
+                            @if (Auth::user())
+                                <li
+                                    class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
+                                </li>
+                            @else
+                                <li
+                                    class="{{ request()->is('registration*') ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                </li>
+                            @endif
+                            <!-- /Menu: Media Gallery or Registration -->
 
-                                </li> --}}
-                            <li class="menu-item current-menu-item">
+                            <!-- Menu: Contact Us -->
+                            <li class="{{ request()->is('contact*') ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                             </li>
+                            <!-- /Menu: Contact Us -->
                         </ul>
                         <!-- /Mobile Menu -->
+
                     </nav>
                 </div>
                 <div class="panel_bottom"></div>

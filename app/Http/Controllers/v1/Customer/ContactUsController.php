@@ -57,7 +57,7 @@ class ContactUsController extends Controller
             return back()->with('success', 'Enquiry added Successfully');
            
         } catch (Exception $e) {
-            dd($e);
+            // dd($e);
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
