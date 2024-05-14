@@ -157,7 +157,7 @@
                          @endif
                          <form id="addAssociationMemberForm" action="{{ route('addAssociationMember') }}" method="POST"
                              enctype="multipart/form-data" class="donationForm sc_input_hover_default"
-                             onsubmit="return validateForm()">
+                             ">
                              @csrf <!-- CSRF token -->
                              <div class="row">
                                  <div class="col-lg-12">
@@ -165,10 +165,10 @@
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="name_of_state_unit" class="form-label">Name of State Unit</label>
-                                         <input type="text" class="form-control" id="name_of_state_unit"
-                                             name="name_of_state_unit">
-                                         <div id="error-name_of_state_unit"class="text-danger"></div>
+                                         <label for="first_name" class="form-label">Name of State Unit</label>
+                                         <input type="text" class="form-control" id="first_name"
+                                             name="first_name">
+                                         <div id="error-orgNameError"class="text-danger"></div>
                                      </div>
 
                                  </div>
@@ -196,7 +196,7 @@
                                      <div class="mb-3">
                                          <label for="email" class="form-label">Email Id</label>
                                          <input type="email" class="form-control" id="email" name="email">
-                                         <div id="error-email"class="text-danger"></div>
+                                         <div id="orgMailError"class="text-danger"></div>
                                      </div>
 
                                  </div>
@@ -206,7 +206,7 @@
                                          <label for="mobile_no" class="form-label">Mobile Number</label>
                                          <input type="number" class="form-control" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" maxlength="10">
 
-                                         <div id="error-mobile_no"class="text-danger"></div>
+                                         <div id="orgContactError"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -473,20 +473,13 @@
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="currency" class="form-label" disabled>Currency</label>
-                                         <input type="text" class="form-control" value="INR" id="currency"
-                                             name="currency">
-                                         <div id="error-currency"class="text-danger"></div>
+                                         <label for="password" class="form-label" disabled>Password</label>
+                                         <input type="password" class="form-control" id="password"
+                                             name="password">
+                                         <div id="error-password"class="text-danger"></div>
                                      </div>
                                  </div>
-                                 <div class="col-lg-4">
-                                     <div class="mb-3">
-                                         <label for="amount" class="form-label" disabled>Amount</label>
-                                         <input type="text" class="form-control" id="amount" name="amount"
-                                             value="1000">
-                                         <div id="error-amount"class="text-danger"></div>
-                                     </div>
-                                 </div>
+                                
                                  <div class="col-lg-12">
                                      <div class="mb-3 d-flex">
                                          <input class="form-check-input" type="checkbox" value=""
@@ -517,6 +510,47 @@
                              </div>
 
                          </form>
+
+                         <script>
+                   
+                  
+
+                    
+
+                            // Form validation function
+                            function validateForm() {
+                                var organizationName = document.getElementById('first_name').value;
+                                var organizationMail = document.getElementById('email').value;
+                                var organizationContact = document.getElementById('mobile_no').value;
+                           
+
+                                var isValid = true;
+
+                                if (organizationName.trim() === "") {
+                                    document.getElementById('orgNameError').innerText = "Organization Name is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgNameError').innerText = "";
+                                }
+
+                                if (organizationMail.trim() === "") {
+                                    document.getElementById('orgMailError').innerText = "Organization Mail is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgMailError').innerText = "";
+                                }
+
+                                if (organizationContact.trim() === "") {
+                                    document.getElementById('orgContactError').innerText = "Organization Contact is required";
+                                    isValid = false;
+                                } else {
+                                    document.getElementById('orgContactError').innerText = "";
+                                }
+
+
+                                return isValid;
+                            }
+                        </script>
                      </div>
                  </div>
              </div>
@@ -525,63 +559,4 @@
      </div>
  </div>
  <!-- /Modal -->
- <script>
-     function validateForm() {
-         var nameOfStateUnit = document.getElementById("name_of_state_unit").value;
-         var dateOfEstablishment = document.getElementById("date_of_establishment").value;
-         var email = document.getElementById("email").value;
-         var mobileNo = document.getElementById("mobile_no").value;
-         var postalCode = document.getElementById("postal_code").value;
-         var acknowledgement = document.getElementById("acknowledgement").checked;
 
-         // Resetting error messages
-         document.getElementById("error-name_of_state_unit").innerText = "";
-
-         // Name of State Unit validation
-         if (nameOfStateUnit.trim() === "") {
-             document.getElementById("error-name_of_state_unit").innerText = "Name Of State Unit is required";
-             return false;
-         }
-
-         // Date Of Establishment validation
-         var currentDate = new Date();
-         var establishmentDate = new Date(dateOfEstablishment);
-         if (establishmentDate >= currentDate) {
-             document.getElementById("error-date_of_establishment").innerText =
-                 "Date Of Establishment must be before now";
-             return false;
-         }
-
-         // Email Format validation
-         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-         if (!emailPattern.test(email)) {
-             document.getElementById("error-email").innerText = "Invalid Email Format";
-             return false;
-         }
-
-         // Mobile Number validation
-         var mobilePattern = /^[0-9]{10}$/;
-         if (!mobilePattern.test(mobileNo)) {
-             document.getElementById("error-mobile_no").innerText = "Mobile number must be a 10-digit number";
-             return false;
-         }
-
-         // Postal Code validation
-         var postalPattern = /^[0-9]{6}$/;
-         if (!postalPattern.test(postalCode)) {
-             document.getElementById("error-postal_code").innerText = "Postal code must be a 6-digit number";
-             return false;
-         }
-
-         // Acknowledgement validation
-         if (!acknowledgement) {
-             document.getElementById("error-acknowledgement").innerText = "Please acknowledge the disclaimer";
-             return false;
-         }
-
-         // Enable submit button if all validations pass
-         document.getElementById("submit-btn").disabled = false;
-
-         return true;
-     }
- </script>
