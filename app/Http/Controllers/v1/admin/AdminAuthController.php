@@ -20,8 +20,7 @@ use Carbon\Carbon;
 
 
 class AdminAuthController extends Controller
-{
-public function saveFile($file, $process)
+{    public function saveFile($file, $process)
     {
         $extension = $file->getClientOriginalExtension();
         $cur = Str::uuid();
@@ -33,9 +32,15 @@ public function saveFile($file, $process)
         if (!is_dir($basePath)) {
             mkdir($basePath, 0755, true);
         }
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
-        return "/uploads/$fileName/" . $newFileName;
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath =  public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
+        }
+
+        $file->move($destinationPath, $fileName);
+
+        return '/Image/' . $fileName;
     }
     public function adminRegister(Request $request): JsonResponse
     {

@@ -135,29 +135,16 @@ class MediaGalleryController extends Controller
             'media_type' => 'required|array',
             'media_type.*' => ['required', Rule::in(['photo', 'video'])],
             'media' => 'required|array',
-            'media.*' => [
-                'required',
-                'string',
-                function ($attribute, $value, $fail) use ($request) {
-                    // Get the index of the current media file
-                    $index = str_replace('media.', '', $attribute);
-                    
-                    // Get the media type for the current index
-                    $mediaType = $request->media_type[$index];
-        
-                    // Determine valid extensions based on media type
-                    $validExtensions = ($mediaType === 'photo') ? ['jpeg', 'png', 'jpg'] : ['mp4', 'avi', 'mov'];
-        
-                    // Check if the file extension is valid
-                    if (!in_array(strtolower(pathinfo($value, PATHINFO_EXTENSION)), $validExtensions)) {
-                        $fail('The ' . $attribute . ' must be a valid ' . $mediaType . ' file (' . implode(', ', $validExtensions) . ').');
-                    }
-                },
-            ],
+            'media.*' => 'required|string',
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        // Check if the count of media_type and media arrays is the same
+        if (count($request->media_type) !== count($request->media)) {
+            return $this->sendError('Validation Error.', 'Number of media types does not match number of media files.');
         }
 
         DB::beginTransaction();
@@ -179,6 +166,7 @@ class MediaGalleryController extends Controller
         return $this->sendError($e->getMessage(), $e->getTrace(), 413);
     }
 }
+
 
 
     public function deleteMediaGallery(Request $request): JsonResponse

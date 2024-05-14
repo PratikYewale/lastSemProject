@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\Admin\AssociationController;
 use App\Http\Controllers\v1\Admin\MediaGalleryController;
 use App\Http\Controllers\v1\Admin\EventController;
 use App\Http\Controllers\v1\Admin\JobController;
+use App\Http\Controllers\v1\Admin\PlanController;
 use App\Http\Controllers\v1\Admin\SponsorshipController;
 use App\Http\Controllers\v1\Admin\ClubController;
 use App\Http\Controllers\v1\Admin\ContactUsController as AdminContactUsController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\v1\Customer\AnnouncementController as CustomerAnnouncem
 use App\Http\Controllers\v1\Customer\MediaGalleryController as CustomerMediaGalleryController;
 use App\Http\Controllers\v1\customer\EventController as CustomerEventController;
 use App\Http\Controllers\v1\Customer\ProgramController as CustomerProgramController;
+use App\Http\Controllers\v1\Customer\PlanController as CustomerPlanController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -165,6 +167,12 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllJob', [JobController::class, 'getAllJob']);
         Route::post('updateJob', [JobController::class, 'updateJob']);
 
+        //Plans
+        Route::post('createPlan',[PlanController::class,'createPlan']);
+        Route::post('updatePlan',[PlanController::class,'updatePlan']);
+        Route::delete('deletePlan',[PlanController::class,'deletePlan']);
+        Route::get('getAllPlan',[PlanController::class,'getAllPlan']);
+        Route::get('getPlanById',[PlanController::class,'getPlanById']);
         //JobApplication
         Route::get('getJobApplicationByJobId', [AppliedJobController::class, 'getJobApplicationByJobId']);
         Route::get('getJobApplicationById', [AppliedJobController::class, 'getJobApplicationById']);
@@ -199,9 +207,10 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::post('updateAssociationMember',[MemberController::class,'updateAssociationMember']);
     // Athlete
     Route::post('addAthlete', [MemberController::class, 'addAthlete']);
-    Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
+    //Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
     Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
     Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
+    //Route::post('createPaymentAthlete',[MemberController::class,'createPaymentAthlete']);
     Route::get('getAllAthletes',[MemberController::class,'getAllAthletes']);
     Route::get('getAssociationById',[MemberController::class,'getAssociationById']);
 
@@ -243,6 +252,10 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::get('getMediaGalleryById',[CustomerMediaGalleryController::class,'getMediaGalleryById']);
     Route::get('getAllMediaGallery',[CustomerMediaGalleryController::class,'getAllMediaGallery']);
 
+    //Plan
+    Route::get('getPlanById',[CustomerPlanController::class,'getPlanById']);
+    Route::get('getAllPlan',[CustomerPlanController::class,'getAllPlan']);
+
     //Event
     Route::get('getAllEvents',[CustomerEventController::class,'getAllEvents']);
     Route::get('getEventById',[CustomerEventController::class,'getEventById']);
@@ -252,7 +265,8 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::get('getProgramById',[CustomerProgramController::class,'getProgramById']);
 
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
-
+        Route::post('createPaymentAssociation',[MemberController::class,'createPaymentAssociation']);
+        Route::post('associationPaymentVerification',[MemberController::class,'associationPaymentVerification']);
         //Athlete Registration
         Route::post('athleteRegistration', [MemberController::class, 'athleteRegistration']);
         Route::post('paymentVerification', [MemberController::class, 'paymentVerification']);
@@ -264,6 +278,7 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
 
 
     Route::group(['middleware' => ['cors', 'jwt.verify', 'athlete']], function () {
-
+        Route::post('createPaymentAthlete',[MemberController::class,'createPaymentAthlete']);
+        Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
     });
 });

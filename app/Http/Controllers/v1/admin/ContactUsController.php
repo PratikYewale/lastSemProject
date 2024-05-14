@@ -42,10 +42,8 @@ class ContactUsController extends Controller
 
         $file->move($destinationPath, $fileName);
 
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
 
-        return "/uploads/$fileName/" . $newFileName;
+        return "/uploads/$fileName/" . $fileName;
     }
 
     public function getAllContactUs(Request $request)

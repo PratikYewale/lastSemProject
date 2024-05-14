@@ -8,6 +8,7 @@ use App\Models\Achivement;
 use App\Models\Association;
 use App\Models\Athelete;
 use App\Models\Athlete;
+use App\Models\PaymentHistory;
 use App\Models\Member;
 use App\Models\Membership;
 use App\Models\MembershipHistory;
@@ -184,43 +185,8 @@ class MemberController extends Controller
                     $newCertificate->save();
                 }
             }
-            $user->currency = $request->currency;
-            $user->amount = $request->amount;
-            if ($user->save()) {
-                $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
-                $orderDetails = $api->order->create([
-                    'receipt' => 'Inv-' . $user->id,
-                    'amount' => intval($request->amount * 100),
-                    'currency' => $request->currency,
-                    'notes' => [],
-                ]);
-                $user->payment_gateway = "razor-pay";
-                $user->payment_gateway_id = $orderDetails->id;
-                $user->save();
-            }
+           
             $user->save();
-            $data = [
-                'to_name' => $request->name,
-                'email' => $request->email,
-                'message' => $request->message,
-            ];
-
-            Mail::send('emails.athleteRegister', $data, function ($message) use ($data) {
-                $message->to($data['email'], $data['to_name'])
-                    ->subject('Confirmation email');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
-            });
-            $adminData = [
-                'to_name' => 'Admin',
-                'email' => 'achalbhujbal2003@gmail.com', 
-                'message' => 'A new athlete have registered.',
-                'query' => $user,
-            ];
-            Mail::send('emails.adminAthleteRegister', $adminData, function ($message) use ($adminData) {
-                $message->to($adminData['email'], $adminData['to_name'])
-                    ->subject('New Athlete Registration');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
-            });
             DB::commit();
             return $this->sendResponse($user->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
@@ -228,18 +194,53 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+    public function createPaymentAthlete(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                //'user_id' => 'required|exists:users,id',
+                //'description' => 'nullable',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
 
+            $paymentHistory = new PaymentHistory();
+            $paymentHistory->user_id = Auth::user()->id;
+            $paymentHistory->type='athlete';
+            $paymentHistory->amount = $request->amount;
+            $paymentHistory->currency = $request->currency;
+            $paymentHistory->payment_gateway = "razor-pay";
+            
+            $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+            $orderDetails = $api->order->create([
+                'receipt' => 'Inv-' . $paymentHistory->id,
+                'amount' => intval($request->amount * 100),
+                'currency' => $request->currency,
+                'notes' => [],
+            ]);
+            $paymentHistory->payment_gateway_id = $orderDetails->id;
+            
+            $paymentHistory->save();
+            DB::commit();
+            return $this->sendResponse($paymentHistory, 'payment saved successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
     public function athletePaymentVerification(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'user_id' => 'required|numeric',
+                'payment_history_id' => 'required|numeric',
                 'payment_gateway_id' => 'required|string',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $payment = User::where('payment_gateway_id', $request->payment_gateway_id)->find($request->user_id);
+            $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -251,6 +252,28 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $data = [
+                    'to_name' => $request->name,
+                    'email' => Auth::user()->email,
+                    'message' => $request->message,
+                ];
+    
+                Mail::send('emails.athleteRegister', $data, function ($message) use ($data) {
+                    $message->to($data['email'], $data['to_name'])
+                        ->subject('Confirmation email');
+                    $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+                });
+                $adminData = [
+                    'to_name' => 'Admin',
+                    'email' => 'achalbhujbal2003@gmail.com', 
+                    'message' => 'A new athlete have registered.',
+                    
+                ];
+                Mail::send('emails.adminAthleteRegister', $adminData, function ($message) use ($adminData) {
+                    $message->to($adminData['email'], $adminData['to_name'])
+                        ->subject('New Athlete Registration');
+                    $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+                });
             } else {
                 $payment->status = "pending";
                 $payment->save();
@@ -417,9 +440,9 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
-            $user = User::query()->where('email', $request->email)->where('role', 'member')->first();
+            $user = User::query()->where('email', $request->email)->first();
             if (!$user) {
-                // return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
+                //return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
                 return back()->withErrors(['error' => 'User does not exist or user doesn\'t have access']);
             }
             if (Hash::check($request->password, $user->password)) {
@@ -427,14 +450,17 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
+                //return $this->sendResponse($response, 'User logged in successfully.', 200);
+
                 return redirect('/');
             } else {
-                // return $this->sendError('Invalid credentials.', [], 401);
+                //return $this->sendError('Invalid credentials.', [], 401);
                 return back()->withErrors(['error' => 'Invalid credentials']);
             }
         } catch (\Exception $e) {
-            return redirect()->route('login')
-                ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
+            return redirect()->route('login')->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
+            //return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+
         }
     }
 
@@ -616,44 +642,9 @@ class MemberController extends Controller
                     $user->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
                 }
                 $user->acknowledgement = $request->acknowledgement;
-                $user->currency = $request->currency;
-                $user->amount = $request->amount;
-                if ($user->save()) {
-                    $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
-                    $orderDetails = $api->order->create([
-                        'receipt' => 'Inv-' . $user->id,
-                        'amount' => intval($request->amount * 100),
-                        'currency' => $request->currency,
-                        'notes' => [],
-                    ]);
-                    $user->payment_gateway = "razor-pay";
-                    $user->payment_gateway_id = $orderDetails->id;
-                    $user->save();
-                }
                 $user->save();
             }
-            $data = [
-                'to_name' => $request->name,
-                'email' => $request->email,
-                'message' => $request->message,
-            ];
-
-            Mail::send('emails.memberRegister', $data, function ($message) use ($data) {
-                $message->to($data['email'], $data['to_name'])
-                    ->subject('New Athelete Registartion');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
-            });
-            $adminData = [
-                'to_name' => 'Admin',
-                'email' => 'achalbhujbal2003@gmail.com', 
-                'message' => 'A new association have registered.',
-                
-            ];
-            Mail::send('emails.adminAssociationRegister', $adminData, function ($message) use ($adminData) {
-                $message->to($adminData['email'], $adminData['to_name'])
-                    ->subject('New association have registered');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
-            });
+            
 
             DB::commit();
             $data = Member::query()->where('id', $user->id)->with('user')->get();
@@ -664,17 +655,53 @@ class MemberController extends Controller
         }
     }
 
-    public function associationMemberPaymentVerification(Request $request)
+    public function createPaymentAssociation(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'user_id' => 'required|numeric',
+                //'user_id' => 'required|exists:users,id',
+                //'description' => 'nullable',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+
+            $paymentHistory = new PaymentHistory();
+            $paymentHistory->user_id = Auth::user()->id;
+            $paymentHistory->type='member';
+            $paymentHistory->amount = $request->amount;
+            $paymentHistory->currency = $request->currency;
+            $paymentHistory->payment_gateway = "razor-pay";
+            
+            $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
+            $orderDetails = $api->order->create([
+                'receipt' => 'Inv-' . $paymentHistory->id,
+                'amount' => intval($request->amount * 100),
+                'currency' => $request->currency,
+                'notes' => [],
+            ]);
+            $paymentHistory->payment_gateway_id = $orderDetails->id;
+            
+            $paymentHistory->save();
+            DB::commit();
+            return $this->sendResponse($paymentHistory, 'payment saved successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+    public function associationPaymentVerification(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'payment_history_id' => 'required|numeric',
                 'payment_gateway_id' => 'required|string',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $payment = User::where('payment_gateway_id', $request->payment_gateway_id)->find($request->user_id);
+            $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -686,12 +713,35 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $data = [
+                    'to_name' => $request->name,
+                    'email' => Auth::user()->email,
+                    'message' => $request->message,
+                ];
+    
+                Mail::send('emails.memberRegister', $data, function ($message) use ($data) {
+                    $message->to($data['email'], $data['to_name'])
+                        ->subject('New Athelete Registartion');
+                    $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+                });
+                $adminData = [
+                    'to_name' => 'Admin',
+                    'email' => 'achalbhujbal2003@gmail.com', 
+                    'message' => 'A new association have registered.',
+                    
+                ];
+                Mail::send('emails.adminAssociationRegister', $adminData, function ($message) use ($adminData) {
+                    $message->to($adminData['email'], $adminData['to_name'])
+                        ->subject('New association have registered');
+                    $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
+                });
+    
             } else {
                 $payment->status = "pending";
                 $payment->save();
                 return $this->sendError('Payment pending.');
             }
-            return $this->sendResponse([], 'Association member payment status saved successfully.', true);
+            return $this->sendResponse([], 'Athlete payment status saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
