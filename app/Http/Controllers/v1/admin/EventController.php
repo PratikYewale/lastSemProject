@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\JsonResponse;
@@ -13,31 +14,30 @@ use Exception;
 
 class EventController extends Controller
 {
-    public function saveFile($file, $fileName)
+    public function saveFile($file, $process)
     {
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
-        $uploadsPath = public_path('uploads');
-        $directoryPath = "$uploadsPath/$fileName";
-
-        if (!File::exists($uploadsPath)) {
-            File::makeDirectory($uploadsPath, 0755, true);
+        $extension = $file->getClientOriginalExtension();
+        $cur = Str::uuid();
+        $fileName = $process . '-' . $cur . '.' . $extension;
+        $basePath = public_path('\\Image\\');
+        if (env('APP_ENV') == 'prod') {
+            $basePath =  public_path('/Image/');
+        }
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
+        }
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath =  public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
         }
 
-        if (!File::exists($directoryPath)) {
-            File::makeDirectory($directoryPath, 0755, true);
-        }
+        $file->move($destinationPath, $fileName);
 
-        $destinationPath = "$directoryPath/$newFileName";
-        $file->move($directoryPath, $newFileName);
-
-        return "/$fileName/" . $newFileName;
+        return '/Image/' . $fileName;
     }
-
-
     public function createEvent(Request $request): JsonResponse
     {
-
         try {
             $validator = Validator::make($request->all(), [
                 'program_id' => 'nullable|exists:programs,id',
@@ -55,7 +55,7 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $addEvent = new Event();
             $addEvent->program_id = $request->program_id;
             $addEvent->team_id = $request->team_id;
@@ -73,13 +73,13 @@ class EventController extends Controller
             $addEvent->end_date = $request->end_date;
             $addEvent->is_competition = $request->is_competition;
             $addEvent->save();
-
-            return $this->sendResponse($addEvent, 'Event uploaded successfully', true);
+            DB::commit();
+            return $this->sendResponse($addEvent, 'Event uploaded successfully.', true);
         } catch (Exception $e) {
+            DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
 
     public function updateEvent(Request $request): JsonResponse
     {
@@ -90,7 +90,7 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-
+            DB::beginTransaction();
             $updateEvent = Event::query()->where('id', $request->id)->first();
             if ($request->filled('program_id')) {
                 $updateEvent->program_id = $request->program_id;
@@ -122,15 +122,14 @@ class EventController extends Controller
             if ($request->filled('conclusion')) {
                 $updateEvent->conclusion = $request->conclusion;
             }
-
-
             $updateEvent->save();
-            return $this->sendResponse($updateEvent, 'Event Updated Successfully', true);
+            DB::commit();
+            return $this->sendResponse($updateEvent, 'Event Updated Successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllEvents(Request $request)
     {
         try {
@@ -162,16 +161,14 @@ class EventController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Events'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available.");
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function deleteEvent(Request $request): JsonResponse
     {
         try {
@@ -185,12 +182,11 @@ class EventController extends Controller
             $deleteEvent = Event::query()->where('id', $request->id)->first();
             $deleteEvent->delete();
 
-            return $this->sendResponse($deleteEvent, 'Events Deleted Successfully', true);
+            return $this->sendResponse($deleteEvent, 'Events deleted successfully.', true);
         } catch (Exception $e) {
-            return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getEventById(Request $request): JsonResponse
     {
         try {
@@ -201,14 +197,13 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $Event = Event::query()->where('id',$request->id)->first();
-            if(!$Event)
-            {
+            $Event = Event::query()->where('id', $request->id)->first();
+            if (!$Event) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse($Event, "Event fetched successfully", true);
+            return $this->sendResponse($Event, "Event fetched successfully.", true);
         } catch (Exception $e) {
-            return $this->sendError('Something went wrong', $e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 }

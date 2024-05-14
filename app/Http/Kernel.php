@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\admin;
+use App\Http\Middleware\athlete;
 use App\Http\Middleware\Cors;
 use App\Http\Middleware\JwtMiddleware;
 use App\Http\Middleware\member;
@@ -71,5 +72,6 @@ class Kernel extends HttpKernel
         'jwt.verify' => JwtMiddleware::class,
         'admin' => admin::class,
         'member' => member::class,
+        'athlete' => athlete::class,
     ];
 }

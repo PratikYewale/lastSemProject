@@ -22,25 +22,30 @@ use Illuminate\Support\Str;
 
 class ContactUsController extends Controller
 {
-    public function saveFile($file, $fileName)
+    public function saveFile($file, $process)
     {
-        $fileExtension = $file->getClientOriginalExtension();
-        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
-        $uploadsPath = public_path('uploads');
-        $directoryPath = "$uploadsPath/$fileName";
-
-        if (!File::exists($uploadsPath)) {
-            File::makeDirectory($uploadsPath, 0755, true);
+        $extension = $file->getClientOriginalExtension();
+        $cur = Str::uuid();
+        $fileName = $process . '-' . $cur . '.' . $extension;
+        $basePath = public_path('\\Image\\');
+        if (env('APP_ENV') == 'prod') {
+            $basePath =  public_path('/Image/');
+        }
+        if (!is_dir($basePath)) {
+            mkdir($basePath, 0755, true);
+        }
+        if (env('APP_ENV') == 'prod') {
+            $destinationPath =  public_path('/Image');
+        } else {
+            $destinationPath = public_path('\\Image');
         }
 
-        if (!File::exists($directoryPath)) {
-            File::makeDirectory($directoryPath, 0755, true);
-        }
+        $file->move($destinationPath, $fileName);
 
         $destinationPath = "$directoryPath/$newFileName";
         $file->move($directoryPath, $newFileName);
 
-        return "/$fileName/" . $newFileName;
+        return "/uploads/$fileName/" . $newFileName;
     }
 
     public function getAllContactUs(Request $request)
@@ -74,12 +79,12 @@ class ContactUsController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Contact_us'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully', true);
+                return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
-                return $this->sendResponse('No Data Available', [], false);
+                return $this->sendError("No data available.");
             }
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
@@ -87,20 +92,19 @@ class ContactUsController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer',
+                'id' => 'required|integer|exists:contact_us,id',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $ContactUs = ContactUs::query()->where('id',$request->id)->first();
-            if(!$ContactUs)
-            {
+            $ContactUs = ContactUs::query()->where('id', $request->id)->first();
+            if (!$ContactUs) {
                 return $this->sendError('No data available.');
             }
             return $this->sendResponse($ContactUs, "Contact us fetched successfully.", true);
-        }catch(Exception $e){
-            return $this->sendError('Something went wrong',$e->getMessage(),500);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
     public function resolveQuery(Request $request)
@@ -110,7 +114,6 @@ class ContactUsController extends Controller
                 'query_id' => 'required|exists:contact_us,id',
                 'message' => 'required|nullable',
             ]);
-
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 422);
             }
@@ -136,7 +139,7 @@ class ContactUsController extends Controller
             Mail::send('emails.resolvedQueries', $data, function ($message) use ($data) {
                 $message->to($data['email'], $data['to_name'])
                     ->subject('Response to your query');
-                $message->from(env('MAIL_FROM_ADDRESS'), 'INDIAN SKI AND SNOWBOARD');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
             DB::commit();
             return $this->sendResponse($resolveQuery, 'Mail sent successfully.', true);
