@@ -49,6 +49,7 @@ class MediaGalleryController extends Controller
     }
 
 
+
     public function deleteMediaGallery(Request $request): JsonResponse
     {
         try {
