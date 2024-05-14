@@ -611,6 +611,8 @@ class MemberController extends Controller
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
+                // return $this->sendError('Validation Error.', $validator->errors());
+
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
