@@ -9,5 +9,4 @@ class NewsImage extends Model
 {
     use HasFactory;
     protected $table='news_images';
-
 }

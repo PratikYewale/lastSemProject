@@ -89,13 +89,10 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'images' => 'array',
-                'title' => 'nullable',
-                'user_id' => 'nullable',
-                'intro_para' => 'nullable',
-                'conclusion' => 'nullable',
-                'body_para' => 'nullable',
-                'short_title' => 'nullable'
+                'news_images' => 'array',
+                'file' => 'mimes:pdf',
+                'type' => 'required'
+
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -110,23 +107,26 @@ class NewsController extends Controller
             $uploadNews->conclusion = $request->conclusion;
             $uploadNews->short_title = $request->short_title;
             $uploadNews->date = $request->date;
-            $uploadNews->file = $this->saveFile($request->file, 'file');;
-            $uploadNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');;
+            if ($request->has('file')) {
+                $uploadNews->file = $this->saveFile($request->file, 'file');
+            }
+            if ($request->has('primary_img')) {
+                $uploadNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');
+            }
             $uploadNews->save();
-            if($request->has("news_images"))
-            {
-                foreach($request->images as $image)
-                {
-                $newImages = new NewsImage();
-                $newImages->news_id = $uploadNews->id;
-                $newImages->image = $image;
+            if ($request->has("news_images")) {
+                foreach ($request->news_images as $image) {
+                    $newImages = new NewsImage();
+                    $newImages->news_id = $uploadNews->id;
+                    $newImages->image = $image;
+                    $newImages->save();
                 }
             }
             DB::commit();
             return $this->sendResponse($uploadNews->id, 'Data uploaded successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError("Something went wrong.",$e->getMessage(), 500);
+            return $this->sendError("Something went wrong.", $e->getMessage(), 500);
         }
     }
     public function updateNews(Request $request)
@@ -140,9 +140,6 @@ class NewsController extends Controller
             }
             DB::beginTransaction();
             $updateNews = News::query()->where('id', $request->id)->first();
-            if ($request->filled('user_id')) {
-                $updateNews->user_id = $request->user_id;
-            }
             if ($request->filled('title')) {
                 $updateNews->title = $request->title;
             }
@@ -152,24 +149,33 @@ class NewsController extends Controller
             if ($request->filled('body_para')) {
                 $updateNews->body_para = $request->body_para;
             }
-            if ($request->filled('short_title')) {
-                $updateNews->short_title = $request->short_title;
+            if ($request->filled('conclusion')) {
+                $updateNews->conclusion = $request->conclusion;
             }
             if ($request->filled('short_title')) {
                 $updateNews->short_title = $request->short_title;
+            }
+            if ($request->filled('date')) {
+                $updateNews->date = $request->date;
+            }
+            if ($request->has('file')) {
+                $updateNews->file = $this->saveFile($request->file, 'file');
+            }
+            if ($request->has('primary_img')) {
+                $updateNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');
             }
             $updateNews->save();
-            $updateNews->newsAnnouncementImages()->delete();
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    $uploadNewsImage = new NewsAnnouncementImages();
-                    $uploadNewsImage->news_id = $updateNews->id;
-                    $uploadNewsImage->images = $this->saveFile($image, 'NewsImage');
-                    $uploadNewsImage->save();
+            if ($request->has("news_images")) {
+                $updateNews->newsImages()->delete();
+                foreach ($request->news_images as $image) {
+                    $newImages = new NewsImage();
+                    $newImages->news_id = $updateNews->id;
+                    $newImages->image = $image;
+                    $newImages->save();
                 }
             }
             DB::commit();
-            return $this->sendResponse($updateNews, 'News updated successfully.', true);
+            return $this->sendResponse($updateNews->id, 'Data updated successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -186,7 +192,22 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = News::query()->with('newsImages');
+            if($request->has('type'))
+            {
+                if($request->type == 'news')
+                {
+                    $query->where('type',"news");
+                }
+                if($request->type == 'announcement')
+                {
+                    $query->where('type',"announcement");
+                }
+                if($request->type == 'achievement')
+                {
+                    $query->where('type',"achievement");
+                }
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -206,6 +227,24 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    public function getNewsById(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:news,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $News = News::query()->where('id', $request->id)->with('newsImages')->first();
+            if (!$News) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($News, "News fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
     public function deleteNews(Request $request)
     {
         try {
@@ -217,27 +256,9 @@ class NewsController extends Controller
             }
 
             $deletenews = News::query()->where('id', $request->id)->first();
+            $deletenews->newsImages()->delete();
             $deletenews->delete();
-
-            return $this->sendResponse($deletenews, 'News deleted successfully.', true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
-    public function getNewsById(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id',
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError("Validation failed.", $validator->errors());
-            }
-            $News = News::query()->where('id', $request->id)->first();
-            if (!$News) {
-                return $this->sendError('No data available.');
-            }
-            return $this->sendResponse($News, "News fetched successfully.", true);
+            return $this->sendResponse($deletenews->id, 'Data deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
