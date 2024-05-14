@@ -41,46 +41,6 @@ class NewsController extends Controller
         return "/uploads/$fileName/" . $newFileName;
     }
 
-    public function storeBase64Image($base64String, $uploadDir)
-    {
-        $UPLOADS_PATH = public_path('uploads/' . $uploadDir);
-        $UPLOADS_FOLDER = public_path('uploads/' . $uploadDir);
-
-        if (!file_exists($UPLOADS_FOLDER)) {
-            mkdir($UPLOADS_FOLDER, 0777, true);
-        }
-
-        $matches = [];
-        preg_match('/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/', $base64String, $matches);
-
-        if (empty($matches)) {
-            throw new \Exception("Invalid base64 string format");
-        }
-
-        $extension = $matches[1];
-        if (!in_array($extension, ['jpeg', 'png', 'webp', 'jpg'])) {
-            throw new \Exception("Invalid image file type");
-        }
-
-        // Decode the base64 string and save the image
-        $image = base64_decode($matches[2]);
-
-        // Resize the image
-        $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-
-        // Generate a unique filename
-        $filename = Str::uuid() . '.' . $extension;
-
-        // Save the resized image to the uploads folder
-        $resizedImage->save($UPLOADS_FOLDER . '/' . $filename);
-
-        // Return the URL path of the saved image
-        $imagePath = '/' . 'uploads/' . $uploadDir . '/' . $filename;
-        return $imagePath;
-    }
-
     // public function createNews(Request $request)
     // {
 
