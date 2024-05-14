@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsAnnouncementImages;
+use App\Models\NewsImage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -19,65 +20,64 @@ use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
-    public function saveFile($file, $process)
+    public function saveFile($file, $fileName)
     {
-        $extension = $file->getClientOriginalExtension();
-        $cur = Str::uuid();
-        $fileName = $process . '-' . $cur . '.' . $extension;
-        $basePath = public_path('\\Image\\');
-        if (env('APP_ENV') == 'prod') {
-            $basePath = public_path('/Image/');
-        }
-        if (!is_dir($basePath)) {
-            mkdir($basePath, 0755, true);
-        }
-        if (env('APP_ENV') == 'prod') {
-            $destinationPath = public_path('/Image');
-        } else {
-            $destinationPath = public_path('\\Image');
+        $fileExtension = $file->getClientOriginalExtension();
+        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
+        $uploadsPath = public_path('uploads');
+        $directoryPath = "$uploadsPath/$fileName";
+
+        if (!File::exists($uploadsPath)) {
+            File::makeDirectory($uploadsPath, 0755, true);
         }
 
-        $file->move($destinationPath, $fileName);
+        if (!File::exists($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true);
+        }
 
-        return '/Image/' . $fileName;
+        $destinationPath = "$directoryPath/$newFileName";
+        $file->move($directoryPath, $newFileName);
+
+        return "/uploads/$fileName/" . $newFileName;
     }
+
     public function storeBase64Image($base64String, $uploadDir)
     {
         $UPLOADS_PATH = public_path('uploads/' . $uploadDir);
         $UPLOADS_FOLDER = public_path('uploads/' . $uploadDir);
-    
+
         if (!file_exists($UPLOADS_FOLDER)) {
             mkdir($UPLOADS_FOLDER, 0777, true);
         }
-    
+
         $matches = [];
         preg_match('/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/', $base64String, $matches);
-    
+
         if (empty($matches)) {
             throw new \Exception("Invalid base64 string format");
         }
-    
+
         $extension = $matches[1];
         if (!in_array($extension, ['jpeg', 'png', 'webp', 'jpg'])) {
             throw new \Exception("Invalid image file type");
         }
-    
+
         // Decode the base64 string and save the image
         $image = base64_decode($matches[2]);
-    
+
         // Resize the image
         $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
             $constraint->aspectRatio();
         });
-    
+
         // Generate a unique filename
         $filename = Str::uuid() . '.' . $extension;
-    
+
         // Save the resized image to the uploads folder
         $resizedImage->save($UPLOADS_FOLDER . '/' . $filename);
-    
+
         // Return the URL path of the saved image
-        $imagePath = '/'.'uploads/' . $uploadDir . '/' . $filename;
+        $imagePath = '/' . 'uploads/' . $uploadDir . '/' . $filename;
         return $imagePath;
     }
 
@@ -108,7 +108,7 @@ class NewsController extends Controller
     //         $uploadNews->conclusion = $request->conclusion;
     //         $uploadNews->short_title = $request->short_title;
     //         $uploadNews->save();
-            
+
     //         $images = $request->file('images');
     //         foreach ($images as $newsimage) {
     //             $uploadNewsImage = new NewsAnnouncementImages();
@@ -129,11 +129,9 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                
-                'images.*' => 'required|string', 
+                'images' => 'array',
                 'title' => 'nullable',
                 'user_id' => 'nullable',
-                'img_description' => 'nullable',
                 'intro_para' => 'nullable',
                 'conclusion' => 'nullable',
                 'body_para' => 'nullable',
@@ -146,23 +144,29 @@ class NewsController extends Controller
             $uploadNews = new News();
             $uploadNews->user_id = Auth::user()->id;
             $uploadNews->title = $request->title;
+            $uploadNews->type = $request->type;
             $uploadNews->intro_para = $request->intro_para;
             $uploadNews->body_para = $request->body_para;
             $uploadNews->conclusion = $request->conclusion;
             $uploadNews->short_title = $request->short_title;
+            $uploadNews->date = $request->date;
+            $uploadNews->file = $this->saveFile($request->file, 'file');;
+            $uploadNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');;
             $uploadNews->save();
-            
-            foreach ($request->images as $base64Image) {
-                $uploadNewsImage = new NewsAnnouncementImages();
-                $uploadNewsImage->news_id = $uploadNews->id;
-                $uploadNewsImage->images = $this->storeBase64Image($base64Image, 'NewsImage');
-                $uploadNewsImage->save();
+            if($request->has("news_images"))
+            {
+                foreach($request->images as $image)
+                {
+                $newImages = new NewsImage();
+                $newImages->news_id = $uploadNews->id;
+                $newImages->image = $image;
+                }
             }
             DB::commit();
-            return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
+            return $this->sendResponse($uploadNews->id, 'Data uploaded successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+            return $this->sendError("Something went wrong.",$e->getMessage(), 500);
         }
     }
     public function updateNews(Request $request)
@@ -176,7 +180,7 @@ class NewsController extends Controller
             }
             DB::beginTransaction();
             $updateNews = News::query()->where('id', $request->id)->first();
-           if ($request->filled('user_id')) {
+            if ($request->filled('user_id')) {
                 $updateNews->user_id = $request->user_id;
             }
             if ($request->filled('title')) {
