@@ -9,9 +9,9 @@ class News extends Model
 {
     use HasFactory;
     protected $table='news';
-    public function newsAnnouncementImages()
+    public function newsImages()
     {
-        return $this->hasMany(NewsAnnouncementImages::class, 'news_id');
+        return $this->hasMany(NewsImage::class, 'news_id');
     }
     public function user()
     {

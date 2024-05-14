@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsAnnouncementImages;
+use App\Models\NewsImage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -19,66 +20,25 @@ use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
-    public function saveFile($file, $process)
+    public function saveFile($file, $fileName)
     {
-        $extension = $file->getClientOriginalExtension();
-        $cur = Str::uuid();
-        $fileName = $process . '-' . $cur . '.' . $extension;
-        $basePath = public_path('\\Image\\');
-        if (env('APP_ENV') == 'prod') {
-            $basePath = public_path('/Image/');
-        }
-        if (!is_dir($basePath)) {
-            mkdir($basePath, 0755, true);
-        }
-        if (env('APP_ENV') == 'prod') {
-            $destinationPath = public_path('/Image');
-        } else {
-            $destinationPath = public_path('\\Image');
+        $fileExtension = $file->getClientOriginalExtension();
+        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
+        $uploadsPath = public_path('uploads');
+        $directoryPath = "$uploadsPath/$fileName";
+
+        if (!File::exists($uploadsPath)) {
+            File::makeDirectory($uploadsPath, 0755, true);
         }
 
-        $file->move($destinationPath, $fileName);
+        if (!File::exists($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true);
+        }
 
-        return '/Image/' . $fileName;
-    }
-    public function storeBase64Image($base64String, $uploadDir)
-    {
-        $UPLOADS_PATH = public_path('uploads/' . $uploadDir);
-        $UPLOADS_FOLDER = public_path('uploads/' . $uploadDir);
-    
-        if (!file_exists($UPLOADS_FOLDER)) {
-            mkdir($UPLOADS_FOLDER, 0777, true);
-        }
-    
-        $matches = [];
-        preg_match('/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/', $base64String, $matches);
-    
-        if (empty($matches)) {
-            throw new \Exception("Invalid base64 string format");
-        }
-    
-        $extension = $matches[1];
-        if (!in_array($extension, ['jpeg', 'png', 'webp', 'jpg'])) {
-            throw new \Exception("Invalid image file type");
-        }
-    
-        // Decode the base64 string and save the image
-        $image = base64_decode($matches[2]);
-    
-        // Resize the image
-        $resizedImage = Image::make($image)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-    
-        // Generate a unique filename
-        $filename = Str::uuid() . '.' . $extension;
-    
-        // Save the resized image to the uploads folder
-        $resizedImage->save($UPLOADS_FOLDER . '/' . $filename);
-    
-        // Return the URL path of the saved image
-        $imagePath = '/'.'uploads/' . $uploadDir . '/' . $filename;
-        return $imagePath;
+        $destinationPath = "$directoryPath/$newFileName";
+        $file->move($directoryPath, $newFileName);
+
+        return "/uploads/$fileName/" . $newFileName;
     }
 
     // public function createNews(Request $request)
@@ -108,7 +68,7 @@ class NewsController extends Controller
     //         $uploadNews->conclusion = $request->conclusion;
     //         $uploadNews->short_title = $request->short_title;
     //         $uploadNews->save();
-            
+
     //         $images = $request->file('images');
     //         foreach ($images as $newsimage) {
     //             $uploadNewsImage = new NewsAnnouncementImages();
@@ -129,15 +89,10 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                
-                'images.*' => 'required|string', 
-                'title' => 'nullable',
-                'user_id' => 'nullable',
-                'img_description' => 'nullable',
-                'intro_para' => 'nullable',
-                'conclusion' => 'nullable',
-                'body_para' => 'nullable',
-                'short_title' => 'nullable'
+                'news_images' => 'array',
+                'file' => 'mimes:pdf',
+                'type' => 'required'
+
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -146,23 +101,32 @@ class NewsController extends Controller
             $uploadNews = new News();
             $uploadNews->user_id = Auth::user()->id;
             $uploadNews->title = $request->title;
+            $uploadNews->type = $request->type;
             $uploadNews->intro_para = $request->intro_para;
             $uploadNews->body_para = $request->body_para;
             $uploadNews->conclusion = $request->conclusion;
             $uploadNews->short_title = $request->short_title;
+            $uploadNews->date = $request->date;
+            if ($request->has('file')) {
+                $uploadNews->file = $this->saveFile($request->file, 'file');
+            }
+            if ($request->has('primary_img')) {
+                $uploadNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');
+            }
             $uploadNews->save();
-            
-            foreach ($request->images as $base64Image) {
-                $uploadNewsImage = new NewsAnnouncementImages();
-                $uploadNewsImage->news_id = $uploadNews->id;
-                $uploadNewsImage->images = $this->storeBase64Image($base64Image, 'NewsImage');
-                $uploadNewsImage->save();
+            if ($request->has("news_images")) {
+                foreach ($request->news_images as $image) {
+                    $newImages = new NewsImage();
+                    $newImages->news_id = $uploadNews->id;
+                    $newImages->image = $image;
+                    $newImages->save();
+                }
             }
             DB::commit();
-            return $this->sendResponse($uploadNews->id, 'News uploaded successfully.', true);
+            return $this->sendResponse($uploadNews->id, 'Data uploaded successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+            return $this->sendError("Something went wrong.", $e->getMessage(), 500);
         }
     }
     public function updateNews(Request $request)
@@ -176,9 +140,6 @@ class NewsController extends Controller
             }
             DB::beginTransaction();
             $updateNews = News::query()->where('id', $request->id)->first();
-           if ($request->filled('user_id')) {
-                $updateNews->user_id = $request->user_id;
-            }
             if ($request->filled('title')) {
                 $updateNews->title = $request->title;
             }
@@ -188,24 +149,33 @@ class NewsController extends Controller
             if ($request->filled('body_para')) {
                 $updateNews->body_para = $request->body_para;
             }
-            if ($request->filled('short_title')) {
-                $updateNews->short_title = $request->short_title;
+            if ($request->filled('conclusion')) {
+                $updateNews->conclusion = $request->conclusion;
             }
             if ($request->filled('short_title')) {
                 $updateNews->short_title = $request->short_title;
+            }
+            if ($request->filled('date')) {
+                $updateNews->date = $request->date;
+            }
+            if ($request->has('file')) {
+                $updateNews->file = $this->saveFile($request->file, 'file');
+            }
+            if ($request->has('primary_img')) {
+                $updateNews->primary_img = $this->saveFile($request->primary_img, 'primary_img');
             }
             $updateNews->save();
-            $updateNews->newsAnnouncementImages()->delete();
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    $uploadNewsImage = new NewsAnnouncementImages();
-                    $uploadNewsImage->news_id = $updateNews->id;
-                    $uploadNewsImage->images = $this->saveFile($image, 'NewsImage');
-                    $uploadNewsImage->save();
+            if ($request->has("news_images")) {
+                $updateNews->newsImages()->delete();
+                foreach ($request->news_images as $image) {
+                    $newImages = new NewsImage();
+                    $newImages->news_id = $updateNews->id;
+                    $newImages->image = $image;
+                    $newImages->save();
                 }
             }
             DB::commit();
-            return $this->sendResponse($updateNews, 'News updated successfully.', true);
+            return $this->sendResponse($updateNews->id, 'Data updated successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -222,7 +192,22 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query();
+            $query = News::query()->with('newsImages');
+            if($request->has('type'))
+            {
+                if($request->type == 'news')
+                {
+                    $query->where('type',"news");
+                }
+                if($request->type == 'announcement')
+                {
+                    $query->where('type',"announcement");
+                }
+                if($request->type == 'achievement')
+                {
+                    $query->where('type',"achievement");
+                }
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -242,6 +227,24 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    public function getNewsById(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:news,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $News = News::query()->where('id', $request->id)->with('newsImages')->first();
+            if (!$News) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($News, "News fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
     public function deleteNews(Request $request)
     {
         try {
@@ -253,27 +256,9 @@ class NewsController extends Controller
             }
 
             $deletenews = News::query()->where('id', $request->id)->first();
+            $deletenews->newsImages()->delete();
             $deletenews->delete();
-
-            return $this->sendResponse($deletenews, 'News deleted successfully.', true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
-    public function getNewsById(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:news,id',
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError("Validation failed.", $validator->errors());
-            }
-            $News = News::query()->where('id', $request->id)->first();
-            if (!$News) {
-                return $this->sendError('No data available.');
-            }
-            return $this->sendResponse($News, "News fetched successfully.", true);
+            return $this->sendResponse($deletenews->id, 'Data deleted successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }

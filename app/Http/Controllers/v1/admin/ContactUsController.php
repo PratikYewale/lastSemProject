@@ -42,6 +42,7 @@ class ContactUsController extends Controller
 
         $file->move($destinationPath, $fileName);
 
+       
 
         return "/uploads/$fileName/" . $fileName;
     }

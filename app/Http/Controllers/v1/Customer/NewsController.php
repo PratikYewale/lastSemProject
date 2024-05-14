@@ -22,7 +22,22 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = News::query()->with('user');
+            $query = News::query()->with('newsImages');
+            if($request->has('type'))
+            {
+                if($request->type == 'news')
+                {
+                    $query->where('type',"news");
+                }
+                if($request->type == 'announcement')
+                {
+                    $query->where('type',"announcement");
+                }
+                if($request->type == 'achievement')
+                {
+                    $query->where('type',"achievement");
+                }
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -42,7 +57,6 @@ class NewsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getNewsById(Request $request)
     {
         try {
@@ -52,7 +66,7 @@ class NewsController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
             }
-            $News = News::query()->where('id', $request->id)->with('user')->first();
+            $News = News::query()->where('id', $request->id)->with('newsImages')->first();
             if (!$News) {
                 return $this->sendError('No data available.');
             }
