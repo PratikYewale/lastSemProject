@@ -32,7 +32,7 @@
         media="all" />
     <link rel="stylesheet" href="{{ url('frontend/js/core.messages/core.messages.min.css') }}" type="text/css"
         media="all" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="icon" href="http://placehold.it/32x32" sizes="32x32" />
     <link rel="icon" href="http://placehold.it/32x32" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="http://placehold.it/32x32" />
@@ -93,16 +93,20 @@
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
-                                        <!-- Menu: News -->
-                                        <li class="menu-item ">
-                                            <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                        @if (Auth::user())
+                                            <li class="menu-item current-menu-item">
+                                                <a href="{{ url('/media-gallary') }}"><span>Media Gallary</span></a>
+                                            </li>
+                                        @else
+                                            <!-- Menu: News -->
+                                            <li class="menu-item ">
+                                                <a href="{{ url('/registration') }}"><span>Registration</span></a>
 
-                                        </li>
+                                            </li>
+                                        @endif
                                         <!-- /Menu: News -->
                                         <!-- Menu: Contact Us -->
-                                        {{-- <li class="menu-item">
-                                            <a href="{{ url('/membership') }}"><span>Membership</span></a>
-                                        </li> --}}
+
                                         <li class="menu-item">
                                             <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                         </li>
@@ -215,14 +219,16 @@
                                     <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
 
                                 </li>
-                                <li class="menu-item ">
-                                    <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                @if (Auth::user())
+                                    <li class="menu-item current-menu-item">
+                                        <a href="{{ url('/media-gallary') }}"><span>Media Gallary</span></a>
+                                    </li>
+                                @else
+                                    <li class="menu-item ">
+                                        <a href="{{ url('/registration') }}"><span>Registration</span></a>
 
-                                </li>
-                                {{-- <li class="menu-item ">
-                                        <a href="{{ url('/membership') }}"><span>Membership</span></a>
-    
-                                    </li> --}}
+                                    </li>
+                                @endif
                                 <li class="menu-item current-menu-item">
                                     <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                                 </li>

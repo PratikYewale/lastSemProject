@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Razorpay\Api\Api;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Toastr;
+
 
 class MemberController extends Controller
 {
@@ -431,13 +431,18 @@ class MemberController extends Controller
                 Auth::login($user);
                 return redirect('/');
             } else {
-                Toastr::error('Invalid credentials', 'Error');
+
                 return back()->withErrors(['error' => 'Invalid credentials']);
+                return $this->sendError("Invalid credentials.");
+                
             }
         } catch (\Exception $e) {
             // Exception occurred
-            Toastr::error('Something went wrong: ' . $e->getMessage(), 'Error');
-            return redirect()->route('login')->withErrors(['error' => 'Something went wrong']);
+
+            // return redirect()->route('login')
+            //     ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
+            return back()->withErrors(['error' => 'Something weent wrong']);
+            // return $this->sendError("Something weent wrong",$e->getMessage());
         }
     }
 
@@ -662,8 +667,6 @@ class MemberController extends Controller
             $data = Member::query()->where('id', $user->id)->with('user')->get();
             // return $this->sendResponse($data, 'Association Member added successfully.', true);
             return redirect('/registration');
-        
-            
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
