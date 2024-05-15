@@ -123,11 +123,13 @@ class MemberController extends Controller
                 'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
                 'date_of_birth' => 'nullable|date',
-                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-                'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-                'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-                'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
-                'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf|max:2048',
+                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg',
+                'recommendation' => 'mimes:png,jpg,jpeg,pdf',
+                'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
+                'aadhar_number'=>'required|max:12|min:12',
+                'passport_number'=>'nullable|unique',
+                'passport' => 'mimes:png,jpg,jpeg,pdf',
+                'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
                 'acknowledge' => 'boolean',
             ]);
 
@@ -144,7 +146,6 @@ class MemberController extends Controller
                 $user->mobile_no = $request->mobile_no;
                 $user->role = "athlete";
                 $user->password = Hash::make($request->password);
-                $user->save();
                 $user->gender = $request->gender;
                 $user->date_of_birth = $request->date_of_birth;
                 $user->city = $request->city;
@@ -187,7 +188,7 @@ class MemberController extends Controller
                     $newCertificate->save();
                 }
             }
-           
+
             $user->save();
             DB::commit();
             return $this->sendResponse($user->id, 'Athlete added successfully.', true);
@@ -210,11 +211,11 @@ class MemberController extends Controller
 
             $paymentHistory = new PaymentHistory();
             $paymentHistory->user_id = Auth::user()->id;
-            $paymentHistory->type='athlete';
+            $paymentHistory->type = 'athlete';
             $paymentHistory->amount = $request->amount;
             $paymentHistory->currency = $request->currency;
             $paymentHistory->payment_gateway = "razor-pay";
-            
+
             $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
             $orderDetails = $api->order->create([
                 'receipt' => 'Inv-' . $paymentHistory->id,
@@ -223,7 +224,7 @@ class MemberController extends Controller
                 'notes' => [],
             ]);
             $paymentHistory->payment_gateway_id = $orderDetails->id;
-            
+
             $paymentHistory->save();
             DB::commit();
             return $this->sendResponse($paymentHistory, 'payment saved successfully.', true);
@@ -243,6 +244,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
+            $payment->plan_start_date = now();
+            $payment->plan_expiry_date = now()->addYear();
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -254,12 +257,15 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $user = User::find(Auth::id());
+                $user->status = true; 
+                $user->save();
                 $data = [
                     'to_name' => $request->name,
                     'email' => Auth::user()->email,
                     'message' => $request->message,
                 ];
-    
+
                 Mail::send('emails.athleteRegister', $data, function ($message) use ($data) {
                     $message->to($data['email'], $data['to_name'])
                         ->subject('Confirmation email');
@@ -267,9 +273,9 @@ class MemberController extends Controller
                 });
                 $adminData = [
                     'to_name' => 'Admin',
-                    'email' => 'achalbhujbal2003@gmail.com', 
+                    'email' => 'achalbhujbal2003@gmail.com',
                     'message' => 'A new athlete have registered.',
-                    
+
                 ];
                 Mail::send('emails.adminAthleteRegister', $adminData, function ($message) use ($adminData) {
                     $message->to($adminData['email'], $adminData['to_name'])
@@ -452,14 +458,14 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
-                //return $this->sendResponse($response, 'User logged in successfully.', 200);
+               // return $this->sendResponse($response, 'User logged in successfully.', 200);
 
                 return redirect('/');
             } else {
 
                 return back()->withErrors(['error' => 'Invalid credentials']);
-                return $this->sendError("Invalid credentials.");
-                
+                //return $this->sendError("Invalid credentials.");
+
             }
         } catch (\Exception $e) {
             // Exception occurred
@@ -611,8 +617,6 @@ class MemberController extends Controller
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
-                // return $this->sendError('Validation Error.', $validator->errors());
-
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -653,7 +657,7 @@ class MemberController extends Controller
                 $user->acknowledgement = $request->acknowledgement;
                 $user->save();
             }
-            
+
 
             DB::commit();
             $data = Member::query()->where('id', $user->id)->with('user')->get();
@@ -679,11 +683,11 @@ class MemberController extends Controller
 
             $paymentHistory = new PaymentHistory();
             $paymentHistory->user_id = Auth::user()->id;
-            $paymentHistory->type='member';
+            $paymentHistory->type = 'member';
             $paymentHistory->amount = $request->amount;
             $paymentHistory->currency = $request->currency;
             $paymentHistory->payment_gateway = "razor-pay";
-            
+
             $api = new Api(env('R_API_KEY'), env('R_API_SECRET'));
             $orderDetails = $api->order->create([
                 'receipt' => 'Inv-' . $paymentHistory->id,
@@ -692,7 +696,7 @@ class MemberController extends Controller
                 'notes' => [],
             ]);
             $paymentHistory->payment_gateway_id = $orderDetails->id;
-            
+
             $paymentHistory->save();
             DB::commit();
             return $this->sendResponse($paymentHistory, 'payment saved successfully.', true);
@@ -712,6 +716,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
+            $payment->plan_start_date = now();
+            $payment->plan_expiry_date = now()->addYear();
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -723,12 +729,15 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $user = User::find(Auth::id());
+                $user->status = true; 
+                $user->save();
                 $data = [
                     'to_name' => $request->name,
                     'email' => Auth::user()->email,
                     'message' => $request->message,
                 ];
-    
+
                 Mail::send('emails.memberRegister', $data, function ($message) use ($data) {
                     $message->to($data['email'], $data['to_name'])
                         ->subject('New Athelete Registartion');
@@ -736,22 +745,22 @@ class MemberController extends Controller
                 });
                 $adminData = [
                     'to_name' => 'Admin',
-                    'email' => 'achalbhujbal2003@gmail.com', 
+                    'email' => 'achalbhujbal2003@gmail.com',
                     'message' => 'A new association have registered.',
-                    
+
                 ];
                 Mail::send('emails.adminAssociationRegister', $adminData, function ($message) use ($adminData) {
                     $message->to($adminData['email'], $adminData['to_name'])
                         ->subject('New association have registered');
                     $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
                 });
-    
+
             } else {
                 $payment->status = "pending";
                 $payment->save();
                 return $this->sendError('Payment pending.');
             }
-            return $this->sendResponse([], 'Athlete payment status saved successfully.', true);
+            return $this->sendResponse([], 'Association payment status saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
