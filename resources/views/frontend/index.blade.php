@@ -148,6 +148,79 @@
 
                                 </div>
                                 <!-- /Cart -->
+                                <!-- Cart -->
+                                <div class="menu_main_cart top_panel_icon">
+                                    <a href="#" class="top_panel_cart_button" data-items="2"
+                                        data-summa="&#036;538.00">
+                                        <span class="contact_icon icon-basket"></span>
+                                        <span class="cart_summa">&#36;538.00</span>
+                                        <span class="contact_label contact_cart_label">Your cart:</span>
+                                    </a>
+                                    <ul class="widget_area sidebar_cart sidebar">
+                                        <li>
+                                            <div class="widget woocommerce widget_shopping_cart">
+                                                <div class="hide_cart_widget_if_empty">
+                                                    <div class="widget_shopping_cart_content">
+                                                        <ul class="cart_list product_list_widget ">
+                                                            <!-- Cart item -->
+                                                            <li class="mini_cart_item">
+                                                                <a class="remove" href="#"
+                                                                    title="Remove this item">×</a>
+                                                                <a href="shop-product.html">
+                                                                    <img src="http://placehold.it/180x180"
+                                                                        alt="">
+                                                                    Bogner Phoenix Mirror Goggles
+                                                                </a>
+                                                                <span class="quantity">
+                                                                    1 ×
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        <span
+                                                                            class="woocommerce-Price-currencySymbol">$</span>
+                                                                        339.00
+                                                                    </span>
+                                                                </span>
+                                                            </li>
+                                                            <!-- /Cart item -->
+                                                            <!-- Cart item -->
+                                                            <li class="mini_cart_item">
+                                                                <a class="remove" href="#"
+                                                                    title="Remove this item">×</a>
+                                                                <a href="shop-product.html">
+                                                                    <img src="http://placehold.it/180x180"
+                                                                        alt="">
+                                                                    Rome Heist Snowboard
+                                                                </a>
+                                                                <span class="quantity">
+                                                                    1 ×
+                                                                    <span class="woocommerce-Price-amount amount">
+                                                                        <span
+                                                                            class="woocommerce-Price-currencySymbol">$</span>
+                                                                        199.00
+                                                                    </span>
+                                                                </span>
+                                                            </li>
+                                                            <!-- /Cart item -->
+                                                        </ul>
+                                                        <p class="total">
+                                                            <strong>Subtotal:</strong>
+                                                            <span class="woocommerce-Price-amount amount">
+                                                                <span class="woocommerce-Price-currencySymbol">$</span>
+                                                                538.00
+                                                            </span>
+                                                        </p>
+                                                        <p class="buttons">
+                                                            <a class="button wc-forward sc_button_hover_fade"
+                                                                href="{{ url('/logout') }}">Logout</a>
+                                                            <a class="button checkout wc-forward sc_button_hover_fade"
+                                                                href="checkout.html">Checkout</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /Cart -->
                                 <!-- Booking button block -->
                                 <div class="menu_main_additional_button top_panel_icon">
                                     <div class="menu_main_additional_button_container">

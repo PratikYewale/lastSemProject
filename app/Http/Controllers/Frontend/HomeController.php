@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Illuminate\Support\Facades\Session;
 use Exception;
+use App\Models\News;
 
 
 class HomeController extends Controller
@@ -43,7 +44,16 @@ class HomeController extends Controller
     }
     public function announcement()
     {
-        return view('frontend.announcement');
+        try {
+            $news = News::query();
+            $news = $news->with([])->paginate(9);
+
+            return view('frontend.announcement', compact('news'));
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Error fetching news.');
+        }
+        // return view('frontend.announcement');
     }
     public function registration()
     {
@@ -62,12 +72,12 @@ class HomeController extends Controller
     public function storeAssoction(Request $request)
     {
         $input = $request->all();
-    
+
         if (!empty($input['razorpay_payment_id'])) {
             try {
                 $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
                 $payment = $api->payment->fetch($input['razorpay_payment_id']);
-    
+
                 // Capture payment
                 $response = $api->payment->fetch($input['razorpay_payment_id'])
                     ->capture(['amount' => $payment['amount']]);
@@ -76,9 +86,8 @@ class HomeController extends Controller
                 return redirect()->back();
             }
         }
-    
+
         Session::put('success', 'Payment successful');
         return redirect()->back();
     }
-
 }
