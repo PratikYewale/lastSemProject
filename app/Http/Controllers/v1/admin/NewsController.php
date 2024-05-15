@@ -203,9 +203,9 @@ class NewsController extends Controller
                 {
                     $query->where('type',"announcement");
                 }
-                if($request->type == 'achievement')
+                if($request->type == 'achievements')
                 {
-                    $query->where('type',"achievement");
+                    $query->where('type',"achievements");
                 }
             }
             $count = $query->count();
