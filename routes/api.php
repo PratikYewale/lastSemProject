@@ -13,6 +13,7 @@ use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
+use App\Http\Controllers\v1\Customer\AchivementController;
 use App\Http\Controllers\v1\Customer\AddressController;
 use App\Http\Controllers\v1\Customer\JobApplicationController;
 use App\Http\Controllers\v1\Admin\JobApplicationController as AppliedJobController;
@@ -280,5 +281,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::group(['middleware' => ['cors', 'jwt.verify', 'athlete']], function () {
         Route::post('createPaymentAthlete',[MemberController::class,'createPaymentAthlete']);
         Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
+
+        //Achivement
+        Route::post('createAchivement',[AchivementController::class,'createAchivement']);
+        Route::delete('deleteAchivement',[AchivementController::class,'deleteAchivement']);
     });
 });

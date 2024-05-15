@@ -155,8 +155,9 @@
                                  </ul>
                              </div>
                          @endif
-                         <form id="addAssociationMemberForm"  action="{{ route('addAssociationMember') }}" method="POST"
-                             enctype="multipart/form-data" class="donationForm sc_input_hover_default" onsubmit="return validateForm()">
+                         <form id="addAssociationMemberForm" action="{{ route('addAssociationMember') }}" method="POST"
+                             enctype="multipart/form-data" class="donationForm sc_input_hover_default"
+                             onsubmit="return validateForm()">
                              @csrf <!-- CSRF token -->
                              <div class="row">
                                  <div class="col-lg-12">
@@ -164,10 +165,12 @@
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
-                                         <label for="first_name" class="form-label">Name of State Unit</label>
-                                         <input type="text" class="form-control" id="first_name"
-                                             name="first_name">
+                                         <label for="name_of_state_unit" class="form-label">Name of State Unit</label>
+                                         <input type="text" class="form-control" id="name_of_state_unit"
+                                             name="name_of_state_unit">
+                                         <div id="error-name_of_state_unit"class="text-danger"></div>
                                      </div>
+
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
@@ -175,6 +178,7 @@
                                              Establishment</label>
                                          <input type="date" class="form-control" id="date_of_establishment"
                                              name="date_of_establishment">
+                                         <div id="error-date_of_establishment"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -185,12 +189,14 @@
                                          <input type="text" class="form-control"
                                              id="incorporation_certificate_number"
                                              name="incorporation_certificate_number">
+                                         <div id="error-incorporation_certificate_number"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="email" class="form-label">Email Id</label>
                                          <input type="email" class="form-control" id="email" name="email">
+                                         <div id="error-email"class="text-danger"></div>
                                      </div>
 
                                  </div>
@@ -198,19 +204,23 @@
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="mobile_no" class="form-label">Mobile Number</label>
-                                         <input type="tel" class="form-control" id="mobile_no" name="mobile_no">
+                                         <input type="number" class="form-control" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" maxlength="10">
+
+                                         <div id="error-mobile_no"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="website" class="form-label">Website (if applicable)</label>
                                          <input type="text" class="form-control" id="website" name="website">
+                                         <div id="error-website"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="logo" class="form-label"> Logo</label>
                                          <input type="file" class="form-control" id="logo" name="logo">
+                                         <div id="error-logo"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-6">
@@ -221,7 +231,7 @@
                                              <div class="form-check ">
                                                  <input class="form-check-input" type="radio"
                                                      name="recognition_by_state_government"
-                                                     id="recognition_by_state_government" value="true">
+                                                     id="recognition_by_state_government" value="1">
                                                  <label class="form-check-label" for="flexRadioDefault1">
                                                      Yes
                                                  </label>
@@ -229,11 +239,12 @@
                                              <div class="form-check ms-3">
                                                  <input class="form-check-input" type="radio"
                                                      name="recognition_by_state_government"
-                                                     id="recognition_by_state_government" value="false">
+                                                     id="recognition_by_state_government" value="0">
                                                  <label class="form-check-label" for="flexRadioDefault2">
                                                      No
                                                  </label>
                                              </div>
+                                             <div id="error-recognition_by_state_government"class="text-danger"></div>
                                          </div>
                                      </div>
                                  </div>
@@ -246,7 +257,7 @@
                                              <div class="form-check ">
                                                  <input class="form-check-input" type="radio"
                                                      name="recognition_by_state_olympic_association"
-                                                     id="recognition_by_state_olympic_association" value="true">
+                                                     id="recognition_by_state_olympic_association" value="1">
                                                  <label class="form-check-label" for="flexRadioDefault1">
                                                      Yes
                                                  </label>
@@ -254,11 +265,13 @@
                                              <div class="form-check ms-3">
                                                  <input class="form-check-input" type="radio"
                                                      name="recognition_by_state_olympic_association"
-                                                     id="recognition_by_state_olympic_association" value="false">
+                                                     id="recognition_by_state_olympic_association" value="0">
                                                  <label class="form-check-label" for="flexRadioDefault2">
                                                      No
                                                  </label>
                                              </div>
+                                         </div>
+                                         <div id="error-recognition_by_state_olympic_association"class="text-danger">
                                          </div>
                                      </div>
                                  </div>
@@ -271,7 +284,7 @@
                                              <div class="form-check ">
                                                  <input class="form-check-input" type="radio"
                                                      name="hosted_national_event_in_past_3_yrs"
-                                                     id="hosted_national_event_in_past_3_yrs" value="true">
+                                                     id="hosted_national_event_in_past_3_yrs" value="1">
                                                  <label class="form-check-label" for="flexRadioDefault1">
                                                      Yes
                                                  </label>
@@ -279,12 +292,13 @@
                                              <div class="form-check ms-3">
                                                  <input class="form-check-input" type="radio"
                                                      name="hosted_national_event_in_past_3_yrs"
-                                                     id="hosted_national_event_in_past_3_yrs" value="false">
+                                                     id="hosted_national_event_in_past_3_yrs" value="0">
                                                  <label class="form-check-label" for="flexRadioDefault2">
                                                      No
                                                  </label>
                                              </div>
                                          </div>
+                                         <div id="error-hosted_national_event_in_past_3_yrs"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-6">
@@ -295,7 +309,7 @@
                                              <div class="form-check ">
                                                  <input class="form-check-input" type="radio"
                                                      name="hosted_international_event_in_past_4_yrs"
-                                                     id="hosted_international_event_in_past_4_yrs" value="true">
+                                                     id="hosted_international_event_in_past_4_yrs" value="1">
                                                  <label class="form-check-label" for="flexRadioDefault1">
                                                      Yes
                                                  </label>
@@ -303,11 +317,13 @@
                                              <div class="form-check ms-3">
                                                  <input class="form-check-input" type="radio"
                                                      name="hosted_international_event_in_past_4_yrs"
-                                                     id="hosted_international_event_in_past_4_yrs" value="false">
+                                                     id="hosted_international_event_in_past_4_yrs" value="0">
                                                  <label class="form-check-label" for="flexRadioDefault2">
                                                      No
                                                  </label>
                                              </div>
+                                         </div>
+                                         <div id="error-hosted_international_event_in_past_4_yrs"class="text-danger">
                                          </div>
                                      </div>
                                  </div>
@@ -320,7 +336,7 @@
                                              <div class="form-check ">
                                                  <input class="form-check-input" type="radio"
                                                      name="active_athletes_competed_in_past_2_yrs"
-                                                     id="active_athletes_competed_in_past_2_yrs" value="true">
+                                                     id="active_athletes_competed_in_past_2_yrs" value="1">
                                                  <label class="form-check-label" for="flexRadioDefault1">
                                                      Yes
                                                  </label>
@@ -328,11 +344,13 @@
                                              <div class="form-check ms-3">
                                                  <input class="form-check-input" type="radio"
                                                      name="active_athletes_competed_in_past_2_yrs"
-                                                     id="active_athletes_competed_in_past_2_yrs" value="false">
+                                                     id="active_athletes_competed_in_past_2_yrs" value="0">
                                                  <label class="form-check-label" for="flexRadioDefault2">
                                                      No
                                                  </label>
                                              </div>
+                                         </div>
+                                         <div id="error-active_athletes_competed_in_past_2_yrs"class="text-danger">
                                          </div>
                                      </div>
                                  </div>
@@ -349,18 +367,21 @@
                                      <div class="mb-3">
                                          <label for="country" class="form-label">Select Country</label>
                                          <input type="text" class="form-control" id="country" name="country">
+                                         <div id="error-country"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="state" class="form-label">Select State / Province</label>
                                          <input type="text" class="form-control" id="state" name="state">
+                                         <div id="error-state"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="city" class="form-label">City</label>
                                          <input type="text" class="form-control" id="city" name="city">
+                                         <div id="error-city"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -369,6 +390,7 @@
                                          <label for="registered_address" class="form-label">Registered Address</label>
                                          <input type="text" class="form-control" id="registered_address"
                                              name="registered_address">
+                                         <div id="error-registered_address"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -378,6 +400,7 @@
                                          <label for="postal_code " class="form-label">Postal Code</label>
                                          <input type="number" pattern="[0-9]{6}" maxlength="6" minlength="6"
                                              class="form-control" id="postal_code" name="postal_code">
+                                         <div id="error-postal_code"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -388,6 +411,7 @@
                                          <label for="comment" class="form-label">Activities Over the Past Four
                                              Years</label>
                                          <textarea class="form-control" id="comment" rows="3"></textarea>
+                                         <div id="error-comment"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -400,6 +424,7 @@
                                          <label for="president_name" class="form-label">Full Name</label>
                                          <input type="text" class="form-control" id="president_name"
                                              name="president_name">
+                                         <div id="error-president_name"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -407,6 +432,7 @@
                                          <label for="president_email" class="form-label">Email Address</label>
                                          <input type="email" class="form-control" id="president_email"
                                              name="president_email">
+                                         <div id="error-president_email"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -414,6 +440,7 @@
                                          <label for="president_phone_number" class="form-label">Phone Number</label>
                                          <input type="tel" class="form-control" id="president_phone_number"
                                              name="president_phone_number">
+                                         <div id="error-president_phone_number"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -423,6 +450,7 @@
                                              President</label>
                                          <input type="file" class="form-control" id="president_signature"
                                              name="president_signature">
+                                         <div id="error-president_signature"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -431,6 +459,7 @@
                                              Bearer 1</label>
                                          <input type="file" class="form-control" id="signature_of_bearer_1"
                                              name="signature_of_bearer_1">
+                                         <div id="error-signature_of_bearer_1"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -439,6 +468,23 @@
                                              Bearer 2</label>
                                          <input type="file" class="form-control" id="signature_of_bearer_2"
                                              name="signature_of_bearer_2">
+                                         <div id="error-signature_of_bearer_2"class="text-danger"></div>
+                                     </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                     <div class="mb-3">
+                                         <label for="currency" class="form-label" disabled>Currency</label>
+                                         <input type="text" class="form-control" value="INR" id="currency"
+                                             name="currency">
+                                         <div id="error-currency"class="text-danger"></div>
+                                     </div>
+                                 </div>
+                                 <div class="col-lg-4">
+                                     <div class="mb-3">
+                                         <label for="amount" class="form-label" disabled>Amount</label>
+                                         <input type="text" class="form-control" id="amount" name="amount"
+                                             value="1000">
+                                         <div id="error-amount"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-12">
@@ -457,10 +503,16 @@
 
                                          </label>
                                      </div>
-
+                                     <div id="error-acknowledgement"class="text-danger"></div>
                                  </div>
 
-
+                                 <div class="">
+                                     <button type="button"
+                                         class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
+                                         data-bs-dismiss="modal">Cancel</button>
+                                     <button type="submit"
+                                         class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
+                                 </div>
 
                              </div>
 
@@ -468,14 +520,68 @@
                      </div>
                  </div>
              </div>
-             <div class="modal-footer">
-                 <button type="button"
-                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                     data-bs-dismiss="modal">Cancel</button>
-                 <button type="submit"
-                     class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
-             </div>
+
          </div>
      </div>
  </div>
  <!-- /Modal -->
+ <script>
+     function validateForm() {
+         var nameOfStateUnit = document.getElementById("name_of_state_unit").value;
+         var dateOfEstablishment = document.getElementById("date_of_establishment").value;
+         var email = document.getElementById("email").value;
+         var mobileNo = document.getElementById("mobile_no").value;
+         var postalCode = document.getElementById("postal_code").value;
+         var acknowledgement = document.getElementById("acknowledgement").checked;
+
+         // Resetting error messages
+         document.getElementById("error-name_of_state_unit").innerText = "";
+
+         // Name of State Unit validation
+         if (nameOfStateUnit.trim() === "") {
+             document.getElementById("error-name_of_state_unit").innerText = "Name Of State Unit is required";
+             return false;
+         }
+
+         // Date Of Establishment validation
+         var currentDate = new Date();
+         var establishmentDate = new Date(dateOfEstablishment);
+         if (establishmentDate >= currentDate) {
+             document.getElementById("error-date_of_establishment").innerText =
+                 "Date Of Establishment must be before now";
+             return false;
+         }
+
+         // Email Format validation
+         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailPattern.test(email)) {
+             document.getElementById("error-email").innerText = "Invalid Email Format";
+             return false;
+         }
+
+         // Mobile Number validation
+         var mobilePattern = /^[0-9]{10}$/;
+         if (!mobilePattern.test(mobileNo)) {
+             document.getElementById("error-mobile_no").innerText = "Mobile number must be a 10-digit number";
+             return false;
+         }
+
+         // Postal Code validation
+         var postalPattern = /^[0-9]{6}$/;
+         if (!postalPattern.test(postalCode)) {
+             document.getElementById("error-postal_code").innerText = "Postal code must be a 6-digit number";
+             return false;
+         }
+
+         // Acknowledgement validation
+         if (!acknowledgement) {
+             document.getElementById("error-acknowledgement").innerText = "Please acknowledge the disclaimer";
+             return false;
+         }
+
+         // Enable submit button if all validations pass
+         document.getElementById("submit-btn").disabled = false;
+
+         return true;
+     }
+ </script>

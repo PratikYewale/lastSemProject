@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Association;
 use App\Models\Athlete;
 use App\Models\Member;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\JsonResponse;

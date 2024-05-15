@@ -42,6 +42,58 @@
                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Contact
                             Us</a>
                     </section>
+
+                    @if (isset($news) && count($news) > 0)
+                    <div class="row">
+                        @foreach ($news as $news)
+                            <div class="col-lg-4 mb-4">
+                                <!-- Post item -->
+                                <article class="post_item card news-card post_item_excerpt odd post">
+                                    <div class=" clearfix card-body">
+
+
+                                        <div class="post_featured">
+                                            <div class="post_thumb" data-image=""
+                                                data-title="Serving Cookies at Alpine Nationals">
+                                                <a class="hover_icon hover_icon_link" href="{{ route('newsDetails', ['id' => $news->id]) }}">
+                                                    <img alt="Serving Cookies at Alpine Nationals"
+                                                        src="http://placehold.it/1170x659">
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <h4 class="news-title">
+                                            <a href="{{ route('newsDetails', ['id' => $news->id]) }}">{{ $news['title'] }}</a>
+                                        </h4>
+
+                                        <div class="post_descr">
+                                            <p>{{ $news['img_description'] }}</p>
+                                        </div>
+                                        <div class="post_info mb-0 mt-0 d-flex justify-content-between">
+                                            <span class="post_info_item post_info_posted">
+                                                <span class="contact_icon icon-calendar-light"></span> <a
+                                                    href="post-single.html" class="post_info_date">{{ \Carbon\Carbon::parse($news['created_at'])->format('M d, Y') }}
+                                                  
+                                                </a>
+                                            </span>
+                                            <span class="post_info_item post_info_posted_by"><span
+                                                    class="contact_icon icon-user"></span> <a href="#"
+                                                    class="post_info_author">{{ $news['user']['first_name']}} {{ $news['user']['last_name'] }}</a>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </article>
+                                <!-- /Post item -->
+                            </div>
+                        @endforeach
+
+                    </div>
+                @else
+                    <h1>No Data available.</h1>
+                @endif
+
                 </div>
                 <!-- /Single team info -->
            

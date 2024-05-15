@@ -23,7 +23,7 @@
                 @if (isset($news) && count($news) > 0)
                     <div class="row">
                         @foreach ($news as $news)
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-4">
                                 <!-- Post item -->
                                 <article class="post_item card news-card post_item_excerpt odd post">
                                     <div class=" clearfix card-body">
