@@ -162,9 +162,17 @@
               <div class="modal-body px-5">
                   <div class="comments_form">
                       <div id="respond" class="comment-respond">
-                          <form id="addAthlete" action="{{ route('addAssociationMember') }}" method="POST"
-                              enctype="multipart/form-data" class="donationForm sc_input_hover_default"
-                              onsubmit="return validateForm()">
+                          @if ($errors->any())
+                              <div class="alert alert-danger">
+                                  <ul>
+                                      @foreach ($errors->all() as $error)
+                                          <li>{{ $error }}</li>
+                                      @endforeach
+                                  </ul>
+                              </div>
+                          @endif
+                          <form id="addAthlete" action="{{ route('addAthlete') }}" method="POST"
+                              enctype="multipart/form-data" class="donationForm sc_input_hover_default">
                               @csrf <!-- CSRF token -->
                               <div class="row">
                                   <div class="col-lg-12">
@@ -241,10 +249,48 @@
                                   <div class="col-lg-4">
                                       <div class="mb-3">
                                           <label for="mobile_no" class="form-label">Mobile Number</label>
-                                          <input type="tel" class="form-control" id="mobile_no"
-                                              name="mobile_no" pattern="[0-9]{10}" maxlength="10">
+                                          <input type="tel" class="form-control" id="mobile_no" name="mobile_no"
+                                              pattern="[0-9]{10}" maxlength="10">
                                       </div>
                                   </div>
+
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="password" class="form-label">Password</label>
+                                          <div class="input-group d-flex">
+                                              <input type="password" class="form-control" id="password"
+                                                  name="password" >
+                                              {{-- <div class="input-group-append h-100" style="width: 20%">
+                                                  <span class="input-group-text toggle-password eye-password-btn"
+                                                      id="togglePassword">
+                                                      <span class="icon-eye"></span>
+                                                  </span>
+                                              </div> --}}
+                                          </div>
+                                          <div id="error-password" class="text-danger"></div>
+                                      </div>
+                                  </div>
+                                  <div class="col-lg-4">
+                                      <div class="mb-3">
+                                          <label for="password_confirmation" class="form-label">Confirm
+                                              Password</label>
+                                          <div class="input-group d-flex">
+                                              <input type="password" class="form-control" id="password_confirmation"
+                                                  name="password_confirmation" >
+                                              {{-- <div class="input-group-append h-100" style="width: 20%">
+                                                  <span class="input-group-text toggle-password eye-password-btn"
+                                                      id="toggleConfirmPassword">
+                                                      <span class="icon-eye"></span>
+                                                  </span>
+                                              </div> --}}
+                                          </div>
+                                          <div id="error-password_confirmation" class="text-danger"></div>
+                                      </div>
+                                  </div>
+
+                           
+
+
                                   <div class="col-lg-12">
                                       <h4 class="mt-auto form-section-title">Address Information</h4>
                                   </div>
@@ -348,13 +394,13 @@
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <label for="sport_certificates" class="form-label">Sports
-                                            Certificates/Awards</label>
-                                        <input type="file" class="form-control" id="sport_certificates"
-                                            name="sport_certificates">
-                                    </div>
-                                </div>
+                                      <div class="mb-3">
+                                          <label for="sport_certificates" class="form-label">Sports
+                                              Certificates/Awards</label>
+                                          <input type="file" class="form-control" id="sport_certificates"
+                                              name="sport_certificates">
+                                      </div>
+                                  </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
                                           <label for="achievements_name" class="form-label">Year</label>
@@ -370,13 +416,13 @@
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <label for="sport_certificates" class="form-label">Sports
-                                            Certificates/Awards</label>
-                                        <input type="file" class="form-control" id="sport_certificates"
-                                            name="sport_certificates">
-                                    </div>
-                                </div>
+                                      <div class="mb-3">
+                                          <label for="sport_certificates" class="form-label">Sports
+                                              Certificates/Awards</label>
+                                          <input type="file" class="form-control" id="sport_certificates"
+                                              name="sport_certificates">
+                                      </div>
+                                  </div>
                                   <div class="col-lg-4">
                                       <div class="mb-3">
                                           <label for="achievements_name" class="form-label">Year</label>
@@ -392,34 +438,33 @@
                                       </div>
                                   </div>
                                   <div class="col-lg-4">
-                                    <div class="mb-3">
-                                        <label for="sport_certificates" class="form-label">Sports
-                                            Certificates/Awards</label>
-                                        <input type="file" class="form-control" id="sport_certificates"
-                                            name="sport_certificates">
-                                    </div>
-                                </div>
+                                      <div class="mb-3">
+                                          <label for="sport_certificates" class="form-label">Sports
+                                              Certificates/Awards</label>
+                                          <input type="file" class="form-control" id="sport_certificates"
+                                              name="sport_certificates">
+                                      </div>
+                                  </div>
 
-                            
 
-                               
+
+
 
 
 
 
                                   <div class="col-lg-12">
                                       <div class="mb-3 d-flex">
-                                          <input class="form-check-input" type="checkbox" value=""
+                                          <input class="form-check-input" type="checkbox" value="1"
                                               id="acknowledge" name="acknowledge">
                                           <label class="form-check-label ms-3" for="acknowledge">
                                               <b>Disclaimer:</b><br />
                                               By submitting this form, I certify that all information provided is true
                                               and accurate to the best of my knowledge.
-
                                           </label>
                                       </div>
-
                                   </div>
+
 
 
 

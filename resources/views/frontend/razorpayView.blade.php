@@ -15,6 +15,7 @@
     <div id="app">
         <main class="py-4">
             <div class="container">
+                <h1 class="text-center"> To access make Payment First</h1>
                 <div class="row">
                     <div class="col-md-6 offset-3 col-md-offset-6">
                         @if($message = Session::get('error'))

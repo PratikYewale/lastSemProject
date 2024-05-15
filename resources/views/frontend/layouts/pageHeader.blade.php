@@ -102,12 +102,7 @@
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
-                                        @if (Auth::user())
-                                            <li
-                                                class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                                <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
-                                            </li>
-                                        @else
+                                        @if (!Auth::user())
                                             <li
                                                 class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                                 <a href="{{ url('/registration') }}"><span>Registration</span></a>
@@ -128,20 +123,61 @@
                                 <!-- Cart -->
                                 <div class="menu_main_cart top_panel_icon">
                                     @if (Auth::user())
-                                        <a href="{{ url('/') }}">
+                                        <a href="#" class="top_panel_cart_button">
                                             <span class="contact_icon icon-user"></span>
                                             <span class="cart_summa">{{ Auth::user()->first_name }}
                                                 {{ Auth::user()->last_name }}</span>
-
+                                            <span class="contact_label contact_cart_label">Your cart:</span>
                                         </a>
+                                        <ul class="widget_area sidebar_cart sidebar">
+                                            <li>
+                                                <div class="widget woocommerce widget_shopping_cart">
+                                                    <div class="hide_cart_widget_if_empty">
+                                                        <div class="widget_shopping_cart_content">
+                                                            <ul class="cart_list product_list_widget ">
+                                                                <!-- Cart item -->
+                                                                <li class="mini_cart_item">
+
+                                                                    <a href="{{ url('/profile') }}">
+
+                                                                        Profile
+                                                                    </a>
+
+                                                                </li>
+                                                                <!-- /Cart item -->
+                                                                <!-- Cart item -->
+                                                                <li class="mini_cart_item">
+
+                                                                    <a href="{{ url('/media-gallery') }}">
+
+                                                                        Media Gallery
+                                                                    </a>
+
+                                                                </li>
+                                                                <li class="mini_cart_item">
+
+                                                                    <a href="{{ url('/logout') }}">
+
+                                                                        Logout
+                                                                    </a>
+
+                                                                </li>
+                                                                <!-- /Cart item -->
+                                                            </ul>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     @else
-                                        <a href="{{ url('/login') }}">
+                                        <a href="{{ url('/login') }}" class="top_panel_cart_button">
                                             <span class="contact_icon icon-user"></span>
                                             <span class="cart_summa">Login</span>
-
+                                            {{-- <span class="contact_label contact_cart_label">Your cart:</span> --}}
                                         </a>
                                     @endif
-
                                 </div>
                                 <!-- /Cart -->
                                 <!-- Booking button block -->
@@ -240,12 +276,7 @@
                                 </li>
 
                                 <!-- Menu: Media Gallery or Registration -->
-                                @if (Auth::user())
-                                    <li
-                                        class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                        <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
-                                    </li>
-                                @else
+                                @if (!Auth::user())
                                     <li
                                         class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                         <a href="{{ url('/registration') }}"><span>Registration</span></a>

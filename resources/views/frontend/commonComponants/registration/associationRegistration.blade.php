@@ -157,7 +157,7 @@
                          @endif
                          <form id="addAssociationMemberForm" action="{{ route('addAssociationMember') }}" method="POST"
                              enctype="multipart/form-data" class="donationForm sc_input_hover_default"
-                             ">
+                             {{-- onsubmit="return validateForm()" --}}>
                              @csrf <!-- CSRF token -->
                              <div class="row">
                                  <div class="col-lg-12">
@@ -168,19 +168,20 @@
                                          <label for="first_name" class="form-label">Name of State Unit</label>
                                          <input type="text" class="form-control" id="first_name"
                                              name="first_name">
-                                         <div id="error-orgNameError"class="text-danger"></div>
+                                         <div id="error-first_name" class="text-danger"></div>
                                      </div>
-
                                  </div>
+
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="date_of_establishment" class="form-label">Date of
                                              Establishment</label>
                                          <input type="date" class="form-control" id="date_of_establishment"
                                              name="date_of_establishment">
-                                         <div id="error-date_of_establishment"class="text-danger"></div>
+                                         <div id="error-date_of_establishment" class="text-danger"></div>
                                      </div>
                                  </div>
+
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="incorporation_certificate_number"
@@ -204,7 +205,8 @@
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="mobile_no" class="form-label">Mobile Number</label>
-                                         <input type="number" class="form-control" id="mobile_no" name="mobile_no" pattern="[0-9]{10}" maxlength="10">
+                                         <input type="number" class="form-control" id="mobile_no" name="mobile_no"
+                                             pattern="[0-9]{10}" maxlength="10">
 
                                          <div id="orgContactError"class="text-danger"></div>
                                      </div>
@@ -472,14 +474,52 @@
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
-                                     <div class="mb-3">
-                                         <label for="password" class="form-label" disabled>Password</label>
-                                         <input type="password" class="form-control" id="password"
-                                             name="password">
-                                         <div id="error-password"class="text-danger"></div>
-                                     </div>
-                                 </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="input-group d-flex">
+                                            <input type="password" class="form-control " id="password" name="password" style="width: 80%">
+                                            <div class="input-group-append h-100" style="width: 20%">
+                                                <span class="input-group-text toggle-password" id="togglePassword" >
+                                                    <span class="icon-eye"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="error-password" class="text-danger"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                        <div class="input-group d-flex">
+                                            <input type="password" class="form-control " id="password_confirmation" name="password_confirmation" style="width: 80%">
+                                            <div class="input-group-append h-100" style="width: 20%">
+                                                <span class="input-group-text toggle-password_confirmation" id="toggleConfirmPassword" >
+                                                    <span class="icon-eye"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div id="error-password_confirmation" class="text-danger"></div>
+                                    </div>
+                                </div>
                                 
+                                <script>
+                                    document.getElementById('togglePassword').addEventListener('click', function() {
+                                        const passwordInput = document.getElementById('password');
+                                        const toggleBtnIcon = this.querySelector('i');
+                                
+                                        if (passwordInput.type === 'password') {
+                                            passwordInput.type = 'text';
+                                            toggleBtnIcon.classList.remove('bi-eye');
+                                            toggleBtnIcon.classList.add('bi-eye-slash');
+                                        } else {
+                                            passwordInput.type = 'password';
+                                            toggleBtnIcon.classList.remove('bi-eye-slash');
+                                            toggleBtnIcon.classList.add('bi-eye');
+                                        }
+                                    });
+                                </script>
+                                
+
                                  <div class="col-lg-12">
                                      <div class="mb-3 d-flex">
                                          <input class="form-check-input" type="checkbox" value=""
@@ -511,46 +551,72 @@
 
                          </form>
 
-                         <script>
-                   
-                  
+                         {{-- <script>
+                             document.getElementById('addAssociationMemberForm').addEventListener('submit', function(event) {
+                                 let error = false;
 
-                    
+                                 // Reset error messages
+                                 document.querySelectorAll('.text-danger').forEach(function(el) {
+                                     el.textContent = '';
+                                 });
 
-                            // Form validation function
-                            function validateForm() {
-                                var organizationName = document.getElementById('first_name').value;
-                                var organizationMail = document.getElementById('email').value;
-                                var organizationContact = document.getElementById('mobile_no').value;
-                           
+                                 // Check required fields
+                                 const requiredFields = ['first_name', 'email', 'mobile_no', 'date_of_establishment',
+                                     'incorporation_certificate_number', 'president_name', 'president_phone_number'
+                                 ];
+                                 requiredFields.forEach(function(fieldName) {
+                                     const input = document.getElementById(fieldName);
+                                     if (!input.value.trim()) {
+                                         document.getElementById('error-' + fieldName).textContent = 'The ' + fieldName.replace(
+                                             '_', ' ') + ' field is required.';
+                                         error = true;
+                                     }
+                                 });
 
-                                var isValid = true;
+                                 // Validate email format
+                                 const emailInput = document.getElementById('email');
+                                 const emailValue = emailInput.value.trim();
+                                 if (emailValue && !isValidEmail(emailValue)) {
+                                     document.getElementById('orgMailError').textContent = 'Please enter a valid email address.';
+                                     error = true;
+                                 }
 
-                                if (organizationName.trim() === "") {
-                                    document.getElementById('orgNameError').innerText = "Organization Name is required";
-                                    isValid = false;
-                                } else {
-                                    document.getElementById('orgNameError').innerText = "";
-                                }
+                                 // Validate mobile number format
+                                 const mobileInput = document.getElementById('mobile_no');
+                                 const mobileValue = mobileInput.value.trim();
+                                 if (mobileValue && !isValidMobile(mobileValue)) {
+                                     document.getElementById('orgContactError').textContent = 'Please enter a valid mobile number.';
+                                     error = true;
+                                 }
 
-                                if (organizationMail.trim() === "") {
-                                    document.getElementById('orgMailError').innerText = "Organization Mail is required";
-                                    isValid = false;
-                                } else {
-                                    document.getElementById('orgMailError').innerText = "";
-                                }
+                                 if (error) {
+                                     event.preventDefault(); // Prevent form submission if there are errors
+                                 }
+                             });
 
-                                if (organizationContact.trim() === "") {
-                                    document.getElementById('orgContactError').innerText = "Organization Contact is required";
-                                    isValid = false;
-                                } else {
-                                    document.getElementById('orgContactError').innerText = "";
-                                }
+                             function isValidEmail(email) {
+                                 // Basic email format validation
+                                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+                             }
 
+                             function isValidMobile(mobile) {
+                                 // Basic mobile number format validation (10 digits)
+                                 return /^\d{10}$/.test(mobile);
+                             }
 
-                                return isValid;
-                            }
-                        </script>
+                             // Check required fields
+                             const requiredFields = ['first_name', 'email', 'mobile_no', 'date_of_establishment',
+                                 'incorporation_certificate_number', 'president_name', 'president_phone_number'
+                             ];
+                             requiredFields.forEach(function(fieldName) {
+                                 const input = document.getElementById(fieldName);
+                                 if (!input.value.trim()) {
+                                     document.getElementById('error-' + fieldName).textContent = 'The ' + fieldName.replace('_', ' ') +
+                                         ' field is required.';
+                                     error = true;
+                                 }
+                             });
+                         </script> --}}
                      </div>
                  </div>
              </div>
@@ -559,4 +625,3 @@
      </div>
  </div>
  <!-- /Modal -->
-

@@ -161,7 +161,8 @@
                     <div id="sponsership_form" class="comment-respond">
                         <form id="sponsershipForm" action="{{ route('createSponsorship') }}" method="POST"
                             enctype="multipart/form-data" class="sponsershipForm sc_input_hover_default"
-                            onsubmit="return validateForm()">
+                            onsubmit="return validateForm()
+                            ">
                             @csrf <!-- CSRF token -->
                             <div class="row">
 
