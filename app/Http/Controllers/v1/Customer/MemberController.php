@@ -113,12 +113,12 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function addAthlete(Request $request): JsonResponse
+    public function addAthlete(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
-                'last_name' => 'nullable|string|max:255',
+                'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
@@ -134,7 +134,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -191,7 +191,8 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Athlete added successfully.', true);
+            // return $this->sendResponse($user->id, 'Athlete added successfully.', true);
+            return back()->with('success', 'Athlete added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -460,7 +461,12 @@ class MemberController extends Controller
                 Auth::login($user);
                // return $this->sendResponse($response, 'User logged in successfully.', 200);
 
-                return redirect('/');
+                // Check user status
+                if ($user->status == 1) {
+                    return redirect('/');
+                } else {
+                    return redirect('/razorpay-payment');
+                }
             } else {
 
                 return back()->withErrors(['error' => 'Invalid credentials']);
@@ -589,11 +595,11 @@ class MemberController extends Controller
                 'middle_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|min:10|max:10',
-                'password' => 'nullable|string',
+                'password' => 'required|string',
                 'name_of_state_unit' => 'nullable|string',
                 'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'date_of_establishment' => 'nullable|date',
-                'incorporation_certificate_number' => 'nullable|string|max:255',
+                'date_of_establishment' => 'required|date',
+                'incorporation_certificate_number' => 'required|string|max:255',
                 'recognition_by_state_government' => 'nullable|boolean|max:255',
                 'recognition_by_state_olympic_association' => 'nullable|boolean|max:255',
                 'hosted_national_event_in_past_3_yrs' => 'nullable|boolean|max:255',
@@ -604,9 +610,9 @@ class MemberController extends Controller
                 'state' => 'nullable|string|max:255',
                 'postal_code' => 'nullable|string|max:255',
                 'website' => 'nullable|string|max:255',
-                'president_name' => 'nullable|string|max:255',
-                'president_email' => 'nullable|string|email|max:255',
-                'president_phone_number' => 'nullable|string|max:255',
+                'president_name' => 'required|string|max:255',
+                'president_email' => 'required|string|email|max:255',
+                'president_phone_number' => 'required|string|max:255',
                 'president_signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'signature_of_bearer_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'signature_of_bearer_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

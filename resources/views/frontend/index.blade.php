@@ -108,12 +108,8 @@
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
-                                        @if (Auth::user())
-                                            <li
-                                                class="{{ request()->is('media-gallary*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                                <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
-                                            </li>
-                                        @else
+                                        @if (!Auth::user())
+                                     
                                             <li
                                                 class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                                 <a href="{{ url('/registration') }}"><span>Registration</span></a>
@@ -129,31 +125,14 @@
                                         <!-- /Menu: Contact Us -->
                                     </ul>
                                 </nav>
+        
                                 <!-- Cart -->
                                 <div class="menu_main_cart top_panel_icon">
-                                    @if (Auth::user())
-                                        <a href="{{ url('/') }}">
-                                            <span class="contact_icon icon-user"></span>
-                                            <span class="cart_summa">{{ Auth::user()->first_name }}
-                                                {{ Auth::user()->last_name }}</span>
-
-                                        </a>
-                                    @else
-                                        <a href="{{ url('/login') }}">
-                                            <span class="contact_icon icon-user"></span>
-                                            <span class="cart_summa">Login</span>
-
-                                        </a>
-                                    @endif
-
-                                </div>
-                                <!-- /Cart -->
-                                <!-- Cart -->
-                                <div class="menu_main_cart top_panel_icon">
-                                    <a href="#" class="top_panel_cart_button" data-items="2"
-                                        data-summa="&#036;538.00">
-                                        <span class="contact_icon icon-basket"></span>
-                                        <span class="cart_summa">&#36;538.00</span>
+                                    @if(Auth::user())
+                                    <a href="#" class="top_panel_cart_button" >
+                                        <span class="contact_icon icon-user"></span>
+                                        <span class="cart_summa">{{ Auth::user()->first_name }}
+                                            {{ Auth::user()->last_name }}</span>
                                         <span class="contact_label contact_cart_label">Your cart:</span>
                                     </a>
                                     <ul class="widget_area sidebar_cart sidebar">
@@ -164,61 +143,48 @@
                                                         <ul class="cart_list product_list_widget ">
                                                             <!-- Cart item -->
                                                             <li class="mini_cart_item">
-                                                                <a class="remove" href="#"
-                                                                    title="Remove this item">×</a>
-                                                                <a href="shop-product.html">
-                                                                    <img src="http://placehold.it/180x180"
-                                                                        alt="">
-                                                                    Bogner Phoenix Mirror Goggles
+                                                              
+                                                                <a href="{{ url('/profile') }}">
+                                                                   
+                                                                   Profile
                                                                 </a>
-                                                                <span class="quantity">
-                                                                    1 ×
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span
-                                                                            class="woocommerce-Price-currencySymbol">$</span>
-                                                                        339.00
-                                                                    </span>
-                                                                </span>
+                                                           
                                                             </li>
                                                             <!-- /Cart item -->
                                                             <!-- Cart item -->
                                                             <li class="mini_cart_item">
-                                                                <a class="remove" href="#"
-                                                                    title="Remove this item">×</a>
-                                                                <a href="shop-product.html">
-                                                                    <img src="http://placehold.it/180x180"
-                                                                        alt="">
-                                                                    Rome Heist Snowboard
+                                                              
+                                                                <a href="{{ url('/media-gallery') }}">
+                                                                   
+                                                                  Media  Gallery
                                                                 </a>
-                                                                <span class="quantity">
-                                                                    1 ×
-                                                                    <span class="woocommerce-Price-amount amount">
-                                                                        <span
-                                                                            class="woocommerce-Price-currencySymbol">$</span>
-                                                                        199.00
-                                                                    </span>
-                                                                </span>
+                                                           
+                                                            </li>
+                                                            <li class="mini_cart_item">
+                                                              
+                                                                <a href="{{ url('/logout') }}">
+                                                                   
+                                                                 Logout
+                                                                </a>
+                                                           
                                                             </li>
                                                             <!-- /Cart item -->
                                                         </ul>
-                                                        <p class="total">
-                                                            <strong>Subtotal:</strong>
-                                                            <span class="woocommerce-Price-amount amount">
-                                                                <span class="woocommerce-Price-currencySymbol">$</span>
-                                                                538.00
-                                                            </span>
-                                                        </p>
-                                                        <p class="buttons">
-                                                            <a class="button wc-forward sc_button_hover_fade"
-                                                                href="{{ url('/logout') }}">Logout</a>
-                                                            <a class="button checkout wc-forward sc_button_hover_fade"
-                                                                href="checkout.html">Checkout</a>
-                                                        </p>
+
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
+                                    @else
+                                    <a href="{{ url('/login') }}" class="top_panel_cart_button" >
+                                        <span class="contact_icon icon-user"></span>
+                                        <span class="cart_summa">Login</span>
+                                        {{-- <span class="contact_label contact_cart_label">Your cart:</span> --}}
+                                    </a>
+                                  
+                                    @endif
                                 </div>
                                 <!-- /Cart -->
                                 <!-- Booking button block -->
@@ -311,12 +277,8 @@
                             </li>
 
                             <!-- Menu: Media Gallery or Registration -->
-                            @if (Auth::user())
-                                <li
-                                    class="{{ Route::currentRouteName() == 'media-gallery' ? 'menu-item current-menu-item' : 'menu-item' }}">
-                                    <a href="{{ url('/media-gallary') }}"><span>Media Gallery</span></a>
-                                </li>
-                            @else
+                            @if (!Auth::user())
+                           
                                 <li
                                     class="{{ Route::currentRouteName() == 'registration' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                     <a href="{{ url('/registration') }}"><span>Registration</span></a>
@@ -1380,12 +1342,7 @@
 
                                         </li>
                                         <!-- /Menu: News -->
-                                        <!-- Menu: Contact Us -->
-                                        <li class="menu-item">
-                                            <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/membership') }}"><span
-                                                        class="ms-1">Membership</span></a>
-                                        </li>
+                            
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/contact') }}"><span class="ms-1">Contact
