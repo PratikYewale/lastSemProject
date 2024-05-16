@@ -9351,8 +9351,9 @@ body table.booked-calendar tr.days th {
 	margin-right: 10px;
  }
 
- .form-label {
-    font-weight: 500;
+ .form-label,
+ .form-check-label {
+    font-weight: 600;
 
 }
 
