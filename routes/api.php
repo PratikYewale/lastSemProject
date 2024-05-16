@@ -13,6 +13,7 @@ use App\Http\Controllers\v1\Admin\FaqController;
 use App\Http\Controllers\v1\Admin\MembershipController;
 use App\Http\Controllers\v1\Admin\NewsController;
 use App\Http\Controllers\v1\Admin\ProgramController;
+use App\Http\Controllers\v1\Customer\AchivementController;
 use App\Http\Controllers\v1\Customer\AddressController;
 use App\Http\Controllers\v1\Customer\JobApplicationController;
 use App\Http\Controllers\v1\Admin\JobApplicationController as AppliedJobController;
@@ -119,11 +120,11 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getClubById', [ClubController::class, 'getClubById']);
 
         //Association
-        Route::post('createAssociaction', [AssociationController::class, 'createAssociaction']);
-        Route::post('updateAssociation', [AssociationController::class, 'updateAssociation']);
-        Route::get('getAllAssociation', [AssociationController::class, 'getAllAssociation']);
-        Route::delete('deleteAssociation', [AssociationController::class, 'deleteAssociation']);
-        Route::get('getAssociationById', [AssociationController::class, 'getAssociationById']);
+        // Route::post('createAssociaction', [AssociationController::class, 'createAssociaction']);
+        // Route::post('updateAssociation', [AssociationController::class, 'updateAssociation']);
+        //Route::get('getAllAssociation', [AssociationController::class, 'getAllAssociation']);
+        // Route::delete('deleteAssociation', [AssociationController::class, 'deleteAssociation']);
+        // Route::get('getAssociationById', [AssociationController::class, 'getAssociationById']);
 
         //Membership
         Route::post('createMembership', [MembershipController::class, 'createMembership']);
@@ -142,10 +143,12 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getSponsorshipById', [SponsorshipController::class, 'getSponsorshipById']);
 
         // Member
-        Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
+        //Route::get('getAllMembers', [AdminMemberController::class, 'getAllMembers']);
         Route::get('getAllAthletes', [AdminMemberController::class, 'getAllAthletes']);
-        Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
+        //Route::get('getMemberById', [AdminMemberController::class, 'getMemberById']);
         Route::get('getAllAssociation',[AdminMemberController::class,'getAllAssociation']);
+        Route::get('getAssociationById',[AdminMemberController::class,'getAssociationById']);
+        Route::get('getAthleteById',[AdminMemberController::class,'getAthleteById']);
 
         //ContactUs
         Route::get('getAllContactUs', [AdminContactUsController::class, 'getAllContactUs']);
@@ -213,7 +216,7 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     //Route::post('createPaymentAthlete',[MemberController::class,'createPaymentAthlete']);
     Route::get('getAllAthletes',[MemberController::class,'getAllAthletes']);
     Route::get('getAssociationById',[MemberController::class,'getAssociationById']);
-
+    Route::get('getAthleteById',[MemberController::class,'getAthleteById']);
     
     // Auth
     Route::post('forgetPasswordMember', [MemberAuthController::class, 'forgetPasswordMember']);
@@ -247,7 +250,7 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     //Association
     Route::get('getAllAssociation', [CustomerAssociationController::class, 'getAllAssociation']);
     // Route::get('getAssociationById',[CustomerAssociationController::class,'getAssociationById']);
-
+    
     //Media Gallery
     Route::get('getMediaGalleryById',[CustomerMediaGalleryController::class,'getMediaGalleryById']);
     Route::get('getAllMediaGallery',[CustomerMediaGalleryController::class,'getAllMediaGallery']);
@@ -280,5 +283,9 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::group(['middleware' => ['cors', 'jwt.verify', 'athlete']], function () {
         Route::post('createPaymentAthlete',[MemberController::class,'createPaymentAthlete']);
         Route::post('athletePaymentVerification',[MemberController::class,'athletePaymentVerification']);
+
+        //Achivement
+        Route::post('createAchivement',[AchivementController::class,'createAchivement']);
+        Route::delete('deleteAchivement',[AchivementController::class,'deleteAchivement']);
     });
 });

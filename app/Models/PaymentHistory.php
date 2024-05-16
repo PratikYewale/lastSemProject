@@ -9,4 +9,5 @@ class PaymentHistory extends Model
 {
     use HasFactory;
     protected $table='payment_history';
+    
 }
