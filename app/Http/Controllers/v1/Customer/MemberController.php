@@ -134,7 +134,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -191,7 +191,8 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Athlete added successfully.', true);
+            return back()->with('success', 'Athlete added successfully.');
+
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
@@ -377,7 +378,7 @@ class MemberController extends Controller
                 'limit' => 'numeric',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors(), 400);
+                return back()->withErrors($validator)->withInput();
             }
             $query = User::query()->with(['achievements', 'sport_certificates'])->where('role', 'athlete');
             $count = $query->count();

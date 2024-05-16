@@ -25,7 +25,7 @@ class DonationController extends Controller
                 'honoree_first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'honoree_last_name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+                'email' => 'required|string|email|max:255',
                 'mobile_no' => 'required|min:10|max:10',
                 'address_line1' => 'required|string',
                 'zip' => 'required|numeric',
@@ -44,7 +44,8 @@ class DonationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->with('success', 'Athlete added successfully.');
+
             }
             DB::beginTransaction();
             $newDonor = new Donor();
@@ -96,7 +97,7 @@ class DonationController extends Controller
             }
             DB::commit();
             $data = Donor::query()->where('id', $newDonor->id)->with(['donations', 'honors'])->get();
-            return $this->sendResponse($data, 'Donation added successfully.', true);
+            return back()->with('success', 'Athlete added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);

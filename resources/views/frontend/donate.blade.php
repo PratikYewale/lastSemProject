@@ -57,8 +57,19 @@
                                 INDIA (SSI)</h2>
                             <div class="comments_form">
                                 <div id="respond" class="comment-respond">
-                                    <form action="#" method="post" id="donationForm"
-                                        class="donationForm sc_input_hover_default">
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    <form id="donationForm" action="{{ route('addDonation') }}" method="POST"
+                                        enctype="multipart/form-data" class="donationForm sc_input_hover_default"
+                                        {{-- onsubmit="return validateForm() --}}>
+                                        @csrf
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
@@ -67,12 +78,12 @@
                                                     <div class="d-flex">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" id="one_time"
-                                                                name="donation_type" value="1" checked>
+                                                                name="donation_type" value="onetime" checked>
                                                             <label class="form-check-label" for="one_time">One Time</label>
                                                         </div>
                                                         <div class="form-check ms-5">
                                                             <input class="form-check-input" type="radio" id="monthly"
-                                                                name="donation_type" value="0">
+                                                                name="donation_type" value="monthly">
                                                             <label class="form-check-label" for="monthly">Monthly</label>
                                                         </div>
                                                     </div>
@@ -99,13 +110,16 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <div class="form-check">
+                                                        <input class="form-check-input" type="hidden" name="dedicate"
+                                                            value="0"> <!-- Hidden input with value 0 -->
                                                         <input class="form-check-input" type="checkbox" id="dedicate"
-                                                            name="dedicate">
+                                                            name="dedicate" value="1">
                                                         <label class="form-check-label" for="dedicate">Dedicate my
                                                             donation</label>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="col-lg-6" id="honor_type_wrapper">
                                                 <div class="mb-3">
                                                     <label for="honor_type" class="form-label">Honor Type</label><br>
@@ -175,6 +189,9 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <div class="form-check">
+                                                        <input class="form-check-input" type="hidden"
+                                                            name="future_contact" value="0">
+                                                        <!-- Hidden input with value 0 -->
                                                         <input class="form-check-input" type="checkbox"
                                                             id="future_contact" name="future_contact" value="1">
                                                         <label class="form-check-label" for="future_contact">Allow Future
@@ -199,22 +216,25 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="country" class="form-label">Country</label>
-                                                    <input type="text" class="form-control" id="country" name="country" required>
+                                                    <input type="text" class="form-control" id="country"
+                                                        name="country" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="state" class="form-label">State</label>
-                                                    <input type="text" class="form-control" id="state" name="state" required>
+                                                    <input type="text" class="form-control" id="state"
+                                                        name="state" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="city" class="form-label">City</label>
-                                                    <input type="text" class="form-control" id="city" name="city" required>
+                                                    <input type="text" class="form-control" id="city"
+                                                        name="city" required>
                                                 </div>
                                             </div>
-                                            
+
 
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
@@ -253,14 +273,17 @@
                                                         streaming schedules.</p>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            id="follow_updates_yes" name="follow_updates" value="1">
+                                                            id="subscription_to_news" name="subscription_to_news"
+                                                            value="1">
                                                         <label class="form-check-label"
-                                                            for="follow_updates_yes">Yes</label>
+                                                            for="subscription_to_news">Yes</label>
                                                     </div>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio"
-                                                            id="follow_updates_no" name="follow_updates" value="0">
-                                                        <label class="form-check-label" for="follow_updates_no">No</label>
+                                                            id="subscription_to_news" name="subscription_to_news"
+                                                            value="0">
+                                                        <label class="form-check-label"
+                                                            for="subscription_to_news">No</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -271,8 +294,8 @@
                                                         donation messages from U.S. Ski & Snowboard to the phone number you
                                                         provide. No consent required to buy. Msg&data rates may apply.</p>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            id="text_updates_yes" name="text_updates" value="1">
+                                                        <input class="form-check-input" type="radio" id="text_updates"
+                                                            name="text_updates" value="1">
                                                         <label class="form-check-label" for="text_updates_yes">Yes</label>
                                                     </div>
                                                     <div class="form-check">
@@ -294,7 +317,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
-                                                    <button type="button"
+                                                    <button type="submit"
                                                         class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">
                                                         UPI
                                                     </button>
