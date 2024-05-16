@@ -22,11 +22,9 @@ class HomeController extends Controller
     }
     public function donate()
     {
-        $countries = Country::pluck('name', 'id');
-        $states = State::pluck('name', 'id');
-        $cities = City::pluck('name', 'id');
+      
 
-        return view('frontend.donate', compact('countries','states','cities'));
+        return view('frontend.donate');
     }
     public function about()
     {

@@ -199,38 +199,22 @@
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="country" class="form-label">Country</label>
-                                                    <select class="form-select" id="country" name="country" required>
-                                                        <option value="">Select Country</option>
-                                                        @foreach ($countries as $id => $name)
-                                                            <option value="{{ $id }}">{{ $name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" class="form-control" id="country" name="country" required>
                                                 </div>
-
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="state" class="form-label">State</label>
-                                                    <select class="form-select" id="state" name="state" required>
-                                                        <option value="">Select State</option>
-                                                        @foreach ($states as $id => $name)
-                                                            <option value="{{ $id }}">{{ $name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="text" class="form-control" id="state" name="state" required>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="city" class="form-label">City</label>
-                                                    <select class="form-select" id="city" name="city" required
-                                                        disabled>
-                                                        <option value="">Select City</option>
-                                                        <!-- Options will be dynamically populated based on selected state using JavaScript -->
-                                                    </select>
+                                                    <input type="text" class="form-control" id="city" name="city" required>
                                                 </div>
                                             </div>
+                                            
 
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
