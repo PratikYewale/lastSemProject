@@ -16,80 +16,80 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
-    public function getAllMembers(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'pageNo' => 'nullable|numeric',
-                'limit' => 'nullable|numeric',
-                'name' => 'nullable|string|max:255',
-            ]);
+    // public function getAllMembers(Request $request): JsonResponse
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'pageNo' => 'nullable|numeric',
+    //             'limit' => 'nullable|numeric',
+    //             'name' => 'nullable|string|max:255',
+    //         ]);
 
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors(), 400);
-            }
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors(), 400);
+    //         }
 
-            $query = Member::query()->with(['user']);
-            if ($request->has('is_athlete')) {
-                if ($request->is_athlete == true) {
-                    $query->where('is_athlete', true);
-                }
-                if ($request->is_athlete == false) {
-                    $query->where('is_athlete', false);
-                }
-            }
-            if ($request->has('is_featured')) {
-                if ($request->is_featured == true) {
-                    $query->where('is_featured', true)->where('is_athlete', true);
-                }
-                if ($request->is_featured == false) {
-                    $query->where('is_featured', false)->where('is_athlete', true);
-                }
-            }
-            $count = $query->count();
+    //         $query = Member::query()->with(['user']);
+    //         if ($request->has('is_athlete')) {
+    //             if ($request->is_athlete == true) {
+    //                 $query->where('is_athlete', true);
+    //             }
+    //             if ($request->is_athlete == false) {
+    //                 $query->where('is_athlete', false);
+    //             }
+    //         }
+    //         if ($request->has('is_featured')) {
+    //             if ($request->is_featured == true) {
+    //                 $query->where('is_featured', true)->where('is_athlete', true);
+    //             }
+    //             if ($request->is_featured == false) {
+    //                 $query->where('is_featured', false)->where('is_athlete', true);
+    //             }
+    //         }
+    //         $count = $query->count();
 
-            if ($request->has('pageNo') && $request->has('limit')) {
-                $limit = $request->limit;
-                $pageNo = $request->pageNo;
-                $skip = $limit * $pageNo;
-                $query->skip($skip)->limit($limit);
-            }
+    //         if ($request->has('pageNo') && $request->has('limit')) {
+    //             $limit = $request->limit;
+    //             $pageNo = $request->pageNo;
+    //             $skip = $limit * $pageNo;
+    //             $query->skip($skip)->limit($limit);
+    //         }
 
-            $members = $query->orderBy('id', 'DESC')->get()->toArray();
+    //         $members = $query->orderBy('id', 'DESC')->get()->toArray();
 
-            foreach ($members as &$member) {
-                $member['achievements'] = is_string($member['achievements']) ? json_decode($member['achievements'], true) : $member['achievements'];
-                $member['schools'] = is_string($member['schools']) ? json_decode($member['schools'], true) : $member['schools'];
-                $member['links'] = is_string($member['links']) ? json_decode($member['links'], true) : $member['links'];
-            }
+    //         foreach ($members as &$member) {
+    //             $member['achievements'] = is_string($member['achievements']) ? json_decode($member['achievements'], true) : $member['achievements'];
+    //             $member['schools'] = is_string($member['schools']) ? json_decode($member['schools'], true) : $member['schools'];
+    //             $member['links'] = is_string($member['links']) ? json_decode($member['links'], true) : $member['links'];
+    //         }
 
-            if (count($members) <= 0) {
-                return $this->sendError('No data available.');
-            }
+    //         if (count($members) <= 0) {
+    //             return $this->sendError('No data available.');
+    //         }
 
-            return $this->sendResponse(["count" => $count, "data" => $members], 'Data Fetched Successfully.', true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
-    public function getMemberById(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|exists:members,id',
-            ]);
+    //         return $this->sendResponse(["count" => $count, "data" => $members], 'Data Fetched Successfully.', true);
+    //     } catch (Exception $e) {
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+    //     }
+    // }
+    // public function getMemberById(Request $request): JsonResponse
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'id' => 'required|exists:members,id',
+    //         ]);
 
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors(), 400);
-            }
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors(), 400);
+    //         }
 
-            $query = Member::query()->where('id', $request->id)->with('user')->first();
+    //         $query = Member::query()->where('id', $request->id)->with('user')->first();
 
-            return $this->sendResponse($query, 'Data fetched successfully.', true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
+    //         return $this->sendResponse($query, 'Data fetched successfully.', true);
+    //     } catch (Exception $e) {
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+    //     }
+    // }
     public function getAllAthletes(Request $request)
     {
         try {
@@ -100,7 +100,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->with(['achievements','sport_certificates'])->where('role', 'athlete');
+            $query = User::query()->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -110,8 +110,8 @@ class MemberController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Athlete'] = $data;
                 $response['count'] = $count;
+                $response['Athlete'] = $data;
                 return $this->sendResponse($response, 'Athlete fetched successfully.', true);
             } else {
                 return $this->sendError("No data found.");
@@ -120,7 +120,6 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function getAllAssociation(Request $request)
     {
         try {
@@ -131,7 +130,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->where('role','member');
+            $query = User::query()->with('payment_history')->where('role','member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -151,5 +150,42 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
+    public function getAssociationById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id'
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $association = User::query()->where('id', $request->id)->with('payment_history')->where('role','member')->first();
+            if (!$association) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($association, "Association fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getAthleteById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id'
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $athlete = User::query()->where('id', $request->id)->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete')->first();
+            if (!$athlete) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($athlete, "Association fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
 }

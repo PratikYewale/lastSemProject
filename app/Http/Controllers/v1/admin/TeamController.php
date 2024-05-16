@@ -17,38 +17,32 @@ use Illuminate\Support\Str;
 
 class TeamController extends Controller
 {
-    public function saveFile($file, $process)
+    public function saveFile($file, $fileName)
     {
-        $extension = $file->getClientOriginalExtension();
-        $cur = Str::uuid();
-        $fileName = $process . '-' . $cur . '.' . $extension;
-        $basePath = public_path('\\Image\\');
-        if (env('APP_ENV') == 'prod') {
-            $basePath =  public_path('/Image/');
-        }
-        if (!is_dir($basePath)) {
-            mkdir($basePath, 0755, true);
-        }
-        if (env('APP_ENV') == 'prod') {
-            $destinationPath =  public_path('/Image');
-        } else {
-            $destinationPath = public_path('\\Image');
+        $fileExtension = $file->getClientOriginalExtension();
+        $newFileName = Str::uuid() . '-' . rand(100, 9999) . '.' . $fileExtension;
+        $uploadsPath = public_path('uploads');
+        $directoryPath = "$uploadsPath/$fileName";
+
+        if (!File::exists($uploadsPath)) {
+            File::makeDirectory($uploadsPath, 0755, true);
         }
 
-        $file->move($destinationPath, $fileName);
+        if (!File::exists($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true);
+        }
 
-        return '/Image/' . $fileName;
+        $destinationPath = "$directoryPath/$newFileName";
+        $file->move($directoryPath, $newFileName);
+
+        return "/uploads/$fileName/" . $newFileName;
     }
     public function addTeam(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'description' => 'required',
                 'primary_img' => 'required|mimes:jpg,jpeg,png|max:2048',
-                'secondary_img' => 'mimes:jpg,jpeg,png|max:2048',
-                'primary_video' => 'mimes:mp4,mkv|max:4046',
-                'intro_para' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -58,19 +52,8 @@ class TeamController extends Controller
             $newTeam = new Team();
             $newTeam->name = $request->name;
             $newTeam->description = $request->description;
-            $newTeam->links = $request->links;
-            $newTeam->quote = $request->quote;
-            $newTeam->intro_para = $request->intro_para;
-            $newTeam->body_para = $request->body_para;
-            $newTeam->conclusion = $request->conclusion;
             if ($request->primary_img) {
-                $newTeam->primary_img = $this->saveFile($request->primary_img, 'TeamsPrimaryImages');
-            }
-            if ($request->secondary_img) {
-                $newTeam->secondary_img = $this->saveFile($request->secondary_img, 'TeamsSecondaryImages');
-            }
-            if ($request->primary_video) {
-                $newTeam->primary_video = $this->saveFile($request->primary_video, 'TeamsPrimaryVideos');
+                $newTeam->primary_img = $this->saveFile($request->primary_img, 'TeamLogos');
             }
             $newTeam->save();
             DB::commit();
@@ -87,8 +70,6 @@ class TeamController extends Controller
                 'id' => 'required|integer|exists:teams,id',
                 'name' => 'string|max:255',
                 'primary_img' => 'mimes:jpg,jpeg,png|max:2048',
-                'secondary_img' => 'mimes:jpg,jpeg,png|max:2048',
-                'primary_video' => 'mimes:mp4,mkv|max:4046',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -104,29 +85,8 @@ class TeamController extends Controller
             if ($request->has('description')) {
                 $updateTeam->description = $request->description;
             }
-            if ($request->has('links')) {
-                $updateTeam->links = $request->links;
-            }
-            if ($request->has('quote')) {
-                $updateTeam->quote = $request->quote;
-            }
-            if ($request->has('intro_para')) {
-                $updateTeam->intro_para = $request->intro_para;
-            }
-            if ($request->has('body_para')) {
-                $updateTeam->body_para = $request->body_para;
-            }
-            if ($request->has('conclusion')) {
-                $updateTeam->conclusion = $request->conclusion;
-            }
             if ($request->hasFile('primary_img')) {
                 $updateTeam->primary_img = $this->saveFile($request->primary_img, 'TeamsPrimaryImages');
-            }
-            if ($request->hasFile('secondary_img')) {
-                $updateTeam->secondary_img = $this->saveFile($request->secondary_img, 'TeamsSecondaryImages');
-            }
-            if ($request->hasFile('primary_video')) {
-                $updateTeam->primary_video = $this->saveFile($request->primary_video, 'TeamsPrimaryVideos');
             }
             $updateTeam->save();
             DB::commit();
@@ -147,7 +107,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Team::query();
+            $query = Team::query()->with(['teamprofiles']);
 
             if ($request->has('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
@@ -160,13 +120,10 @@ class TeamController extends Controller
                 $query->skip($skip)->limit($limit);
             }
             $data = $query->orderBy('id', 'DESC')->get();
-            foreach ($data as &$member) {
-                $member['links'] = is_string($member['links']) ? json_decode($member['links'], true) : $member['links'];
-            }
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
+            return $this->sendResponse(["count" => $count, "teams" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -181,12 +138,9 @@ class TeamController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $getTeam = Team::query()->where('id', $request->id)->with(['teamprofiles'])->first();
-            $getTeam['links'] = is_string($getTeam['links']) ? json_decode($getTeam['links'], true) : $getTeam['links'];
-
             if (empty($getTeam)) {
                 return $this->sendError("No team found.");
             }
-
             return $this->sendResponse($getTeam, 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -203,10 +157,7 @@ class TeamController extends Controller
             }
             DB::beginTransaction();
             $team = Team::query()->where('id', $request->id)->first();
-            $teamProfiles = $team->teamprofiles()->get();
-            foreach ($teamProfiles as $teamProfile) {
-                $teamProfile->delete();
-            }
+            $team->teamProfiles()->delete();
             $team->delete();
             DB::commit();
             return $this->sendResponse($team->id, 'Team and associated profile deleted successfully.', true);
@@ -216,6 +167,7 @@ class TeamController extends Controller
         }
     }
 
+    // Team Profile
     public function addTeamProfile(Request $request): JsonResponse
     {
         try {
@@ -245,7 +197,7 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:team_profiles,id',
-                'team_id' => 'required|integer|exists:teams,id',
+                'team_id' => 'exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -349,60 +301,88 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'team_id' => 'required|integer|exists:teams,id',
-                'team_profile_id' => 'required|integer|exists:team_profiles,id',
-                'member_id' => 'required|integer|exists:members,id',
+                'team_profile' => 'required|string',
+                'athlete_ids' => 'required|array',
+                'athlete_ids.*' => 'required|integer|exists:users,id,role,athlete',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+
             DB::beginTransaction();
-            $newTeamMember = new TeamMember();
-            $newTeamMember->team_id = $request->team_id;
-            $newTeamMember->team_profile_id = $request->team_profile_id;
-            $newTeamMember->member_id = $request->member_id;
-            $newTeamMember->save();
+
+            $team_id = $request->team_id;
+            $team_profile = $request->team_profile;
+            $athlete_ids = $request->athlete_ids;
+
+            foreach ($athlete_ids as $athlete_id) {
+                $existingTeamMember = TeamMember::where('team_id', $team_id)
+                    ->where('team_profile', $team_profile)
+                    ->where('athlete_id', $athlete_id)
+                    ->first();
+
+                if ($existingTeamMember) {
+                    return $this->sendError("Athlete with ID $athlete_id already belongs to this team profile.", [], 409);
+                }
+
+                $existingTeamMember = TeamMember::where('team_id', $team_id)
+                    ->where('athlete_id', $athlete_id)
+                    ->first();
+
+                if ($existingTeamMember) {
+                    return $this->sendError("Athlete with ID $athlete_id already belongs to another team profile.", [], 409);
+                }
+
+                $newTeamMember = new TeamMember();
+                $newTeamMember->team_id = $team_id;
+                $newTeamMember->team_profile = $team_profile;
+                $newTeamMember->athlete_id = $athlete_id;
+                $newTeamMember->save();
+            }
+
             DB::commit();
-            return $this->sendResponse($newTeamMember, 'Team member added successfully.', true);
+            return $this->sendResponse([],'All team members added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function updateTeamMember(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:team_member,id',
-                'team_id' => 'required|integer|exists:teams,id',
-                'team_profile_id' => 'required|integer|exists:team_profiles,id',
-                'member_id' => 'required|integer|exists:members,id',
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-            DB::beginTransaction();
-            $updateTeamMember = TeamMember::query()->where('id', $request->id)->first();
-            if (!$updateTeamMember) {
-                return $this->sendError("No team found.");
-            }
-            if ($request->has('team_id')) {
-                $updateTeamMember->team_id = $request->team_id;
-            }
-            if ($request->has('team_profile_id')) {
-                $updateTeamMember->team_profile_id = $request->team_profile_id;
-            }
-            if ($request->has('member_id')) {
-                $updateTeamMember->member_id = $request->member_id;
-            }
-            $updateTeamMember->save();
-            DB::commit();
-            return $this->sendResponse($updateTeamMember, 'Team member updated successfully.');
-        } catch (Exception $e) {
-            DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
-        }
-    }
+
+    // public function updateTeamMember(Request $request): JsonResponse
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'id' => 'required|integer|exists:team_member,id',
+    //             'team_id' => 'required|integer|exists:teams,id',
+    //             'team_profile_id' => 'required|integer|exists:team_profiles,id',
+    //             'member_id' => 'required|integer|exists:members,id',
+    //         ]);
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         DB::beginTransaction();
+    //         $updateTeamMember = TeamMember::query()->where('id', $request->id)->first();
+    //         if (!$updateTeamMember) {
+    //             return $this->sendError("No team found.");
+    //         }
+    //         if ($request->has('team_id')) {
+    //             $updateTeamMember->team_id = $request->team_id;
+    //         }
+    //         if ($request->has('team_profile_id')) {
+    //             $updateTeamMember->team_profile_id = $request->team_profile_id;
+    //         }
+    //         if ($request->has('member_id')) {
+    //             $updateTeamMember->member_id = $request->member_id;
+    //         }
+    //         $updateTeamMember->save();
+    //         DB::commit();
+    //         return $this->sendResponse($updateTeamMember, 'Team member updated successfully.');
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+    //     }
+    // }
     public function getAllTeamMembers(Request $request): JsonResponse
     {
         try {
@@ -413,7 +393,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamMember::query()->with(['team', 'teamprofiles', 'member']);
+            $query = TeamMember::query()->with(['team', 'member']);
 
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -423,12 +403,6 @@ class TeamController extends Controller
                 $query->skip($skip)->limit($limit);
             }
             $data = $query->orderBy('id', 'DESC')->get();
-            foreach ($data as &$member) {
-                $member['member']['achievements'] = is_string($member['member']['achievements']) ? json_decode($member['member']['achievements'], true) : $member['member']['achievements'];
-                $member['member']['schools'] = is_string($member['member']['schools']) ? json_decode($member['member']['schools'], true) : $member['member']['schools'];
-                $member['member']['links'] = is_string($member['member']['links']) ? json_decode($member['member']['links'], true) : $member['member']['links'];
-                $member['team']['links'] = is_string($member['team']['links']) ? json_decode($member['team']['links'], true) : $member['team']['links'];
-            }
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
@@ -447,12 +421,6 @@ class TeamController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $getTeamMember = TeamMember::query()->where('id', $request->id)->with(['team', 'teamprofiles', 'member'])->first();
-
-            $getTeamMember['member']['achievements'] = is_string($getTeamMember['member']['achievements']) ? json_decode($getTeamMember['member']['achievements'], true) : $getTeamMember['member']['achievements'];
-            $getTeamMember['member']['schools'] = is_string($getTeamMember['member']['schools']) ? json_decode($getTeamMember['member']['schools'], true) : $getTeamMember['member']['schools'];
-            $getTeamMember['member']['links'] = is_string($getTeamMember['member']['links']) ? json_decode($getTeamMember['member']['links'], true) : $getTeamMember['member']['links'];
-            $getTeamMember['team']['links'] = is_string($getTeamMember['team']['links']) ? json_decode($getTeamMember['team']['links'], true) : $getTeamMember['team']['links'];
-
             if (empty($getTeamMember)) {
                 return $this->sendError("No team found.");
             }

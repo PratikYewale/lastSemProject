@@ -66,6 +66,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(SportCertificate::class,'id');
     }
+    public function payment_history()
+    {
+        return $this->hasMany(PaymentHistory::class);
+    }
     
     
 }
