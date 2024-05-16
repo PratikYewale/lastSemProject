@@ -44,7 +44,7 @@ class DonationController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return back()->with('success', 'Athlete added successfully.');
+                return back()->withErrors($validator)->withInput();
 
             }
             DB::beginTransaction();
@@ -97,7 +97,7 @@ class DonationController extends Controller
             }
             DB::commit();
             $data = Donor::query()->where('id', $newDonor->id)->with(['donations', 'honors'])->get();
-            return back()->with('success', 'Athlete added successfully.');
+            return back()->with('success', 'Donation added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
