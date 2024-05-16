@@ -455,9 +455,9 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
-               return $this->sendResponse($response, 'User logged in successfully.', 200);
+               //return $this->sendResponse($response, 'User logged in successfully.', 200);
 
-                //return redirect('/');
+                return redirect('/');
             } else {
 
                 return back()->withErrors(['error' => 'Invalid credentials']);
