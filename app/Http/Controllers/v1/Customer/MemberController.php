@@ -394,8 +394,8 @@ class MemberController extends Controller
             }
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
-                $response['Athlete'] = $data;
                 $response['count'] = $count;
+                $response['Athlete'] = $data;
                 return $this->sendResponse($response, 'Athlete fetched successfully.', true);
             } else {
                 return $this->sendError("No data found.");

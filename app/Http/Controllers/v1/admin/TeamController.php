@@ -301,39 +301,54 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'team_id' => 'required|integer|exists:teams,id',
-                'team_profile_id' => 'required|integer|exists:team_profiles,id',
-                'member_id' => 'required|integer|exists:members,id',
+                'team_profile' => 'required|string',
+                'athlete_ids' => 'required|array',
+                'athlete_ids.*' => 'required|integer|exists:users,id,role,athlete',
             ]);
 
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
+
             DB::beginTransaction();
-            $existingTeamMember = TeamMember::where('team_id', $request->team_id)
-                ->where('team_profile_id', $request->team_profile_id)
-                ->where('member_id', $request->member_id)
-                ->first();
-            if ($existingTeamMember) {
-                return $this->sendError('Member already belongs to this team profile.', [], 409);
+
+            $team_id = $request->team_id;
+            $team_profile = $request->team_profile;
+            $athlete_ids = $request->athlete_ids;
+
+            foreach ($athlete_ids as $athlete_id) {
+                $existingTeamMember = TeamMember::where('team_id', $team_id)
+                    ->where('team_profile', $team_profile)
+                    ->where('athlete_id', $athlete_id)
+                    ->first();
+
+                if ($existingTeamMember) {
+                    return $this->sendError("Athlete with ID $athlete_id already belongs to this team profile.", [], 409);
+                }
+
+                $existingTeamMember = TeamMember::where('team_id', $team_id)
+                    ->where('athlete_id', $athlete_id)
+                    ->first();
+
+                if ($existingTeamMember) {
+                    return $this->sendError("Athlete with ID $athlete_id already belongs to another team profile.", [], 409);
+                }
+
+                $newTeamMember = new TeamMember();
+                $newTeamMember->team_id = $team_id;
+                $newTeamMember->team_profile = $team_profile;
+                $newTeamMember->athlete_id = $athlete_id;
+                $newTeamMember->save();
             }
-            $existingTeamMember = TeamMember::where('team_id', $request->team_id)
-                ->where('member_id', $request->member_id)
-                ->first();
-            if ($existingTeamMember) {
-                return $this->sendError('Member already belongs to other team profile.', [], 409);
-            }
-            $newTeamMember = new TeamMember();
-            $newTeamMember->team_id = $request->team_id;
-            $newTeamMember->team_profile_id = $request->team_profile_id;
-            $newTeamMember->member_id = $request->member_id;
-            $newTeamMember->save();
+
             DB::commit();
-            return $this->sendResponse($newTeamMember, 'Team member added successfully.', true);
+            return $this->sendResponse([],'All team members added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+
     // public function updateTeamMember(Request $request): JsonResponse
     // {
     //     try {
@@ -378,7 +393,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamMember::query()->with(['team', 'teamprofiles', 'member']);
+            $query = TeamMember::query()->with(['team', 'member']);
 
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
