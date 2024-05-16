@@ -25,7 +25,7 @@
                     <div class="content">
 
                         @if (Auth::user())
-                            <table class="table table-bordered committee-table">
+                            <table class="table table-bordered profile-table">
 
                                 <tbody>
                                     <tr>
@@ -49,13 +49,13 @@
                                         </td>
                                         <td>
                                             <b>
-                                                Middle Name:
+                                                Last Name:
                                             </b>
                                             <span>
                                                 {{ Auth::user()->last_name }}
                                             </span>
                                         </td>
-                                        <td rowspan="4">
+                                        <td rowspan="3">
 
                                             <span>
                                                 <img class="profile-picture" src={{ Auth::user()->profile_picture }}
@@ -74,10 +74,15 @@
                                         </td>
                                         <td>
                                             <b>
-                                                Contact Number:
+                                                Gender:
                                             </b>
                                             <span>
-                                                {{ Auth::user()->gender }}
+                                                @if (Auth::user()->gender == 1)
+                                                    Male
+                                                @else
+                                                    Female
+                                                @endif
+
                                             </span>
                                         </td>
                                         <td>
@@ -108,12 +113,101 @@
                                         </td>
                                         <td>
                                             <b>
-                                                Role:
+                                                Id:
                                             </b>
                                             <b class="text-danger">
-                                                {{ Auth::user()->role }}
+                                                {{ Auth::user()->id }}
                                             </b>
                                         </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <b>
+                                                Address:<br />
+                                            </b>
+                                            <span>
+                                                {{ Auth::user()->address }},<br />
+                                                {{ Auth::user()->city }}, {{ Auth::user()->state }}<br />
+                                                {{ Auth::user()->country }}- {{ Auth::user()->postal_code }}
+
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <b>
+                                                Aadhar Card Number:<br />
+                                            </b>
+                                            <span>
+                                                {{ Auth::user()->aadhar_number }}<br />
+                                            </span>
+                                            <a href={{ Auth::user()->aadhar_card }}><b>Download Aadhar Card</b></a>
+                                        </td>
+                                        <td>
+                                            <b>
+                                                Passport Number:<br />
+                                            </b>
+                                            <span>
+                                                {{ Auth::user()->passport_number }}<br />
+                                            </span>
+                                            <a href={{ Auth::user()->passport }}><b>Download Passport </b></a>
+                                        </td>
+                                        <td>
+                                            <b>
+                                                Recommendation from State Sports Federation:<br />
+                                            </b>
+                                            <span>
+                                                <a href={{ Auth::user()->recommendation }}><b>Download Recommendation
+                                                    </b></a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <h4 class="m-3  text-bold">Sport Achievements</h4>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>
+                                                Achievements Name
+                                            </b>
+
+                                        </td>
+                                        <td>
+                                            <b>
+                                                Achievements Result
+                                            </b>
+
+                                        </td>
+                                        <td>
+                                            <b>
+                                                Certificates
+                                            </b>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+                                            {{ Auth::user()->achievements_name }}
+
+
+                                        </td>
+                                        <td>
+
+                                            {{ Auth::user()->achievements_result }}
+
+
+                                        </td>
+                                        <td>
+                                            <a href={{ Auth::user()->sport_certificates }}><b>Download Recommendation
+                                                </b></a>
+
+
+                                        </td>
+
                                     </tr>
 
                                 </tbody>
@@ -123,7 +217,7 @@
                 </div>
 
 
-                {{ Auth::user() }}
+                {{-- {{ Auth::user() }} --}}
 
 
 

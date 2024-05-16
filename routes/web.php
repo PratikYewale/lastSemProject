@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\RazorpayPaymentController;
 
 use App\Http\Controllers\v1\Customer\ContactUsController;
+use App\Http\Controllers\v1\Customer\DonationController;
 use App\Http\Controllers\v1\Customer\MemberController;
 use App\Http\Controllers\v1\Customer\SponsorshipController;
 
@@ -63,7 +64,7 @@ Route::post('/createSponsorship', [SponsorshipController::class, 'createSponsors
 
 Route::post('/registration', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
 Route::post('/athleteRegistration', [MemberController::class, 'addAthlete'])->name('addAthlete');
-
+Route::post('/donate', [DonationController::class, 'addDonation'])->name('addDonation');
 
 Route::get('/razorpay-payment', [RazorpayPaymentController::class, 'index']);
 Route::post('/razorpay-payment', [RazorpayPaymentController::class, 'payment'])->name('payment');

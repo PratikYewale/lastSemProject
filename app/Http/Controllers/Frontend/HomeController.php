@@ -9,6 +9,9 @@ use Razorpay\Api\Api;
 use Illuminate\Support\Facades\Session;
 use Exception;
 use App\Models\News;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 
 
 class HomeController extends Controller
@@ -19,6 +22,8 @@ class HomeController extends Controller
     }
     public function donate()
     {
+      
+
         return view('frontend.donate');
     }
     public function about()

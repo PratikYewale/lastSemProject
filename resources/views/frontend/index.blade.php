@@ -175,10 +175,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li>+
                                     </ul>
                                     @else
-                                    <a href="{{ url('/login') }}" class="top_panel_cart_button" >
+                                    <a href="{{ url('/login') }}" >
                                         <span class="contact_icon icon-user"></span>
                                         <span class="cart_summa">Login</span>
                                         {{-- <span class="contact_label contact_cart_label">Your cart:</span> --}}
@@ -190,7 +190,7 @@
                                 <!-- Booking button block -->
                                 <div class="menu_main_additional_button top_panel_icon">
                                     <div class="menu_main_additional_button_container">
-                                        <a href="#">
+                                        <a href={{ url('/donate') }}>
                                             <img src="{{ url('frontend/images/booking_heared_img.png') }}"
                                                 alt="">
                                         </a>

@@ -113,12 +113,12 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function addAthlete(Request $request)
+    public function addAthlete(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'last_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
@@ -127,7 +127,7 @@ class MemberController extends Controller
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_number'=>'required|max:12|min:12',
-                'passport_number'=>'nullable|unique',
+                'passport_number' => 'nullable|unique:users',
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
                 'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
                 'acknowledge' => 'boolean',
@@ -191,11 +191,11 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            // return $this->sendResponse($user->id, 'Athlete added successfully.', true);
             return back()->with('success', 'Athlete added successfully.');
+
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+            return $this->sendError($e->getMessage(), $e->getMessage(), 413);
         }
     }
     public function createPaymentAthlete(Request $request): JsonResponse
@@ -383,7 +383,7 @@ class MemberController extends Controller
                 'limit' => 'numeric',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors(), 400);
+                return back()->withErrors($validator)->withInput();
             }
             $query = User::query()->with(['achievements', 'sport_certificates'])->where('role', 'athlete');
             $count = $query->count();
