@@ -127,7 +127,7 @@ class MemberController extends Controller
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_number'=>'required|max:12|min:12',
-                'passport_number'=>'nullable|unique',
+                'passport_number' => 'nullable|unique:users',
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
                 'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
                 'acknowledge' => 'boolean',
@@ -194,7 +194,7 @@ class MemberController extends Controller
             return $this->sendResponse($user->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+            return $this->sendError($e->getMessage(), $e->getMessage(), 413);
         }
     }
     public function createPaymentAthlete(Request $request): JsonResponse
@@ -384,7 +384,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->with(['achievements', 'sport_certificates'])->where('role', 'athlete');
+            $query = User::query()->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -404,8 +404,6 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
-
     public function updateAchievement(Request $request): JsonResponse
     {
         try {
@@ -437,7 +435,6 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
     public function loginMember(Request $request)
     {
         try {
@@ -458,9 +455,9 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
-               // return $this->sendResponse($response, 'User logged in successfully.', 200);
+               return $this->sendResponse($response, 'User logged in successfully.', 200);
 
-                return redirect('/');
+                //return redirect('/');
             } else {
 
                 return back()->withErrors(['error' => 'Invalid credentials']);
@@ -899,7 +896,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $association = User::query()->where('id', $request->id)->first();
+            $association = User::query()->where('id', $request->id)->with('payment_history')->where('role','member')->first();
             if (!$association) {
                 return $this->sendError('No data available.');
             }
@@ -908,8 +905,26 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    public function getAthleteById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id'
+            ]);
 
-    public function getAllAssociation(Request $request)
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $athlete = User::query()->where('id', $request->id)->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete')->first();
+            if (!$athlete) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($athlete, "Association fetched successfully.", true);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+   public function getAllAssociation(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -919,7 +934,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->where('role', 'member');
+            $query = User::query()->with('payment_history')->where('role','member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -939,4 +954,5 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+
 }
