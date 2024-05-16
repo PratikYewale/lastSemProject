@@ -15,25 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function getEventById(Request $request): JsonResponse
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:events,id',
-            ]);
-
-            if ($validator->fails()) {
-                return $this->sendError("Validation failed", $validator->errors());
-            }
-            $Event = Event::query()->where('id', $request->id)->first();
-            if (!$Event) {
-                return $this->sendError('No data available.');
-            }
-            return $this->sendResponse($Event, "Event fetched successfully.", true);
-        } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
     public function getAllEvents(Request $request)
     {
         try {
@@ -46,14 +27,13 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Event::query();
+            $query = Event::query()->with('eventImages');
             if ($request->has('start_date')) {
                 $query->whereDate('start_date', '=', $request->start_date);
             }
             if ($request->has('end_date')) {
                 $query->whereDate('end_date', '=', $request->end_date);
             }
-
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -69,6 +49,25 @@ class EventController extends Controller
             } else {
                 return $this->sendError("No data available.");
             }
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function getEventById(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:events,id',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+            }
+            $Event = Event::query()->where('id', $request->id)->with('eventImages')->first();
+            if (!$Event) {
+                return $this->sendError('No data available.');
+            }
+            return $this->sendResponse($Event, "Event fetched successfully.", true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }

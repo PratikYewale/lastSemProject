@@ -245,6 +245,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
+            $payment->plan_start_date = now();
+            $payment->plan_expiry_date = now()->addYear();
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -256,6 +258,9 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $user = User::find(Auth::id());
+                $user->status = true; 
+                $user->save();
                 $data = [
                     'to_name' => $request->name,
                     'email' => Auth::user()->email,
@@ -454,7 +459,7 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
-                //return $this->sendResponse($response, 'User logged in successfully.', 200);
+               // return $this->sendResponse($response, 'User logged in successfully.', 200);
 
                 // Check user status
                 if ($user->status == 1) {
@@ -465,7 +470,8 @@ class MemberController extends Controller
             } else {
 
                 return back()->withErrors(['error' => 'Invalid credentials']);
-                return $this->sendError("Invalid credentials.");
+                //return $this->sendError("Invalid credentials.");
+
             }
         } catch (\Exception $e) {
             // Exception occurred
@@ -617,8 +623,6 @@ class MemberController extends Controller
 
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
-                // return $this->sendError('Validation Error.', $validator->errors());
-
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -718,6 +722,8 @@ class MemberController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             $payment = PaymentHistory::where('payment_gateway_id', $request->payment_gateway_id)->find($request->payment_history_id);
+            $payment->plan_start_date = now();
+            $payment->plan_expiry_date = now()->addYear();
             if (is_null($payment)) {
                 return $this->sendError('Wrong payment id.');
             }
@@ -729,6 +735,9 @@ class MemberController extends Controller
             if ($razorpay_order->status == 'paid' || true) {
                 $payment->status = "paid";
                 $payment->save();
+                $user = User::find(Auth::id());
+                $user->status = true; 
+                $user->save();
                 $data = [
                     'to_name' => $request->name,
                     'email' => Auth::user()->email,
@@ -751,12 +760,13 @@ class MemberController extends Controller
                         ->subject('New association have registered');
                     $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
                 });
+
             } else {
                 $payment->status = "pending";
                 $payment->save();
                 return $this->sendError('Payment pending.');
             }
-            return $this->sendResponse([], 'Athlete payment status saved successfully.', true);
+            return $this->sendResponse([], 'Association payment status saved successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
