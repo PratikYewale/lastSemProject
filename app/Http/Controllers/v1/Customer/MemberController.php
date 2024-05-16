@@ -113,27 +113,28 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function addAthlete(Request $request)
+    public function addAthlete(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
+                'last_name' => 'nullable|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
                 'date_of_birth' => 'nullable|date',
-                'profile_picture' => 'required|image|mimes:png,jpg,jpeg',
+                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
-                'aadhar_card' => 'required|mimes:png,jpg,jpeg,pdf',
-                'aadhar_number' => 'required',
+                'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
+                'aadhar_number'=>'required|max:12|min:12',
+                'passport_number' => 'nullable|unique:users',
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
                 'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
-                'acknowledge' => 'required|boolean',
+                'acknowledge' => 'boolean',
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -145,7 +146,6 @@ class MemberController extends Controller
                 $user->mobile_no = $request->mobile_no;
                 $user->role = "athlete";
                 $user->password = Hash::make($request->password);
-                $user->save();
                 $user->gender = $request->gender;
                 $user->date_of_birth = $request->date_of_birth;
                 $user->city = $request->city;
@@ -191,11 +191,10 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            // return $this->sendResponse($user->id, 'Athlete added successfully.', true);
-            return back()->with('success', 'Athlete added successfully.');
+            return $this->sendResponse($user->id, 'Athlete added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+            return $this->sendError($e->getMessage(), $e->getMessage(), 413);
         }
     }
     public function createPaymentAthlete(Request $request): JsonResponse

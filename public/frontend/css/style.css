@@ -9376,3 +9376,31 @@ body table.booked-calendar tr.days th {
 	max-height: 150px;
 	object-fit: contain;
 }
+
+.profile-table {
+
+	border: 1px solid #dee2e6;
+	width: 100%;
+}
+
+.profile-table .table-title {
+	font-size: 22px !important;
+	font-weight: 500;
+}
+
+.profile-table th {}
+
+.profile-table thead tr,
+.profile-table thead tr th,
+.profile-table tbody tr,
+.profile-table tbody tr td {
+	border: 1px solid #dee2e6 !important;
+	
+
+
+}
+
+.profile-table tbody tr td {
+	font-size: 22px;
+	padding: 10px 25px;
+}

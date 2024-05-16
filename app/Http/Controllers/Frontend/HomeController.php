@@ -9,6 +9,9 @@ use Razorpay\Api\Api;
 use Illuminate\Support\Facades\Session;
 use Exception;
 use App\Models\News;
+use App\Models\Country;
+use App\Models\State;
+use App\Models\City;
 
 
 class HomeController extends Controller
@@ -19,7 +22,11 @@ class HomeController extends Controller
     }
     public function donate()
     {
-        return view('frontend.donate');
+        $countries = Country::pluck('name', 'id');
+        $states = State::pluck('name', 'id');
+        $cities = City::pluck('name', 'id');
+
+        return view('frontend.donate', compact('countries','states','cities'));
     }
     public function about()
     {
