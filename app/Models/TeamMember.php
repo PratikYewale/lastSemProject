@@ -12,15 +12,15 @@ class TeamMember extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(Team::class,'team_id');
     }   
 
-    public function teamprofiles()
+    // public function teamprofiles()
+    // {
+    //     return $this->belongsTo(TeamProfiles::class,'team_profile_id');
+    // }
+    public function users()
     {
-        return $this->belongsTo(TeamProfiles::class,'team_profile_id');
-    }
-    public function member()
-    {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(User::class,'athlete_id');
     }
 }

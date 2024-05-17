@@ -9,16 +9,20 @@ class Team extends Model
 {
     use HasFactory;
     protected $table='teams';
-    public function teamprofiles()
-    {
-        return $this->hasMany(TeamProfiles::class);
-    }
+    // public function teamprofiles()
+    // {
+    //     return $this->hasMany(TeamProfiles::class);
+    // }
     public function teammembers()
     {
-        return $this->hasMany(TeamMember::class);
+        return $this->hasMany(TeamMember::class,'team_id')->with('users');
     }
-    public function member()
+    public function teammember()
     {
-        return $this->belongsTo(Member::class);
+        return $this->hasMany(TeamMember::class,'team_id');
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class)->where('role','athlete');
     }
 }

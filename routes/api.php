@@ -37,6 +37,7 @@ use App\Http\Controllers\v1\Customer\MemberAuthController;
 use App\Http\Controllers\v1\Customer\MemberController;
 use App\Http\Controllers\v1\Customer\MembershipController as CustomerMembershipController;
 use App\Http\Controllers\v1\Customer\NewsController as CustomerNewsController;
+use App\Http\Controllers\v1\Customer\TeamController as CustomerTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -266,6 +267,12 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     //Program 
     Route::get('getAllProgram',[CustomerProgramController::class,'getAllProgram']);
     Route::get('getProgramById',[CustomerProgramController::class,'getProgramById']);
+
+    //Team 
+    Route::get('getAllTeams', [CustomerTeamController::class, 'getAllTeams']);
+    Route::get('getTeamById', [CustomerTeamController::class, 'getTeamById']);
+    Route::get('getAllTeamMembers', [CustomerTeamController::class, 'getAllTeamMembers']);
+
 
     Route::group(['middleware' => ['cors', 'jwt.verify', 'member']], function () {
         Route::post('createPaymentAssociation',[MemberController::class,'createPaymentAssociation']);
