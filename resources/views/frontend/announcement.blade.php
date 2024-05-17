@@ -84,7 +84,7 @@
                                                     </span>
                                                     <span class="post_info_item post_info_posted_by">
                                                         <span class="contact_icon icon-user"></span>
-                                                        <a href="#" class="post_info_author">{{ $item->user->first_name }} {{ $item->user->last_name }}</a>
+                                                        {{-- <a href="#" class="post_info_author">{{ $item->user->first_name }} {{ $item->user->last_name }}</a> --}}
                                                     </span>
                                                 </div>
                                             </div>

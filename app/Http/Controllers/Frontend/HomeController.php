@@ -12,6 +12,7 @@ use App\Models\News;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Event;
 
 
 class HomeController extends Controller
@@ -66,7 +67,16 @@ class HomeController extends Controller
     }
     public function membership()
     {
-        return view('frontend.membership');
+        try {
+            $events = Event::query();
+            $events = $events->with([])->paginate(9);
+
+            return view('frontend.membership', compact('events'));
+        } catch (Exception $e) {
+
+            return view('frontend.membership');
+        }
+        
     }
 
     public function contact()

@@ -19,7 +19,7 @@
     <div class="page_content_wrap page_paddings_no">
         <!-- Content -->
         <div class="content">
-            <article class="post_item post_item_single page">
+            <article class="post_item post_item_single page mb-5">
                 <section class="post_content">
                     <!-- Greeting -->
                     <div class="content_wrap">
@@ -61,7 +61,7 @@
 
                     @include('frontend.commonComponants.athletesHistory')
                     <!-- E-mailer -->
-                    <div class="emailer_section">
+                    {{-- <div class="emailer_section">
                         <div class="content_wrap">
                             <div class="sc_section">
                                 <div class="sc_section_inner">
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- /E-mailer -->
                 </section>
             </article>
