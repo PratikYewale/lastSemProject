@@ -157,7 +157,8 @@
                          @endif
                          <form id="addAssociationMemberForm" action="{{ route('addAssociationMember') }}" method="POST"
                              enctype="multipart/form-data" class="donationForm sc_input_hover_default"
-                             {{-- onsubmit="return validateForm()" --}}>
+                             
+                             >
                              @csrf <!-- CSRF token -->
                              <div class="row">
                                  <div class="col-lg-12">
@@ -168,7 +169,7 @@
                                          <label for="first_name" class="form-label">Name of State Unit</label>
                                          <input type="text" class="form-control" id="first_name"
                                              name="first_name">
-                                         <div id="error-first_name" class="text-danger"></div>
+                                         <div id="first_name_error" class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -197,7 +198,7 @@
                                      <div class="mb-3">
                                          <label for="email" class="form-label">Email Id</label>
                                          <input type="email" class="form-control" id="email" name="email">
-                                         <div id="orgMailError"class="text-danger"></div>
+                                         <div id="email_error"class="text-danger"></div>
                                      </div>
 
                                  </div>
@@ -208,7 +209,7 @@
                                          <input type="number" class="form-control" id="mobile_no" name="mobile_no"
                                              pattern="[0-9]{10}" maxlength="10">
 
-                                         <div id="orgContactError"class="text-danger"></div>
+                                         <div id="mobile_no_error"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
@@ -369,21 +370,21 @@
                                      <div class="mb-3">
                                          <label for="country" class="form-label">Select Country</label>
                                          <input type="text" class="form-control" id="country" name="country">
-                                         <div id="error-country"class="text-danger"></div>
+                                         <div id="country_error"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="state" class="form-label">Select State / Province</label>
                                          <input type="text" class="form-control" id="state" name="state">
-                                         <div id="error-state"class="text-danger"></div>
+                                         <div id="state_error"class="text-danger"></div>
                                      </div>
                                  </div>
                                  <div class="col-lg-4">
                                      <div class="mb-3">
                                          <label for="city" class="form-label">City</label>
                                          <input type="text" class="form-control" id="city" name="city">
-                                         <div id="error-city"class="text-danger"></div>
+                                         <div id="city_error"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -392,7 +393,7 @@
                                          <label for="registered_address" class="form-label">Registered Address</label>
                                          <input type="text" class="form-control" id="registered_address"
                                              name="registered_address">
-                                         <div id="error-registered_address"class="text-danger"></div>
+                                         <div id="registered_address_error"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -402,7 +403,7 @@
                                          <label for="postal_code " class="form-label">Postal Code</label>
                                          <input type="number" pattern="[0-9]{6}" maxlength="6" minlength="6"
                                              class="form-control" id="postal_code" name="postal_code">
-                                         <div id="error-postal_code"class="text-danger"></div>
+                                         <div id="postal_code_error"class="text-danger"></div>
                                      </div>
                                  </div>
 
@@ -551,72 +552,95 @@
 
                          </form>
 
-                         {{-- <script>
-                             document.getElementById('addAssociationMemberForm').addEventListener('submit', function(event) {
-                                 let error = false;
+                    {{-- Validtion Script --}}
+                    {{-- <script>
+                        function validateForm() {
+                            var isValid = true;
 
-                                 // Reset error messages
-                                 document.querySelectorAll('.text-danger').forEach(function(el) {
-                                     el.textContent = '';
-                                 });
+                            // Validate first name
+                            var firstName = document.getElementById("first_name").value.trim();
+                            if (firstName === "") {
+                                document.getElementById("first_name_error").innerText = "The first name field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("first_name_error").innerText = "";
+                            }
 
-                                 // Check required fields
-                                 const requiredFields = ['first_name', 'email', 'mobile_no', 'date_of_establishment',
-                                     'incorporation_certificate_number', 'president_name', 'president_phone_number'
-                                 ];
-                                 requiredFields.forEach(function(fieldName) {
-                                     const input = document.getElementById(fieldName);
-                                     if (!input.value.trim()) {
-                                         document.getElementById('error-' + fieldName).textContent = 'The ' + fieldName.replace(
-                                             '_', ' ') + ' field is required.';
-                                         error = true;
-                                     }
-                                 });
+                          
 
-                                 // Validate email format
-                                 const emailInput = document.getElementById('email');
-                                 const emailValue = emailInput.value.trim();
-                                 if (emailValue && !isValidEmail(emailValue)) {
-                                     document.getElementById('orgMailError').textContent = 'Please enter a valid email address.';
-                                     error = true;
-                                 }
 
-                                 // Validate mobile number format
-                                 const mobileInput = document.getElementById('mobile_no');
-                                 const mobileValue = mobileInput.value.trim();
-                                 if (mobileValue && !isValidMobile(mobileValue)) {
-                                     document.getElementById('orgContactError').textContent = 'Please enter a valid mobile number.';
-                                     error = true;
-                                 }
+                            // Validate email
+                            var email = document.getElementById("email").value.trim();
+                            if (email === "") {
+                                document.getElementById("email_error").innerText = "The email field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("email_error").innerText = "";
+                            }
 
-                                 if (error) {
-                                     event.preventDefault(); // Prevent form submission if there are errors
-                                 }
-                             });
+                            // Validate mobile number
+                            var mobileNo = document.getElementById("mobile_no").value.trim();
+                            if (mobileNo === "" || isNaN(mobileNo) || mobileNo.length !== 10) {
+                                document.getElementById("mobile_no_error").innerText =
+                                    "The mobile no field is required and must be 10 digits and accept only numbers.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("mobile_no_error").innerText = "";
+                            }
 
-                             function isValidEmail(email) {
-                                 // Basic email format validation
-                                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-                             }
 
-                             function isValidMobile(mobile) {
-                                 // Basic mobile number format validation (10 digits)
-                                 return /^\d{10}$/.test(mobile);
-                             }
+                            // Validate address line 1
+                            var registeredAddress = document.getElementById("registered_address").value.trim();
+                            if (registeredAddress === "") {
+                                document.getElementById("registered_address_error").innerText = "The address line1 field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("registered_address_error").innerText = "";
+                            }
 
-                             // Check required fields
-                             const requiredFields = ['first_name', 'email', 'mobile_no', 'date_of_establishment',
-                                 'incorporation_certificate_number', 'president_name', 'president_phone_number'
-                             ];
-                             requiredFields.forEach(function(fieldName) {
-                                 const input = document.getElementById(fieldName);
-                                 if (!input.value.trim()) {
-                                     document.getElementById('error-' + fieldName).textContent = 'The ' + fieldName.replace('_', ' ') +
-                                         ' field is required.';
-                                     error = true;
-                                 }
-                             });
-                         </script> --}}
+                            // Validate postal_code code
+                            var postal_code = document.getElementById("postal_code").value.trim();
+                            if (postal_code === "") {
+                                document.getElementById("postal_code_error").innerText = "The postal_code field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("postal_code_error").innerText = "";
+                            }
+
+                            // Validate city
+                            var city = document.getElementById("city").value.trim();
+                            if (city === "") {
+                                document.getElementById("city_error").innerText = "The city field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("city_error").innerText = "";
+                            }
+
+                            // Validate country
+                            var country = document.getElementById("country").value.trim();
+                            if (country === "") {
+                                document.getElementById("country_error").innerText = "The country field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("country_error").innerText = "";
+                            }
+
+                            // Validate state
+                            var state = document.getElementById("state").value.trim();
+                            if (state === "") {
+                                document.getElementById("state_error").innerText = "The state field is required.";
+                                isValid = false;
+                            } else {
+                                document.getElementById("state_error").innerText = "";
+                            }
+
+
+                         
+
+                            return isValid;
+                        }
+                    </script> --}}
+                    {{-- /Validtion Script --}}
                      </div>
                  </div>
              </div>

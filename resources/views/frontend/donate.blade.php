@@ -68,7 +68,7 @@
                                     @endif
                                     <form id="donationForm" action="{{ route('addDonation') }}" method="POST"
                                         enctype="multipart/form-data" class="donationForm sc_input_hover_default"
-                                        {{-- onsubmit="return validateForm() --}}>
+                                        onsubmit="return validateForm()">
                                         @csrf
                                         <div class="row">
                                             <div class="col-lg-4">
@@ -93,7 +93,7 @@
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
                                                     <label for="currency" class="form-label">Currency</label>
-                                                    <select class="form-select" id="currency" name="currency" required>
+                                                    <select class="form-select" id="currency" name="currency">
                                                         <option value="INR">INR</option>
                                                         <option value="USD">USD</option>
                                                         <!-- Add more currency options as needed -->
@@ -103,8 +103,9 @@
                                             <div class="col-lg-4">
                                                 <div class="mb-3">
                                                     <label for="amount" class="form-label">Amount</label>
-                                                    <input type="text" class="form-control" id="amount" name="amount"
-                                                        required>
+                                                    <input type="text" class="form-control" id="amount"
+                                                        name="amount">
+                                                    <span id="amount_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -127,6 +128,7 @@
                                                         <input class="form-check-input" type="radio"
                                                             id="honor_type_in_honor_of" name="honor_type"
                                                             value="in honor of">
+
                                                         <label class="form-check-label" for="honor_type_in_honor_of">In
                                                             Honor Of</label>
                                                     </div>
@@ -137,7 +139,9 @@
                                                         <label class="form-check-label" for="honor_type_in_memory_of">In
                                                             Memory Of</label>
                                                     </div>
+
                                                 </div>
+                                                <span id="honor_type_error" class="error-message text-danger"></span>
                                             </div>
 
                                             <div class="col-lg-6">
@@ -146,6 +150,8 @@
                                                         Name</label>
                                                     <input type="text" class="form-control" id="honoree_first_name"
                                                         name="honoree_first_name">
+                                                    <span id="honoree_first_name_error"
+                                                        class="error-message text-danger"></span>
                                                 </div>
 
                                             </div>
@@ -155,20 +161,24 @@
                                                         Name</label>
                                                     <input type="text" class="form-control" id="honoree_last_name"
                                                         name="honoree_last_name">
+                                                    <span id="honoree_last_name_error"
+                                                        class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="first_name" class="form-label">First Name</label>
                                                     <input type="text" class="form-control" id="first_name"
-                                                        name="first_name" required>
+                                                        name="first_name">
+                                                    <span id="first_name_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="last_name" class="form-label">Last Name</label>
                                                     <input type="text" class="form-control" id="last_name"
-                                                        name="last_name" required>
+                                                        name="last_name">
+                                                    <span id="last_name_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -176,14 +186,16 @@
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email</label>
                                                     <input type="email" class="form-control" id="email"
-                                                        name="email" required>
+                                                        name="email">
+                                                    <span id="email_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="mobile_no" class="form-label">Mobile Number</label>
                                                     <input type="tel" class="form-control" id="mobile_no"
-                                                        name="mobile_no" required>
+                                                        name="mobile_no">
+                                                    <span id="mobile_no_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
@@ -203,7 +215,9 @@
                                                 <div class="mb-3">
                                                     <label for="address_line1" class="form-label">Address Line 1</label>
                                                     <input type="text" class="form-control" id="address_line1"
-                                                        name="address_line1" required>
+                                                        name="address_line1">
+                                                    <span id="address_line1_error"
+                                                        class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -217,21 +231,24 @@
                                                 <div class="mb-3">
                                                     <label for="country" class="form-label">Country</label>
                                                     <input type="text" class="form-control" id="country"
-                                                        name="country" required>
+                                                        name="country">
+                                                    <span id="country_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="state" class="form-label">State</label>
                                                     <input type="text" class="form-control" id="state"
-                                                        name="state" required>
+                                                        name="state">
+                                                    <span id="state_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <label for="city" class="form-label">City</label>
                                                     <input type="text" class="form-control" id="city"
-                                                        name="city" required>
+                                                        name="city">
+                                                    <span id="city_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -240,7 +257,8 @@
                                                 <div class="mb-3">
                                                     <label for="zip" class="form-label">ZIP Code</label>
                                                     <input type="text" class="form-control" id="zip"
-                                                        name="zip" required>
+                                                        name="zip">
+                                                    <span id="zip_error" class="error-message text-danger"></span>
                                                 </div>
                                             </div>
 
@@ -271,19 +289,21 @@
                                                         addition, we provide the Daily Update (in-season), which offers a
                                                         quick recap of athlete and event results, upcoming events, TV and
                                                         streaming schedules.</p>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            id="subscription_to_news" name="subscription_to_news"
-                                                            value="1">
-                                                        <label class="form-check-label"
-                                                            for="subscription_to_news">Yes</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            id="subscription_to_news" name="subscription_to_news"
-                                                            value="0">
-                                                        <label class="form-check-label"
-                                                            for="subscription_to_news">No</label>
+                                                    <div class="d-flex">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                id="subscription_to_news" name="subscription_to_news"
+                                                                value="1">
+                                                            <label class="form-check-label"
+                                                                for="subscription_to_news">Yes</label>
+                                                        </div>
+                                                        <div class="form-check ms-5">
+                                                            <input class="form-check-input" type="radio"
+                                                                id="subscription_to_news" name="subscription_to_news"
+                                                                value="0">
+                                                            <label class="form-check-label"
+                                                                for="subscription_to_news">No</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -292,29 +312,39 @@
                                                     <p>Yes, I want to receive text updates. By participating, you agree to
                                                         the terms & privacy policy (tandcs.us/sst) for recurring autodialed
                                                         donation messages from U.S. Ski & Snowboard to the phone number you
-                                                        provide. No consent required to buy. Msg&data rates may apply.</p>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" id="text_updates"
-                                                            name="text_updates" value="1">
-                                                        <label class="form-check-label" for="text_updates_yes">Yes</label>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            id="text_updates_no" name="text_updates" value="0">
-                                                        <label class="form-check-label" for="text_updates_no">No</label>
+                                                        provide. No consent to buy. Msg&data rates may apply.</p>
+                                                    <div class="d-flex">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                id="text_updates" name="text_updates" value="1">
+                                                            <label class="form-check-label"
+                                                                for="text_updates_yes">Yes</label>
+                                                        </div>
+                                                        <div class="form-check ms-5">
+                                                            <input class="form-check-input" type="radio"
+                                                                id="text_updates_no" name="text_updates" value="0">
+                                                            <label class="form-check-label"
+                                                                for="text_updates_no">No</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="cover_fees"
-                                                            name="cover_fees" value="1">
-                                                        <label class="form-check-label" for="cover_fees">Cover Fees (10%
-                                                            will be added to your donation amount)</label>
+                                                        <input class="form-check-input" type="checkbox" id="cover_fees" name="cover_fees" value="1">
+                                                        <label class="form-check-label" for="cover_fees">Cover Fees (10% will be added to your donation amount)</label>
+                                                    </div>
+                                                    <div>
+                                                        <p>
+                                                        <b id="amount_donated">Amount Donated:</b> <br />
+                                                        <b id="cover_fees_display">Cover Fees:</b> <br />
+                                                        <b id="total_amount">Total Amount:</b> <br />
+                                                    </p>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-lg-6">
                                                 <div class="mb-3">
                                                     <button type="submit"
@@ -328,7 +358,168 @@
                                             </div>
                                         </div>
                                     </form>
+                                    {{-- Validtion Script --}}
+                                    <script>
+                                        function validateForm() {
+                                            var isValid = true;
 
+                                            // Validate first name
+                                            var firstName = document.getElementById("first_name").value.trim();
+                                            if (firstName === "") {
+                                                document.getElementById("first_name_error").innerText = "The first name field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("first_name_error").innerText = "";
+                                            }
+
+                                            // Validate honoree first name
+                                            var honoreeFirstName = document.getElementById("honoree_first_name").value.trim();
+                                            if (honoreeFirstName === "") {
+                                                document.getElementById("honoree_first_name_error").innerText = "The honoree first name field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("honoree_first_name_error").innerText = "";
+                                            }
+
+                                            // Validate last name
+                                            var lastName = document.getElementById("last_name").value.trim();
+                                            if (lastName === "") {
+                                                document.getElementById("last_name_error").innerText = "The last name field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("last_name_error").innerText = "";
+                                            }
+
+                                            // Validate honoree last name
+                                            var honoreeLastName = document.getElementById("honoree_last_name").value.trim();
+                                            if (honoreeLastName === "") {
+                                                document.getElementById("honoree_last_name_error").innerText = "The honoree last name field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("honoree_last_name_error").innerText = "";
+                                            }
+
+                                            // Validate email
+                                            var email = document.getElementById("email").value.trim();
+                                            if (email === "") {
+                                                document.getElementById("email_error").innerText = "The email field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("email_error").innerText = "";
+                                            }
+
+                                            // Validate mobile number
+                                            var mobileNo = document.getElementById("mobile_no").value.trim();
+                                            if (mobileNo === "" || isNaN(mobileNo) || mobileNo.length !== 10) {
+                                                document.getElementById("mobile_no_error").innerText =
+                                                    "The mobile no field is required and must be 10 digits and accept only numbers.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("mobile_no_error").innerText = "";
+                                            }
+
+
+                                            // Validate address line 1
+                                            var addressLine1 = document.getElementById("address_line1").value.trim();
+                                            if (addressLine1 === "") {
+                                                document.getElementById("address_line1_error").innerText = "The address line1 field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("address_line1_error").innerText = "";
+                                            }
+
+                                            // Validate zip code
+                                            var zip = document.getElementById("zip").value.trim();
+                                            if (zip === "") {
+                                                document.getElementById("zip_error").innerText = "The zip field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("zip_error").innerText = "";
+                                            }
+
+                                            // Validate city
+                                            var city = document.getElementById("city").value.trim();
+                                            if (city === "") {
+                                                document.getElementById("city_error").innerText = "The city field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("city_error").innerText = "";
+                                            }
+
+                                            // Validate country
+                                            var country = document.getElementById("country").value.trim();
+                                            if (country === "") {
+                                                document.getElementById("country_error").innerText = "The country field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("country_error").innerText = "";
+                                            }
+
+                                            // Validate state
+                                            var state = document.getElementById("state").value.trim();
+                                            if (state === "") {
+                                                document.getElementById("state_error").innerText = "The state field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("state_error").innerText = "";
+                                            }
+
+
+                                            // Validate amount
+                                            var amount = document.getElementById("amount").value.trim();
+                                            if (amount === "") {
+                                                document.getElementById("amount_error").innerText = "The amount field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("amount_error").innerText = "";
+                                            }
+
+                                            // Validate honor type
+                                            var honorType = document.querySelector('input[name="honor_type"]:checked');
+                                            if (!honorType) {
+                                                document.getElementById("honor_type_error").innerText = "The honor type field is required.";
+                                                isValid = false;
+                                            } else {
+                                                document.getElementById("honor_type_error").innerText = "";
+                                            }
+
+                                            return isValid;
+                                        }
+                                    </script>
+                                    {{-- /Validtion Script --}}
+
+                                    {{-- Amount Calculation Script --}}
+                                    <script>
+                                        // Function to update the display based on the amount and cover fees checkbox
+                                        function updateDisplay() {
+                                            // Get the amount input field value
+                                            var amount = parseFloat(document.getElementById("amount").value.trim());
+
+                                            // Check if the cover fees checkbox is checked
+                                            var coverFees = document.getElementById("cover_fees").checked;
+
+                                            // Calculate the total amount
+                                            var totalAmount = amount;
+                                            if (coverFees) {
+                                                totalAmount += amount * 0.1; // Add 10% as cover fees
+                                            }
+
+                                            // Display the amounts
+                                            document.getElementById("amount_donated").innerText = "Amount Donated: " + amount.toFixed(2);
+                                            document.getElementById("cover_fees_display").innerText = "Cover Fees: " + (coverFees ? (amount * 0.1).toFixed(
+                                                2) : "0.00");
+                                            document.getElementById("total_amount").innerText = "Total Amount: " + totalAmount.toFixed(2);
+                                        }
+
+                                        // Add event listeners to amount input field and cover fees checkbox
+                                        document.getElementById("amount").addEventListener("input", updateDisplay);
+                                        document.getElementById("cover_fees").addEventListener("change", updateDisplay);
+
+                                        // Call updateDisplay initially to set the initial display
+                                        updateDisplay();
+                                    </script>
+
+                                    {{-- /Amount Calculation Script --}}
 
                                 </div>
                             </div>

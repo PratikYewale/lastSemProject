@@ -17,7 +17,7 @@ use Razorpay\Api\Api;
 
 class DonationController extends Controller
 {
-    public function addDonation(Request $request): JsonResponse
+    public function addDonation(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [

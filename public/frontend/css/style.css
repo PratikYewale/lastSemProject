@@ -9351,8 +9351,9 @@ body table.booked-calendar tr.days th {
 	margin-right: 10px;
  }
 
- .form-label {
-    font-weight: 500;
+ .form-label,
+ .form-check-label {
+    font-weight: 600;
 
 }
 
@@ -9403,4 +9404,31 @@ body table.booked-calendar tr.days th {
 .profile-table tbody tr td {
 	font-size: 22px;
 	padding: 10px 25px;
+}
+/* ============================= */
+
+.events-card {
+	border: none;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.events-table {
+
+	border: 1px solid #dee2e6;
+	width: 100%;
+}
+
+.events-table .table-title {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.events-table th {}
+
+.events-table thead tr,
+.events-table thead tr th,
+.events-table tbody tr,
+.events-table tbody tr td {
+	border: 1px solid #dee2e6 !important;
+
 }
