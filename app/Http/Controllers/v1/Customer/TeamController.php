@@ -44,20 +44,20 @@ class TeamController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function getTeamMemberById(Request $request): JsonResponse
+    public function getTeamById(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:team_member,id',
+                'id' => 'required|integer|exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $getTeamMember = TeamMember::query()->where('id', $request->id)->with(['team', 'users'])->first();
-            if (empty($getTeamMember)) {
+            $getTeam = Team::query()->where('id', $request->id)->with(['teammembers'])->first();
+            if (empty($getTeam)) {
                 return $this->sendError("No team found.");
             }
-            return $this->sendResponse($getTeamMember, 'Data fetched successfully.', true);
+            return $this->sendResponse($getTeam, 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }

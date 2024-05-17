@@ -40,10 +40,7 @@ class HomeController extends Controller
         }
         // return view('frontend.about');
     }
-    public function teams()
-    {
-        return view('frontend.teams');
-    }
+  
     public function services()
     {
         return view('frontend.services');
@@ -52,7 +49,7 @@ class HomeController extends Controller
     {
         try {
             $news = News::query();
-            $news = $news->with([])->paginate(9);
+            $news = $news->with([])->paginate(6);
 
             return view('frontend.announcement', compact('news'));
         } catch (Exception $e) {
