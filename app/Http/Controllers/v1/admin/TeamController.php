@@ -231,6 +231,7 @@ class TeamController extends Controller
                 'pageNo' => 'nullable|numeric',
                 'limit' => 'nullable|numeric',
                 'name' => 'nullable|string|max:255',
+                'team_id' => 'required|exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
@@ -239,6 +240,9 @@ class TeamController extends Controller
 
             if ($request->has('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
+            }
+            if ($request->has('team_id')) {
+                $query->where('team_id',$request->team_id);
             }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -301,7 +305,7 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'team_id' => 'required|integer|exists:teams,id',
-                'team_profile' => 'required|string',
+                'team_profile_id' => 'required||exists:team_profiles,id',
                 'athlete_ids' => 'required|array',
                 'athlete_ids.*' => 'required|integer|exists:users,id,role,athlete',
             ]);
@@ -313,12 +317,12 @@ class TeamController extends Controller
             DB::beginTransaction();
 
             $team_id = $request->team_id;
-            $team_profile = $request->team_profile;
+            $team_profile_id = $request->team_profile_id;
             $athlete_ids = $request->athlete_ids;
 
             foreach ($athlete_ids as $athlete_id) {
                 $existingTeamMember = TeamMember::where('team_id', $team_id)
-                    ->where('team_profile', $team_profile)
+                    ->where('team_profile_id', $team_profile_id)
                     ->where('athlete_id', $athlete_id)
                     ->first();
 
@@ -333,10 +337,9 @@ class TeamController extends Controller
                 if ($existingTeamMember) {
                     return $this->sendError("Athlete with ID $athlete_id already belongs to another team profile.", [], 409);
                 }
-
                 $newTeamMember = new TeamMember();
                 $newTeamMember->team_id = $team_id;
-                $newTeamMember->team_profile = $team_profile;
+                $newTeamMember->team_profile_id = $team_profile_id;
                 $newTeamMember->athlete_id = $athlete_id;
                 $newTeamMember->save();
             }
@@ -354,7 +357,7 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'team_id' => 'required|integer|exists:teams,id',
-                'team_profile' => 'required|exists:team_member,team_profile',
+                'team_profile_id' => 'required|exists:team_profiles,id',
                 'athlete_ids' => 'required|array',
                 'athlete_ids.*' => 'required|integer|exists:users,id,role,athlete',
             ]);
@@ -362,7 +365,7 @@ class TeamController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $teamMembers = TeamMember::query()->where('team_id', $request->team_id)->where('team_profile', $request->team_profile)->get();
+            $teamMembers = TeamMember::query()->where('team_id', $request->team_id)->where('team_profile_id', $request->team_profile_id)->get();
             if (!$teamMembers) {
                 return $this->sendError("No team found.");
             }
@@ -370,12 +373,12 @@ class TeamController extends Controller
                 $teamMember->delete();
             }
             $team_id = $request->team_id;
-            $team_profile = $request->team_profile;
+            $team_profile_id = $request->team_profile_id;
             $athlete_ids = $request->athlete_ids;
 
             foreach ($athlete_ids as $athlete_id) {
                 $existingTeamMember = TeamMember::where('team_id', $team_id)
-                    ->where('team_profile', $team_profile)
+                    ->where('team_profile_id', $team_profile_id)
                     ->where('athlete_id', $athlete_id)
                     ->first();
 
@@ -393,7 +396,7 @@ class TeamController extends Controller
 
                 $newTeamMember = new TeamMember();
                 $newTeamMember->team_id = $team_id;
-                $newTeamMember->team_profile = $team_profile;
+                $newTeamMember->team_profile_id = $team_profile_id;
                 $newTeamMember->athlete_id = $athlete_id;
                 $newTeamMember->save();
             }
@@ -416,9 +419,9 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamMember::query()->with(['team', 'users']);
-            if ($request->has('team_profie')) {
-                $query->where('team_profile', $request->team_profie);
+            $query = TeamMember::query()->with(['users']);
+            if ($request->has('team_profile_id')) {
+                $query->where('team_profile_id', $request->team_profile_id);
             }
             if ($request->has('team_id')) {
                 $query->where('team_id', $request->team_id);
@@ -435,6 +438,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
+            
             return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);

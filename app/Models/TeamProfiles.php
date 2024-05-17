@@ -14,5 +14,10 @@ class TeamProfiles extends Model
     {
         return $this->belongsTo(Team::class);
     }
+    public function teammember()
+    {
+        return $this->hasMany(TeamMember::class,'team_profile_id');
+    }
+
     
 }
