@@ -16,8 +16,10 @@ class TeamProfiles extends Model
     }
     public function teammember()
     {
-        return $this->hasMany(TeamMember::class,'team_profile_id');
+        return $this->hasMany(TeamMember::class,'team_profile_id')->with('users')->select(['id','team_profile_id','athlete_id']);
     }
-
-    
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'team_member', 'team_profile_id', 'athlete_id');
+    }
 }

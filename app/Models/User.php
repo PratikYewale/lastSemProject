@@ -70,6 +70,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(PaymentHistory::class);
     }
-    
-    
+    public function teamProfiles()
+    {
+        return $this->belongsToMany(TeamProfiles::class, 'team_member', 'athlete_id', 'team_profile_id');
+    } 
 }
