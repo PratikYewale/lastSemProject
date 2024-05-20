@@ -112,13 +112,13 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamProfiles::query();
+            $query = TeamProfiles::query()->with('users');
 
             if ($request->has('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
             }
             if ($request->has('team_id')) {
-                $query->where('team_id',$request->team_id);
+                $query->where('team_id', $request->team_id);
             }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -131,7 +131,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
+            return $this->sendResponse(["count" => $count, "teams" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -145,7 +145,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $getTeamProfile = TeamProfiles::query()->where('id', $request->id)->first();
+            $getTeamProfile = TeamProfiles::query()->where('id', $request->id)->with('users')->first();
 
             if (empty($getTeamProfile)) {
                 return $this->sendError("No team found.");

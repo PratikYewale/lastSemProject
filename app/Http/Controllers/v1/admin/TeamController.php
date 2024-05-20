@@ -42,7 +42,7 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'primary_img' => 'required|mimes:jpg,jpeg,png|max:2048',
+                'primary_img' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -57,7 +57,7 @@ class TeamController extends Controller
             }
             $newTeam->save();
             DB::commit();
-            return $this->sendResponse($newTeam, 'Team added successfully.', true);
+            return $this->sendResponse($newTeam, 'Game added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -69,7 +69,6 @@ class TeamController extends Controller
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:teams,id',
                 'name' => 'string|max:255',
-                'primary_img' => 'mimes:jpg,jpeg,png|max:2048',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -77,7 +76,7 @@ class TeamController extends Controller
             DB::beginTransaction();
             $updateTeam = Team::query()->where('id', $request->id)->first();
             if (!$updateTeam) {
-                return $this->sendError("No team found.");
+                return $this->sendError("No game found.");
             }
             if ($request->has('name')) {
                 $updateTeam->name = $request->name;
@@ -90,7 +89,7 @@ class TeamController extends Controller
             }
             $updateTeam->save();
             DB::commit();
-            return $this->sendResponse($updateTeam, 'Team updated successfully.');
+            return $this->sendResponse($updateTeam, 'Game updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -123,7 +122,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "teams" => $data], 'Data fetched successfully.', true);
+            return $this->sendResponse(["count" => $count, "games" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -139,7 +138,7 @@ class TeamController extends Controller
             }
             $getTeam = Team::query()->where('id', $request->id)->with(['teammembers'])->first();
             if (empty($getTeam)) {
-                return $this->sendError("No team found.");
+                return $this->sendError("No game found.");
             }
             return $this->sendResponse($getTeam, 'Data fetched successfully.', true);
         } catch (Exception $e) {
@@ -158,9 +157,10 @@ class TeamController extends Controller
             DB::beginTransaction();
             $team = Team::query()->where('id', $request->id)->first();
             $team->teammember()->delete();
+            $team->teamprofiles()->delete();
             $team->delete();
             DB::commit();
-            return $this->sendResponse($team->id, 'Team and associated profile deleted successfully.', true);
+            return $this->sendResponse($team->id, 'Game and associated teams deleted successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -180,13 +180,18 @@ class TeamController extends Controller
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $newTeamProfile = new TeamProfiles();
-            $newTeamProfile->team_id = $request->team_id;
-            $newTeamProfile->name = $request->name;
-            $newTeamProfile->description = $request->description;
-            $newTeamProfile->save();
+            $teamProfile = TeamProfiles::query()->where('team_id', $request->team_id)->where('name', $request->name)->first();
+            if ($teamProfile) {
+                return $this->sendError("Team with same name already exist");
+            } else {
+                $newTeamProfile = new TeamProfiles();
+                $newTeamProfile->team_id = $request->team_id;
+                $newTeamProfile->name = $request->name;
+                $newTeamProfile->description = $request->description;
+                $newTeamProfile->save();
+            }
             DB::commit();
-            return $this->sendResponse($newTeamProfile, 'Team profile added successfully.', true);
+            return $this->sendResponse($newTeamProfile, 'Team added successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -197,7 +202,6 @@ class TeamController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:team_profiles,id',
-                'team_id' => 'exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -208,17 +212,19 @@ class TeamController extends Controller
                 return $this->sendError("No team found.");
             }
             if ($request->has('name')) {
-                $updateTeamProfile->name = $request->name;
+                $teamProfile = TeamProfiles::query()->where('team_id', $updateTeamProfile->team_id)->where('name', $request->name)->first();
+                if ($teamProfile && $teamProfile->id != $request->id) {
+                    return $this->sendError("Team with same name already exist");
+                } else {
+                    $updateTeamProfile->name = $request->name;
+                }
             }
             if ($request->has('description')) {
                 $updateTeamProfile->description = $request->description;
             }
-            if ($request->has('team_id')) {
-                $updateTeamProfile->team_id = $request->team_id;
-            }
             $updateTeamProfile->save();
             DB::commit();
-            return $this->sendResponse($updateTeamProfile, 'Team profile updated successfully.');
+            return $this->sendResponse($updateTeamProfile, 'Team updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -236,13 +242,13 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamProfiles::query();
+            $query = TeamProfiles::query()->with('users');
 
             if ($request->has('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
             }
             if ($request->has('team_id')) {
-                $query->where('team_id',$request->team_id);
+                $query->where('team_id', $request->team_id);
             }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -255,7 +261,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
+            return $this->sendResponse(["count" => $count, "teams" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -269,7 +275,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
-            $getTeamProfile = TeamProfiles::query()->where('id', $request->id)->first();
+            $getTeamProfile = TeamProfiles::query()->where('id', $request->id)->with('users')->first();
 
             if (empty($getTeamProfile)) {
                 return $this->sendError("No team found.");
@@ -290,9 +296,10 @@ class TeamController extends Controller
             }
             DB::beginTransaction();
             $teamProfile = TeamProfiles::query()->where('id', $request->id)->first();
+            $teamProfile->teammember()->delete();
             $teamProfile->delete();
             DB::commit();
-            return $this->sendResponse($teamProfile->id, 'Team profile deleted successfully.', true);
+            return $this->sendResponse($teamProfile->id, 'Team deleted successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -345,13 +352,12 @@ class TeamController extends Controller
             }
 
             DB::commit();
-            return $this->sendResponse([], 'All team members added successfully.', true);
+            return $this->sendResponse([], 'Athletes added to team successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
     public function updateTeamMember(Request $request): JsonResponse
     {
         try {
@@ -401,7 +407,7 @@ class TeamController extends Controller
                 $newTeamMember->save();
             }
             DB::commit();
-            return $this->sendResponse([], 'Team updated successfully.');
+            return $this->sendResponse([], 'Athletes in team updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -438,7 +444,7 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            
+
             return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
@@ -466,16 +472,24 @@ class TeamController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:team_member,id',
+                'team_id' => 'required|integer|exists:teams,id',
+                'team_profile_id' => 'required|integer|exists:team_profiles,id',
+                'athlete_id' => 'required|integer|exists:users,id,role,athlete',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-            $teamMember = TeamMember::query()->where('id', $request->id)->first();
-            $teamMember->delete();
+            $teamMember = TeamMember::query()->where('team_id', $request->team_id)
+                ->where('team_profile_id', $request->team_profile_id)
+                ->where('athlete_id', $request->athlete_id)->first();
+            if (!$teamMember) {
+                return $this->sendError("Athlete doesn't exist in this team.");
+            } else {
+                $teamMember->delete();
+            }
             DB::commit();
-            return $this->sendResponse($teamMember->id, 'Team member deleted successfully.', true);
+            return $this->sendResponse($teamMember->id, 'Athlete removed fron team successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
