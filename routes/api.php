@@ -80,6 +80,8 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getTeamById', [TeamController::class, 'getTeamById']);
         Route::delete('deleteTeamById', [TeamController::class, 'deleteTeamById']);
         // Team Profiles 
+        Route::post('addMultipleTeamsWithAthletes', [TeamController::class, 'addMultipleTeamsWithAthletes']);
+        Route::post('updateMultipleTeamsWithAthletes', [TeamController::class, 'updateMultipleTeamsWithAthletes']);
         Route::post('addTeamProfile', [TeamController::class, 'addTeamProfile']);
         Route::post('updateTeamProfile', [TeamController::class, 'updateTeamProfile']);
         Route::get('getAllTeamProfiles', [TeamController::class, 'getAllTeamProfiles']);
