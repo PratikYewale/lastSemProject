@@ -23,8 +23,8 @@
 
             <ul class="nav nav-pills mb-3 d-flex justify-content-around" id="pills-tab" role="tablist">
                 @php
-                $uniqueProfiles = $team->teammembers->pluck('team_profile')->unique();
-            @endphp
+                    $uniqueProfiles = $team->teammembers->pluck('team_profile')->unique();
+                @endphp
                 @foreach ($team->teammembers as $index => $member)
                     <li class="nav-item" role="presentation">
                         <a class="nav-link @if ($index == 0) active @endif"
@@ -38,7 +38,7 @@
             </ul>
         </div>
         <div class="tab-content" id="pills-tabContent">
-   
+
             @foreach ($team->teammembers as $index => $member)
                 <div class="tab-pane fade @if ($index == 0) show active @endif"
                     id="pills-{{ $index }}" role="tabpanel" aria-labelledby="pills-{{ $index }}-tab"

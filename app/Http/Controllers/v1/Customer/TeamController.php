@@ -74,7 +74,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamMember::query()->with(['team', 'users']);
+            $query = TeamMember::query()->with(['users']);
             if ($request->has('team_profie')) {
                 $query->where('team_profile', $request->team_profie);
             }
@@ -93,7 +93,12 @@ class TeamController extends Controller
             if (count($data) <= 0) {
                 return $this->sendError('No data available.');
             }
-            return $this->sendResponse(["count" => $count, "data" => $data], 'Data fetched successfully.', true);
+            $grouped_data = [];
+            foreach ($data as $member) {
+                $profile = $member->team_profile;
+                $grouped_data[$profile][] = $member;
+            }
+            return $this->sendResponse(["count" => $count, "data" => $grouped_data], 'Data fetched successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
