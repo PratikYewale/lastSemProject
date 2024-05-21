@@ -25,13 +25,13 @@
                 @php
                     $uniqueProfiles = $team->teammembers->pluck('team_profile')->unique();
                 @endphp
-                @foreach ($team->teammembers as $index => $member)
+                @foreach ($team->teamprofiles as $index => $profile)
                     <li class="nav-item" role="presentation">
                         <a class="nav-link @if ($index == 0) active @endif"
                             id="pills-{{ $index }}-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-{{ $index }}" href="#" role="tab"
                             aria-controls="pills-{{ $index }}"
-                            aria-selected="@if ($index == 0) true @endif">{{ $member['team_profile'] }}</a>
+                            aria-selected="@if ($index == 0) true @endif">{{ $profile->name }}</a>
                     </li>
                 @endforeach
 
@@ -39,13 +39,16 @@
         </div>
         <div class="tab-content" id="pills-tabContent">
 
-            @foreach ($team->teammembers as $index => $member)
+            @foreach ($team->teamprofiles as $index => $profile)
                 <div class="tab-pane fade @if ($index == 0) show active @endif"
                     id="pills-{{ $index }}" role="tabpanel" aria-labelledby="pills-{{ $index }}-tab"
                     tabindex="0">
-                    <h3>{{ $member['users']['first_name'] }}</h3>
-                    <p>Email: {{ $member['users']['email'] }}</p>
-                    <p>Mobile No: {{ $member['users']['mobile_no'] }}</p>
+                    <h3>{{ $profile->name }}</h3>
+                    @foreach($profile->teammember as $member)
+                    <p>{{$member->users->first_name}}</p>
+                    @endforeach
+                    {{-- <p>Email: {{ $member['users']['email'] }}</p>
+                    <p>Mobile No: {{ $member['users']['mobile_no'] }}</p> --}}
                     <!-- Add more fields as necessary -->
                 </div>
             @endforeach

@@ -110,10 +110,21 @@
                                         <!-- Menu: Media Gallery or Registration -->
                                         @if (!Auth::user())
                                      
-                                            <li
-                                                class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                                <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                        <li
+                                        class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
+                                        <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                        <ul class="sub-menu">
+                                            <li class="menu-item current-menu-item">
+                                                <a href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
                                             </li>
+                                            <li class="menu-item">
+                                                <a href="{{ url('/registration/athletesRegistration') }}"><span>Athlete</span></a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="{{ url('/registration/sponsorshipRegistration') }}"><span>Sponsership</span></a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                         @endif
                                         <!-- /Menu: Media Gallery or Registration -->
 
@@ -263,12 +274,7 @@
                             </li>
                             <!-- /Menu: Services -->
 
-                            <!-- Menu: Store -->
-                            <li
-                                class="{{ Route::currentRouteName() == 'shop' ? 'menu-item current-menu-item' : 'menu-item' }}">
-                                <a href="shop-page.html"><span>Store</span></a>
-                            </li>
-                            <!-- /Menu: Store -->
+                      
 
                             <!-- Menu: Announcement -->
                             <li
@@ -278,10 +284,21 @@
 
                             <!-- Menu: Media Gallery or Registration -->
                             @if (!Auth::user())
-                           
+                        
                                 <li
-                                    class="{{ Route::currentRouteName() == 'registration' ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    class="{{ Route::currentRouteName() == 'registration*' ? 'menu-item current-menu-item menu-item-has-children' : 'menu-item menu-item-has-children' }}">
                                     <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                    <ul class="sub-menu">
+                                        <li class="menu-item current-menu-item">
+                                            <a href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ url('/registration/athletesRegistration') }}"><span>Athlete</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="{{ url('/registration/sponsorshipRegistration') }}"><span>Sponsership</span></a>
+                                        </li>
+                                    </ul>
                                 </li>
                             @endif
                             <!-- /Menu: Media Gallery or Registration -->

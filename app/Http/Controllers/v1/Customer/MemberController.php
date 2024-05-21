@@ -113,7 +113,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function addAthlete(Request $request): JsonResponse
+    public function addAthlete(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [

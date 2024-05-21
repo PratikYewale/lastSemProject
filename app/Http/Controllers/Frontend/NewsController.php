@@ -32,4 +32,16 @@ class NewsController extends Controller
             return redirect()->back()->with('error', 'Error fetching news details.');
         }
     }
+    public function association()
+    {
+        return view('frontend.commonComponants.registration.associationRegistration');
+    }
+    public function athletes()
+    {
+        return view('frontend.commonComponants.registration.athletesRegistration');
+    }
+    public function sponsorship()
+    {
+        return view('frontend.commonComponants.registration.sponsorshipRegistration');
+    }
 }

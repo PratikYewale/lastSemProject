@@ -23,8 +23,8 @@ class TeamController extends Controller
 
     public function teamDetails($id)
     {
-        $teamProfile = Team::with('teammembers.users')->findOrFail($id);
-        $team = Team::with('teammembers.users')->findOrFail($id);
+        $team = Team::with('teamprofiles','teamprofiles.teammember')->findOrFail($id);
+        // $team = Team::with('teammembers.users')->findOrFail($id);
     
         return view('frontend.teamDetails', compact('team'));
     }
