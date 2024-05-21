@@ -85,7 +85,7 @@ class TeamController extends Controller
                 $updateTeam->description = $request->description;
             }
             if ($request->hasFile('primary_img')) {
-                $updateTeam->primary_img = $this->saveFile($request->primary_img, 'TeamsPrimaryImages');
+                $updateTeam->primary_img = $this->saveFile($request->primary_img, 'TeamLogos');
             }
             $updateTeam->save();
             DB::commit();
