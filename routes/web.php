@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\RazorpayPaymentController;
-
+use App\Http\Controllers\frontend\TeamController;
 use App\Http\Controllers\v1\Customer\ContactUsController;
 use App\Http\Controllers\v1\Customer\DonationController;
 use App\Http\Controllers\v1\Customer\MemberController;
@@ -37,7 +37,8 @@ use App\Http\Controllers\v1\Customer\SponsorshipController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/donate', [HomeController::class, 'donate']);
 Route::get('/about', [HomeController::class, 'about']);
-Route::get('/teams', [HomeController::class, 'teams']);
+Route::get('/teams', [TeamController::class, 'teams']);
+Route::get('/teamDetails/{id}', [TeamController::class, 'teamDetails'])->name('teamDetails');
 Route::get('/services', [HomeController::class, 'services']);
 Route::get('/announcement', [HomeController::class, 'announcement']);
 Route::get('/registration', [HomeController::class, 'registration']);
