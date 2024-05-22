@@ -9,4 +9,7 @@ class plan extends Model
 {
     use HasFactory;
     protected $table='plans';
+    protected $casts = [
+        "description" => "array"
+    ];
 }
