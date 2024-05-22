@@ -123,7 +123,7 @@ class MemberController extends Controller
                 'mobile_no' => 'required|min:10|max:10',
                 'password' => 'required|confirmed|string',
                 'date_of_birth' => 'nullable|date',
-                'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg',
+                'profile_picture' => 'required|image|mimes:png,jpg,jpeg',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_number'=>'required|max:12|min:12',
@@ -131,6 +131,9 @@ class MemberController extends Controller
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
                 'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
                 'acknowledge' => 'boolean',
+                'city' => 'required',
+                'state' => 'required',
+                'country' => 'required',
             ]);
 
             if ($validator->fails()) {
