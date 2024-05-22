@@ -13,7 +13,7 @@ class TeamController extends Controller
     {
         try {
             $games = Team::query();
-            $games = $games->with([])->paginate(9);
+            $games = $games->with([])->orderBy('created_at', 'desc')->paginate(9);
             return view('frontend.teams', compact('games'));
         } catch (Exception $e) {
 

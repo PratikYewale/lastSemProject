@@ -9432,3 +9432,11 @@ body table.booked-calendar tr.days th {
 	border: 1px solid #dee2e6 !important;
 
 }
+.about-team-profile-pic{
+	width: 228px;
+}
+
+.sc_team_item_avatar img{
+	max-height: 275px;
+	object-fit: contain;
+}

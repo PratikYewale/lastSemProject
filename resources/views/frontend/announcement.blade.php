@@ -67,7 +67,8 @@
                                                 <div class="post_featured">
                                                     <div class="post_thumb" data-image="" data-title="Serving Cookies at Alpine Nationals">
                                                         <a class="hover_icon hover_icon_link" href="{{ route('newsDetails', ['id' => $item->id]) }}">
-                                                            <img alt="Serving Cookies at Alpine Nationals" src="http://placehold.it/1170x659">
+                                                            <img alt="Serving Cookies at Alpine Nationals" src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}">
+
                                                         </a>
                                                     </div>
                                                 </div>
@@ -84,7 +85,7 @@
                                                     </span>
                                                     <span class="post_info_item post_info_posted_by">
                                                         <span class="contact_icon icon-user"></span>
-                                                        {{-- <a href="#" class="post_info_author">{{ $item->user->first_name }} {{ $item->user->last_name }}</a> --}}
+                                                        <a href="#" class="post_info_author">{{ $item->type }} </a>
                                                     </span>
                                                 </div>
                                             </div>
