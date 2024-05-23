@@ -128,7 +128,7 @@ class MemberController extends Controller
                 'physical_fitness_certificate' => 'required|mimes:png,jpg,jpeg,pdf',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
-                'aadhar_number'=>'required|max:12|min:12',
+                'aadhar_number' => 'required|max:12|min:12',
                 'passport_number' => 'nullable|unique:users',
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
                 'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
@@ -136,6 +136,7 @@ class MemberController extends Controller
                 'city' => 'required',
                 'state' => 'required',
                 'country' => 'required',
+                'team_id' => 'integer|exists:teams,id',
             ]);
 
             if ($validator->fails()) {
@@ -160,6 +161,7 @@ class MemberController extends Controller
                 $user->postal_code = $request->postal_code;
                 $user->aadhar_number = $request->aadhar_number;
                 $user->passport_number = $request->passport_number;
+                $user->team_id = $request->team_id;
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
                 }
@@ -179,8 +181,6 @@ class MemberController extends Controller
                     $user->passport = $this->saveFile($request->file('passport'), 'Passport');
                 }
             }
-
-
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achievement();
@@ -202,8 +202,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return back()->with('success', 'Form submitted successfully!');
-
+            return back()->with('success', 'Athlete added successfully.');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
@@ -270,7 +269,7 @@ class MemberController extends Controller
                 $payment->status = "paid";
                 $payment->save();
                 $user = User::find(Auth::id());
-                $user->status = true; 
+                $user->status = true;
                 $user->save();
                 $data = [
                     'to_name' => $request->name,
@@ -317,6 +316,7 @@ class MemberController extends Controller
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'acknowledge' => 'boolean',
+                'team_id' => 'integer|exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
@@ -335,6 +335,9 @@ class MemberController extends Controller
             }
             if ($request->has('last_name')) {
                 $user->last_name = $request->last_name;
+            }
+            if ($request->has('team_id')) {
+                $user->team_id = $request->team_id;
             }
             if ($request->has('mobile_no')) {
                 $user->mobile_no = $request->mobile_no;
@@ -402,7 +405,10 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
-            $query = User::query()->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete');
+            $query = User::query()->with(['team', 'achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete');
+            if ($request->team_id) {
+                $query->where('team_id', $request->team_id);
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -473,7 +479,7 @@ class MemberController extends Controller
                 $response = ['token' => $token];
                 $response['userData'] = $user;
                 Auth::login($user);
-               //return $this->sendResponse($response, 'User logged in successfully.', 200);
+                //return $this->sendResponse($response, 'User logged in successfully.', 200);
 
                 // Check user status
                 if ($user->status == 1) {
@@ -750,7 +756,7 @@ class MemberController extends Controller
                 $payment->status = "paid";
                 $payment->save();
                 $user = User::find(Auth::id());
-                $user->status = true; 
+                $user->status = true;
                 $user->save();
                 $data = [
                     'to_name' => $request->name,
@@ -774,7 +780,6 @@ class MemberController extends Controller
                         ->subject('New association have registered');
                     $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
                 });
-
             } else {
                 $payment->status = "pending";
                 $payment->save();
@@ -919,7 +924,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $association = User::query()->where('id', $request->id)->with('payment_history')->where('role','member')->first();
+            $association = User::query()->where('id', $request->id)->with('payment_history')->where('role', 'member')->first();
             if (!$association) {
                 return $this->sendError('No data available.');
             }
@@ -938,7 +943,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $athlete = User::query()->where('id', $request->id)->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete')->first();
+            $athlete = User::query()->where('id', $request->id)->with(['team','achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete')->first();
             if (!$athlete) {
                 return $this->sendError('No data available.');
             }
@@ -947,7 +952,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-   public function getAllAssociation(Request $request)
+    public function getAllAssociation(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -957,7 +962,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->with('payment_history')->where('role','member');
+            $query = User::query()->with('payment_history')->where('role', 'member');
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -977,5 +982,4 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
 }

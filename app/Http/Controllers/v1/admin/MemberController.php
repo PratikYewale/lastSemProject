@@ -96,11 +96,15 @@ class MemberController extends Controller
             $validator = Validator::make($request->all(), [
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
+                'team_id' => 'integer|exists:teams,id',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = User::query()->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete');
+            $query = User::query()->with(['team','achievements', 'sport_certificates','payment_history'])->where('role', 'athlete');
+            if ($request->team_id) {
+                $query->where('team_id', $request->team_id);
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -179,7 +183,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $athlete = User::query()->where('id', $request->id)->with(['achievements', 'sport_certificates','payment_history'])->where('role', 'athlete')->first();
+            $athlete = User::query()->where('id', $request->id)->with(['team','achievements', 'sport_certificates','payment_history'])->where('role', 'athlete')->first();
             if (!$athlete) {
                 return $this->sendError('No data available.');
             }
