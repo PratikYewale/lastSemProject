@@ -91,8 +91,8 @@ class NewsController extends Controller
             $validator = Validator::make($request->all(), [
                 'news_images' => 'array',
                 'file' => 'mimes:pdf',
-                'type' => 'required'
-
+                'type' => 'required',
+                'primary_img' => 'required|mimes:jpg,jpeg,png',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());

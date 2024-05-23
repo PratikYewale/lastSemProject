@@ -211,13 +211,13 @@ class TeamController extends Controller
                 foreach ($teamData['athlete_ids'] as $athlete_id) {
                     // Check if athlete is already part of the team profile
                     $existingTeamMember = TeamMember::query()
-                    ->where('team_id', $team_id)
-                    ->where('athlete_id', $athlete_id)
-                    ->first();
-                    $teamProfile = TeamProfiles::where('id',$existingTeamMember->team_profile_id)->pluck('name')->first();
-                    $athleteName = User::where('id',$athlete_id)->pluck('first_name')->first();
-                    
+                        ->where('team_id', $team_id)
+                        ->where('athlete_id', $athlete_id)
+                        ->first();
+
                     if ($existingTeamMember) {
+                        $teamProfile = TeamProfiles::where('id', $existingTeamMember->team_profile_id)->pluck('name')->first();
+                        $athleteName = User::where('id', $athlete_id)->pluck('first_name')->first();
                         DB::rollBack();
                         return $this->sendError("$athleteName is already assigned to team '$teamProfile'.", [], 409);
                     }
@@ -249,31 +249,31 @@ class TeamController extends Controller
             'teams.*.athlete_ids' => 'required|array',
             'teams.*.athlete_ids.*' => 'required|integer|exists:users,id,role,athlete',
         ]);
-    
+
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-    
+
         DB::beginTransaction();
         $team_id = $request->team_id;
         try {
             foreach ($request->teams as $teamData) {
                 // Fetch existing team profile
                 $teamProfile = TeamProfiles::find($teamData['id']);
-    
+
                 if (!$teamProfile || $teamProfile->team_id != $team_id) {
                     DB::rollBack();
                     return $this->sendError("Team profile with ID '{$teamData['id']}' does not exist or does not belong to the specified team.");
                 }
-    
+
                 // Update team profile details
                 $teamProfile->name = $teamData['name'];
                 $teamProfile->description = $teamData['description'] ?? $teamProfile->description; // Update description if provided
                 $teamProfile->save();
-    
+
                 // Remove existing athlete associations
                 TeamMember::where('team_profile_id', $teamProfile->id)->delete();
-    
+
                 // Add updated athlete associations
                 foreach ($teamData['athlete_ids'] as $athlete_id) {
                     // Ensure athlete is not already assigned to another team in the same game
@@ -281,12 +281,12 @@ class TeamController extends Controller
                         ->where('team_id', $team_id)
                         ->where('athlete_id', $athlete_id)
                         ->first();
-    
+
                     if ($existingTeamMember) {
                         DB::rollBack();
                         return $this->sendError("Athlete with ID $athlete_id is already assigned to another team in this game", [], 409);
                     }
-    
+
                     // Add athlete to the team profile
                     $newTeamMember = new TeamMember();
                     $newTeamMember->team_id = $team_id;
@@ -295,7 +295,7 @@ class TeamController extends Controller
                     $newTeamMember->save();
                 }
             }
-    
+
             DB::commit();
             return $this->sendResponse([], 'Teams and athletes updated successfully.', true);
         } catch (Exception $e) {
@@ -303,7 +303,7 @@ class TeamController extends Controller
             return $this->sendError('Failed to update teams with athletes.', $e->getMessage(), 500);
         }
     }
-    
+
     public function addTeamProfile(Request $request): JsonResponse
     {
         try {
