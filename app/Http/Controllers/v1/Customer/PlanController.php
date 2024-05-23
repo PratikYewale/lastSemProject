@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\v1\Customer;
+
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Exception;
@@ -18,11 +19,15 @@ class PlanController extends Controller
             $validator = Validator::make($request->all(), [
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
+                'type' => 'in:athlete,member,sponsorship',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
             $query = Plan::query();
+            if ($request->has('type')) {
+                $query->where('type', $request->type);
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -33,7 +38,7 @@ class PlanController extends Controller
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
                 $response['count'] = $count;
-                $response['Club'] = $data;
+                $response['plans'] = $data;
                 return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
                 return $this->sendError('No Data Available.');

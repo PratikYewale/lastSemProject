@@ -124,6 +124,8 @@ class MemberController extends Controller
                 'password' => 'required|confirmed|string',
                 'date_of_birth' => 'nullable|date',
                 'profile_picture' => 'required|image|mimes:png,jpg,jpeg',
+                'anti_doping_certificate' => 'required|mimes:png,jpg,jpeg,pdf',
+                'physical_fitness_certificate' => 'required|mimes:png,jpg,jpeg,pdf',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_number'=>'required|max:12|min:12',
@@ -160,6 +162,12 @@ class MemberController extends Controller
                 $user->passport_number = $request->passport_number;
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
+                }
+                if ($request->hasFile('physical_fitness_certificate')) {
+                    $user->physical_fitness_certificate = $this->saveFile($request->file('physical_fitness_certificate'), 'PhysicalFitness');
+                }
+                if ($request->hasFile('anti_doping_certificate')) {
+                    $user->anti_doping_certificate = $this->saveFile($request->file('anti_doping_certificate'), 'AntiDoping');
                 }
                 if ($request->hasFile('recommendation')) {
                     $user->recommendation = $this->saveFile($request->file('recommendation'), 'Recommendation');
@@ -303,6 +311,8 @@ class MemberController extends Controller
                 'id' => 'required|integer|exists:users,id',
                 'email' => 'string|email|max:255|unique:users',
                 'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+                'anti_doping_certificate' => 'nullable|mimes:png,jpg,jpeg,pdf',
+                'physical_fitness_certificate' => 'nullable|mimes:png,jpg,jpeg,pdf',
                 'recommendation' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
@@ -329,8 +339,6 @@ class MemberController extends Controller
             if ($request->has('mobile_no')) {
                 $user->mobile_no = $request->mobile_no;
             }
-
-
             if ($request->has('gender')) {
                 $user->gender = $request->gender;
             }
@@ -357,6 +365,12 @@ class MemberController extends Controller
             }
             if ($request->has('passport_number')) {
                 $user->passport_number = $request->passport_number;
+            }
+            if ($request->hasFile('physical_fitness_certificate')) {
+                $user->physical_fitness_certificate = $this->saveFile($request->file('physical_fitness_certificate'), 'PhysicalFitness');
+            }
+            if ($request->hasFile('anti_doping_certificate')) {
+                $user->anti_doping_certificate = $this->saveFile($request->file('anti_doping_certificate'), 'AntiDoping');
             }
             if ($request->hasFile('profile_picture')) {
                 $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');

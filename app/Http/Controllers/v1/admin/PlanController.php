@@ -78,8 +78,6 @@ class PlanController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-
-
     public function updatePlan(Request $request): JsonResponse
     {
         try {
@@ -118,7 +116,6 @@ class PlanController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-
     public function deletePlan(Request $request): JsonResponse
     {
         try {
@@ -137,7 +134,6 @@ class PlanController extends Controller
             return $this->sendError('Something Went Wrong', $e->getMessage(), 413);
         }
     }
-
     public function getAllPlan(Request $request)
     {
         try {
