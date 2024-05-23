@@ -136,7 +136,7 @@ class MemberController extends Controller
                 'city' => 'required',
                 'state' => 'required',
                 'country' => 'required',
-                'team_id' => 'required|integer|exists:teams,id',
+                'team_id' => 'integer|exists:teams,id',
             ]);
 
             if ($validator->fails()) {

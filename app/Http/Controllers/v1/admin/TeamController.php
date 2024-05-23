@@ -220,11 +220,11 @@ class TeamController extends Controller
                         DB::rollBack();
                         return $this->sendError("$athleteName is already assigned to team '$teamProfile'.", [], 409);
                     }
-                    $user = User::where('team_id', $team_id)->where('id', $athlete_id);
-                    if ($user) {
-                        DB::rollBack();
-                        return $this->sendError("Please select valid athlete.");
-                    }
+                    // $user = User::where('team_id', $team_id)->where('id', $athlete_id);
+                    // if ($user) {
+                    //     DB::rollBack();
+                    //     return $this->sendError("Please select valid athlete.");
+                    // }
                     // Add athlete to the team profile
                     $newTeamMember = new TeamMember();
                     $newTeamMember->team_id = $team_id;
