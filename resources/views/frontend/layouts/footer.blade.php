@@ -2,19 +2,22 @@
         <footer class="footer_wrap widget_area">
             <div class="footer_wrap_inner widget_area_inner">
                 <div class="content_wrap">
-                    <div class="columns_wrap row">
+                    <div class=" row">
                         <!-- Widget: Weather -->
-                        <aside class="column-1_3 widget widget_text">
+                        <aside class="col-lg-3 widget widget_text">
 
                             <div class="textwidget">
                                 <div class="wpc-weather-id">
-                                    <img src="{{ url('frontend/images/logo.png') }}" class="footer_logo" alt="">
+                                    <img src="{{ url('frontend/images/logo.png') }}" class="footer_logo"
+                                        alt="">
                                 </div>
 
 
                             </div>
-                        </aside><!-- /Widget: Weather --><!-- Widget: Quick Links -->
-                        <aside class="column-1_3 widget widget_recent_reviews">
+                        </aside>
+                        <!-- /Widget: Weather -->
+                        <!-- Widget: Quick Links -->
+                        <aside class="col-lg-3 widget widget_recent_reviews">
                             <h5 class="widget_title">Quick Links</h5>
                             <div class="recent_reviews">
                                 <article class="post_item no_thumb first">
@@ -24,10 +27,7 @@
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/') }}"><span class="ms-1">Home</span></a>
                                         </li>
-                                        <li class="menu-item">
-                                            <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/donate') }}"><span class="ms-1">Donate</span></a>
-                                        </li>
+
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/about') }}"><span class="ms-1">About</span></a>
@@ -36,34 +36,22 @@
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/teams') }}"><span class="ms-1">Teams</span></a>
                                         </li>
+                                        <!-- /Menu: Rent -->
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/services') }}"><span
                                                         class="ms-1">Services</span></a>
                                         </li>
-
-                                        <!-- /Menu: Rent -->
                                         <!-- Menu: Store -->
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/announcement') }}"><span
-                                                        class="ms-1">Programs</span></a>
+                                                        class="ms-1">Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
-                                        <!-- Menu: News -->
-                                        <li class="menu-item ">
-                                            <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/registration') }}"><span
-                                                        class="ms-1">Competition</span></a>
+                                       
+                                 
 
-                                        </li>
-                                        <!-- /Menu: News -->
-                                        <!-- Menu: Contact Us -->
-                                        <li class="menu-item">
-                                            <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/membership') }}"><span
-                                                        class="ms-1">Membership</span></a>
-                                        </li>
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/contact') }}"><span class="ms-1">Contact
@@ -73,8 +61,38 @@
                                 </article>
 
                             </div>
-                        </aside><!-- /Widget: Quick Links --><!-- Widget: Contacts -->
-                        <aside class="column-1_3 widget widget_contacts">
+                        </aside>
+                        <!-- /Widget: Quick Links -->
+                         <!-- Widget: Quick Links -->
+                         <aside class="col-lg-3 widget widget_recent_reviews">
+                            <h5 class="widget_title">Register As</h5>
+                            <div class="recent_reviews">
+                                <article class="post_item no_thumb first">
+
+                                    <ul id="menu_footer" class="menu_footer_nav">
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/associationRegistration') }}"><span class="ms-1">Association</span></a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/athletesRegistration') }}"><span class="ms-1">Athletes</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/sponsorshipRegistration') }}"><span class="ms-1">Sponsor</span></a>
+                                        </li>
+                                        <!-- /Menu: Rent -->
+                                   
+                                    </ul>
+                                </article>
+
+                            </div>
+                        </aside>
+                        <!-- /Widget: Quick Links -->
+                        <!-- Widget: Contacts -->
+                        <aside class="col-lg-3 widget widget_contacts">
                             <h5 class="widget_title">Contact Us</h5>
                             <div class="widget_inner">
                                 <ul class="contact_info">
@@ -87,11 +105,11 @@
                                     </li>
                                     {{-- <li class="d-flex">
 
-                                        <i class="icon icon-mobile"></i>
-                                        <div>1 800 215 16 35</div>
-                                    </li> --}}
+                                            <i class="icon icon-mobile"></i>
+                                            <div>1 800 215 16 35</div>
+                                        </li> --}}
                                     <li class="d-flex">
-                                        <i class="icon icon-pencil"></i>
+                                        <i class="icon icon-mail"></i>
                                         <div>skiandsnowboardindia@outlook.com</div>
                                     </li>
 
@@ -136,6 +154,7 @@
                 </div>
             </div>
         </footer>
+        <!-- /Footer -->
         <!-- /Footer -->
         <!-- Copyright -->
         <div class="copyright_wrap copyright_style_menu">

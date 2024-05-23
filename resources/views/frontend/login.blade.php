@@ -74,15 +74,15 @@
 
                                                         <div class="mb-3 d-flex justify-content-between">
                                                             <div>
-                                                                Don't have an account?
-                                                                <a href="#" class="">Sign Up
-                                                                </a>
+                                                                Don't have an account? Sign Up as
+                                                                <a href="#" class="">Athlete</a> or
+                                                                <a href="#" class="">Association</a>
                                                             </div>
-                                                            <div>
+                                                            {{-- <div>
                                                                 <a href="#" class="">Forgot
                                                                     Password
                                                                 </a>
-                                                            </div>
+                                                            </div> --}}
 
 
                                                         </div>

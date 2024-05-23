@@ -44,6 +44,7 @@ Route::get('/announcement', [HomeController::class, 'announcement']);
 Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/events', [HomeController::class, 'events']);
 Route::post('/addContactUs', [ContactUsController::class, 'addContactUs'])->name('addContactUs');
 Route::post('/addContactUsVerified', [ContactUsController::class, 'addContactUsVerified'])->name('addContactUsVerified');
 

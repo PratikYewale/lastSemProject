@@ -13,34 +13,38 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Event;
-
+use App\Models\User;
+use App\Models\Team;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('frontend.index');
+        try {
+            $games = Team::query()->orderBy('created_at', 'desc')->take(3)->get();
+            $news = News::query()->orderBy('created_at', 'desc')->take(3)->get();
+            return view('frontend.index', compact('games', 'news'));
+        } catch (Exception $e) {
+            return view('frontend.index');
+        }
     }
     public function donate()
     {
-      
+
 
         return view('frontend.donate');
     }
     public function about()
     {
         try {
-            $associations = Association::query();
-            $associations = $associations->with([])->paginate(9);
+            $associations = User::where('role', 'member')->paginate(9);
 
             return view('frontend.about', compact('associations'));
         } catch (Exception $e) {
-
             return view('frontend.about');
         }
-        // return view('frontend.about');
     }
-  
+
     public function services()
     {
         return view('frontend.services');
@@ -49,7 +53,7 @@ class HomeController extends Controller
     {
         try {
             $news = News::query();
-            $news = $news->with([])->paginate(6);
+            $news = $news->with([])->orderBy('created_at', 'desc')->paginate(6);
 
             return view('frontend.announcement', compact('news'));
         } catch (Exception $e) {
@@ -73,7 +77,6 @@ class HomeController extends Controller
 
             return view('frontend.membership');
         }
-        
     }
 
     public function contact()
@@ -101,5 +104,19 @@ class HomeController extends Controller
 
         Session::put('success', 'Payment successful');
         return redirect()->back();
+    }
+
+    public function events()
+    {
+        try {
+            $events = Event::query();
+            $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
+
+            return view('frontend.event', compact('events'));
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Error fetching events.');
+        }
+     
     }
 }

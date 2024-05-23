@@ -62,7 +62,7 @@
 
                     @include('frontend.commonComponants.athletesHistory')
                     <!-- E-mailer -->
-                    <div class="emailer_section">
+                    {{-- <div class="emailer_section">
                         <div class="content_wrap">
                             <div class="sc_section">
                                 <div class="sc_section_inner">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- /E-mailer -->
                 </section>
             </article>
