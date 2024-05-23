@@ -170,14 +170,14 @@
                                                                 </li>
                                                                 <!-- /Cart item -->
                                                                 <!-- Cart item -->
-                                                                <li class="mini_cart_item">
+                                                                {{-- <li class="mini_cart_item">
 
                                                                     <a href="{{ url('/media-gallery') }}">
 
                                                                         Media Gallery
                                                                     </a>
 
-                                                                </li>
+                                                                </li> --}}
                                                                 <li class="mini_cart_item">
 
                                                                     <a href="{{ url('/logout') }}">
@@ -193,7 +193,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>+
+                                            </li>
                                         </ul>
                                     @else
                                         <a href="{{ url('/login') }}">
@@ -1004,7 +1004,7 @@
                             </div>
                         </article>
                         <!-- School Info -->
-                    >
+                   
                         <!-- Equipment -->
                         @include('frontend.commonComponants.sponsershipPackages')
                         <!-- /Equipment -->
@@ -1282,6 +1282,7 @@
     </div>
     <!-- /Body wrap -->
 
+    <a href="#" class="scroll_to_top icon-up-small" title="Scroll to top"></a>
     @include('frontend.commonComponants.enquiryBtn')
 
     <script type="text/javascript" src="{{ url('frontend/js/jquery/jquery.js') }}"></script>

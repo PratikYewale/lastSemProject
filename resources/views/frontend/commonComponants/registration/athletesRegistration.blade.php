@@ -177,6 +177,12 @@
                                         </ul>
                                     </div>
                                 @endif
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
+
                                 <form id="addAthlete" action="{{ route('addAthlete') }}" method="POST"
                                     enctype="multipart/form-data" class="donationForm sc_input_hover_default"
                                     onsubmit="return validateForm()">
@@ -187,7 +193,8 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="first_name" class="form-label">First Name</label>
+                                                <label for="first_name" class="form-label">First Name <span
+                                                        class="text-danger">*</span> </label>
                                                 <input type="text" class="form-control" id="first_name"
                                                     name="first_name">
                                             </div>
@@ -201,7 +208,8 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="last_name" class="form-label">Last Name</label>
+                                                <label for="last_name" class="form-label">Last Name <span
+                                                        class="text-danger">*</span> </label>
                                                 <input type="text" class="form-control" id="last_name"
                                                     name="last_name">
                                             </div>
@@ -209,14 +217,16 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="date_of_birth" class="form-label">Date Of Birth</label>
+                                                <label for="date_of_birth" class="form-label">Date Of Birth <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="date" class="form-control" id="date_of_birth"
                                                     name="date_of_birth">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="profile_picture" class="form-label">Profile Picture</label>
+                                                <label for="profile_picture" class="form-label">Profile Picture <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="file" class="form-control" id="profile_picture"
                                                     name="profile_picture">
                                             </div>
@@ -225,7 +235,8 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="gender" class="form-label">Gender</label>
+                                                <label for="gender" class="form-label">Gender <span
+                                                        class="text-danger">*</span></label>
                                                 <div class="d-flex ">
                                                     <div class="form-check ">
                                                         <input class="form-check-input" type="radio" name="gender"
@@ -248,7 +259,8 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="email" class="form-label">Email Id</label>
+                                                <label for="email" class="form-label">Email Id <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="email" class="form-control" id="email"
                                                     name="email">
                                             </div>
@@ -257,7 +269,8 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="mobile_no" class="form-label">Mobile Number</label>
+                                                <label for="mobile_no" class="form-label">Mobile Number <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="tel" class="form-control" id="mobile_no"
                                                     name="mobile_no" pattern="[0-9]{10}" maxlength="10">
                                             </div>
@@ -327,53 +340,60 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="country" class="form-label">Country</label>
+                                                <label for="country" class="form-label">Country <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="country"
                                                     name="country">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="state" class="form-label">State / Province</label>
+                                                <label for="state" class="form-label">State / Province <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="state"
                                                     name="state">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="city" class="form-label">City</label>
+                                                <label for="city" class="form-label">City <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="city"
                                                     name="city">
                                             </div>
                                         </div>
+
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="postal_code" class="form-label">Postal Code</label>
-                                                <input type="text" class="form-control" id="postal_code"
-                                                    name="postal_code">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-3">
-                                                <label for="address" class="form-label">Address</label>
+                                                <label for="address" class="form-label">Address <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="address"
                                                     name="address">
                                             </div>
                                         </div>
-
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="postal_code" class="form-label">Postal Code <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="postal_code"
+                                                    name="postal_code">
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                             <h4 class="mt-auto form-section-title">Documents Upload</h4>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="aadhar_number" class="form-label">Aadhar Card Number</label>
+                                                <label for="aadhar_number" class="form-label">Aadhar Card Number <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="aadhar_number"
                                                     name="aadhar_number">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="aadhar_card" class="form-label">Aadhar Card </label>
+                                                <label for="aadhar_card" class="form-label">Aadhar Card <span
+                                                        class="text-danger">*</span></label>
                                                 <input type="file" class="form-control" id="aadhar_card"
                                                     name="aadhar_card">
                                             </div>
@@ -398,9 +418,25 @@
                                             <div class="mb-3">
                                                 <label for="recommendation" class="form-label">Recommendation from State
                                                     Sports
-                                                    Federation (if available)</label>
+                                                    Federation</label>
                                                 <input type="file" class="form-control" id="recommendation"
                                                     name="recommendation">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="anti_doping_certificate" class="form-label">Anti Doping
+                                                    Certificate <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" id="anti_doping_certificate"
+                                                    name="anti_doping_certificate">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="physical_fitness_certificate" class="form-label">Physical
+                                                    Fitness Certificate <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control"
+                                                    id="physical_fitness_certificate" name="physical_fitness_certificate">
                                             </div>
                                         </div>
 
