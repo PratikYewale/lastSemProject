@@ -214,14 +214,17 @@ class TeamController extends Controller
                         ->where('team_id', $team_id)
                         ->where('athlete_id', $athlete_id)
                         ->first();
-
                     if ($existingTeamMember) {
                         $teamProfile = TeamProfiles::where('id', $existingTeamMember->team_profile_id)->pluck('name')->first();
                         $athleteName = User::where('id', $athlete_id)->pluck('first_name')->first();
                         DB::rollBack();
                         return $this->sendError("$athleteName is already assigned to team '$teamProfile'.", [], 409);
                     }
-
+                    $user = User::where('team_id', $team_id)->where('id', $athlete_id);
+                    if ($user) {
+                        DB::rollBack();
+                        return $this->sendError("Please select valid athlete.");
+                    }
                     // Add athlete to the team profile
                     $newTeamMember = new TeamMember();
                     $newTeamMember->team_id = $team_id;
