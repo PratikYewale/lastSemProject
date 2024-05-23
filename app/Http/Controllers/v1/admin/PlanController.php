@@ -17,8 +17,10 @@ class PlanController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'type' => 'nullable',
-                'description' => 'nullable',
+                'type' => 'required|in:athlete,member,sponsorship',
+                'name' => 'required|string',
+                'amount' => 'required|numeric',
+                'description' => 'nullable|array',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -29,7 +31,7 @@ class PlanController extends Controller
             $addPlan->name = $request->name;
             $addPlan->description = $request->description;
             $addPlan->amount = $request->amount;
-            $addPlan->status=true;
+            $addPlan->status = true;
             $addPlan->save();
             DB::commit();
             return $this->sendResponse($addPlan, 'Plan saved successfully.', true);
@@ -38,18 +40,61 @@ class PlanController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+    public function createPlans(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'plans' => 'required|array',
+                'plans.*.type' => 'required|in:athlete,member,sponsorship',
+                'plans.*.name' => 'required|string',
+                'plans.*.amount' => 'required|numeric',
+                'plans.*.description' => 'nullable|array',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+
+            DB::beginTransaction();
+
+            $plansData = $request->input('plans');
+            $createdPlans = [];
+
+            foreach ($plansData as $planData) {
+                $addPlan = new Plan;
+                $addPlan->type = $planData['type'];
+                $addPlan->name = $planData['name'];
+                $addPlan->description = $planData['description'];
+                $addPlan->amount = $planData['amount'];
+                $addPlan->status = true;
+                $addPlan->save();
+                $createdPlans[] = $addPlan;
+            }
+
+            DB::commit();
+
+            return $this->sendResponse($createdPlans, 'Plans saved successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
+
 
     public function updatePlan(Request $request): JsonResponse
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:plans,id'
+                'id' => 'required|integer|exists:plans,id',
+                'type' => 'in:athlete,member,sponsorship',
+                'amount' => 'numeric',
+                'description' => 'array',
+                'status' => 'boolean',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
             }
             DB::beginTransaction();
-           $updateplan = Plan::query()->where('id', $request->id)->first();
+            $updateplan = Plan::query()->where('id', $request->id)->first();
             if ($request->filled('name')) {
                 $updateplan->name = $request->name;
             }
@@ -99,11 +144,15 @@ class PlanController extends Controller
             $validator = Validator::make($request->all(), [
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
+                'type' => 'in:athlete,member,sponsorship',
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
             $query = Plan::query();
+            if ($request->has('type')) {
+                $query->where('type', $request->type);
+            }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
                 $limit = $request->limit;
@@ -114,7 +163,7 @@ class PlanController extends Controller
             $data = $query->orderBy('id', 'DESC')->get();
             if (count($data) > 0) {
                 $response['count'] = $count;
-                $response['Club'] = $data;
+                $response['plans'] = $data;
                 return $this->sendResponse($response, 'Data fetched successfully.', true);
             } else {
                 return $this->sendError('No Data Available.');

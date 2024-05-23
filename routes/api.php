@@ -175,6 +175,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
         //Plans
         Route::post('createPlan', [PlanController::class, 'createPlan']);
+        Route::post('createPlans', [PlanController::class, 'createPlans']);
         Route::post('updatePlan', [PlanController::class, 'updatePlan']);
         Route::delete('deletePlan', [PlanController::class, 'deletePlan']);
         Route::get('getAllPlan', [PlanController::class, 'getAllPlan']);

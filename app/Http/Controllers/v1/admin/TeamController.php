@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Models\TeamMember;
 use App\Models\TeamProfiles;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -85,7 +86,7 @@ class TeamController extends Controller
                 $updateTeam->description = $request->description;
             }
             if ($request->hasFile('primary_img')) {
-                $updateTeam->primary_img = $this->saveFile($request->primary_img, 'TeamsPrimaryImages');
+                $updateTeam->primary_img = $this->saveFile($request->primary_img, 'TeamLogos');
             }
             $updateTeam->save();
             DB::commit();
@@ -195,7 +196,7 @@ class TeamController extends Controller
 
                 if ($teamProfile) {
                     DB::rollBack();
-                    return $this->sendError("Team profile with the name '{$teamData['name']}' already exists.");
+                    return $this->sendError("Team with the name '{$teamData['name']}' already exists.");
                 }
 
                 // Create a new team profile
@@ -213,10 +214,12 @@ class TeamController extends Controller
                     ->where('team_id', $team_id)
                     ->where('athlete_id', $athlete_id)
                     ->first();
-
+                    $teamProfile = TeamProfiles::where('id',$existingTeamMember->team_profile_id)->pluck('name')->first();
+                    $athleteName = User::where('id',$athlete_id)->pluck('first_name')->first();
+                    
                     if ($existingTeamMember) {
                         DB::rollBack();
-                        return $this->sendError("Athlete with ID $athlete_id is already assigned to another team in this game", [], 409);
+                        return $this->sendError("$athleteName is already assigned to team '$teamProfile'.", [], 409);
                     }
 
                     // Add athlete to the team profile
@@ -375,7 +378,7 @@ class TeamController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = TeamProfiles::query()->with('users');
+            $query = TeamProfiles::query()->with('users')->withCount('users');
 
             if ($request->has('name')) {
                 $query->where('name', 'like', '%' . $request->name . '%');
