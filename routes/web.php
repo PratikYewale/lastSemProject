@@ -51,7 +51,7 @@ Route::post('/addContactUsVerified', [ContactUsController::class, 'addContactUsV
 
 // News
 Route::get('/news', [NewsController::class, 'news']);
-Route::get('/news/{id}', [NewsController::class, 'newsDetails'])->name('newsDetails');
+Route::get('/announcement/{id}', [NewsController::class, 'announcementDetails'])->name('announcementDetails');
 Route::get('/registration/associationRegistration', [NewsController::class, 'association']);
 Route::get('/registration/athletesRegistration', [NewsController::class, 'athletes']);
 Route::get('/registration/sponsorshipRegistration', [NewsController::class, 'sponsorship']);

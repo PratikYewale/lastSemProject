@@ -39,6 +39,11 @@
             </ul>
         </div>
         <div class="tab-content" id="pills-tabContent">
+            <div class="container text-primary mt-3">
+                <b class="back-link">  <span class="sc_list_icon icon-left-small"> <a
+                      href="{{ url('/teams') }}"><span class="ms-1 text-primary">Back To Teams</span></a>
+                  </b>
+              </div>
             <div class="container">
             @foreach ($team->teamprofiles as $index => $profile)
                 <div class="tab-pane fade @if ($index == 0) show active @endif"

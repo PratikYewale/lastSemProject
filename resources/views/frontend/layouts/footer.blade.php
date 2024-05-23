@@ -183,7 +183,7 @@
         <!-- /Page wrap -->
         </div>
         <!-- /Body wrap -->
-
+        <a href="#" class="scroll_to_top icon-up-small" title="Scroll to top"></a>
         @include('frontend.commonComponants.enquiryBtn')
 
         <script type="text/javascript" src="{{ url('frontend/js/jquery/jquery.js') }}"></script>

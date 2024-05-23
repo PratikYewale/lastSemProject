@@ -75,8 +75,8 @@
                                                         <div class="mb-3 d-flex justify-content-between">
                                                             <div>
                                                                 Don't have an account? Sign Up as
-                                                                <a href="#" class="">Athlete</a> or
-                                                                <a href="#" class="">Association</a>
+                                                                <a href="{{ url('/registration/athletesRegistration#Athlete-register-form') }}" class="">Athlete</a> or
+                                                                <a href="{{ url('/registration/associationRegistration#association-register-form') }}" class="">Association</a>.
                                                             </div>
                                                             {{-- <div>
                                                                 <a href="#" class="">Forgot

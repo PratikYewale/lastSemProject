@@ -21,13 +21,13 @@ class NewsController extends Controller
         }
     }
 
-    public function newsDetails($id)
+    public function announcementDetails($id)
     {
         try {
             $recentNews = News::orderBy('created_at', 'desc')->take(5)->get();
             $news = News::findOrFail($id);
 
-            return view('frontend.news.newsDetails', compact('news', 'recentNews'));
+            return view('frontend.news.announcementDetails', compact('news', 'recentNews'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error fetching news details.');
         }
