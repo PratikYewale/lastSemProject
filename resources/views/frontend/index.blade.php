@@ -651,36 +651,7 @@
                         @include('frontend.commonComponants.chairmanWords')
 
 
-                        <!-- Online Booking -->
-                        {{-- <div class="hp_booking_section">
-                                <div class="content_wrap">
-                                    <div class="sc_columns columns_wrap">
-                                        <div class="column-1_2">
-                                            <div class="custom_title_1 text_align_left">Ski and Snowboard India</div>
-                                            <div class="sc_section">
-                                                <div class="sc_section_inner">
-                                                    <h2
-                                                        class="sc_section_title sc_item_title sc_item_title_with_descr">
-                                                        About SSI</h2>
-                                                    <div class="sc_section_descr sc_item_descr">Ski and Snowboard India
-                                                        (SSI) is the National Sports Association governing sport
-                                                        disciplines under the International Ski Federation (FIS) in the
-                                                        territory of India. SSI is also a recognised member of the
-                                                        Indian Olympic Association </div>
-                                           
-                                                    <div class="sc_section_content_wrap">
-                                                        <a href="#"
-                                                            class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_tiny">Contact
-                                                            Us</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        <!-- /Online Booking -->
-                        <!-- The Essential Grid -->
+                
 
                         <div class="clear"></div>
                         <!-- /The Essential Grid -->
@@ -1033,93 +1004,9 @@
                             </div>
                         </article>
                         <!-- School Info -->
-                        {{-- <div class="hp_school_info">
-                                <div class="content_wrap">
-                                    <div class="sc_columns columns_wrap">
-                                        <div class="column-9_12">
-                                            <div class="custom_title_1 text_align_left">Ski and Snowboard India (SSI)
-                                            </div>
-                                            <div class="sc_section">
-                                                <div class="sc_section_inner">
-                                                    <h2
-                                                        class="sc_section_title sc_item_title sc_item_title_without_descr">
-                                                        Development</h2>
-                                                </div>
-                                            </div>
-                                            <div class="sc_section margin_top_small-">
-                                                <div class="sc_section_inner">
-                                                    <div class="sc_section_descr sc_item_descr">Skiing and
-                                                        snowboarding in India have increasingly become popular
-                                                        activities for both domestic and international tourists seeking
-                                                        winter sports experiences. The breath-taking landscapes of the
-                                                        Indian Himalayas coupled with the thrill of skiing and
-                                                        snowboarding have attracted adventurers and outdoor enthusiasts
-                                                        from around the world.
-                                                        <br /><br />
-                                                        While skiing and snowboarding in India continue to grow in
-                                                        popularity, there are challenges such as limited infrastructure,
-                                                        funding constraints, and access to training facilities,
-                                                        especially for athletes from regions with less snowfall.
-                                                        However, the passion and dedication of Indian skiers and
-                                                        snowboarders, coupled with increasing support from government
-                                                        bodies and private organizations, present opportunities for the
-                                                        further development and promotion of winter sports in India.
-                                                        <br /><br />
-                                                        Overall, the history of skiing and snowboarding in India is
-                                                        characterized by a journey of exploration, passion, and
-                                                        perseverance, with the potential to become a thriving part of
-                                                        the country's sports and tourism landscape in the years to come.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sc_skills sc_skills_counter margin_top_6em"
-                                                data-type="counter" data-caption="Skills">
-                                                <div class="columns_wrap sc_skills_columns sc_skills_columns_3 row">
-                                                    <div class="sc_skills_column col-lg-4">
-                                                        <div class="sc_skills_item sc_skills_style_2 odd first">
-                                                            <div class="sc_skills_total" data-start="0"
-                                                                data-stop="2300" data-step="23" data-max="2300"
-                                                                data-speed="13" data-duration="1300" data-ed="">0
-                                                            </div>
-                                                            <div class="sc_skills_count"></div>
-                                                            <div class="sc_skills_info">
-                                                                <div class="sc_skills_label">Happy Clients</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sc_skills_column col-lg-4">
-                                                        <div class="sc_skills_item sc_skills_style_2 even">
-                                                            <div class="sc_skills_total" data-start="0"
-                                                                data-stop="26" data-step="23" data-max="2300"
-                                                                data-speed="40" data-duration="45" data-ed="">
-                                                                0</div>
-                                                            <div class="sc_skills_count"></div>
-                                                            <div class="sc_skills_info">
-                                                                <div class="sc_skills_label">Professional Awards</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="sc_skills_column col-lg-4">
-                                                        <div class="sc_skills_item sc_skills_style_2 odd">
-                                                            <div class="sc_skills_total" data-start="0"
-                                                                data-stop="319" data-step="23" data-max="2300"
-                                                                data-speed="13" data-duration="180"
-                                                                data-ed="">0</div>
-                                                            <div class="sc_skills_count"></div>
-                                                            <div class="sc_skills_info">
-                                                                <div class="sc_skills_label">Reached Tops</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        <!-- /School Info -->
+                    >
                         <!-- Equipment -->
-                        @include('frontend.commonComponants.pricingPlan')
+                        @include('frontend.commonComponants.sponsershipPackages')
                         <!-- /Equipment -->
                         <!-- From the Blog -->
                         <div class="hp_blog_section">
@@ -1147,7 +1034,7 @@
                                                                                 <div class="post_thumb" data-image=""
                                                                                     data-title="Serving Cookies at Alpine Nationals">
                                                                                     <a class="hover_icon hover_icon_link"
-                                                                                        href="{{ route('newsDetails', ['id' => $item->id]) }}">
+                                                                                        href="{{ route('announcementDetails', ['id' => $item->id]) }}">
                                                                                         <img alt="Serving Cookies at Alpine Nationals"
                                                                                             src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}"
                                                                                             onerror="this.onerror=null; this.src='{{ url('frontend/images/image-4-480x480.jpg') }}';">
@@ -1156,7 +1043,7 @@
                                                                             </div>
                                                                             <h4 class="news-title">
                                                                                 <a
-                                                                                    href="{{ route('newsDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                                                    href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                                                             </h4>
                                                                             <div class="post_descr">
                                                                                 <p>{{ $item->img_description }}</p>
@@ -1257,8 +1144,8 @@
                                                         class="ms-1">Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
-                                       
-                                 
+
+
 
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
@@ -1271,8 +1158,8 @@
                             </div>
                         </aside>
                         <!-- /Widget: Quick Links -->
-                         <!-- Widget: Quick Links -->
-                         <aside class="col-lg-3 widget widget_recent_reviews">
+                        <!-- Widget: Quick Links -->
+                        <aside class="col-lg-3 widget widget_recent_reviews">
                             <h5 class="widget_title">Register As</h5>
                             <div class="recent_reviews">
                                 <article class="post_item no_thumb first">
@@ -1280,19 +1167,22 @@
                                     <ul id="menu_footer" class="menu_footer_nav">
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/registration/associationRegistration') }}"><span class="ms-1">Association</span></a>
+                                                    href="{{ url('/registration/associationRegistration') }}"><span
+                                                        class="ms-1">Association</span></a>
                                         </li>
 
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/registration/athletesRegistration') }}"><span class="ms-1">Athletes</span></a>
+                                                    href="{{ url('/registration/athletesRegistration') }}"><span
+                                                        class="ms-1">Athletes</span></a>
                                         </li>
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/registration/sponsorshipRegistration') }}"><span class="ms-1">Sponsor</span></a>
+                                                    href="{{ url('/registration/sponsorshipRegistration') }}"><span
+                                                        class="ms-1">Sponsor</span></a>
                                         </li>
                                         <!-- /Menu: Rent -->
-                                   
+
                                     </ul>
                                 </article>
 

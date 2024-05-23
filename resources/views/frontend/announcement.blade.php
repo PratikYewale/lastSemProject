@@ -21,7 +21,7 @@
         <div class="content">
             <article class="post_item post_item_single_team post_featured_left team">
                 <!-- Single team info -->
-                <div class="content_wrap">
+                {{-- <div class="content_wrap">
                     <section class="post_featured single_team_post_featured">
                         <div class="post_thumb" data-image="http://placehold.it/840x800" data-title="Shannon Lorenz">
                             <a class="hover_icon hover_icon_view" href="http://placehold.it/840x800" title="Shannon Lorenz">
@@ -31,7 +31,7 @@
                     </section>
                     <section class="single_team_post_description">
                         <h2 class="team_title">Announcement Of SSI</h2>
-                        {{-- <h6 class="team_position">Instructor</h6> --}}
+                      
                         <div class="team_meta"></div>
                         <div class="team_brief_info">
                             <div class="team_brief_info_text">
@@ -49,12 +49,12 @@
 
 
 
-                </div>
+                </div> --}}
                 <!-- /Single team info -->
 
 
                 <div class="content_wrap">
-                    <h2 class="team_title text-center">Announcement News And Achievements Of SSI</h2>
+                    {{-- <h2 class="team_title text-center">Announcement News And Achievements Of SSI</h2> --}}
                     <div class="content">
                         @if ($news->count() > 0)
                             <div class="row">
@@ -66,14 +66,14 @@
                                             <div class="clearfix card-body">
                                                 <div class="post_featured">
                                                     <div class="post_thumb" data-image="" data-title="Serving Cookies at Alpine Nationals">
-                                                        <a class="hover_icon hover_icon_link" href="{{ route('newsDetails', ['id' => $item->id]) }}">
+                                                        <a class="hover_icon hover_icon_link" href="{{ route('announcementDetails', ['id' => $item->id]) }}">
                                                             <img alt="Serving Cookies at Alpine Nationals" src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}">
 
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <h4 class="news-title">
-                                                    <a href="{{ route('newsDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                    <a href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
                                                 </h4>
                                                 <div class="post_descr">
                                                     <p>{{ $item->img_description }}</p>
@@ -85,7 +85,14 @@
                                                     </span>
                                                     <span class="post_info_item post_info_posted_by">
                                                         <span class="contact_icon icon-user"></span>
-                                                        <a href="#" class="post_info_author">{{ $item->type }} </a>
+                                                        <a href="#" class="post_info_author"> @if ($item->type == 'achievements')
+                                                            Achievement
+                                                            @elseif ($item->type == 'announcement')
+                                                            Announcement
+                                                            @else
+                                                            News
+                                                            
+                                                        @endif</a>
                                                     </span>
                                                 </div>
                                             </div>
