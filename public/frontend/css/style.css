@@ -9457,3 +9457,10 @@ body table.booked-calendar tr.days th {
 .back-link{
 	font-size: 16px;
 }
+.price-card{
+	border: none;
+}
+.price-card .card-footer{
+	border-top: none;
+	padding: 1rem !important;
+}

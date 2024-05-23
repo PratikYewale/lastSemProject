@@ -70,6 +70,8 @@ Route::post('/createSponsorship', [SponsorshipController::class, 'createSponsors
 
 Route::post('/registration', [MemberController::class, 'addAssociationMember'])->name('addAssociationMember');
 Route::post('/athleteRegistration', [MemberController::class, 'addAthlete'])->name('addAthlete');
+Route::post('/edit-profile-athlete', [MemberController::class, 'updateAthlete'])->name('updateAthlete');
+Route::post('/edit-profile-association', [MemberController::class, 'updateAssociationMember'])->name('updateAssociationMember');
 Route::post('/donate', [DonationController::class, 'addDonation'])->name('addDonation');
 
 Route::get('/razorpay-payment', [RazorpayPaymentController::class, 'index']);

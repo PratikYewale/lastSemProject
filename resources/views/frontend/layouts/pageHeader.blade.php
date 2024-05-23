@@ -161,14 +161,14 @@
                                                                 </li>
                                                                 <!-- /Cart item -->
                                                                 <!-- Cart item -->
-                                                                <li class="mini_cart_item">
+                                                                {{-- <li class="mini_cart_item">
 
                                                                     <a href="{{ url('/media-gallery') }}">
 
                                                                         Media Gallery
                                                                     </a>
 
-                                                                </li>
+                                                                </li> --}}
                                                                 <li class="mini_cart_item">
 
                                                                     <a href="{{ url('/logout') }}">

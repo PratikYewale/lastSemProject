@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
-
+use App\Models\Plan;
 class NewsController extends Controller
 {
     public function news()
@@ -42,6 +42,13 @@ class NewsController extends Controller
     }
     public function sponsorship()
     {
-        return view('frontend.commonComponants.registration.sponsorshipRegistration');
+        try {
+
+            $plan = Plan::query()->where('type', 'sponsorship')->orderBy('created_at', 'desc')->take(3)->get();
+            return view('frontend.commonComponants.registration.sponsorshipRegistration', compact('plan'));
+        } catch (Exception $e) {
+            return view('frontend.commonComponants.registration.sponsorshipRegistration');
+        }
+        
     }
 }

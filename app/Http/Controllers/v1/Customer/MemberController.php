@@ -202,7 +202,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return back()->with('success', 'Athlete added successfully.');
+            return back()->with('success', 'Form submitted successfully!');
 
         } catch (Exception $e) {
             DB::rollBack();
@@ -319,7 +319,7 @@ class MemberController extends Controller
                 'acknowledge' => 'boolean',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
 
@@ -386,7 +386,7 @@ class MemberController extends Controller
             }
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Athlete updated successfully.');
+            return back()->with('success', 'Profile Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -815,7 +815,7 @@ class MemberController extends Controller
 
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
 
@@ -903,7 +903,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Association updated successfully.');
+            return back()->with('success', 'Profile Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
