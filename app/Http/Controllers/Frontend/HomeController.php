@@ -15,6 +15,7 @@ use App\Models\City;
 use App\Models\Event;
 use App\Models\User;
 use App\Models\Team;
+use App\Models\Plan;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,8 @@ class HomeController extends Controller
         try {
             $games = Team::query()->orderBy('created_at', 'desc')->take(3)->get();
             $news = News::query()->orderBy('created_at', 'desc')->take(3)->get();
-            return view('frontend.index', compact('games', 'news'));
+            $plan = Plan::query()->where('type', 'sponsorship')->orderBy('created_at', 'desc')->take(3)->get();
+            return view('frontend.index', compact('games', 'news','plan'));
         } catch (Exception $e) {
             return view('frontend.index');
         }

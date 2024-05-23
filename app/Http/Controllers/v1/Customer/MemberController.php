@@ -319,7 +319,7 @@ class MemberController extends Controller
                 'team_id' => 'integer|exists:teams,id',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
 
@@ -389,7 +389,7 @@ class MemberController extends Controller
             }
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Athlete updated successfully.');
+            return back()->with('success', 'Profile Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
@@ -820,7 +820,7 @@ class MemberController extends Controller
 
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
 
@@ -908,7 +908,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse($user->id, 'Association updated successfully.');
+            return back()->with('success', 'Profile Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
