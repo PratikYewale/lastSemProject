@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Customer\SponsorshipController as CustomerSponsorshipController;
 use App\Http\Controllers\v1\Customer\AssociationController as CustomerAssociationController;
 use App\Http\Controllers\v1\Admin\AdminAuthController;
+use App\Http\Controllers\v1\Admin\DashboardController;
 use App\Http\Controllers\v1\Admin\DonationController as AdminDonationController;
 use App\Http\Controllers\v1\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\v1\Admin\TeamController;
@@ -62,10 +63,14 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
     Route::post('forgetPasswordAdmin', [AdminAuthController::class, 'forgetPasswordAdmin']);
     Route::post('checkOtpAndLoginEmail', [AdminAuthController::class, 'checkOtpAndLoginEmail']);
     Route::post('updatePassword', [AdminAuthController::class, 'updatePassword']);
+
     Route::group(['middleware' => ['cors', 'jwt.verify', 'admin']], function () {
 
         //Auth
         Route::get('getCurrentProfile', [AdminAuthController::class, 'getCurrentProfile']);
+        
+        // Dashboard
+        Route::get('getAllDashboardCount', [DashboardController::class, 'getAllDashboardCount']);
 
         // Donation
         Route::post('addDonation', [AdminDonationController::class, 'addDonation']);
