@@ -5,11 +5,11 @@
         <div class="top_panel_image_hover"></div>
         <div class="content_wrap">
             <div class="top_panel_image_header">
-                <h1 class="top_panel_image_title">Announcement</h1>
+                <h1 class="top_panel_image_title">Events</h1>
                 <div class="breadcrumbs">
                     <a class="breadcrumbs_item home" href="{{ url('/') }}">Home</a>
                     <span class="breadcrumbs_delimiter"></span>
-                    <span class="breadcrumbs_item current">Announcement</span>
+                    <span class="breadcrumbs_item current">Events</span>
                 </div>
             </div>
         </div>
@@ -30,13 +30,13 @@
                         </div>
                     </section>
                     <section class="single_team_post_description">
-                        <h2 class="team_title">Announcement Of SSI</h2>
+                        <h2 class="team_title">Events Of SSI</h2>
                         {{-- <h6 class="team_position">Instructor</h6> --}}
                         <div class="team_meta"></div>
                         <div class="team_brief_info">
                             <div class="team_brief_info_text">
-                                <p>Ski and Snowboard India encompass a variety of Sport Announcement, Development
-                                    Announcement and Competitions, all aimed at developing athletes and supporting coaches,
+                                <p>Ski and Snowboard India encompass a variety of Sport Events, Development
+                                    Events and Competitions, all aimed at developing athletes and supporting coaches,
                                     officials, parents, and volunteers while accomplishing the vision and mission to make
                                     the India the "Best in the World" in Olympic skiing and snowboarding. </p>
                             </div>
@@ -54,26 +54,26 @@
 
 
                 <div class="content_wrap">
-                    <h2 class="team_title text-center">Announcement News And Achievements Of SSI</h2>
+                    <h2 class="team_title text-center">Events Of SSI</h2>
                     <div class="content">
-                        @if ($news->count() > 0)
+                        @if ($events->count() > 0)
                             <div class="row">
-                                @foreach ($news as $item)
-                                    <!-- Display each news item here -->
+                                @foreach ($events as $item)
+                                    <!-- Display each events item here -->
                                     <div class="col-lg-4 mb-4">
                                         <!-- Post item -->
-                                        <article class="post_item card news-card post_item_excerpt odd post">
+                                        {{-- <article class="post_item card news-card post_item_excerpt odd post">
                                             <div class="clearfix card-body">
                                                 <div class="post_featured">
                                                     <div class="post_thumb" data-image="" data-title="Serving Cookies at Alpine Nationals">
-                                                        <a class="hover_icon hover_icon_link" href="{{ route('newsDetails', ['id' => $item->id]) }}">
+                                                        <a class="hover_icon hover_icon_link" href="#">
                                                             <img alt="Serving Cookies at Alpine Nationals" src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}">
 
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <h4 class="news-title">
-                                                    <a href="{{ route('newsDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                    <a href="#">{{ $item->title }}</a>
                                                 </h4>
                                                 <div class="post_descr">
                                                     <p>{{ $item->img_description }}</p>
@@ -89,36 +89,70 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </article>
+                                        </article> --}}
+                                        <div class="card committee-card">
+
+                                            <div class="card-body">
+                
+                                                <table class="committee-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2" class="table-title">{{ $item->title }}</th>
+                                                        </tr>
+                                                        <tr>
+                
+                                                            <th class="">Date</th>
+                                                            <td class="">{{ $item->start_date }} To {{ $item->end_date }}</td>
+                
+                                                        </tr>
+                                                        <tr>
+                
+                                                            <th class="">Address</th>
+                                                            <td class="">{{ $item->address }}</td>
+                
+                                                        </tr>
+                                                      
+                                                        <tr>
+                
+                                                            <th class="">Brochure</th>
+                                                            <td class="">
+                                                                <a href="{{ $item->address }}"> Click Here</a> to Download Brochure</td>
+                
+                                                        </tr>
+                                                    </thead>
+                                                 
+                                                </table>
+                                            </div>
+                                        </div>
                                         <!-- /Post item -->
                                     </div>
                                 @endforeach
                             </div>
                             <!-- Custom Pagination -->
                             <nav id="pagination" class="pagination_wrap pagination_pages">
-                                @if ($news->previousPageUrl())
-                                    <a href="{{ $news->previousPageUrl() }}" class="pager_prev"></a>
+                                @if ($events->previousPageUrl())
+                                    <a href="{{ $events->previousPageUrl() }}" class="pager_prev"></a>
                                 @endif
                                 
                                 @php
                                     // Calculate the range of visible page numbers
-                                    $startPage = max(1, $news->currentPage() - 2);
-                                    $endPage = min($startPage + 4, $news->lastPage());
+                                    $startPage = max(1, $events->currentPage() - 2);
+                                    $endPage = min($startPage + 4, $events->lastPage());
                                 @endphp
                                 
                                 @for ($i = $startPage; $i <= $endPage; $i++)
-                                    @if ($i == $news->currentPage())
+                                    @if ($i == $events->currentPage())
                                         <span class="pager_current active">{{ $i }}</span>
                                     @else
-                                        <a href="{{ $news->url($i) }}" class="pager_number">{{ $i }}</a>
+                                        <a href="{{ $events->url($i) }}" class="pager_number">{{ $i }}</a>
                                     @endif
                                 @endfor
                             
-                                @if ($news->nextPageUrl())
-                                    <a href="{{ $news->nextPageUrl() }}" class="pager_next"></a>
+                                @if ($events->nextPageUrl())
+                                    <a href="{{ $events->nextPageUrl() }}" class="pager_next"></a>
                                 @endif
                                 
-                                <a href="{{ $news->url($news->lastPage()) }}" class="pager_last"></a>
+                                <a href="{{ $events->url($events->lastPage()) }}" class="pager_last"></a>
                             </nav>
                             
                             <!-- End Custom Pagination -->

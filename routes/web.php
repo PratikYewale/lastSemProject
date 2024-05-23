@@ -44,6 +44,7 @@ Route::get('/announcement', [HomeController::class, 'announcement']);
 Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/events', [HomeController::class, 'events']);
 Route::post('/addContactUs', [ContactUsController::class, 'addContactUs'])->name('addContactUs');
 Route::post('/addContactUsVerified', [ContactUsController::class, 'addContactUsVerified'])->name('addContactUsVerified');
 
@@ -51,6 +52,10 @@ Route::post('/addContactUsVerified', [ContactUsController::class, 'addContactUsV
 // News
 Route::get('/news', [NewsController::class, 'news']);
 Route::get('/news/{id}', [NewsController::class, 'newsDetails'])->name('newsDetails');
+Route::get('/registration/associationRegistration', [NewsController::class, 'association']);
+Route::get('/registration/athletesRegistration', [NewsController::class, 'athletes']);
+Route::get('/registration/sponsorshipRegistration', [NewsController::class, 'sponsorship']);
+
 
 
 // Login

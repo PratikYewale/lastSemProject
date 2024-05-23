@@ -1,6 +1,7 @@
 @extends('frontend.layouts.main')
 @section('main-container')
     <!-- Top panel -->
+
     <section class="top_panel_image">
         <div class="top_panel_image_hover"></div>
         <div class="content_wrap">
@@ -17,7 +18,7 @@
     <!-- /Top panel -->
 
     <!-- Page content wrap -->
-    <div class="page_content_wrap page_paddings_yes">
+    <div class=" page_paddings_yes">
         <!-- Content -->
         <div class="bg-primery">
 
@@ -25,34 +26,79 @@
                 @php
                     $uniqueProfiles = $team->teammembers->pluck('team_profile')->unique();
                 @endphp
-                @foreach ($team->teammembers as $index => $member)
+                @foreach ($team->teamprofiles as $index => $profile)
                     <li class="nav-item" role="presentation">
                         <a class="nav-link @if ($index == 0) active @endif"
                             id="pills-{{ $index }}-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-{{ $index }}" href="#" role="tab"
                             aria-controls="pills-{{ $index }}"
-                            aria-selected="@if ($index == 0) true @endif">{{ $member['team_profile'] }}</a>
+                            aria-selected="@if ($index == 0) true @endif">{{ $profile->name }}</a>
                     </li>
                 @endforeach
 
             </ul>
         </div>
         <div class="tab-content" id="pills-tabContent">
-
-            @foreach ($team->teammembers as $index => $member)
+            <div class="container">
+            @foreach ($team->teamprofiles as $index => $profile)
                 <div class="tab-pane fade @if ($index == 0) show active @endif"
                     id="pills-{{ $index }}" role="tabpanel" aria-labelledby="pills-{{ $index }}-tab"
                     tabindex="0">
-                    <h3>{{ $member['users']['first_name'] }}</h3>
-                    <p>Email: {{ $member['users']['email'] }}</p>
-                    <p>Mobile No: {{ $member['users']['mobile_no'] }}</p>
-                    <!-- Add more fields as necessary -->
+                    
+                    <h3>{{ $profile->name }}</h3>
+                    <div class="row">
+                        @foreach ($profile->teammember as $member)
+                            <div class="col-lg-5">
+                         
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-3">
+                                            <img src="{{ $member->users->profile_picture }}"
+                                                class="img-fluid rounded-start"
+                                                alt="{{ $member->users->profile_picture }}">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="card-body">
+                                                <h4 class="card-title m-0">{{ $member->users->first_name }}
+                                                    {{ $member->users->last_name }}</h4>
+                                                <div class="card-text">
+                                                    <div class="d-flex">
+                                                        <div class="">
+                                                            <i class="icon icon-mail"></i>
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            {{ $member->users->email }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="">
+                                                            <i class="icon icon-calendar-light"></i>
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            {{ $member->users->date_of_birth }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="">
+                                                            <i class="icon icon-location-1"></i>
+                                                        </div>
+                                                        <div class="ms-2">
+                                                            {{ $member->users->city }}, {{ $member->users->state }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+ 
                 </div>
             @endforeach
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
-                tabindex="0">
-                @include('frontend.commonComponants.registration.athletesRegistration')
-            </div>
+</div
         </div>
         <!-- /Content -->
     </div>

@@ -16,14 +16,22 @@
                                         <img src="{{ url('frontend/images/target.png') }}" alt="" />
                                     </div>
                                     <div class="col-lg-9">
-                                        <h4 class="org-name ">{{ $associations['name_of_state_unit'] }}</h4>
+                                        <h4 class="org-name ">{{ $associations['first_name'] }}</h4>
 
                                         <div class="d-flex">
                                             <div class="">
                                                 <i class="icon icon-mail"></i>
                                             </div>
                                             <div class="">
-                                                pranavdevkar1311@gmail.com
+                                                {{ $associations['email'] }}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="">
+                                                <i class="icon icon-mobile"></i>
+                                            </div>
+                                            <div class="">
+                                                {{ $associations['mobile_no'] }}
                                             </div>
                                         </div>
 

@@ -105,14 +105,32 @@
                                             class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
+                                        <li
+                                            class="{{ request()->is('events') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                            <a href="{{ url('/events') }}"><span>Events</span></a>
+                                        </li>
+
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
                                         @if (!Auth::user())
-                                     
                                             <li
-                                                class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                                class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
                                                 <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                                <ul class="sub-menu">
+                                                    <li class="menu-item current-menu-item">
+                                                        <a
+                                                            href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a
+                                                            href="{{ url('/registration/athletesRegistration') }}"><span>Athlete</span></a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a
+                                                            href="{{ url('/registration/sponsorshipRegistration') }}"><span>Sponsership</span></a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         @endif
                                         <!-- /Menu: Media Gallery or Registration -->
@@ -125,65 +143,64 @@
                                         <!-- /Menu: Contact Us -->
                                     </ul>
                                 </nav>
-        
+
                                 <!-- Cart -->
                                 <div class="menu_main_cart top_panel_icon">
-                                    @if(Auth::user())
-                                    <a href="#" class="top_panel_cart_button" >
-                                        <span class="contact_icon icon-user"></span>
-                                        <span class="cart_summa">{{ Auth::user()->first_name }}
-                                            {{ Auth::user()->last_name }}</span>
-                                        <span class="contact_label contact_cart_label">Your cart:</span>
-                                    </a>
-                                    <ul class="widget_area sidebar_cart sidebar">
-                                        <li>
-                                            <div class="widget woocommerce widget_shopping_cart">
-                                                <div class="hide_cart_widget_if_empty">
-                                                    <div class="widget_shopping_cart_content">
-                                                        <ul class="cart_list product_list_widget ">
-                                                            <!-- Cart item -->
-                                                            <li class="mini_cart_item">
-                                                              
-                                                                <a href="{{ url('/profile') }}">
-                                                                   
-                                                                   Profile
-                                                                </a>
-                                                           
-                                                            </li>
-                                                            <!-- /Cart item -->
-                                                            <!-- Cart item -->
-                                                            <li class="mini_cart_item">
-                                                              
-                                                                <a href="{{ url('/media-gallery') }}">
-                                                                   
-                                                                  Media  Gallery
-                                                                </a>
-                                                           
-                                                            </li>
-                                                            <li class="mini_cart_item">
-                                                              
-                                                                <a href="{{ url('/logout') }}">
-                                                                   
-                                                                 Logout
-                                                                </a>
-                                                           
-                                                            </li>
-                                                            <!-- /Cart item -->
-                                                        </ul>
+                                    @if (Auth::user())
+                                        <a href="#" class="top_panel_cart_button">
+                                            <span class="contact_icon icon-user"></span>
+                                            <span class="cart_summa">{{ Auth::user()->first_name }}
+                                                {{ Auth::user()->last_name }}</span>
+                                            <span class="contact_label contact_cart_label">Your cart:</span>
+                                        </a>
+                                        <ul class="widget_area sidebar_cart sidebar">
+                                            <li>
+                                                <div class="widget woocommerce widget_shopping_cart">
+                                                    <div class="hide_cart_widget_if_empty">
+                                                        <div class="widget_shopping_cart_content">
+                                                            <ul class="cart_list product_list_widget ">
+                                                                <!-- Cart item -->
+                                                                <li class="mini_cart_item">
 
-                                                    
+                                                                    <a href="{{ url('/profile') }}">
+
+                                                                        Profile
+                                                                    </a>
+
+                                                                </li>
+                                                                <!-- /Cart item -->
+                                                                <!-- Cart item -->
+                                                                <li class="mini_cart_item">
+
+                                                                    <a href="{{ url('/media-gallery') }}">
+
+                                                                        Media Gallery
+                                                                    </a>
+
+                                                                </li>
+                                                                <li class="mini_cart_item">
+
+                                                                    <a href="{{ url('/logout') }}">
+
+                                                                        Logout
+                                                                    </a>
+
+                                                                </li>
+                                                                <!-- /Cart item -->
+                                                            </ul>
+
+
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>+
-                                    </ul>
+                                            </li>+
+                                        </ul>
                                     @else
-                                    <a href="{{ url('/login') }}" >
-                                        <span class="contact_icon icon-user"></span>
-                                        <span class="cart_summa">Login</span>
-                                        {{-- <span class="contact_label contact_cart_label">Your cart:</span> --}}
-                                    </a>
-                                  
+                                        <a href="{{ url('/login') }}">
+                                            <span class="contact_icon icon-user"></span>
+                                            <span class="cart_summa">Login</span>
+                                            {{-- <span class="contact_label contact_cart_label">Your cart:</span> --}}
+                                        </a>
                                     @endif
                                 </div>
                                 <!-- /Cart -->
@@ -263,25 +280,37 @@
                             </li>
                             <!-- /Menu: Services -->
 
-                            <!-- Menu: Store -->
-                            <li
-                                class="{{ Route::currentRouteName() == 'shop' ? 'menu-item current-menu-item' : 'menu-item' }}">
-                                <a href="shop-page.html"><span>Store</span></a>
-                            </li>
-                            <!-- /Menu: Store -->
+
 
                             <!-- Menu: Announcement -->
                             <li
                                 class="{{ Route::currentRouteName() == 'announcement' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                             </li>
+                            <li
+                                class="{{ Route::currentRouteName() == 'events' ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                <a href="{{ url('/events') }}"><span>Events</span></a>
+                            </li>
 
                             <!-- Menu: Media Gallery or Registration -->
                             @if (!Auth::user())
-                           
                                 <li
-                                    class="{{ Route::currentRouteName() == 'registration' ? 'menu-item current-menu-item' : 'menu-item' }}">
+                                    class="{{ Route::currentRouteName() == 'registration*' ? 'menu-item current-menu-item menu-item-has-children' : 'menu-item menu-item-has-children' }}">
                                     <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                    <ul class="sub-menu">
+                                        <li class="menu-item current-menu-item">
+                                            <a
+                                                href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a
+                                                href="{{ url('/registration/athletesRegistration') }}"><span>Athlete</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a
+                                                href="{{ url('/registration/sponsorshipRegistration') }}"><span>Sponsership</span></a>
+                                        </li>
+                                    </ul>
                                 </li>
                             @endif
                             <!-- /Menu: Media Gallery or Registration -->
@@ -673,7 +702,7 @@
                                                             <div class="sc_team_item sc_team_item_1 odd first">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Mr Shiva Keshavan"
-                                                                        src="{{ url('frontend/images/team-4-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/shiva.jpg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -1103,171 +1132,65 @@
                                                 class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
                                                 <h2 class="sc_blogger_title sc_item_title sc_item_title_without_descr">
                                                     Breaking News</h2>
-                                                <div class="isotope_wrap" data-columns="3">
+                                                <div class="">
                                                     <!-- Post item -->
-                                                    <div
-                                                        class="isotope_item isotope_item_classic isotope_item_classic_alter_3 isotope_column_3">
-                                                        <div
-                                                            class="post_item post_item_classic post_item_classic_alter_3 odd">
-                                                            <div class="post_featured">
-                                                                <div class="post_thumb" data-image=""
-                                                                    data-title="Serving Cookies at Alpine Nationals">
-                                                                    <a class="hover_icon hover_icon_link"
-                                                                        href="post-single.html">
-                                                                        <img alt="Serving Cookies at Alpine Nationals"
-                                                                            src="{{ url('frontend/images/image-4-480x480.jpg') }}">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post_content_overlay">
-                                                                    <div class="post_content isotope_item_content">
-                                                                        <div class="post_info">
-                                                                            <span
-                                                                                class="post_info_item post_info_posted">
-                                                                                <a href="#"
-                                                                                    class="post_info_date">August
-                                                                                    8, 2016</a>
-                                                                            </span>
-                                                                            <span
-                                                                                class="post_info_item post_info_counters">
-                                                                                <a class="post_counters_item post_counters_comments icon-comment-1"
-                                                                                    title="Comments - 0"
-                                                                                    href="#">
+                                                    @if ($news->count() > 0)
+                                                        <div class="row">
+                                                            @foreach ($news as $item)
+                                                                <!-- Display each news item here -->
+                                                                <div class="col-lg-4 mb-4">
+                                                                    <!-- Post item -->
+                                                                    <article
+                                                                        class="post_item card news-card post_item_excerpt odd post">
+                                                                        <div class="clearfix card-body">
+                                                                            <div class="post_featured">
+                                                                                <div class="post_thumb" data-image=""
+                                                                                    data-title="Serving Cookies at Alpine Nationals">
+                                                                                    <a class="hover_icon hover_icon_link"
+                                                                                        href="{{ route('newsDetails', ['id' => $item->id]) }}">
+                                                                                        <img alt="Serving Cookies at Alpine Nationals"
+                                                                                            src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}"
+                                                                                            onerror="this.onerror=null; this.src='{{ url('frontend/images/image-4-480x480.jpg') }}';">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <h4 class="news-title">
+                                                                                <a
+                                                                                    href="{{ route('newsDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                                            </h4>
+                                                                            <div class="post_descr">
+                                                                                <p>{{ $item->img_description }}</p>
+                                                                            </div>
+                                                                            <div
+                                                                                class="post_info mb-0 mt-0 d-flex justify-content-between">
+                                                                                <span
+                                                                                    class="post_info_item post_info_posted">
                                                                                     <span
-                                                                                        class="post_counters_number">0</span>
-                                                                                </a>
-                                                                                <a class="post_counters_item post_counters_likes icon-heart-1"
-                                                                                    title="Like" href="#">
+                                                                                        class="contact_icon icon-calendar-light"></span>
+                                                                                    <a href="post-single.html"
+                                                                                        class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
+                                                                                </span>
+                                                                                <span
+                                                                                    class="post_info_item post_info_posted_by">
                                                                                     <span
-                                                                                        class="post_counters_number">1</span>
-                                                                                </a>
-                                                                            </span>
+                                                                                        class="contact_icon icon-user"></span>
+                                                                                    <a href="#"
+                                                                                        class="post_info_author">{{ $item->type }}</a>
+                                                                                </span>
+                                                                            </div>
                                                                         </div>
-                                                                        <h5 class="post_title">
-                                                                            <a href="post-single.html">Serving
-                                                                                Cookies at Alpine Nationals</a>
-                                                                        </h5>
-                                                                        <div class="post_descr">
-                                                                            <a href="post-single.html"
-                                                                                class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
-                                                                                <span class="">Read
-                                                                                    More</span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
+                                                                    </article>
+                                                                    <!-- /Post item -->
                                                                 </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
-                                                    </div><!-- /Post item --><!-- Post item -->
-                                                    <div
-                                                        class="isotope_item isotope_item_classic isotope_item_classic_alter_3 isotope_column_3">
-                                                        <div
-                                                            class="post_item post_item_classic post_item_classic_alter_3 even">
-                                                            <div class="post_featured">
-                                                                <div class="post_thumb" data-image=""
-                                                                    data-title="Easter Success on Top of MT Spokane">
-                                                                    <a class="hover_icon hover_icon_link"
-                                                                        href="post-single.html">
-                                                                        <img alt="Easter Success on Top of MT Spokane"
-                                                                            src="{{ url('frontend/images/image_2-480x480.jpg') }}">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post_content_overlay">
-                                                                    <div class="post_content isotope_item_content">
-                                                                        <div class="post_info">
-                                                                            <span
-                                                                                class="post_info_item post_info_posted">
-                                                                                <a href="post-single.html"
-                                                                                    class="post_info_date">August
-                                                                                    8, 2016</a>
-                                                                            </span>
-                                                                            <span
-                                                                                class="post_info_item post_info_counters">
-                                                                                <a class="post_counters_item post_counters_comments icon-comment-1"
-                                                                                    title="Comments - 0"
-                                                                                    href="#">
-                                                                                    <span
-                                                                                        class="post_counters_number">0</span>
-                                                                                </a>
-                                                                                <a class="post_counters_item post_counters_likes icon-heart-1"
-                                                                                    title="Like" href="#">
-                                                                                    <span
-                                                                                        class="post_counters_number">0</span>
-                                                                                </a>
-                                                                            </span>
-                                                                        </div>
-                                                                        <h5 class="post_title">
-                                                                            <a href="post-single.html">Easter
-                                                                                Success on Top of MT Spokane</a>
-                                                                        </h5>
-                                                                        <div class="post_descr">
-                                                                            <a href="post-single.html"
-                                                                                class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
-                                                                                <span class="">Read
-                                                                                    More</span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /Post item --><!-- Post item -->
-                                                    <div
-                                                        class="isotope_item isotope_item_classic isotope_item_classic_alter_3 isotope_column_3">
-                                                        <div
-                                                            class="post_item post_item_classic post_item_classic_alter_3 odd last">
-                                                            <div class="post_featured">
-                                                                <div class="post_thumb" data-image=""
-                                                                    data-title="Avalanche Safety Gear: How to Choose">
-                                                                    <a class="hover_icon hover_icon_link"
-                                                                        href="post-single.html">
-                                                                        <img alt="Avalanche Safety Gear: How to Choose"
-                                                                            src="{{ url('frontend/images/image-7-480x480.jpg') }}">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="post_content_overlay">
-                                                                    <div class="post_content isotope_item_content">
-                                                                        <div class="post_info">
-                                                                            <span
-                                                                                class="post_info_item post_info_posted">
-                                                                                <a href="#"
-                                                                                    class="post_info_date">August
-                                                                                    8, 2016</a>
-                                                                            </span>
-                                                                            <span
-                                                                                class="post_info_item post_info_counters">
-                                                                                <a class="post_counters_item post_counters_comments icon-comment-1"
-                                                                                    title="Comments - 0"
-                                                                                    href="#">
-                                                                                    <span
-                                                                                        class="post_counters_number">0</span>
-                                                                                </a>
-                                                                                <a class="post_counters_item post_counters_likes icon-heart-1"
-                                                                                    title="Like" href="#">
-                                                                                    <span
-                                                                                        class="post_counters_number">0</span>
-                                                                                </a>
-                                                                            </span>
-                                                                        </div>
-                                                                        <h5 class="post_title">
-                                                                            <a href="post-single.html">Avalanche
-                                                                                Safety Gear: How to Choose</a>
-                                                                        </h5>
-                                                                        <div class="post_descr">
-                                                                            <a href="post-single.html"
-                                                                                class="sc_button sc_button_square sc_button_style_filled sc_button_size_small">
-                                                                                <span class="">Read
-                                                                                    More</span>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    @else
+                                                        <h1>No Data available.</h1>
+                                                    @endif
                                                     <!-- /Post item -->
                                                 </div>
                                             </div>
-                                            <a href="{{ url('/news') }}"
+                                            <a href="{{ url('/announcement') }}"
                                                 class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large aligncenter margin_top_small margin_bottom_tiny sc_button_iconed none">View
                                                 More News</a>
                                         </div>
@@ -1287,9 +1210,9 @@
         <footer class="footer_wrap widget_area">
             <div class="footer_wrap_inner widget_area_inner">
                 <div class="content_wrap">
-                    <div class="columns_wrap row">
+                    <div class=" row">
                         <!-- Widget: Weather -->
-                        <aside class="column-1_3 widget widget_text">
+                        <aside class="col-lg-3 widget widget_text">
 
                             <div class="textwidget">
                                 <div class="wpc-weather-id">
@@ -1299,8 +1222,10 @@
 
 
                             </div>
-                        </aside><!-- /Widget: Weather --><!-- Widget: Quick Links -->
-                        <aside class="column-1_3 widget widget_recent_reviews">
+                        </aside>
+                        <!-- /Widget: Weather -->
+                        <!-- Widget: Quick Links -->
+                        <aside class="col-lg-3 widget widget_recent_reviews">
                             <h5 class="widget_title">Quick Links</h5>
                             <div class="recent_reviews">
                                 <article class="post_item no_thumb first">
@@ -1313,13 +1238,11 @@
 
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/about') }}"><span
-                                                        class="ms-1">About</span></a>
+                                                    href="{{ url('/about') }}"><span class="ms-1">About</span></a>
                                         </li>
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/teams') }}"><span
-                                                        class="ms-1">Teams</span></a>
+                                                    href="{{ url('/teams') }}"><span class="ms-1">Teams</span></a>
                                         </li>
                                         <!-- /Menu: Rent -->
                                         <li class="menu-item">
@@ -1331,18 +1254,12 @@
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/announcement') }}"><span
-                                                        class="ms-1">Programs</span></a>
+                                                        class="ms-1">Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
-                                        <!-- Menu: News -->
-                                        <li class="menu-item ">
-                                            <span class="sc_list_icon icon-right-small"> <a
-                                                    href="{{ url('/registration') }}"><span
-                                                        class="ms-1">Competition</span></a>
+                                       
+                                 
 
-                                        </li>
-                                        <!-- /Menu: News -->
-                            
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/contact') }}"><span class="ms-1">Contact
@@ -1352,8 +1269,38 @@
                                 </article>
 
                             </div>
-                        </aside><!-- /Widget: Quick Links --><!-- Widget: Contacts -->
-                        <aside class="column-1_3 widget widget_contacts">
+                        </aside>
+                        <!-- /Widget: Quick Links -->
+                         <!-- Widget: Quick Links -->
+                         <aside class="col-lg-3 widget widget_recent_reviews">
+                            <h5 class="widget_title">Register As</h5>
+                            <div class="recent_reviews">
+                                <article class="post_item no_thumb first">
+
+                                    <ul id="menu_footer" class="menu_footer_nav">
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/associationRegistration') }}"><span class="ms-1">Association</span></a>
+                                        </li>
+
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/athletesRegistration') }}"><span class="ms-1">Athletes</span></a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <span class="sc_list_icon icon-right-small"> <a
+                                                    href="{{ url('/registration/sponsorshipRegistration') }}"><span class="ms-1">Sponsor</span></a>
+                                        </li>
+                                        <!-- /Menu: Rent -->
+                                   
+                                    </ul>
+                                </article>
+
+                            </div>
+                        </aside>
+                        <!-- /Widget: Quick Links -->
+                        <!-- Widget: Contacts -->
+                        <aside class="col-lg-3 widget widget_contacts">
                             <h5 class="widget_title">Contact Us</h5>
                             <div class="widget_inner">
                                 <ul class="contact_info">
@@ -1370,7 +1317,7 @@
                                             <div>1 800 215 16 35</div>
                                         </li> --}}
                                     <li class="d-flex">
-                                        <i class="icon icon-pencil"></i>
+                                        <i class="icon icon-mail"></i>
                                         <div>skiandsnowboardindia@outlook.com</div>
                                     </li>
 

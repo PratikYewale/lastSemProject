@@ -106,6 +106,8 @@
 .icon-behance:before { content: '\e868'; } /* '' */
 .icon-bitbucket:before { content: '\e869'; } /* '' */
 .icon-cc:before { content: '\e86a'; } /* '' */
+.icon-birthday:before { content: '\e800'; /* Replace with the actual Unicode from your Fontello demo.html */
+  }
 .icon-codeopen:before { content: '\e86b'; } /* '' */
 .icon-css3:before { content: '\e86c'; } /* '' */
 .icon-delicious:before { content: '\e86d'; } /* '' */

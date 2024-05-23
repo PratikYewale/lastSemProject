@@ -282,7 +282,7 @@
 
                                                         <div class="row d-flex justify-content-between align-items-center">
                                                             <div class="col-lg-4 ">
-                                                                <img alt="" src="http://placehold.it/228x228" />
+                                                                <img class="about-team-profile-pic" alt="" src="{{ url('frontend/images/shiva.jpg') }}" />
                                                             </div>
                                                             <div class="col-lg-8">
                                                                 <h5 class="org-member-name mt-auto">Mr.Shiva Keshavan</h5>

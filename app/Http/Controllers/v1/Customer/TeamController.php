@@ -45,6 +45,7 @@ class TeamController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+
     public function getAllTeamMembers(Request $request): JsonResponse
     {
         try {
