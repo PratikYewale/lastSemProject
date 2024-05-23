@@ -99,6 +99,10 @@
                                             class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
+                                        <li
+                                        class="{{ request()->is('events') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                        <a href="{{ url('/events') }}"><span>Events</span></a>
+                                    </li>
                                         <!-- /Menu: Announcement -->
                                       
                                         <!-- Menu: Media Gallery or Registration -->
@@ -280,6 +284,10 @@
                                 class="{{ Route::currentRouteName() == 'announcement' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                             </li>
+                            <li
+                            class="{{ Route::currentRouteName() == 'events' ? 'menu-item current-menu-item' : 'menu-item' }}">
+                            <a href="{{ url('/events') }}"><span>Events</span></a>
+                        </li>
 
                             <!-- Menu: Media Gallery or Registration -->
                             @if (!Auth::user())

@@ -18,7 +18,7 @@
     <!-- /Top panel -->
 
     <!-- Page content wrap -->
-    <div class="page_content_wrap page_paddings_yes">
+    <div class=" page_paddings_yes">
         <!-- Content -->
         <div class="bg-primery">
 

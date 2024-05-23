@@ -105,4 +105,18 @@ class HomeController extends Controller
         Session::put('success', 'Payment successful');
         return redirect()->back();
     }
+
+    public function events()
+    {
+        try {
+            $events = Event::query();
+            $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
+
+            return view('frontend.event', compact('events'));
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Error fetching events.');
+        }
+     
+    }
 }
