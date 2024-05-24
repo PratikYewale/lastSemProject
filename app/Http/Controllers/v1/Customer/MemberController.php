@@ -303,7 +303,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function updateAthlete(Request $request): JsonResponse
+    public function updateAthlete(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -790,7 +790,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function updateAssociationMember(Request $request): JsonResponse
+    public function updateAssociationMember(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
