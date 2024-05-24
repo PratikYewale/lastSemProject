@@ -111,12 +111,36 @@
                                                             <td class="">{{ $item->address }}</td>
                 
                                                         </tr>
+                                                        <tr>
+                
+                                                            <th class="">Description</th>
+                                                           
+                                                            <td class=""><a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal">View Description</a>
+                                                                <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5 mt-0" id="athletesFormModalLabel">{{$item->title}}</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body px-5">
+                                                                            {{ $item->description }} 
+                                                                        </div>
+                                                
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </td>
+                
+                                                        </tr>
                                                       
                                                         <tr>
                 
                                                             <th class="">Brochure</th>
                                                             <td class="">
-                                                                <a href="{{ $item->address }}"> Click Here</a> to Download Brochure</td>
+                                                                <a href="{{ $item->file }}"> Click Here</a> to Download Brochure</td>
                 
                                                         </tr>
                                                     </thead>

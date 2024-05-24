@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\frontend\AfterLoginPagesController;
+use App\Http\Controllers\Frontend\AfterLoginPagesController;
 use App\Http\Controllers\Frontend\auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
 use App\Http\Controllers\Frontend\RazorpayPaymentController;
-use App\Http\Controllers\frontend\TeamController;
+use App\Http\Controllers\Frontend\TeamController;
 use App\Http\Controllers\v1\Customer\ContactUsController;
 use App\Http\Controllers\v1\Customer\DonationController;
 use App\Http\Controllers\v1\Customer\MemberController;
