@@ -353,23 +353,20 @@
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="cover_fees"
-                                                            name="cover_fees" value="1" checked disabled
-                                                            onchange="calculateTotal()">
-                                                        <label class="form-check-label" for="cover_fees">GST (18%
-                                                            will be added to your donation amount)</label>
+                                                        <input class="form-check-input" type="checkbox" id="cover_fees" name="cover_fees" value="1" checked onchange="calculateTotal()" disabled>
+                                                        <label class="form-check-label" for="cover_fees">GST (18% will be added to your donation amount)</label>
                                                     </div>
+                                                    <!-- Hidden input to ensure value is sent -->
+                                                    <input type="hidden" name="cover_fees" value="1">
                                                     <div>
                                                         <p>
-                                                            <b id="amount_donated">Amount Donated: ₹<span
-                                                                    id="amount_donated_value">0</span></b> <br />
-                                                            <b id="cover_fees_display">GST Amount: ₹<span
-                                                                    id="cover_fees_value">0</span></b> <br />
-                                                            <b id="total_amount">Total Amount: ₹<span
-                                                                    id="total_amount_value">0</span></b> <br />
+                                                            <b id="amount_donated">Amount Donated: ₹<span id="amount_donated_value">0</span></b> <br />
+                                                            <b id="cover_fees_display">GST Amount: ₹<span id="cover_fees_value">0</span></b> <br />
+                                                            <b id="total_amount">Total Amount: ₹<span id="total_amount_value">0</span></b> <br />
                                                         </p>
                                                     </div>
                                                 </div>
+                                                
                                             </div>
 
 
