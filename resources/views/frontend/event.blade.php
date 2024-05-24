@@ -41,7 +41,7 @@
                                     the India the "Best in the World" in Olympic skiing and snowboarding. </p>
                             </div>
                         </div>
-                        <a href="#"
+                        <a href="{{ url('/contact') }}"
                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Contact
                             Us</a>
                     </section>

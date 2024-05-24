@@ -44,7 +44,7 @@
                                                 recognised member of the Indian Olympic Association <br>
 
                                             </p>
-                                            <a href="#"
+                                            <a href="{{ url('/contact') }}"
                                                 class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Contact
                                                 Us</a>
                                         </div>
@@ -211,9 +211,8 @@
                         </div>
                         <div class="">
                             <a class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null"
-                                href="#" data-bs-toggle="collapse" data-bs-target="#collapse2"
-                                aria-expanded="false" aria-controls="collapse2" id="collapseData"
-                                onclick="myFunction()">Read More</a>
+                                href="#" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2"
+                                id="collapseData2" onclick="toggleCollapse('collapseData2', 'collapse2')">Read More</a>
                         </div>
                     </div>
                     <!-- /Vision Mission -->
@@ -250,10 +249,8 @@
                                                 Indian athletes started representing the country at international skiing
                                                 competitions, including the Winter Olympics, World Championships, and Asian
                                                 Winter Games</p>
-                                            <a class="" href="#" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse3" aria-expanded="false"
-                                                aria-controls="collapse3" id="collapseData" onclick="myFunction()">Read
-                                                More</a>
+                                                <a class="" href="#" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3"
+                                                id="collapseData3" onclick="toggleCollapse('collapseData3', 'collapse3')">Read More</a>
                                         </div>
 
 

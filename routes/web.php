@@ -41,7 +41,7 @@ Route::get('/teams', [TeamController::class, 'teams']);
 Route::get('/teamDetails/{id}', [TeamController::class, 'teamDetails'])->name('teamDetails');
 Route::get('/services', [HomeController::class, 'services']);
 Route::get('/announcement', [HomeController::class, 'announcement']);
-Route::get('/registration', [HomeController::class, 'registration']);
+// Route::get('/registration', [HomeController::class, 'registration']);
 Route::get('/membership', [HomeController::class, 'membership']);
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/events', [HomeController::class, 'events']);

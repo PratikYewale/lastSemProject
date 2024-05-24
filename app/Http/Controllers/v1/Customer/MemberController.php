@@ -485,7 +485,8 @@ class MemberController extends Controller
                 if ($user->status == 1) {
                     return redirect('/');
                 } else {
-                    return redirect('/razorpay-payment');
+                    // return redirect('/razorpay-payment');
+                    return redirect('/');
                 }
             } else {
 
@@ -496,7 +497,7 @@ class MemberController extends Controller
         } catch (\Exception $e) {
             // Exception occurred
 
-            // return redirect()->route('login')
+          
             //     ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
             return back()->withErrors(['error' => 'Something weent wrong']);
             // return $this->sendError("Something weent wrong",$e->getMessage());
@@ -688,7 +689,7 @@ class MemberController extends Controller
             DB::commit();
             $data = Member::query()->where('id', $user->id)->with('user')->get();
             // return $this->sendResponse($data, 'Association Member added successfully.', true);
-            return redirect('/registration');
+            return back()->with('success', 'Form Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);

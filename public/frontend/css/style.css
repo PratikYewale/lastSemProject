@@ -9329,7 +9329,7 @@ body table.booked-calendar tr.days th {
 }
 
 .enquiry-btn{
-	font-size: 22px !important;;
+	/* font-size: 16px !important;; */
     position: fixed !important;
     left: -75px !important;
     bottom: 25px !important;
@@ -9447,7 +9447,7 @@ body table.booked-calendar tr.days th {
 }
 
 .sc_team_item_avatar img{
-	max-height: 275px;
+	max-height: 275px !important;
 	object-fit: contain;
 }
 
@@ -9464,3 +9464,14 @@ body table.booked-calendar tr.days th {
 	border-top: none;
 	padding: 1rem !important;
 }
+
+/* Hide spinner arrows for number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+/*  */
