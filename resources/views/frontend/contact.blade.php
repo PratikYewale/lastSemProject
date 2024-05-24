@@ -46,7 +46,7 @@
                                                         </ul>
                                                     </div>
                                                 @endif
-                                                <form action="{{ route('addContactUs') }}" method="POST"
+                                                <form action="{{ Auth::user() ? route('addContactUsVerified') : route('addContactUs') }}" method="POST"
                                                     enctype="multipart/form-data" id="contactForm"
                                                     class="contactForm sc_input_hover_default">
                                                    

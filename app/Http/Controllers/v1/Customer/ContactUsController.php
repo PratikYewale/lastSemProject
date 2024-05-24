@@ -24,6 +24,7 @@ class ContactUsController extends Controller
             ]);
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
+                // return $this->sendError('Validation Error.', $validator->errors());
             }
             $ContactUs = new ContactUs;
             $ContactUs->name = $request->name;
@@ -55,6 +56,7 @@ class ContactUsController extends Controller
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
             return back()->with('success', 'Enquiry added Successfully');
+            // return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
            
         } catch (Exception $e) {
             // dd($e);
@@ -73,7 +75,8 @@ class ContactUsController extends Controller
                 'message' => 'nullable',
             ]);
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
+                // return $this->sendError('Validation Error.', $validator->errors());
             }
             $user = Auth::user();
             $ContactUs = new ContactUs;
@@ -94,36 +97,38 @@ class ContactUsController extends Controller
                     ->subject('Confirmation email');
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARD INDIA');
             });
-            return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
+            return back()->with('success', 'Enquiry added Successfully');
+            // return $this->sendResponse($ContactUs, 'Contact added successfully.', true);
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
 
-    public function ContactUs(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'nullable',
-                'email' => 'required|string|email|max:255',
-                'mobile_no' => 'required|min:10|max:10',
+    // public function ContactUs(Request $request)
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'name' => 'nullable',
+    //             'email' => 'required|string|email|max:255',
+    //             'mobile_no' => 'required|min:10|max:10',
 
-                'message' => 'nullable',
-            ]);
+    //             'message' => 'nullable',
+    //         ]);
 
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-            $ContactUs = new ContactUs;
-            $ContactUs->name = $request->name;
-            $ContactUs->mobile_number = $request->mobile_number;
-            $ContactUs->message = $request->message;
-            $ContactUs->email = $request->email;
-            $ContactUs->save();
-            return back()->with('success', 'Enquiry added Successfully');
-            // return $this->sendResponse([], 'Contact added Successfully.', true);
-        } catch (Exception $e) {
-            return back()->with('false', 'Something went wrong. Please try again later.');
-        }
-    }
+    //         if ($validator->fails()) {
+    //             return back()->withErrors($validator)->withInput();
+    //             // return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+    //         $ContactUs = new ContactUs;
+    //         $ContactUs->name = $request->name;
+    //         $ContactUs->mobile_number = $request->mobile_number;
+    //         $ContactUs->message = $request->message;
+    //         $ContactUs->email = $request->email;
+    //         $ContactUs->save();
+    //         return back()->with('success', 'Enquiry added Successfully');
+    //         // return $this->sendResponse([], 'Contact added Successfully.', true);
+    //     } catch (Exception $e) {
+    //         return back()->with('false', 'Something went wrong. Please try again later.');
+    //     }
+    // }
 }
