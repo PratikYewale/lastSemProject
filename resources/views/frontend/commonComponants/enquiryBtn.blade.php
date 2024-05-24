@@ -23,7 +23,7 @@
             <div class="modal-body px-5">
                 <div class="comments_form">
                     <div id="respond" class="comment-respond">
-                        <form action="{{ Auth::user() ? route('addContactUs') : route('addContactUsVerified') }}" method="post" id="donationForm"
+                        <form action="{{ Auth::user() ? route('addContactUsVerified') : route('addContactUs') }}" method="post" id="donationForm"
                             class="donationForm sc_input_hover_default">
                             {{ csrf_field()}}
                             <div class="row">
@@ -52,7 +52,13 @@
                                         <textarea class="form-control" id="message" name="message" rows="3"></textarea>
                                     </div>
                                 </div>
-
+                                <div class="col-lg-12">
+                                    <button type="button"
+                                        class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit"
+                                        class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
+                                </div>
 
 
 
@@ -62,13 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button"
-                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                    data-bs-dismiss="modal">Cancel</button>
-                <button type="submit"
-                    class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
-            </div>
+          
         </div>
     </div>
 </div>
