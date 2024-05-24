@@ -81,4 +81,6 @@ Route::post('/paymentVerification', [MemberController::class, 'paymentVerificati
 
 // After Login Pages Routes
 Route::get('/media-gallery', [AfterLoginPagesController::class, 'mediaGallery']);
+Route::get('/userAchivements', [AfterLoginPagesController::class, 'userAchivements']);
+Route::get('/editAchivement', [AfterLoginPagesController::class, 'editAchivement']);
 Route::get('/profile', [AfterLoginPagesController::class, 'profile']);

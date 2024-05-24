@@ -29,4 +29,13 @@ class AfterLoginPagesController extends Controller
         return view('frontend.afterAuthPages.profile');
     }
 
+    public function userAchivements()
+    {
+        return view('frontend.afterAuthPages.userAchivements');
+    }
+    public function editAchivement()
+    {
+        return view('frontend.afterAuthPages.editAchivement');
+    }
+
 }
