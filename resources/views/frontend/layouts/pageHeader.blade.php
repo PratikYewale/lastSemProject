@@ -109,7 +109,7 @@
                                         @if (!Auth::user())
                                             <li
                                                 class="{{ request()->is('registration*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
-                                                <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                                <a href="#"><span>Registration</span></a>
                                                 <ul class="sub-menu">
                                                     <li class="menu-item current-menu-item">
                                                         <a href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
@@ -294,7 +294,7 @@
                         
                                 <li
                                     class="{{ Route::currentRouteName() == 'registration*' ? 'menu-item current-menu-item menu-item-has-children' : 'menu-item menu-item-has-children' }}">
-                                    <a href="{{ url('/registration') }}"><span>Registration</span></a>
+                                    <a href="#"><span>Registration</span></a>
                                     <ul class="sub-menu">
                                         <li class="menu-item current-menu-item">
                                             <a href="{{ url('/registration/associationRegistration') }}"><span>Association</span></a>
