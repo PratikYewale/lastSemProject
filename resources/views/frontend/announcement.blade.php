@@ -81,7 +81,7 @@
                                                 <div class="post_info mb-0 mt-0 d-flex justify-content-between">
                                                     <span class="post_info_item post_info_posted">
                                                         <span class="contact_icon icon-calendar-light"></span>
-                                                        <a href="post-single.html" class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
+                                                        <a href="post-single.html" class="post_info_date">{{ \Carbon\Carbon::parse($item->date)->format('M d, Y') }}</a>
                                                     </span>
                                                     <span class="post_info_item post_info_posted_by">
                                                         <span class="contact_icon icon-user"></span>

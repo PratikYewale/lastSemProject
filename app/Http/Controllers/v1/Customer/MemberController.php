@@ -53,7 +53,7 @@ class MemberController extends Controller
 
         return '/Image/' . $fileName;
     }
-    public function addMember(Request $request): JsonResponse
+    public function addMember(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -208,7 +208,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
         }
     }
-    public function createPaymentAthlete(Request $request): JsonResponse
+    public function createPaymentAthlete(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -303,7 +303,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function updateAthlete(Request $request): JsonResponse
+    public function updateAthlete(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -428,7 +428,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function updateAchievement(Request $request): JsonResponse
+    public function updateAchievement(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -695,7 +695,7 @@ class MemberController extends Controller
         }
     }
 
-    public function createPaymentAssociation(Request $request): JsonResponse
+    public function createPaymentAssociation(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -790,7 +790,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function updateAssociationMember(Request $request): JsonResponse
+    public function updateAssociationMember(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -914,7 +914,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    public function getAssociationById(Request $request): JsonResponse
+    public function getAssociationById(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -933,7 +933,7 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    public function getAthleteById(Request $request): JsonResponse
+    public function getAthleteById(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [

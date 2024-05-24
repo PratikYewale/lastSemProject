@@ -2509,7 +2509,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 }
 
 .menu_main_nav>li ul {
-	width: 175px;
+	width: 175px !important;
 	padding: 2em 2.2em;
 }
 
@@ -9329,21 +9329,21 @@ body table.booked-calendar tr.days th {
 }
 
 .enquiry-btn{
-	font-size: 22px;
+	font-size: 22px !important;;
     position: fixed !important;
     left: -75px !important;
     bottom: 25px !important;
     z-index: 999 !important;
 	border-radius:  0 20px 20px 0!important;
-	vertical-align: middle;
+	vertical-align: middle!important;;
 	display: flex !important;
-	align-items: center;
+	align-items: center!important;;
 	background-color: #f9f600 !important;
 	
 }
 .icon-enquiry{
-	font-size: 18px;
-	font-weight: 600;
+	font-size: 18px!important;;
+	font-weight: 600!important;;
 	color: #000 !important;
 	
 }
@@ -9356,9 +9356,9 @@ body table.booked-calendar tr.days th {
    
 }
 .enquiry-btn img{
-	width: 24px;
-	height: 24px;
-	margin-left: 10px;
+	width: 24px !important;;
+	height: 24px !important;;
+	margin-left: 10px !important;;
  }
 
  .form-label,
