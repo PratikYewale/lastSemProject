@@ -131,7 +131,11 @@ class MemberController extends Controller
                 'aadhar_number' => 'required|max:12|min:12',
                 'passport_number' => 'nullable|unique:users',
                 'passport' => 'mimes:png,jpg,jpeg,pdf',
-                'sport_certificates.*.certificate' => 'mimes:png,jpg,jpeg,pdf',
+                'achievements' => 'array',
+                'achievements.*.name' => 'nullable',
+                'achievements.*.year' => 'nullable',
+                'achievements.*.result' => 'nullable',
+                'achievements.*.certificate' => 'file',
                 'acknowledge' => 'boolean',
                 'city' => 'required',
                 'state' => 'required',
@@ -140,6 +144,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
+                // return $this->sendError('Validation Error.', $validator->errors());
                 return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
@@ -181,6 +186,7 @@ class MemberController extends Controller
                     $user->passport = $this->saveFile($request->file('passport'), 'Passport');
                 }
             }
+            $user->save();
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achievement();
@@ -188,21 +194,24 @@ class MemberController extends Controller
                     $newAchievment->name = $achievement['name'];
                     $newAchievment->year = $achievement['year'];
                     $newAchievment->result = $achievement['result'];
+                    if (isset($achievement['certificate'])) {
+                        $newAchievment->certificate = $this->saveFile($achievement['certificate'], 'Certificate');
+                    }
                     $newAchievment->save();
                 }
             }
-            if ($request->has('sport_certificates')) {
-                foreach ($request->file('sport_certificates') as $sport_certificate) {
-                    $newCertificate = new SportCertificate();
-                    $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
-                    $newCertificate->user_id = $user->id;
-                    $newCertificate->save();
-                }
-            }
+            // if ($request->has('sport_certificates')) {
+            //     foreach ($request->file('sport_certificates') as $sport_certificate) {
+            //         $newCertificate = new SportCertificate();
+            //         $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
+            //         $newCertificate->user_id = $user->id;
+            //         $newCertificate->save();
+            //     }
+            // }
 
-            $user->save();
             DB::commit();
             return back()->with('success', 'Athlete added successfully.');
+            // return $this->sendResponse([], "Athlete added succesfully.");
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
@@ -395,6 +404,40 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
+    public function updateAchievement(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:achievements,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+            DB::beginTransaction();
+            $achievement = Achievement::findOrFail($request->id);
+            if (!$achievement) {
+                return $this->sendError("User not found.");
+            }
+            if ($request->has('name')) {
+                $achievement->name = $request->name;
+            }
+            if ($request->has('year')) {
+                $achievement->year = $request->year;
+            }
+            if ($request->has('result')) {
+                $achievement->result = $request->result;
+            }
+            if ($request->has('certificate')) {
+                $achievement->certificate = $this->saveFile($request->file('certificate'), 'Certificate');
+            }
+            $achievement->save();
+            DB::commit();
+            return $this->sendResponse($achievement->id, 'Achievement updated successfully.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
     public function getAllAthletes(Request $request)
     {
         try {
@@ -426,37 +469,6 @@ class MemberController extends Controller
             }
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
-        }
-    }
-    public function updateAchievement(Request $request)
-    {
-        try {
-            $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:achievements,id',
-            ]);
-            if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-            }
-            DB::beginTransaction();
-            $achievement = Achievement::findOrFail($request->id);
-            if (!$achievement) {
-                return $this->sendError("User not found.");
-            }
-            if ($request->has('name')) {
-                $achievement->name = $request->name;
-            }
-            if ($request->has('year')) {
-                $achievement->year = $request->year;
-            }
-            if ($request->has('result')) {
-                $achievement->result = $request->result;
-            }
-            $achievement->save();
-            DB::commit();
-            return $this->sendResponse($achievement->id, 'Achievement updated successfully.');
-        } catch (Exception $e) {
-            DB::rollBack();
-            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
     public function loginMember(Request $request)
@@ -497,7 +509,7 @@ class MemberController extends Controller
         } catch (\Exception $e) {
             // Exception occurred
 
-          
+
             //     ->withErrors(['error' => 'Something Went Wrong' . $e->getMessage()]);
             return back()->withErrors(['error' => 'Something weent wrong']);
             // return $this->sendError("Something weent wrong",$e->getMessage());
@@ -944,7 +956,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $athlete = User::query()->where('id', $request->id)->with(['team','achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete')->first();
+            $athlete = User::query()->where('id', $request->id)->with(['team', 'achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete')->first();
             if (!$athlete) {
                 return $this->sendError('No data available.');
             }
