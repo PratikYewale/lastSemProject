@@ -352,8 +352,8 @@
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="mb-3">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="cover_fees" name="cover_fees" value="1" checked onchange="calculateTotal()" disabled>
+                                                    <div class="form-check ps-0">
+                                                        <input class="form-check-input" type="checkbox" id="cover_fees" name="cover_fees" value="1" checked onchange="calculateTotal()" hidden>
                                                         <label class="form-check-label" for="cover_fees">GST (18% will be added to your donation amount)</label>
                                                     </div>
                                                     <!-- Hidden input to ensure value is sent -->
