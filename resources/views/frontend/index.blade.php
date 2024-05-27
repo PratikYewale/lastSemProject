@@ -705,7 +705,7 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Mr Shiva
+                                                                        <a href="#">Mr Shiva
                                                                             Keshavan</a>
                                                                     </h5>
                                                                     <div class="sc_team_item_position">Chairman
@@ -717,7 +717,7 @@
                                                             <div class="sc_team_item sc_team_item_2 even">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Bhavani TN "
-                                                                        src="{{ url('frontend/images/team-3-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/Bhavani.jpg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -749,9 +749,9 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Bhavani TN </a>
+                                                                        <a href="#">Bhavani TN</a>
                                                                     </h5>
-                                                                    <div class="sc_team_item_position">Member
+                                                                    <div class="sc_team_item_position">Member (SSI AdHoc Committee)
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -760,7 +760,7 @@
                                                             <div class="sc_team_item sc_team_item_3 odd">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Mr Arif Mohd Khan "
-                                                                        src="{{ url('frontend/images/team-2-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/Arif.jpg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -792,10 +792,10 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Mr Arif Mohd
+                                                                        <a href="#">Mr Arif Mohd
                                                                             Khan </a>
                                                                     </h5>
-                                                                    <div class="sc_team_item_position">Member
+                                                                    <div class="sc_team_item_position">Member (IOA Ad Hoc committee)
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -804,7 +804,7 @@
                                                             <div class="sc_team_item sc_team_item_4 even">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Ms Jelena Dojcinovic "
-                                                                        src="{{ url('frontend/images/team-1-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/org_2.svg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -836,7 +836,7 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Ms Jelena
+                                                                        <a href="#">Ms Jelena
                                                                             Dojcinovic </a>
                                                                     </h5>
                                                                     <div class="sc_team_item_position">Independent

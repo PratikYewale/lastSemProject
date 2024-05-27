@@ -330,7 +330,7 @@
 
                                                             </div>
                                                             <div class="col-lg-4 text-lg-end">
-                                                                <img alt="" src="http://placehold.it/228x228" />
+                                                                <img class="about-team-profile-pic" alt="" src="{{ url('frontend/images/Bhavani.jpg') }}" />
                                                             </div>
                                                         </div>
 
@@ -344,7 +344,7 @@
 
                                                         <div class="row d-flex justify-content-between align-items-center">
                                                             <div class="col-lg-4 ">
-                                                                <img alt="" src="http://placehold.it/228x228" />
+                                                                <img class="about-team-profile-pic" alt="" src="{{ url('frontend/images/Arif.jpg') }}" />
                                                             </div>
                                                             <div class="col-lg-8">
                                                                 <h5 class="org-member-name mt-auto">Mr. Arif Mohd Khan
@@ -400,7 +400,7 @@
 
                                                             </div>
                                                             <div class="col-lg-4 text-lg-end">
-                                                                <img alt="" src="http://placehold.it/228x228" />
+                                                                <img alt="" class="about-team-profile-pic" src="{{ url('frontend/images/org_2.svg') }}" />
                                                             </div>
                                                         </div>
 
