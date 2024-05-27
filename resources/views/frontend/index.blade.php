@@ -869,7 +869,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Glacier National Park Backpacking Packing
                                                         List</a>
                                                 </div>
@@ -893,7 +893,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Downhill Skiing or Snowboarding: Training
                                                         Tips and Exercises</a>
                                                 </div>
@@ -917,7 +917,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-post-1 eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Glide Waxing Your Skis or Snowboard</a>
                                                 </div>
                                                 <div class="esg-center eg-post-1 eg-custom-skin-1-element-12-a">
@@ -942,7 +942,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Avalanche Safety Gear: How to Choose</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -966,7 +966,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Snowboarding: Making Waves on the Slopes</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -988,7 +988,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">A Perfect Day for Snowboarding in Venice</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -1054,7 +1054,7 @@
                                                                                     class="post_info_item post_info_posted">
                                                                                     <span
                                                                                         class="contact_icon icon-calendar-light"></span>
-                                                                                    <a href="post-single.html"
+                                                                                    <a href="#"
                                                                                         class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
                                                                                 </span>
                                                                                 <span
