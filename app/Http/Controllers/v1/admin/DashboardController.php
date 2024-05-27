@@ -19,19 +19,39 @@ class DashboardController extends Controller
     public function getAllDashboardCount(Request $request): JsonResponse
     {
         try {
-            $athletes = User::query()->where('role','athlete')->count();
-            $activeAthletes = User::query()->where('role','athlete')->where('status',true)->count();
-            $InactiveAthletes = User::query()->where('role','athlete')->where('status',false)->count();
-            $members = User::query()->where('role','member')->count();
-            $activeMembers = User::query()->where('role','member')->where('status',true)->count();
-            $InactiveMembers = User::query()->where('role','member')->where('status',false)->count();
-            $teams = TeamProfiles::count();
-            $queriesNotSolved = ContactUs::query()->where('is_solved',false)->count();
-            $queriesSolved = ContactUs::query()->where('is_solved',true)->count();
-            $news = News::query()->where('type','news')->count();
-            $announcements = News::query()->where('type','announcement')->count();
-            $achievements = News::query()->where('type','achievements')->count();
-            $donations = Donation::query()->count();
+            $validator = Validator::make($request->all(), [
+                'start_date' => 'nullable|date|before_or_equal:end_date',
+                'end_date' => 'nullable|date|after_or_equal:start_date',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            // Helper function to apply date filter
+            $applyDateFilter = function ($query) use ($startDate, $endDate) {
+                if ($startDate && $endDate) {
+                    $query->whereBetween('created_at', [$startDate, $endDate]);
+                }
+                return $query;
+            };
+
+
+            $athletes = $applyDateFilter(User::query()->where('role', 'athlete'))->count();
+            $activeAthletes = $applyDateFilter(User::query()->where('role', 'athlete')->where('status', true))->count();
+            $InactiveAthletes = $applyDateFilter(User::query()->where('role', 'athlete')->where('status', false))->count();
+            $members = $applyDateFilter(User::query()->where('role', 'member'))->count();
+            $activeMembers = $applyDateFilter(User::query()->where('role', 'member')->where('status', true))->count();
+            $InactiveMembers = $applyDateFilter(User::query()->where('role', 'member')->where('status', false))->count();
+            $teams = $applyDateFilter(TeamProfiles::query())->count();
+            $queriesNotSolved = $applyDateFilter(ContactUs::query()->where('is_solved', false))->count();
+            $queriesSolved = $applyDateFilter(ContactUs::query()->where('is_solved', true))->count();
+            $news = $applyDateFilter(News::query()->where('type', 'news'))->count();
+            $announcements = $applyDateFilter(News::query()->where('type', 'announcement'))->count();
+            $achievements = $applyDateFilter(News::query()->where('type', 'achievements'))->count();
+            $donations = $applyDateFilter(Donation::query())->count();
             $response = [
                 'totalAthletes' => $athletes,
                 'activeAthletes' => $activeAthletes,
