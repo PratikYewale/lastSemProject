@@ -89,8 +89,8 @@ class NewsController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'news_images' => 'array',
-                'file' => 'mimes:pdf',
+                'news_images' => 'nullable|array',
+                'file' => 'nullable|mimes:pdf',
                 'type' => 'required',
                 'primary_img' => 'required|mimes:jpg,jpeg,png',
             ]);
