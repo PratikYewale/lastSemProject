@@ -448,7 +448,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return back()->withErrors($validator)->withInput();
             }
-            $query = User::query()->with(['team', 'achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete');
+            $query = User::query()->with(['team', 'achievements', 'payment_history'])->where('role', 'athlete');
             if ($request->team_id) {
                 $query->where('team_id', $request->team_id);
             }
@@ -956,7 +956,7 @@ class MemberController extends Controller
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
             }
-            $athlete = User::query()->where('id', $request->id)->with(['team', 'achievements', 'sport_certificates', 'payment_history'])->where('role', 'athlete')->first();
+            $athlete = User::query()->where('id', $request->id)->with(['team', 'achievements', 'payment_history'])->where('role', 'athlete')->first();
             if (!$athlete) {
                 return $this->sendError('No data available.');
             }
