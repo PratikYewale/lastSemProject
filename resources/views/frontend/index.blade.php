@@ -705,7 +705,7 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Mr Shiva
+                                                                        <a href="#">Mr Shiva
                                                                             Keshavan</a>
                                                                     </h5>
                                                                     <div class="sc_team_item_position">Chairman
@@ -717,7 +717,7 @@
                                                             <div class="sc_team_item sc_team_item_2 even">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Bhavani TN "
-                                                                        src="{{ url('frontend/images/team-3-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/Bhavani.jpg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -749,9 +749,9 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Bhavani TN </a>
+                                                                        <a href="#">Bhavani TN</a>
                                                                     </h5>
-                                                                    <div class="sc_team_item_position">Member
+                                                                    <div class="sc_team_item_position">Member (SSI AdHoc Committee)
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -760,7 +760,7 @@
                                                             <div class="sc_team_item sc_team_item_3 odd">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Mr Arif Mohd Khan "
-                                                                        src="{{ url('frontend/images/team-2-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/Arif.jpg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -792,10 +792,10 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Mr Arif Mohd
+                                                                        <a href="#">Mr Arif Mohd
                                                                             Khan </a>
                                                                     </h5>
-                                                                    <div class="sc_team_item_position">Member
+                                                                    <div class="sc_team_item_position">Member (IOA Ad Hoc committee)
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -804,7 +804,7 @@
                                                             <div class="sc_team_item sc_team_item_4 even">
                                                                 <div class="sc_team_item_avatar">
                                                                     <img alt="Ms Jelena Dojcinovic "
-                                                                        src="{{ url('frontend/images/team-1-370x370.jpg') }}">
+                                                                        src="{{ url('frontend/images/org_2.svg') }}">
                                                                     <div class="sc_team_item_hover">
                                                                         <div class="sc_team_item_socials">
                                                                             <div
@@ -836,7 +836,7 @@
                                                                 </div>
                                                                 <div class="sc_team_item_info">
                                                                     <h5 class="sc_team_item_title">
-                                                                        <a href="team-single.html">Ms Jelena
+                                                                        <a href="#">Ms Jelena
                                                                             Dojcinovic </a>
                                                                     </h5>
                                                                     <div class="sc_team_item_position">Independent
@@ -869,7 +869,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Glacier National Park Backpacking Packing
                                                         List</a>
                                                 </div>
@@ -893,7 +893,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Downhill Skiing or Snowboarding: Training
                                                         Tips and Exercises</a>
                                                 </div>
@@ -917,7 +917,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-post-1 eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Glide Waxing Your Skis or Snowboard</a>
                                                 </div>
                                                 <div class="esg-center eg-post-1 eg-custom-skin-1-element-12-a">
@@ -942,7 +942,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Avalanche Safety Gear: How to Choose</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -966,7 +966,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">Snowboarding: Making Waves on the Slopes</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -988,7 +988,7 @@
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
-                                                    <a class="eg-custom-skin-1-element-10" href="post-single.html"
+                                                    <a class="eg-custom-skin-1-element-10" href="#"
                                                         target="_self">A Perfect Day for Snowboarding in Venice</a>
                                                 </div>
                                                 <div class="esg-center eg-custom-skin-1-element-12-a">
@@ -1054,7 +1054,7 @@
                                                                                     class="post_info_item post_info_posted">
                                                                                     <span
                                                                                         class="contact_icon icon-calendar-light"></span>
-                                                                                    <a href="post-single.html"
+                                                                                    <a href="#"
                                                                                         class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
                                                                                 </span>
                                                                                 <span

@@ -9447,7 +9447,7 @@ body table.booked-calendar tr.days th {
 }
 
 .sc_team_item_avatar img{
-	max-height: 275px !important;
+	height: 275px !important;
 	object-fit: contain;
 }
 
