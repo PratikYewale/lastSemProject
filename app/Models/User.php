@@ -60,7 +60,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function achievements()
     {
-        return $this->hasMany(Achievement::class,'id');
+        return $this->hasMany(Achievement::class,'user_id');
     }
     public function sport_certificates()
     {
