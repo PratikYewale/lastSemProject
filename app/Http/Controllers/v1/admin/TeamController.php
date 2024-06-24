@@ -203,7 +203,7 @@ class TeamController extends Controller
                 $newTeamProfile = new TeamProfiles();
                 $newTeamProfile->team_id = $team_id;
                 $newTeamProfile->name = $teamData['name'];
-                $newTeamProfile->description = $teamData['description'] ?? null; // Handle optional description
+                $newTeamProfile->description = $teamData['description'] ?? null;
                 $newTeamProfile->save();
 
                 $team_profile_id = $newTeamProfile->id;

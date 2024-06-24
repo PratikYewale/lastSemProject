@@ -76,7 +76,8 @@ class EventController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:events,id'
+                'id' => 'required|integer|exists:events,id',
+                'result_id' => 'nullable|integer|exists:news,id,type,announcement'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -100,6 +101,9 @@ class EventController extends Controller
             }
             if ($request->filled('address')) {
                 $updateEvent->address = $request->address;
+            }
+            if ($request->filled('result_id')) {
+                $updateEvent->result_id = $request->result_id;
             }
             $updateEvent->save();
             if ($request->has("images")) {
