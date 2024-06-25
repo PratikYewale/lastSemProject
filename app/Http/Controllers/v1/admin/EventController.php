@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\EventImage;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -76,7 +77,8 @@ class EventController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'id' => 'required|integer|exists:events,id'
+                'id' => 'required|integer|exists:events,id',
+                'result_id' => 'nullable|integer|exists:news,id,type,announcement'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors());
@@ -100,6 +102,9 @@ class EventController extends Controller
             }
             if ($request->filled('address')) {
                 $updateEvent->address = $request->address;
+            }
+            if ($request->filled('result_id')) {
+                $updateEvent->result_id = $request->result_id;
             }
             $updateEvent->save();
             if ($request->has("images")) {
@@ -125,7 +130,8 @@ class EventController extends Controller
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
                 'start_date' => 'nullable|date_format:Y-m-d',
-
+                'end_date' => 'nullable|date_format:Y-m-d',
+                'event_type' => 'nullable|string|in:past,upcoming,live'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
@@ -136,6 +142,17 @@ class EventController extends Controller
             }
             if ($request->has('end_date')) {
                 $query->whereDate('end_date', '=', $request->end_date);
+            }
+            if ($request->has('event_type')) {
+                $currentDate = Carbon::now()->toDateString();
+                if ($request->event_type === 'past') {
+                    $query->whereDate('end_date', '<', $currentDate);
+                } elseif ($request->event_type === 'upcoming') {
+                    $query->whereDate('start_date', '>', $currentDate);
+                } elseif ($request->event_type === 'live') {
+                    $query->whereDate('start_date', '<=', $currentDate)
+                        ->whereDate('end_date', '>=', $currentDate);
+                }
             }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -194,5 +211,4 @@ class EventController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
-    
 }

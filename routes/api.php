@@ -158,6 +158,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAssociationById', [AdminMemberController::class, 'getAssociationById']);
         Route::get('getAthleteById', [AdminMemberController::class, 'getAthleteById']);
         Route::post('updateAthlete', [MemberController::class, 'updateAthlete']);
+        Route::post('updateAthleteDesignation', [AdminMemberController::class, 'updateAthleteDesignation']);
         Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
         Route::post('updateAssociationMember', [MemberController::class, 'updateAssociationMember']);
 
