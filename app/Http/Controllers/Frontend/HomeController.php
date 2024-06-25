@@ -119,6 +119,19 @@ class HomeController extends Controller
 
             return redirect()->back()->with('error', 'Error fetching events.');
         }
-     
+
+    }
+    public function pastEvents()
+    {
+        try {
+            $events = Event::query();
+            $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
+
+            return view('frontend.event', compact('pastEvents'));
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Error fetching events.');
+        }
+
     }
 }

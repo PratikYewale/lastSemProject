@@ -52,9 +52,9 @@
                 </div>
                 <!-- /Single team info -->
 
-
+    <!-- / Upcoming events -->
                 <div class="content_wrap">
-                    <h2 class="team_title text-center">Events Of SSI</h2>
+                    <h2 class="team_title text-center">Upcoming Events Of SSI</h2>
                     <div class="content">
                         @if ($events->count() > 0)
                             <div class="row">
@@ -93,28 +93,28 @@
                                         <div class="card committee-card">
 
                                             <div class="card-body">
-                
+
                                                 <table class="committee-table">
                                                     <thead>
                                                         <tr>
                                                             <th colspan="2" class="table-title">{{ $item->title }}</th>
                                                         </tr>
                                                         <tr>
-                
+
                                                             <th class="">Date</th>
                                                             <td class="">{{ $item->start_date }} To {{ $item->end_date }}</td>
-                
+
                                                         </tr>
                                                         <tr>
-                
+
                                                             <th class="">Address</th>
                                                             <td class="">{{ $item->address }}</td>
-                
+
                                                         </tr>
                                                         <tr>
-                
+
                                                             <th class="">Description</th>
-                                                           
+
                                                             <td class=""><a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal">View Description</a>
                                                                 <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel"
                                                                 aria-hidden="true">
@@ -126,25 +126,25 @@
                                                                                 aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="modal-body px-5">
-                                                                            {{ $item->description }} 
+                                                                            {{ $item->description }}
                                                                         </div>
-                                                
+
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             </td>
-                
+
                                                         </tr>
-                                                      
+
                                                         <tr>
-                
+
                                                             <th class="">Brochure</th>
                                                             <td class="">
                                                                 <a href="{{ $item->file }}"> Click Here</a> to Download Brochure</td>
-                
+
                                                         </tr>
                                                     </thead>
-                                                 
+
                                                 </table>
                                             </div>
                                         </div>
@@ -157,13 +157,13 @@
                                 @if ($events->previousPageUrl())
                                     <a href="{{ $events->previousPageUrl() }}" class="pager_prev"></a>
                                 @endif
-                                
+
                                 @php
                                     // Calculate the range of visible page numbers
                                     $startPage = max(1, $events->currentPage() - 2);
                                     $endPage = min($startPage + 4, $events->lastPage());
                                 @endphp
-                                
+
                                 @for ($i = $startPage; $i <= $endPage; $i++)
                                     @if ($i == $events->currentPage())
                                         <span class="pager_current active">{{ $i }}</span>
@@ -171,22 +171,155 @@
                                         <a href="{{ $events->url($i) }}" class="pager_number">{{ $i }}</a>
                                     @endif
                                 @endfor
-                            
+
                                 @if ($events->nextPageUrl())
                                     <a href="{{ $events->nextPageUrl() }}" class="pager_next"></a>
                                 @endif
-                                
+
                                 <a href="{{ $events->url($events->lastPage()) }}" class="pager_last"></a>
                             </nav>
-                            
+
                             <!-- End Custom Pagination -->
                         @else
                             <h1>No Data available.</h1>
                         @endif
                     </div>
                 </div>
-                
-                
+    <!-- Past Events -->
+    <div class="content_wrap">
+                    <h2 class="team_title text-center">Past Events Of SSI</h2>
+                    <div class="content">
+                        @if ($events->count() > 0)
+                            <div class="row">
+                                @foreach ($events as $item)
+                                    <!-- Display each events item here -->
+                                    <div class="col-lg-4 mb-4">
+                                        <!-- Post item -->
+                                        {{-- <article class="post_item card news-card post_item_excerpt odd post">
+                                            <div class="clearfix card-body">
+                                                <div class="post_featured">
+                                                    <div class="post_thumb" data-image="" data-title="Serving Cookies at Alpine Nationals">
+                                                        <a class="hover_icon hover_icon_link" href="#">
+                                                            <img alt="Serving Cookies at Alpine Nationals" src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}">
+
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <h4 class="news-title">
+                                                    <a href="#">{{ $item->title }}</a>
+                                                </h4>
+                                                <div class="post_descr">
+                                                    <p>{{ $item->img_description }}</p>
+                                                </div>
+                                                <div class="post_info mb-0 mt-0 d-flex justify-content-between">
+                                                    <span class="post_info_item post_info_posted">
+                                                        <span class="contact_icon icon-calendar-light"></span>
+                                                        <a href="post-single.html" class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
+                                                    </span>
+                                                    <span class="post_info_item post_info_posted_by">
+                                                        <span class="contact_icon icon-user"></span>
+                                                        <a href="#" class="post_info_author">{{ $item->type }} </a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </article> --}}
+                                        <div class="card committee-card">
+
+                                            <div class="card-body">
+
+                                                <table class="committee-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="2" class="table-title">{{ $item->title }}</th>
+                                                        </tr>
+                                                        <tr>
+
+                                                            <th class="">Date</th>
+                                                            <td class="">{{ $item->start_date }} To {{ $item->end_date }}</td>
+
+                                                        </tr>
+                                                        <tr>
+
+                                                            <th class="">Address</th>
+                                                            <td class="">{{ $item->address }}</td>
+
+                                                        </tr>
+                                                        <tr>
+
+                                                            <th class="">Description</th>
+
+                                                            <td class=""><a href="#" data-bs-toggle="modal" data-bs-target="#descriptionModal">View Description</a>
+                                                                <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5 mt-0" id="athletesFormModalLabel">{{$item->title}}</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body px-5">
+                                                                            {{ $item->description }}
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <th class="">Result</th>
+                                                            <td class="">
+                                                                <a href="{{ $item->file }}"> Click Here</a> to View Result</td>
+
+                                                        </tr>
+                                                    </thead>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!-- /Post item -->
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- Custom Pagination -->
+                            <nav id="pagination" class="pagination_wrap pagination_pages">
+                                @if ($events->previousPageUrl())
+                                    <a href="{{ $events->previousPageUrl() }}" class="pager_prev"></a>
+                                @endif
+
+                                @php
+                                    // Calculate the range of visible page numbers
+                                    $startPage = max(1, $events->currentPage() - 2);
+                                    $endPage = min($startPage + 4, $events->lastPage());
+                                @endphp
+
+                                @for ($i = $startPage; $i <= $endPage; $i++)
+                                    @if ($i == $events->currentPage())
+                                        <span class="pager_current active">{{ $i }}</span>
+                                    @else
+                                        <a href="{{ $events->url($i) }}" class="pager_number">{{ $i }}</a>
+                                    @endif
+                                @endfor
+
+                                @if ($events->nextPageUrl())
+                                    <a href="{{ $events->nextPageUrl() }}" class="pager_next"></a>
+                                @endif
+
+                                <a href="{{ $events->url($events->lastPage()) }}" class="pager_last"></a>
+                            </nav>
+
+                            <!-- End Custom Pagination -->
+                        @else
+                            <h1>No Data available.</h1>
+                        @endif
+                    </div>
+                </div>
+
+
 
             </article>
 
