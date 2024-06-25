@@ -105,11 +105,28 @@
                                             class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
-                                        <li
+                                        <!-- <li
                                             class="{{ request()->is('events') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                            <a href="{{ url('/events') }}"><span>Events</span></a>
-                                        </li>
+                                            <a href="{{ url('/events') }}">
+                                                <span>Events</span>
+                                            </a>
 
+                                        </li> -->
+                                        <li
+                                                class="{{ request()->is('events*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
+                                                <a href="#"><span>Events</span></a>
+                                                <ul class="sub-menu">
+                                                    <li class="menu-item current-menu-item">
+                                                        <a
+                                                            href="{{ url('/frontend/event') }}"><span>Upcoming Events</span></a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a
+                                                            href="{{ url('/frontend/pastevent') }}"><span>Past Events</span></a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
@@ -651,7 +668,7 @@
                         @include('frontend.commonComponants.chairmanWords')
 
 
-                
+
 
                         <div class="clear"></div>
                         <!-- /The Essential Grid -->
@@ -1004,7 +1021,7 @@
                             </div>
                         </article>
                         <!-- School Info -->
-                   
+
                         <!-- Equipment -->
                         @include('frontend.commonComponants.sponsershipPackages')
                         <!-- /Equipment -->

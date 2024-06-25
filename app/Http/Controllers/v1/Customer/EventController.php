@@ -57,7 +57,8 @@ class EventController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Events'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
+                return back()->with('success', 'Data Fetched Successfully.');
+                // return $this->sendResponse($response, 'Data Fetched Successfully.', true);
             } else {
                 return $this->sendError("No data available.");
             }

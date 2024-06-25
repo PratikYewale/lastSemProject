@@ -3,11 +3,11 @@
         <!-- Content -->
         <div class="content">
             <article class="post_item post_item_single_team post_featured_left team ">
-                
+
                 <div class="content_wrap">
 
                     <div class="content">
-                      
+
                         <div class="comments_form">
                             @if(Auth::user()->role === 'athlete')
                             <div id="respond" class="comment-respond">
@@ -98,7 +98,7 @@
                                                 </div>
                                             </div>
                                         </div> --}}
-                                        
+
 
 
                                         {{-- <div class="col-lg-4">
@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
 
-                                 
+
 
 
 
@@ -237,10 +237,10 @@
                                             </div>
                                         </div>
 
-                                    
 
 
-                                 
+
+
 
 
 
@@ -266,9 +266,12 @@
 
                                     </div>
                                     <div class="">
+                                        <a href="profile">
                                         <button type="button"
                                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                            data-bs-dismiss="modal">Cancel </button>
+                                        </a>
+
                                         <button type="submit"
                                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
                                     </div>
@@ -489,7 +492,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-2 d-none d-lg-block"></div>
-                                       
+
                                         {{-- <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="recognition_by_state_government"
@@ -749,13 +752,13 @@
                                                 <div id="error-signature_of_bearer_2"class="text-danger"></div>
                                             </div>
                                         </div>
-                              
-                                   
+
+
 
 
                                         <div class="col-lg-12">
                                             <div class="mb-3 d-flex">
-                                              
+
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="acknowledgement" name="acknowledgement" value="{{ Auth::user()->acknowledgement }}">
                                                 <label class="form-check-label ms-3" for="flexCheckChecked">
@@ -777,9 +780,11 @@
                                         </div>
 
                                         <div class="">
-                                            <button type="button"
-                                                class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
-                                                data-bs-dismiss="modal">Cancel</button>
+                                        <a href="profile">
+                                        <button type="button"
+                                            class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade bg-danger"
+                                            data-bs-dismiss="modal">Cancel </button>
+                                        </a>
                                             <button type="submit"
                                                 class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  sc_button_hover_fade">Submit</button>
                                         </div>
@@ -913,7 +918,7 @@
                             </div>
                             @endif
                         </div>
-                    
+
                     </div>
                 </div>
 
@@ -926,5 +931,6 @@
 
         </div>
         <!-- /Content -->
+
     </div>
     <!-- /Page content wrap -->

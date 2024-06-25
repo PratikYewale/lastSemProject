@@ -165,7 +165,7 @@ class MemberController extends Controller
                 $user->aadhar_number = $request->aadhar_number;
                 $user->passport_number = $request->passport_number;
                 $user->team_id = $request->team_id;
-                $user->designation = "Designation not defined yet.";
+                // $user->designation = "Designation not defined yet.";
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
                 }
@@ -208,7 +208,7 @@ class MemberController extends Controller
             //     }
             // }
 
-            DB::commit();
+            // DB::commit();
             return back()->with('success', 'Athlete added successfully.');
             // return $this->sendResponse([], "Athlete added succesfully.");
         } catch (Exception $e) {

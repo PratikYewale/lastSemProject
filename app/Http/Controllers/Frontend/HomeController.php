@@ -16,6 +16,7 @@ use App\Models\Event;
 use App\Models\User;
 use App\Models\Team;
 use App\Models\Plan;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -108,28 +109,53 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    // public function events()
+    // {
+    //     try {
+    //         $events = Event::query();
+    //         $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
+    //         // dd($events);
+
+    //         return view('frontend.event', compact('events'));
+    //     } catch (Exception $e) {
+
+    //         return redirect()->back()->with('error', 'Error fetching events.');
+    //     }
+
+    // }
     public function events()
     {
         try {
-            $events = Event::query();
-            $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
+            $currentDate = now();
 
-            return view('frontend.event', compact('events'));
+            // Fetch past events
+            $pastEvents = Event::where('end_date', '<', $currentDate)->orderBy('start_date', 'desc')->paginate(9, ['*'], 'past_page');
+
+            // Fetch upcoming events
+            $upcomingEvents = Event::where('start_date', '>', $currentDate)->orderBy('start_date', 'asc')->paginate(9, ['*'], 'upcoming_page');
+
+            // Fetch ongoing events
+            $ongoingEvents = Event::where('start_date', '<=', $currentDate)
+                                  ->where('end_date', '>=', $currentDate)
+                                  ->orderBy('start_date', 'asc')
+                                  ->paginate(9, ['*'], 'ongoing_page');
+
+            return view('frontend.event', compact('pastEvents', 'upcomingEvents', 'ongoingEvents'));
         } catch (Exception $e) {
-
             return redirect()->back()->with('error', 'Error fetching events.');
         }
-
     }
-    public function pastEvents()
+
+
+    public function pastevents()
     {
         try {
-            $events = Event::query();
-            $events = $events->with([])->orderBy('created_at', 'desc')->paginate(9);
-
-            return view('frontend.event', compact('pastEvents'));
+            $events = Event::where('end_date', '<', Carbon::now())
+                ->orderBy('created_at', 'desc')
+                ->paginate(9);
+            // dd($events);
+            return view('frontend.pastevent', compact('events'));
         } catch (Exception $e) {
-
             return redirect()->back()->with('error', 'Error fetching events.');
         }
 
