@@ -33,7 +33,13 @@
                                                             Athlete
                                                         </b>
                                                     </td>
-                                                    <td></td>
+                                                    <td>
+                                                    <b>
+                                                            Designation :
+                                                        </b>
+                                                        <b class="text-danger">
+                                                        {{ ucfirst(Auth::user()->designation) }}                                                        </b>
+                                                    </td>
 
 
 

@@ -404,10 +404,15 @@
 
                                                                 <tr>
 
-                                                                    <th class="">Result</th>
+                                                                    <th class="">Result </th>
                                                                     <td class="">
-                                                                        <a href="{{ $item->file }}"> Click Here</a> to View Result</td>
+                                                                    @if(isset($item->result_id))
+                                                                                <a href="{{ url('/announcement/' . $item->result_id) }}">Click Here</a> to View Result
+                                                                            @else
+                                                                                Result not found.
+                                                                            @endif
 
+                                                                    </td>
                                                                 </tr>
                                                             </thead>
 
