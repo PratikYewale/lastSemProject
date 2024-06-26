@@ -192,4 +192,34 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+    public function updateAthleteDesignation(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id',
+                'designation' => 'required|in:Senior,Junior',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed", $validator->errors());
+
+                // return back()->withErrors($validator)->withInput();
+            }
+            DB::beginTransaction();
+
+            $user = User::query()->where('id', $request->id)->first();
+            if (!$user) {
+                return $this->sendError("User not found.");
+            }
+            if ($request->has('designation')) {
+                $user->designation = $request->designation;
+            }
+            $user->save();
+            DB::commit();
+            return $this->sendResponse([],"Designation Updated Successfully.");
+            // return back()->with('success', 'Profile Updated successfully!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 413);
+        }
+    }
 }
