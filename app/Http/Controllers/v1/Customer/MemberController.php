@@ -199,16 +199,16 @@ class MemberController extends Controller
                     $newAchievment->save();
                 }
             }
-            // if ($request->has('sport_certificates')) {
-            //     foreach ($request->file('sport_certificates') as $sport_certificate) {
-            //         $newCertificate = new SportCertificate();
-            //         $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
-            //         $newCertificate->user_id = $user->id;
-            //         $newCertificate->save();
-            //     }
-            // }
+            if ($request->has('sport_certificates')) {
+                foreach ($request->file('sport_certificates') as $sport_certificate) {
+                    $newCertificate = new SportCertificate();
+                    $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
+                    $newCertificate->user_id = $user->id;
+                    $newCertificate->save();
+                }
+            }
 
-            // DB::commit();
+            DB::commit();
             return back()->with('success', 'Athlete added successfully.');
             // return $this->sendResponse([], "Athlete added succesfully.");
         } catch (Exception $e) {
