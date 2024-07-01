@@ -8347,7 +8347,7 @@ footer.twitter_wrap .sc_section_overlay {
 	z-index: 10002 !important;
 }
 
-/* 13.3 Google conversion 
+/* 13.3 Google conversion
 ---------------------------------------------------------- */
 iframe[name="google_conversion_frame"] {
 	height: 1px;
@@ -9318,7 +9318,7 @@ body table.booked-calendar tr.days th {
 }
 .nav-pills .nav-link .active:hover, .nav-pills .show>.nav-link:hover {
     color: #fff !important;
-   
+
 }
 
 #pills-tab .nav-link {
@@ -9339,21 +9339,21 @@ body table.booked-calendar tr.days th {
 	display: flex !important;
 	align-items: center!important;;
 	background-color: #f9f600 !important;
-	
+
 }
 .icon-enquiry{
 	font-size: 18px!important;;
 	font-weight: 600!important;;
 	color: #000 !important;
-	
+
 }
 .icon-enquiry:hover{
 	color:#fff !important;
 }
 .enquiry-btn:hover{
-	
+
     left: 0px !important;
-   
+
 }
 .enquiry-btn img{
 	width: 24px !important;;
@@ -9406,7 +9406,7 @@ body table.booked-calendar tr.days th {
 .profile-table tbody tr,
 .profile-table tbody tr td {
 	border: 1px solid #dee2e6 !important;
-	
+
 
 
 }

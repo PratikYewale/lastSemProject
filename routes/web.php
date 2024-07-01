@@ -37,6 +37,8 @@ use App\Http\Controllers\v1\Customer\SponsorshipController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/donate', [HomeController::class, 'donate']);
 Route::get('/about', [HomeController::class, 'about']);
+Route::get('/forgotpassword', [HomeController::class, 'forgotpassword']);
+
 Route::get('/teams', [TeamController::class, 'teams']);
 Route::get('/teamDetails/{id}', [TeamController::class, 'teamDetails'])->name('teamDetails');
 Route::get('/services', [HomeController::class, 'services']);
@@ -58,6 +60,15 @@ Route::get('/registration/associationRegistration', [NewsController::class, 'ass
 Route::get('/registration/athletesRegistration', [NewsController::class, 'athletes']);
 Route::get('/registration/sponsorshipRegistration', [NewsController::class, 'sponsorship']);
 
+//forgot password
+
+// Route::post('/forgotpassword', [MemberController::class, 'updatePassword'])->name('updatePassword');
+// Route::post('/checkOtpAndLoginEmail', [MemberController::class, 'checkOtpAndLoginEmail'])->name('checkOtpAndLoginEmail');
+// Route::post('/forgotpassword', [MemberController::class, 'forgetPasswordAdmin'])->name('forgetPasswordAdmin');
+
+Route::post('/forget-password', [MemberController::class, 'forgetPasswordAdmin'])->name('forgetPasswordAdmin');
+Route::post('/check-otp', [MemberController::class, 'checkOtpAndLoginEmail'])->name('checkOtpAndLoginEmail');
+Route::post('/reset-password', [MemberController::class, 'updatePassword'])->name('updatePassword');
 
 
 // Login

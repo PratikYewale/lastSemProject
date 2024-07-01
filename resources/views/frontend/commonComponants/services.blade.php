@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
                             <figure class="sc_image sc_image_shape_square">
-                                <img src="{{ url('frontend/images/depositphotos-86257350-570.png') }}" alt="" />
+                                <img src="{{ url('frontend/images/services1.jpg') }}" alt="" />
                             </figure>
                         </div>
 
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
                             <figure class="sc_image sc_image_shape_square">
-                                <img src="{{ url('frontend/images/depositphotos-86257350-570.png') }}" alt="" />
+                                <img src="{{ url('frontend/images/services2.jpg') }}" alt="" />
                             </figure>
                         </div>
 
@@ -137,7 +137,7 @@
                                             equipment from our official suppliers
                                         </p>
 
-                                      <p><b>Please reach out to us if you are interested to take part is our development programs </b></p>  
+                                      <p><b>Please reach out to us if you are interested to take part is our development programs </b></p>
                                         <a href="{{url('/contact')}}"
                                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Contact Us</a>
                                     </div>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
                             <figure class="sc_image sc_image_shape_square">
-                                <img src="{{ url('frontend/images/depositphotos-86257350-570.png') }}" alt="" />
+                                <img src="{{ url('frontend/images/services.jpg') }}" alt="" />
                             </figure>
                         </div>
 

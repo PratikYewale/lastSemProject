@@ -47,7 +47,26 @@ class HomeController extends Controller
             return view('frontend.about');
         }
     }
+    public function forgotpassword()
+    {
+        try {
+            $associations = User::where('role', 'member')->paginate(9);
 
+            return view('frontend.forgotpassword', compact('associations'));
+        } catch (Exception $e) {
+            return view('frontend.forgotpassword');
+        }
+    }
+    public function updatePassword()
+    {
+        try {
+            $associations = User::where('role', 'member')->paginate(9);
+
+            return view('frontend.login', compact('associations'));
+        } catch (Exception $e) {
+            return view('frontend.login');
+        }
+    }
     public function services()
     {
         return view('frontend.services');
