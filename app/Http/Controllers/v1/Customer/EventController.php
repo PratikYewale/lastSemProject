@@ -22,7 +22,8 @@ class EventController extends Controller
                 'pageNo' => 'numeric',
                 'limit' => 'numeric',
                 'start_date' => 'nullable|date_format:Y-m-d',
-
+                'end_date' => 'nullable|date_format:Y-m-d',
+                'event_type' => 'nullable|string|in:past,upcoming,live'
             ]);
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
@@ -33,6 +34,17 @@ class EventController extends Controller
             }
             if ($request->has('end_date')) {
                 $query->whereDate('end_date', '=', $request->end_date);
+            }
+            if ($request->has('event_type')) {
+                $currentDate = Carbon::now()->toDateString();
+                if ($request->event_type === 'past') {
+                    $query->whereDate('end_date', '<', $currentDate);
+                } elseif ($request->event_type === 'upcoming') {
+                    $query->whereDate('start_date', '>', $currentDate);
+                } elseif ($request->event_type === 'live') {
+                    $query->whereDate('start_date', '<=', $currentDate)
+                        ->whereDate('end_date', '>=', $currentDate);
+                }
             }
             $count = $query->count();
             if ($request->has('pageNo') && $request->has('limit')) {
@@ -45,7 +57,8 @@ class EventController extends Controller
             if (count($data) > 0) {
                 $response['count'] = $count;
                 $response['Events'] = $data;
-                return $this->sendResponse($response, 'Data Fetched Successfully.', true);
+                return back()->with('success', 'Data Fetched Successfully.');
+                // return $this->sendResponse($response, 'Data Fetched Successfully.', true);
             } else {
                 return $this->sendError("No data available.");
             }

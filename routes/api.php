@@ -68,7 +68,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
 
         //Auth
         Route::get('getCurrentProfile', [AdminAuthController::class, 'getCurrentProfile']);
-        
+
         // Dashboard
         Route::get('getAllDashboardCount', [DashboardController::class, 'getAllDashboardCount']);
 
@@ -84,7 +84,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::get('getAllTeams', [TeamController::class, 'getAllTeams']);
         Route::get('getTeamById', [TeamController::class, 'getTeamById']);
         Route::delete('deleteTeamById', [TeamController::class, 'deleteTeamById']);
-        // Team Profiles 
+        // Team Profiles
         Route::post('addMultipleTeamsWithAthletes', [TeamController::class, 'addMultipleTeamsWithAthletes']);
         Route::post('updateMultipleTeamsWithAthletes', [TeamController::class, 'updateMultipleTeamsWithAthletes']);
         Route::post('addTeamProfile', [TeamController::class, 'addTeamProfile']);
@@ -215,6 +215,13 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::get('getAllCity', [AddressController::class, 'getAllCity']);
     Route::get('getAllState', [AddressController::class, 'getAllState']);
     Route::get('getAllCountry', [AddressController::class, 'getAllCountry']);
+    //forgotpassword
+
+    Route::post('forgetPasswordAdmin', [MemberController::class, 'forgetPasswordAdmin']);
+    Route::post('checkOtpAndLoginEmail', [MemberController::class, 'checkOtpAndLoginEmail']);
+    Route::post('updatePassword', [MemberController::class, 'updatePassword']);
+
+
     // Member
     Route::post('addMember', [MemberController::class, 'addMember']);
     Route::post('loginMember', [MemberController::class, 'loginMember']);
@@ -276,11 +283,11 @@ Route::group(['prefix' => 'v1/customer', 'as' => 'v1/customer'], function () {
     Route::get('getAllEvents', [CustomerEventController::class, 'getAllEvents']);
     Route::get('getEventById', [CustomerEventController::class, 'getEventById']);
 
-    //Program 
+    //Program
     Route::get('getAllProgram', [CustomerProgramController::class, 'getAllProgram']);
     Route::get('getProgramById', [CustomerProgramController::class, 'getProgramById']);
 
-    //Team 
+    //Team
     Route::get('getAllTeams', [CustomerTeamController::class, 'getAllTeams']);
     Route::get('getTeamById', [CustomerTeamController::class, 'getTeamById']);
     Route::get('getAllTeamMembers', [CustomerTeamController::class, 'getAllTeamMembers']);

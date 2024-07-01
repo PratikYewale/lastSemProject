@@ -105,11 +105,28 @@
                                             class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
-                                        <li
+                                        <!-- <li
                                             class="{{ request()->is('events') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                            <a href="{{ url('/events') }}"><span>Events</span></a>
-                                        </li>
+                                            <a href="{{ url('/events') }}">
+                                                <span>Events</span>
+                                            </a>
 
+                                        </li> -->
+                                        <li
+                                                class="{{ request()->is('events*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
+                                                <a href="#"><span>Events</span></a>
+                                                <ul class="sub-menu">
+                                                    <li class="menu-item current-menu-item">
+                                                        <a
+                                                            href="{{ url('/frontend/event') }}"><span>Upcoming Events</span></a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a
+                                                            href="{{ url('/frontend/pastevent') }}"><span>Past Events</span></a>
+                                                    </li>
+
+                                                </ul>
+                                            </li>
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
@@ -651,7 +668,7 @@
                         @include('frontend.commonComponants.chairmanWords')
 
 
-                
+
 
                         <div class="clear"></div>
                         <!-- /The Essential Grid -->
@@ -862,7 +879,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="1" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-9-1024x683.jpg') }}"
+                                                <img src="{{ url('frontend/images/comunity1.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -886,7 +903,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="2" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-10-1024x683.jpg') }}"
+                                                <img src="{{ url('frontend/images/compitation.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -910,7 +927,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="1" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-8-1024x649.jpg') }}"
+                                                <img src="{{ url('frontend/images/comunity2.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -935,7 +952,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="1" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-7-1024x670.jpg') }}"
+                                                <img src="{{ url('frontend/images/comunity3.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -959,7 +976,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="1" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-6-1024x683.jpg') }}"
+                                                <img src="{{ url('frontend/images/comunity5.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -981,7 +998,7 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="2" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/image-5-883x1024.jpg') }}"
+                                                <img src="{{ url('frontend/images/comunity4.jpg') }}"
                                                     alt="">
                                             </div>
                                             <div class="esg-entry-cover esg-fade" data-delay="0">
@@ -1004,7 +1021,7 @@
                             </div>
                         </article>
                         <!-- School Info -->
-                   
+
                         <!-- Equipment -->
                         @include('frontend.commonComponants.sponsershipPackages')
                         <!-- /Equipment -->

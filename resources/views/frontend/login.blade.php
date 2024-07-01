@@ -63,7 +63,7 @@
 
 
                                                             </div>
-                                                    
+
 
 
                                                         </div>
@@ -78,15 +78,13 @@
                                                                 <a href="{{ url('/registration/athletesRegistration#Athlete-register-form') }}" class="">Athlete</a> or
                                                                 <a href="{{ url('/registration/associationRegistration#association-register-form') }}" class="">Association</a>.
                                                             </div>
-                                                            {{-- <div>
-                                                                <a href="#" class="">Forgot
+                                                        </div>
+                                                        <div>
+                                                        <a href="{{ url('/forgotpassword') }}">
+                                                                    Forgot
                                                                     Password
                                                                 </a>
-                                                            </div> --}}
-
-
                                                         </div>
-
 
 
                                                     </div>

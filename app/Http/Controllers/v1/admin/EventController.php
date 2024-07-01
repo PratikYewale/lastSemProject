@@ -136,7 +136,7 @@ class EventController extends Controller
             if ($validator->fails()) {
                 return $this->sendError('Validation Error.', $validator->errors(), 400);
             }
-            $query = Event::query()->with('eventImages');
+            $query = Event::query()->with('eventImages','result');
             if ($request->has('start_date')) {
                 $query->whereDate('start_date', '=', $request->start_date);
             }

@@ -165,7 +165,7 @@ class MemberController extends Controller
                 $user->aadhar_number = $request->aadhar_number;
                 $user->passport_number = $request->passport_number;
                 $user->team_id = $request->team_id;
-                $user->designation = "Designation not defined yet.";
+                // $user->designation = "Designation not defined yet.";
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
                 }
@@ -199,14 +199,14 @@ class MemberController extends Controller
                     $newAchievment->save();
                 }
             }
-            // if ($request->has('sport_certificates')) {
-            //     foreach ($request->file('sport_certificates') as $sport_certificate) {
-            //         $newCertificate = new SportCertificate();
-            //         $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
-            //         $newCertificate->user_id = $user->id;
-            //         $newCertificate->save();
-            //     }
-            // }
+            if ($request->has('sport_certificates')) {
+                foreach ($request->file('sport_certificates') as $sport_certificate) {
+                    $newCertificate = new SportCertificate();
+                    $newCertificate->certificate = $this->saveFile($sport_certificate, 'Certificates');
+                    $newCertificate->user_id = $user->id;
+                    $newCertificate->save();
+                }
+            }
 
             DB::commit();
             return back()->with('success', 'Athlete added successfully.');
@@ -991,6 +991,102 @@ class MemberController extends Controller
                 return $this->sendError("No data found.");
             }
         } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function forgetPasswordAdmin(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+            }
+            $otp = rand(100000, 999999);
+            $user->email_otp = $otp;
+            $user->email_otp_expiry = Carbon::now()->addMinutes(5);
+            $user->save();
+            $to_email = $user->email;
+            $data = array('otp' => $otp);
+            Mail::send('emails.sendOtp', $data, function ($message) use ($to_email) {
+                $message->to($to_email)
+                    ->subject('Otp for Login');
+                $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARDS INDIA');
+            });
+            DB::commit();
+
+            return back()->with('success', 'Otp sent successfully.')->with('showOtpScreen', true)->with('email', $request->email);
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function checkOtpAndLoginEmail(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
+                'otp' => 'required|string',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+            }
+            if ($user->email_otp != $request->otp) {
+                return $this->sendError("Validation failed.", ['otp' => 'Invalid OTP.']);
+            }
+            if ($user->email_otp_expiry < Carbon::now()) {
+                return $this->sendError("Validation failed.", ['otp' => 'Expired OTP.']);
+            }
+            $user->email_otp = null;
+            $user->email_otp_expiry = null;
+            $user->save();
+            DB::commit();
+
+            session(['showOtpScreen' => false, 'showResetPasswordScreen' => true, 'email' => $request->email]);
+
+            // Return a JSON response with success message
+            return response()->json([
+                'success' => true,
+                'message' => 'OTP verified. You can now reset your password.',
+            ]);
+        return redirect()->back()->with('success', 'OTP verified. You can now reset your password.');
+        } catch (Exception $e) {
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function updatePassword(Request $request): JsonResponse
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
+                'password' => 'required|min:6|confirmed',
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError("Validation failed.", $validator->errors());
+            }
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return $this->sendError('User not found.', [], 404);
+            }
+            $hashedPassword = Hash::make($request->password);
+            $user->password = $hashedPassword;
+            $user->save();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'Password updated successfully.',
+                'redirect_url' => url('/login')
+            ]);
+               } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }

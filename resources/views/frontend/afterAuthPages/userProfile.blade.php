@@ -33,7 +33,13 @@
                                                             Athlete
                                                         </b>
                                                     </td>
-                                                    <td></td>
+                                                    <td>
+                                                    <b>
+                                                            Designation :
+                                                        </b>
+                                                        <b class="text-danger">
+                                                        {{ ucfirst(Auth::user()->designation) }}                                                        </b>
+                                                    </td>
 
 
 
@@ -147,6 +153,101 @@
                                                         </span>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <h4 class="m-3  text-bold">Documents Details</h4>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>
+                                                            Aaddhar Card:<br/>
+                                                        </b>
+                                                        <span>
+                                                            <img class="profile-picture" src="{{ Auth::user()->aadhar_card }}"
+                                                                alt="No Image">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                           Passport:
+                                                        </b>
+                                                        <span>
+
+                                                            <img class="profile-picture" src="{{ Auth::user()->passport }}"
+                                                                alt="No Image">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                       PhysicalFitness Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->physical_fitness_certificate }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                       Anti Doping Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->anti_doping_certificate }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                <td>
+                                                        <b>
+                                                       Recommendation Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->recommendation }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- <tr>
+                                                    <td colspan="4">
+                                                        <h4 class="m-3  text-bold">Sport Documents Details</h4>
+                                                    </td>
+                                                </tr>
+                                                <td>
+                                                        <b>
+                                                       Recommendation Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->recommendation }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                       Recommendation Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->recommendation }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                       Recommendation Certificate:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->recommendation }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td> -->
                                                 {{-- <tr>
                                                 <td>
                                                     <b>
@@ -184,7 +285,7 @@
                                                         @endif
                                                     </span>
                                                 </td>
-    
+
                                             </tr> --}}
 
 
@@ -230,7 +331,7 @@
                                                 <tr>
                                                     <td>
                                                         <b>
-                                                            Organisation Name:<br/>
+                                                            Organization Name:<br/>
                                                         </b>
                                                         <span>
                                                             {{ Auth::user()->first_name }}
@@ -298,7 +399,7 @@
                                                             Recognition by State Government:<br/>
                                                         </b>
                                                         <span>
-                                                           
+
                                                             <span>
                                                                 @if (Auth::user()->recognition_by_state_government == 1)
                                                                     Yes
@@ -339,7 +440,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                 
+
                                                     <td>
                                                         <b>
                                                             Hosted International Event in Past 4 yrs:<br />
@@ -368,7 +469,7 @@
                                                         </span>
                                                     </td>
                                                 </tr>
-                                             
+
                                                 <tr>
                                                     <td colspan="4">
                                                         <h4 class="m-3  text-bold">President's Information</h4>
@@ -408,7 +509,38 @@
 
                                                 </tr>
 
+                                                <tr>
+                                                    <td>
+                                                        <b>
+                                                            President Signature:<br/>
+                                                        </b>
+                                                        <span>
+                                                            <img class="profile-picture" src="{{ Auth::user()->president_signature }}"
+                                                                alt="No Image">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                            Signature of Bearer 1:
+                                                        </b>
+                                                        <span>
 
+                                                            <img class="profile-picture" src="{{ Auth::user()->signature_of_bearer_1 }}"
+                                                                alt="No Image">
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <b>
+                                                        Signature of Bearer 2:
+                                                        </b>
+                                                        <span>
+
+                                                    <img class="profile-picture" src="{{ Auth::user()->signature_of_bearer_2 }}"
+                                                        alt="No Image">
+                                                    </span>
+                                                    </td>
+
+                                                </tr>
 
                                             </tbody>
                                         </table>
