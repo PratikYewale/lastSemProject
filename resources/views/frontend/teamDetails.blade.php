@@ -21,22 +21,22 @@
     <div class=" page_paddings_yes">
         <!-- Content -->
         <div class="bg-primery">
-        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-    @foreach ($team->teamprofiles as $index => $profile)
-    <li class="nav-item" role="presentation">
-        <a class="nav-link @if ($index == 0) active @endif"
-           id="pills-{{ $index }}-tab"
-           data-bs-toggle="pill"
-           href="#pills-{{ $index }}"
-           role="tab"
-           aria-controls="pills-{{ $index }}"
-           aria-selected="@if ($index == 0) true @endif">
-           {{ $profile->name }}
-        </a>
-    </li>
-    @endforeach
-</ul>
-        </div>
+        <ul class="nav nav-pills " id="pills-tab" style="justify-content:  space-around;" role="tablist">
+            @foreach ($team->teamprofiles as $index => $profile)
+            <li class="nav-item" role="presentation">
+                <a class="nav-link  @if ($index == 0) active @endif"
+                id="pills-{{ $index }}-tab"
+                data-bs-toggle="pill"
+                href="#pills-{{ $index }}"
+                role="tab"
+                aria-controls="pills-{{ $index }}"
+                aria-selected="@if ($index == 0) true @endif" >
+                {{ $profile->name }}
+                </a>
+            </li>
+            @endforeach
+        </ul>
+    </div>
 
         <div >
             <div class="container text-primary mt-3">
@@ -53,7 +53,7 @@
          role="tabpanel"
          aria-labelledby="pills-{{ $index }}-tab">
 
-        <h3>{{ $profile->name }} jhgf</h3>
+        <h3>{{ $profile->name }} </h3>
         <div class="row">
             @foreach ($profile->teammember as $member)
             <div class="col-lg-5">

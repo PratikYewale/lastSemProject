@@ -23,9 +23,9 @@
                 <!-- Single team info -->
                 <div class="content_wrap">
                     <section class="post_featured single_team_post_featured">
-                        <div class="post_thumb" data-image="http://placehold.it/840x800" data-title="Shannon Lorenz">
-                            <a class="hover_icon hover_icon_view" href="http://placehold.it/840x800" title="Shannon Lorenz">
-                                <img alt="Shannon Lorenz" src="http://placehold.it/570x542">
+                        <div class="post_thumb" data-image="{{ url('frontend/images/association.jpg') }}" data-title="Shannon Lorenz">
+                            <a class="hover_icon hover_icon_view" href="{{ url('frontend/images/association.jpg') }}" title="Shannon Lorenz">
+                                <img alt="Shannon Lorenz" src="{{ url('frontend/images/association.jpg') }}">
                             </a>
                         </div>
                     </section>

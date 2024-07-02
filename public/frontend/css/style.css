@@ -9323,6 +9323,7 @@ body table.booked-calendar tr.days th {
 
 #pills-tab .nav-link {
 	color:#fff ;
+    font-size:20px;
 }
 #pills-tab .nav-link:hover{
 	color:#fff !important;
