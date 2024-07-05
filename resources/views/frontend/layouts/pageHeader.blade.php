@@ -104,7 +104,7 @@
                                         <a href="{{ url('/events') }}"><span>Events</span></a>
                                     </li>
                                         <!-- /Menu: Announcement -->
-                                      
+
                                         <!-- Menu: Media Gallery or Registration -->
                                         @if (!Auth::user())
                                             <li
@@ -124,7 +124,19 @@
                                             </li>
                                         @endif
                                         <!-- /Menu: Media Gallery or Registration -->
-
+                                         <!-- Booking button block -->
+                                <!-- <div class="menu_main_additional_button top_panel_icon">
+                                    <div class="menu_main_additional_button_container">
+                                        <a href={{ url('/donate') }}>
+                                            <img src="{{ url('frontend/images/booking_heared_img.png') }}"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div> -->
+                                <li class="{{ request()->is('donate*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                            <a href="{{ url('/donate') }}"><span>Donate</span></a>
+                                 </li>
+                                <!-- /Booking button block -->
                                         <!-- Menu: Contact Us -->
                                         <li
                                             class="{{ request()->is('contact*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
@@ -195,16 +207,7 @@
                                     @endif
                                 </div>
                                 <!-- /Cart -->
-                                <!-- Booking button block -->
-                                <div class="menu_main_additional_button top_panel_icon">
-                                    <div class="menu_main_additional_button_container">
-                                        <a href={{ url('/donate') }}>
-                                            <img src="{{ url('frontend/images/booking_heared_img.png') }}"
-                                                alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- /Booking button block -->
+
                             </div>
                             <!-- /Main menu -->
                         </div>
@@ -224,24 +227,32 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <!-- Booking button block -->
+
+                    <!-- Cart -->
+                    <div class="menu_main_cart top_panel_icon">
+                        <a href="{{ url('/login') }}"
+                            >
+                            <span style=" color:white">Login</span>
+                         </a>
+                    </div>
                     <div class="menu_main_additional_button top_panel_icon">
                         <div class="menu_main_additional_button_container">
-                            <a href="#">
+                        <a href="{{ url('/login') }}" >
+                           <span class="contact_icon icon-user"></span>
+                        </a>
+                        </div>
+                   </div>
+                    <!-- /Cart -->
+
+                    <!-- Booking button block -->
+                  <!-- <div class="menu_main_additional_button top_panel_icon">
+                        <div class="menu_main_additional_button_container">
+                            <a href="{{ url('/donate') }}">
                                 <img src="{{ url('frontend/images/booking_heared_img.png') }}" alt="">
                             </a>
                         </div>
-                    </div>
-                    <!-- Cart -->
-                    <div class="menu_main_cart top_panel_icon">
-                        <a href="{{ url('/login') }}" class="top_panel_cart_button" data-items="2"
-                            data-summa="&#036;538.00">
-                            <span class="contact_icon icon-user"></span>
+                    </div> -->
 
-                        </a>
-
-                    </div>
-                    <!-- /Cart -->
                 </div>
                 <div class="side_wrap">
                     <div class="close">Close</div>
@@ -277,7 +288,7 @@
                             </li>
                             <!-- /Menu: Services -->
 
-                      
+
 
                             <!-- Menu: Announcement -->
                             <li
@@ -291,7 +302,7 @@
 
                             <!-- Menu: Media Gallery or Registration -->
                             @if (!Auth::user())
-                        
+
                                 <li
                                     class="{{ Route::currentRouteName() == 'registration*' ? 'menu-item current-menu-item menu-item-has-children' : 'menu-item menu-item-has-children' }}">
                                     <a href="#"><span>Registration</span></a>
@@ -309,12 +320,16 @@
                                 </li>
                             @endif
                             <!-- /Menu: Media Gallery or Registration -->
+                            <li class="{{ Route::currentRouteName() == 'donate' ? 'menu-item current-menu-item' : 'menu-item' }}">
 
+                             <a href="{{ url('/donate') }}"><span>Donate</span></a>
+                            </li>
                             <!-- Menu: Contact Us -->
                             <li
                                 class="{{ Route::currentRouteName() == 'contact' ? 'menu-item current-menu-item' : 'menu-item' }}">
                                 <a href="{{ url('/contact') }}"><span>Contact Us</span></a>
                             </li>
+
                             <!-- /Menu: Contact Us -->
                         </ul>
                         <!-- /Mobile Menu -->

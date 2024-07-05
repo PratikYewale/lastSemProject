@@ -96,7 +96,7 @@
                                             </div>
                                         </div>
 
-                                        <div  id="resetPassword" style="display: {{ session('showResetPasswordScreen') ? 'none' : 'block' }};">
+                                        <div  id="resetPassword" style="display: {{ session('showResetPasswordScreen') ? 'block' : 'none' }};">
                                             <div class="hero__form">
                                                 <h3 style="color:white;">Reset Password</h3>
                                                 <form id="resetPasswordForm" action="{{ route('updatePassword') }}" method="POST" enctype="multipart/form-data">

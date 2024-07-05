@@ -151,7 +151,11 @@
                                             </li>
                                         @endif
                                         <!-- /Menu: Media Gallery or Registration -->
-
+                                         <!-- Menu: Donate -->
+                                         <li class="{{ request()->is('donate*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                            <a href="{{ url('/donate') }}"><span>Donate</span></a>
+                                        </li>
+                                        <!-- Menu :Donate -->
                                         <!-- Menu: Contact Us -->
                                         <li
                                             class="{{ request()->is('contact*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
@@ -222,14 +226,14 @@
                                 </div>
                                 <!-- /Cart -->
                                 <!-- Booking button block -->
-                                <div class="menu_main_additional_button top_panel_icon">
+                                <!-- <div class="menu_main_additional_button top_panel_icon">
                                     <div class="menu_main_additional_button_container">
                                         <a href={{ url('/donate') }}>
                                             <img src="{{ url('frontend/images/booking_heared_img.png') }}"
                                                 alt="">
                                         </a>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- /Booking button block -->
 
                             </div>
@@ -252,14 +256,27 @@
                     </a>
                 </div>
                 <!-- /Logo -->
+                <div class="menu_main_cart top_panel_icon">
+                        <a href="{{ url('/login') }}"
+                            >
+                            <span style=" color:white">Login</span>
+                         </a>
+                    </div>
+                    <div class="menu_main_additional_button top_panel_icon">
+                        <div class="menu_main_additional_button_container">
+                        <a href="{{ url('/login') }}" >
+                           <span class="contact_icon icon-user"></span>
+                        </a>
+                        </div>
+                   </div>
                 <!-- Booking button block -->
-                <div class="menu_main_additional_button top_panel_icon">
+                <!-- <div class="menu_main_additional_button top_panel_icon">
                     <div class="menu_main_additional_button_container">
                         <a href="{{ url('/donate') }}">
                             <img src="{{ url('frontend/images/booking_heared_img.png') }}" alt="">
                         </a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <div class="side_wrap">
@@ -331,7 +348,11 @@
                                 </li>
                             @endif
                             <!-- /Menu: Media Gallery or Registration -->
+                            <!-- Menu Donate -->
+                            <li class="{{ Route::currentRouteName() == 'donate' ? 'menu-item current-menu-item' : 'menu-item' }}">
 
+                                <a href="{{ url('/donate') }}"><span>Donate</span></a>
+                            </li>
                             <!-- Menu: Contact Us -->
                             <li
                                 class="{{ Route::currentRouteName() == 'contact' ? 'menu-item current-menu-item' : 'menu-item' }}">

@@ -3285,7 +3285,7 @@ li.opened>a>.open_child_menu:before {
 
 .top_panel_middle .contact_icon {
 	float: left;
-	width: 3.5em;
+	width: 4.5em;
 	height: 3.5em;
 	line-height: 3.5em;
 	text-align: center;
@@ -3913,7 +3913,7 @@ li.opened>a>.open_child_menu:before {
 
 .header_mobile .menu_main_cart {
 	position: absolute;
-	right: 30px;
+	right: 20px;
 	margin: 0;
 	top: 50%;
 	margin-top: -12px;
@@ -9481,3 +9481,28 @@ input[type="number"] {
 	border: none;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+@media only screen and (max-width: 768px) {
+
+
+    img.img-fluid.rounded-start {
+        width: 45%;
+        justify-content: center;
+        margin-left: 90px;
+        margin-top: 9px;
+    }
+    .widget_area .widget_recent_reviews .post_item .post_info {
+        display: none;
+    }
+
+    .widget_area .widget_recent_reviews .post_item .post_rating {
+        margin-bottom: 0 em;
+    }
+
+    .widget_area .widget_recent_reviews .post_item:last-child .post_rating {
+        margin-bottom: 0em;
+    }
+}
+.menu_mobile .copyright_style_socials .copyright_text, .menu_mobile .copyright_style_menu .copyright_text, .menu_mobile .copyright_wrap .sc_socials, .menu_mobile .menu_footer_nav{
+ text-align: start;
+}
+

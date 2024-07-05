@@ -1,7 +1,7 @@
             <!-- Price Table -->
             <div class="content_wrap">
                 <h2 class="sc_title sc_title_underline margin_bottom_medium margin_top_2_5em">Sponsorship Packages</h2>
-              
+
                 @if ($plan->count() > 0)
                     <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3 margin_bottom_large row">
                         @foreach ($plan as $item)
@@ -41,7 +41,7 @@
                 @else
                     <h1>No Data available.</h1>
                 @endif
-                
+
             </div>
             <!-- /Price Table -->
 
