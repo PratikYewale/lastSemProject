@@ -268,8 +268,7 @@
                             <div class="custom_title_1 text_align_center">Team</div>
                             <div class="sc_section title_center">
                                 <div class="sc_section_inner">
-                                    <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">meet
-                                        our crew</h2>
+                                    <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">Core Committee</h2>
                                     <div class="sc_section_content_wrap">
                                         <div class="sc_team_wrap margin_top_small">
                                             <div class="sc_team sc_team_style_team-3 title_center width_100_per">

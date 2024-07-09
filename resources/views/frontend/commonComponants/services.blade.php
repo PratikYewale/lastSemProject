@@ -59,9 +59,15 @@
 
                     <div
                         class="columns_wrap sc_columns columns_nofluid sc_columns_count_2 columns_1_2_xs margin_top_large margin_bottom_large row">
+                        <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
+                            <figure class="sc_image sc_image_shape_square">
+                                <img src="{{ url('frontend/images/services2.jpg') }}" alt="" />
+                            </figure>
+                        </div>
                         <div class="col-lg-6 sc_column_item sc_column_item_2 even">
                             <div class="sc_section">
                                 <div class="sc_section_inner">
+
                                     <div class="sc_section_content_wrap">
                                         <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">
                                             Services
@@ -102,11 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
-                            <figure class="sc_image sc_image_shape_square">
-                                <img src="{{ url('frontend/images/services2.jpg') }}" alt="" />
-                            </figure>
-                        </div>
+
 
                     </div>
 
@@ -146,7 +148,7 @@
                         </div>
                         <div class="col-lg-6 sc_column_item sc_column_item_1 odd first">
                             <figure class="sc_image sc_image_shape_square">
-                                <img src="{{ url('frontend/images/services.jpg') }}" alt="" />
+                                <img src="{{ url('frontend/images/services3.jpg') }}" alt="" />
                             </figure>
                         </div>
 

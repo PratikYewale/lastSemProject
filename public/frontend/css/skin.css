@@ -3388,7 +3388,7 @@ figure figcaption,
     color: #aeaeae;
     text-transform: unset;
     text-align: left;
-    
+
 }
 
 .scheme_original .sc_price_block.sc_price_block_style_1 {
@@ -11127,7 +11127,9 @@ figure figcaption,
 }
 
 .scheme_dark .sc_title_underline::after {
-    border-color: #029ce2
+    border-color: #029ce2,
+    text-align:center,
+
 }
 
 .scheme_dark .sc_title_underline_dark::after {
