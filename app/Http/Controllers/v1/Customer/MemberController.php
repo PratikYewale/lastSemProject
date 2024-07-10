@@ -139,6 +139,7 @@ class MemberController extends Controller
                 'state' => 'required',
                 'country' => 'required',
                 'team_id' => 'integer|exists:teams,id',
+                'club_name'=>'required',
             ]);
 
             if ($validator->fails()) {
@@ -165,6 +166,7 @@ class MemberController extends Controller
                 $user->aadhar_number = $request->aadhar_number;
                 $user->passport_number = $request->passport_number;
                 $user->team_id = $request->team_id;
+                $user->club_name=$request->club_name;
                 // $user->designation = "Designation not defined yet.";
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');

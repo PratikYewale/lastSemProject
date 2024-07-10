@@ -197,7 +197,7 @@ class MemberController extends Controller
         try {
             $validator = Validator::make($request->all(), [
                 'id' => 'required|integer|exists:users,id',
-                'designation' => 'required|in:senior,junior',
+                'designation' => 'required|in:senior_a,senior_b,junior_a,junior_b,',
             ]);
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());

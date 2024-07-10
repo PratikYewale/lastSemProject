@@ -391,7 +391,12 @@
                                         data-param3="" data-param4="" data-param5="" data-param6="" data-param7=""
                                         data-param8="" data-param9="" data-param10="" data-description="">
                                         <!-- MAIN IMAGE -->
-                                        <img src="{{ url('frontend/images/slider_3_slide_1.jpg') }}" alt=""
+                                        <!-- <img src="{{ url('frontend/images/slider_3_slide_1.jpg') }}" alt=""
+                                            title="slider_3_slide_1" width="1920" height="980"
+                                            data-bgposition="center center" data-bgfit="cover"
+                                            data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
+                                            data-no-retina> -->
+                                            <img src="{{ url('frontend/images/altete-register-from.jpg') }}" alt=""
                                             title="slider_3_slide_1" width="1920" height="980"
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"

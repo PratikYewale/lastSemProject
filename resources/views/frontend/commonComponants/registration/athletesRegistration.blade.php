@@ -275,7 +275,15 @@
                                                     name="mobile_no" pattern="[0-9]{10}" maxlength="10">
                                             </div>
                                         </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Club/State<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="club_name"
+                                                    name="club_name">
+                                            </div>
 
+                                        </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Password</label>

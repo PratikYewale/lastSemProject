@@ -89,12 +89,15 @@
                                             <i class="icon icon-location-1"></i>
                                         </div>
                                         <div class="ms-2">
-                                            {{ $member->users->city }}, {{ $member->users->state }}
+                                            {{ $member->users->club_name }}
                                         </div>
                                     </div>
                                     <div class="d-flex">
-                                        <div class="">
+                                        <!-- <div class="">
                                             <p style="color:black">Designation :</p>
+                                        </div> -->
+                                        <div class="">
+                                            <i class="icon icon-user"></i>
                                         </div>
                                         <div class="ms-2">
                                             {{ ucfirst($member->users->designation) }}
