@@ -3183,7 +3183,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 	position: relative;
 	background-size: cover;
 	background-position: center;
-	background-image: url(../images/Depositphotos_105585628_1920x305.jpg)
+	background-image: url(../images/heading_background.jpeg)
 }
 
 .top_panel_image_hover {
@@ -3221,6 +3221,8 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 
 .top_panel_image .top_panel_image_header .breadcrumbs>* {
 	margin-top: 1.7em !important;
+    color:black;
+    font-weight: bold;
 }
 
 .top_panel_image .top_panel_image_header .breadcrumbs {
@@ -9006,7 +9008,7 @@ body table.booked-calendar tr.days th {
 	background-position: center;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
-	background-image: url(../images/bg_section_194.jpg);
+	background-image: url(../images/team_atlete_background.jpeg);
 	padding-top: 8em;
 	padding-bottom: 11.33em;
 }

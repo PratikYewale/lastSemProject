@@ -396,14 +396,14 @@
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
                                             data-no-retina> -->
-                                            <img src="{{ url('frontend/images/altete-register-from.jpg') }}" alt=""
+                                            <img src="{{ url('frontend/images/home_heading1.jpeg') }}" alt=""
                                             title="slider_3_slide_1" width="1920" height="980"
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
                                             data-no-retina>
                                         <!-- LAYERS -->
                                         <!-- LAYER NR. 1 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-9-layer-3" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-9-layer-3" data-x="right"
                                             data-hoffset="-9" data-y="28"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -415,9 +415,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_1_boarder.png') }}"
                                                 alt="" data-ww="934px" data-hh="837px" width="934"
                                                 height="837" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 2 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-9-layer-6" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-9-layer-6" data-x="right"
                                             data-hoffset="875" data-y="179"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -429,9 +429,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_1_2.png') }}"
                                                 alt="" data-ww="915px" data-hh="805px" width="915"
                                                 height="805" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 3 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-9-layer-7" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-9-layer-7" data-x="right"
                                             data-hoffset="700" data-y="324"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -443,9 +443,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_1_3.png') }}"
                                                 alt="" data-ww="1178px" data-hh="858px" width="1178"
                                                 height="858" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 4 -->
-                                        <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-9-layer-8" data-x="center" data-hoffset="-182" data-y="398"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -453,9 +453,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">You’re
-                                            here </div>
+                                            here </div> -->
                                         <!-- LAYER NR. 5 -->
-                                        <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-9-layer-9" data-x="center" data-hoffset="-292" data-y="485"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -463,9 +463,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">for the
-                                            point, </div>
+                                            point, </div> -->
                                         <!-- LAYER NR. 6 -->
-                                        <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-9-layer-10" data-x="center" data-hoffset="-302" data-y="602"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -473,9 +473,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">not the
-                                            points... </div>
+                                            points... </div> -->
                                         <!-- LAYER NR. 7 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-9-layer-5" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-9-layer-5" data-x="right"
                                             data-hoffset="23" data-y="220"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -487,7 +487,7 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_1_1.png') }}"
                                                 alt="" data-ww="1892px" data-hh="841px" width="1892"
                                                 height="841" data-no-retina>
-                                        </div>
+                                        </div> -->
                                     </li>
                                     <!-- SLIDE  -->
                                     <li data-index="rs-10" data-transition="fade" data-slotamount="default"
@@ -497,14 +497,14 @@
                                         data-param3="" data-param4="" data-param5="" data-param6="" data-param7=""
                                         data-param8="" data-param9="" data-param10="" data-description="">
                                         <!-- MAIN IMAGE -->
-                                        <img src="{{ url('frontend/images/slider_3_slide_2.jpg') }}" alt=""
+                                        <img src="{{ url('frontend/images/altete-register-from 1.png') }}" alt=""
                                             title="slider_3_slide_2" width="1920" height="1080"
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
                                             data-no-retina>
                                         <!-- LAYERS -->
                                         <!-- LAYER NR. 8 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-10-layer-1" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-10-layer-1" data-x="right"
                                             data-hoffset="" data-y="66" data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
                                             data-responsive_offset="on"
@@ -515,9 +515,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_2_boarder.png') }}"
                                                 alt="" data-ww="1847px" data-hh="951px" width="1847"
                                                 height="951" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 9 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-10-layer-7" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-10-layer-7" data-x="right"
                                             data-hoffset="944" data-y="109"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -529,9 +529,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_2_2.png') }}"
                                                 alt="" data-ww="915px" data-hh="805px" width="915"
                                                 height="805" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 10 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-10-layer-8" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-10-layer-8" data-x="right"
                                             data-hoffset="750" data-y="258"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -543,9 +543,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_2_3.png') }}"
                                                 alt="" data-ww="1178px" data-hh="858px" width="1178"
                                                 height="858" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 11 -->
-                                        <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-10-layer-2" data-x="center" data-hoffset="-355" data-y="350"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -553,9 +553,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">I've
-                                            reached </div>
+                                            reached </div> -->
                                         <!-- LAYER NR. 12 -->
-                                        <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-10-layer-3" data-x="center" data-hoffset="-341" data-y="439"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -563,9 +563,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">my goal
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 13 -->
-                                        <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-10-layer-4" data-x="center" data-hoffset="-338" data-y="570"
                                             data-width="['auto']" data-height="['auto']" data-type="text"
                                             data-responsive_offset="on"
@@ -573,9 +573,9 @@
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">with
-                                            snowboarding </div>
+                                            snowboarding </div> -->
                                         <!-- LAYER NR. 14 -->
-                                        <div class="tp-caption   tp-resizeme" id="slide-10-layer-6" data-x="right"
+                                        <!-- <div class="tp-caption   tp-resizeme" id="slide-10-layer-6" data-x="right"
                                             data-hoffset="33" data-y="177"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -587,7 +587,7 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_2_1.png') }}"
                                                 alt="" data-ww="1891px" data-hh="803px" width="1891"
                                                 height="803" data-no-retina>
-                                        </div>
+                                        </div> -->
                                     </li>
                                     <!-- SLIDE  -->
                                     <li data-index="rs-8" data-transition="fade" data-slotamount="default"
@@ -597,14 +597,14 @@
                                         data-param3="" data-param4="" data-param5="" data-param6="" data-param7=""
                                         data-param8="" data-param9="" data-param10="" data-description="">
                                         <!-- MAIN IMAGE -->
-                                        <img src="{{ url('frontend/images/slider_3_slide_3.jpg') }}" alt=""
+                                        <img src="{{ url('frontend/images/heading_2 1.jpeg') }}" alt=""
                                             title="slider_3_slide_3" width="1920" height="980"
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
                                             data-no-retina>
                                         <!-- LAYERS -->
                                         <!-- LAYER NR. 15 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-8-layer-1" data-x="right"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-8-layer-1" data-x="right"
                                             data-hoffset="3" data-y="162"
                                             data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
@@ -616,9 +616,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_3_boarder.png') }}"
                                                 alt="" data-ww="1085px" data-hh="832px" width="1085"
                                                 height="832" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 16 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-8-layer-6" data-x="68"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-8-layer-6" data-x="68"
                                             data-y="79" data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
                                             data-responsive_offset="on"
@@ -629,9 +629,9 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_3_2.png') }}"
                                                 alt="" data-ww="915px" data-hh="805px" width="915"
                                                 height="805" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 17 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-8-layer-7" data-x="-2"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-8-layer-7" data-x="-2"
                                             data-y="223" data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
                                             data-responsive_offset="on"
@@ -642,36 +642,37 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_3_3.png') }}"
                                                 alt="" data-ww="1178px" data-hh="858px" width="1178"
                                                 height="858" data-no-retina>
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 18 -->
-                                        <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_80 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-8-layer-2" data-x="310" data-y="264" data-width="['auto']"
                                             data-height="['auto']" data-type="text" data-responsive_offset="on"
                                             data-frames='[{"delay":890,"speed":300,"frame":"0","from":"y:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"y:-50px;opacity:0;","ease":"Power3.easeInOut"}]'
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">You Have
-                                            To </div>
+                                            To
+                                        </div> -->
                                         <!-- LAYER NR. 19 -->
-                                        <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_slide_text_100 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-8-layer-3" data-x="361" data-y="359" data-width="['auto']"
                                             data-height="['auto']" data-type="text" data-responsive_offset="on"
                                             data-frames='[{"delay":1160,"speed":300,"frame":"0","from":"x:-50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"x:-50px;opacity:0;","ease":"Power3.easeInOut"}]'
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">get back
-                                        </div>
+                                        </div> -->
                                         <!-- LAYER NR. 20 -->
-                                        <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
+                                        <!-- <div class="tp-caption slider_3_text_70 tp-resizeme rs-parallaxlevel-1"
                                             id="slide-8-layer-4" data-x="264" data-y="481" data-width="['auto']"
                                             data-height="['auto']" data-type="text" data-responsive_offset="on"
                                             data-frames='[{"delay":1440,"speed":300,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"y:50px;opacity:0;","ease":"Power3.easeInOut"}]'
                                             data-textAlign="['left','left','left','left']" data-paddingtop="[0,0,0,0]"
                                             data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]"
                                             data-paddingleft="[0,0,0,0]">into
-                                            surfing again </div>
+                                            surfing again </div> -->
                                         <!-- LAYER NR. 21 -->
-                                        <div class="tp-caption tp-resizeme" id="slide-8-layer-5" data-x="6"
+                                        <!-- <div class="tp-caption tp-resizeme" id="slide-8-layer-5" data-x="6"
                                             data-y="146" data-width="['none','none','none','none']"
                                             data-height="['none','none','none','none']" data-type="image"
                                             data-responsive_offset="on"
@@ -682,7 +683,7 @@
                                             <img src="{{ url('frontend/images/slider_3_slide_3_1.png') }}"
                                                 alt="" data-ww="1891px" data-hh="803px" width="1891"
                                                 height="803" data-no-retina>
-                                        </div>
+                                        </div> -->
                                     </li>
                                 </ul>
                                 <div class="tp-bannertimer tp-bottom"></div>
@@ -907,7 +908,7 @@
                                                 <img src="{{ url('frontend/images/comunity1.jpg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
@@ -920,7 +921,7 @@
                                                         title="View all posts in Community and People">Community
                                                         and People</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -931,7 +932,7 @@
                                                 <img src="{{ url('frontend/images/compitation.jpg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
@@ -944,7 +945,7 @@
                                                         title="View all posts in Competitions"
                                                         rel="category tag">Competitions</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -955,7 +956,7 @@
                                                 <img src="{{ url('frontend/images/comunity2.jpg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-post-1 eg-custom-skin-1-element-10-a">
@@ -969,7 +970,7 @@
                                                     <a class="eg-custom-skin-1-element-12" href="#"
                                                         title="View all posts in Mounthood">Mounthood</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -977,10 +978,10 @@
                                     <li class="eg-custom-skin-1-wrapper" data-cobblesw="1" data-cobblesh="1">
                                         <div class="esg-media-cover-wrapper">
                                             <div class="esg-entry-media">
-                                                <img src="{{ url('frontend/images/comunity3.jpg') }}"
+                                                <img src="{{ url('frontend/images/homa_page_left_side.jpeg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
@@ -993,7 +994,7 @@
                                                     <a class="eg-custom-skin-1-element-12" href="#"
                                                         title="View all posts in Places">Places</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -1004,7 +1005,7 @@
                                                 <img src="{{ url('frontend/images/comunity5.jpg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
@@ -1015,7 +1016,7 @@
                                                     <a class="eg-custom-skin-1-element-12" href="#"
                                                         title="View all posts in Places">Places</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -1026,7 +1027,7 @@
                                                 <img src="{{ url('frontend/images/comunity4.jpg') }}"
                                                     alt="">
                                             </div>
-                                            <div class="esg-entry-cover esg-fade" data-delay="0">
+                                            <!-- <div class="esg-entry-cover esg-fade" data-delay="0">
                                                 <div class="esg-overlay esg-fade eg-custom-skin-1-container"
                                                     data-delay="0"></div>
                                                 <div class="esg-center eg-custom-skin-1-element-10-a">
@@ -1037,7 +1038,7 @@
                                                     <a class="eg-custom-skin-1-element-12" href="#"
                                                         title="View all posts in Mounthood">Mounthood</a>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </li>
                                     <!-- /Grid item -->
@@ -1078,7 +1079,7 @@
                                                                                     <a class="hover_icon hover_icon_link"
                                                                                         href="{{ route('announcementDetails', ['id' => $item->id]) }}">
                                                                                         <img alt="Serving Cookies at Alpine Nationals"
-                                                                                            src="{{ $item->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}"
+                                                                                            src="{{ $item->primary_img }}"
                                                                                             onerror="this.onerror=null; this.src='{{ url('frontend/images/image-4-480x480.jpg') }}';">
                                                                                     </a>
                                                                                 </div>

@@ -98,7 +98,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3">
                                     <div class="sc_skills_item sc_skills_style_2 odd first">
                                         <div class="sc_skills_total" data-start="1" data-stop="1" data-step="1"
-                                            data-max="1" data-speed="36" data-duration="3600" data-ed="">0</div>
+                                            data-max="1" data-speed="36" data-duration="3600" data-ed="">1</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Development of Infrastructure</div>
@@ -111,7 +111,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3">
                                     <div class="sc_skills_item sc_skills_style_2 even">
                                         <div class="sc_skills_total" data-start="2" data-stop="2" data-step="2"
-                                            data-max="2" data-speed="26" data-duration="676" data-ed="">0</div>
+                                            data-max="2" data-speed="26" data-duration="676" data-ed="">2</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Talent Identification and Development</div>
@@ -124,7 +124,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3">
                                     <div class="sc_skills_item sc_skills_style_2 odd">
                                         <div class="sc_skills_total" data-start="3" data-stop="3" data-step="3"
-                                            data-max="3" data-speed="25" data-duration="2658" data-ed="">0</div>
+                                            data-max="3" data-speed="25" data-duration="2658" data-ed="">3</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Education and Coaching</div>
@@ -138,7 +138,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3">
                                     <div class="sc_skills_item sc_skills_style_2 even">
                                         <div class="sc_skills_total" data-start="4" data-stop="4" data-step="4"
-                                            data-max="4" data-speed="28" data-duration="93" data-ed="">0</div>
+                                            data-max="4" data-speed="28" data-duration="93" data-ed="">4</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Competitions and Events</div>
@@ -152,7 +152,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3 ">
                                     <div class="sc_skills_item sc_skills_style_2 odd first">
                                         <div class="sc_skills_total" data-start="5" data-stop="5" data-step="5"
-                                            data-max="5" data-speed="36" data-duration="3600" data-ed="">0</div>
+                                            data-max="5" data-speed="36" data-duration="3600" data-ed="">5</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Promotion and Awareness</div>
@@ -166,7 +166,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3 ">
                                     <div class="sc_skills_item sc_skills_style_2 even">
                                         <div class="sc_skills_total" data-start="6" data-stop="6" data-step="6"
-                                            data-max="6" data-speed="26" data-duration="676" data-ed="">0</div>
+                                            data-max="6" data-speed="26" data-duration="676" data-ed="">6</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">International Representation</div>
@@ -179,7 +179,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3 collapse" id="collapse2">
                                     <div class="sc_skills_item sc_skills_style_2 odd">
                                         <div class="sc_skills_total" data-start="7" data-stop="7" data-step="7"
-                                            data-max="7" data-speed="25" data-duration="2658" data-ed="">0</div>
+                                            data-max="7" data-speed="25" data-duration="2658" data-ed="">7</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Safety and Sustainability</div>
@@ -192,7 +192,7 @@
                                 <div class="sc_skills_column col-lg-4 mt-3 collapse" id="collapse2">
                                     <div class="sc_skills_item sc_skills_style_2 even">
                                         <div class="sc_skills_total" data-start="8" data-stop="8" data-step="8"
-                                            data-max="8" data-speed="28" data-duration="93" data-ed="">0</div>
+                                            data-max="8" data-speed="28" data-duration="93" data-ed="">8</div>
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
                                             <div class="sc_skills_label">Partnerships and Collaboration</div>

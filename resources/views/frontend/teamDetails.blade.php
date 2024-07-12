@@ -100,8 +100,8 @@
                                             <i class="icon icon-user"></i>
                                         </div>
                                         <div class="ms-2">
-                                            {{ ucfirst($member->users->designation) }}
-                                        </div>
+                                        {{ ucwords(str_replace('_', ' ', $member->users->designation)) }}
+                                       </div>
                                     </div>
                                 </div>
                             </div>

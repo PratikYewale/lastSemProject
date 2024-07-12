@@ -31,7 +31,7 @@
                     </section>
                     <section class="single_team_post_description">
                         <h2 class="team_title">Announcement Of SSI</h2>
-                      
+
                         <div class="team_meta"></div>
                         <div class="team_brief_info">
                             <div class="team_brief_info_text">
@@ -73,7 +73,7 @@
                                                     </div>
                                                 </div>
                                                 <h4 class="news-title">
-                                                    <a href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                    <a href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }} kjhr</a>
                                                 </h4>
                                                 <div class="post_descr">
                                                     <p>{{ $item->img_description }}</p>
@@ -91,7 +91,7 @@
                                                             Announcement
                                                             @else
                                                             News
-                                                            
+
                                                         @endif</a>
                                                     </span>
                                                 </div>
@@ -106,13 +106,13 @@
                                 @if ($news->previousPageUrl())
                                     <a href="{{ $news->previousPageUrl() }}" class="pager_prev"></a>
                                 @endif
-                                
+
                                 @php
                                     // Calculate the range of visible page numbers
                                     $startPage = max(1, $news->currentPage() - 2);
                                     $endPage = min($startPage + 4, $news->lastPage());
                                 @endphp
-                                
+
                                 @for ($i = $startPage; $i <= $endPage; $i++)
                                     @if ($i == $news->currentPage())
                                         <span class="pager_current active">{{ $i }}</span>
@@ -120,22 +120,22 @@
                                         <a href="{{ $news->url($i) }}" class="pager_number">{{ $i }}</a>
                                     @endif
                                 @endfor
-                            
+
                                 @if ($news->nextPageUrl())
                                     <a href="{{ $news->nextPageUrl() }}" class="pager_next"></a>
                                 @endif
-                                
+
                                 <a href="{{ $news->url($news->lastPage()) }}" class="pager_last"></a>
                             </nav>
-                            
+
                             <!-- End Custom Pagination -->
                         @else
                             <h1>No Data available.</h1>
                         @endif
                     </div>
                 </div>
-                
-                
+
+
 
             </article>
 

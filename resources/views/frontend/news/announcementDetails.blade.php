@@ -24,10 +24,10 @@
     </div>
     <!-- Page content wrap -->
     <div class="page_content_wrap py-5">
-   
+
         <div class="content_wrap">
             <div class="row">
-              
+
                 <div class="col-lg-7">
                     <!-- Content -->
                     <div class="content">
@@ -59,12 +59,15 @@
                                 <p>
                                     <b>{{ $news->intro_para }}</b>
                                 </p>
-                                @if (!empty($news['img1']))
+                                <!-- <img class="mb-0" src="{{ asset($news->primary_img) }}" alt="Blog"> -->
+                                <img alt="Serving Cookies at Alpine Nationals" style="height:60%; width:60%" src="{{ $news->primary_img ?? url('frontend/images/image-4-480x480.jpg') }}">
+
+                                <!-- @if (!empty($news['img1']))
                                     <img class="mb-0" src="{{ asset($news->primary_img) }}" alt="Blog">
                                 @else
                                     <img class="mb-0" src="{{ url('frontend/images/image-10-1024x683.jpg') }}"
                                         alt="Blog">
-                                @endif
+                                @endif -->
 
 
                                 <p>{{ $news->body_para }}</p>
@@ -114,7 +117,7 @@
                                                                         Announcement
                                                                         @else
                                                                         News
-                                                                        
+
                                                                     @endif
 
                                                                 </div>
