@@ -5690,6 +5690,7 @@ ul.sc_list_style_iconed {
 	font-size: 3.333em;
 	font-weight: 700;
 	text-transform: uppercase;
+	color:#cecece
 }
 .sc_item_title:after {
 	content:' ';
@@ -5697,6 +5698,8 @@ ul.sc_list_style_iconed {
 	width: 8.5rem;
 	height:3px;
 	margin: 0.6667em 0;
+	color:#cecece
+
 }
 
 .sc_section_title{
@@ -5704,6 +5707,8 @@ ul.sc_list_style_iconed {
 	font-weight: 700;
 	margin: 0;
 	text-transform: uppercase;
+	color:#cecece
+
 }
 
 /* Description */
@@ -5718,7 +5723,14 @@ ul.sc_list_style_iconed {
 	font-weight: 300;
 	text-align: left;
 	margin: 2.6em 0 2em 0;
+
 }
+.sc_section_text_col{
+	
+	color: #cecece;
+
+}
+
 /* Learn more botton */
 .sc_item_button:before {
 	content:' ';
