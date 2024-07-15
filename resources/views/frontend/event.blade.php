@@ -140,7 +140,7 @@
 
                                                             <th class="">Brochure</th>
                                                             <td class="">
-                                                                <a href="{{ $item->file }}"> Click Here</a> to Download Brochure</td>
+                                                                <a href="{{ $item->file }}" target="_blank"> Click Here</a> to Download Brochure</td>
 
                                                         </tr>
                                                     </thead>
@@ -273,7 +273,7 @@
 
                                                             <th class="">Brochure</th>
                                                             <td class="">
-                                                                <a href="{{ $item->file }}"> Click Here</a> to Download Brochure</td>
+                                                                <a href="{{ $item->file }}" target="_blank"> Click Here</a> to Download Brochure</td>
 
                                                         </tr>
                                                     </thead>
