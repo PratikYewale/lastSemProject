@@ -9008,15 +9008,20 @@ body table.booked-calendar tr.days th {
 	background-position: center;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
-	background-image: url(../images/team_atlete_background.jpeg);
+	background-image: url(../images/background4.png);
 	padding-top: 8em;
 	padding-bottom: 11.33em;
+	
 }
 
 .hp_school_info .sc_section_title {
 	width: 75%;
 }
 
+/* .sc_columns.columns_wrap {
+	display: flex;
+	justify-content: flex-end; /* Align columns to the right */
+} */
 .hp_booking_section {
 	background-position: center;
 	background-repeat: no-repeat !important;

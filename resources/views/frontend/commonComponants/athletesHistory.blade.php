@@ -1,19 +1,19 @@
      <!-- athletes History -->
-     <div class="hp_school_info">
-         <div class="content_wrap">
+     <div class="hp_school_info sc_columns.columns_wrap">
+         <div class="content_wrap row justify-content-end">
              <div class="sc_columns columns_wrap">
-                 <div class="column-9_12">
+                 <div class="column-9_12 mr-10" >
                      <div class="custom_title_1 text_align_left">Ski and Snowboard India (SSI)
                      </div>
-                     <div class="sc_section">
-                         <div class="sc_section_inner">
-                             <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">
-                                 Athletes</h2>
+                     <div class="sc_section ">
+                         <div class="sc_section_inner ">
+                             <div class="sc_section_title sc_item_title sc_item_title_without_descr sc_section_text_col">
+                                 Athletes</div>
                          </div>
                      </div>
                      <div class="sc_section margin_top_small-">
                          <div class="sc_section_inner">
-                             <div class="sc_section_descr sc_item_descr">In 1964, Jeremy Bujakowski made history as the
+                             <div class="sc_section_descr sc_item_descr sc_section_text_col" >In 1964, Jeremy Bujakowski made history as the
                                  first Indian to compete at the Winter Olympics. Born in Lithuania to Polish parents, he
                                  had more exposure to winter sports than the average Indian at the time. Although he
                                  couldn’t complete his race in 1964, he returned in 1968 to participate in three events:

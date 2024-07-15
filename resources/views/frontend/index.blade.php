@@ -105,14 +105,14 @@
                                             class="{{ request()->is('announcement*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/announcement') }}"><span>Announcement</span></a>
                                         </li>
-                                        <!-- <li
-                                            class="{{ request()->is('events') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
+                                        <li
+                                            class="{{ request()->is('events*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
                                             <a href="{{ url('/events') }}">
                                                 <span>Events</span>
                                             </a>
 
-                                        </li> -->
-                                        <li
+                                        </li>
+                                        <!-- <li
                                                 class="{{ request()->is('events*') ? 'menu-item current-menu-ancestor menu-item-has-children' : 'menu-item menu-item-has-children' }}">
                                                 <a href="#"><span>Events</span></a>
                                                 <ul class="sub-menu">
@@ -126,7 +126,7 @@
                                                     </li>
 
                                                 </ul>
-                                            </li>
+                                            </li> -->
                                         <!-- /Menu: Announcement -->
 
                                         <!-- Menu: Media Gallery or Registration -->
