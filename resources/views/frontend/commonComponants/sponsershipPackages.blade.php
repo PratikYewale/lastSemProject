@@ -1,13 +1,12 @@
             <!-- Price Table -->
-            <div class="content_wrap">
+            <!-- <div class="content_wrap">
             <div
             class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
                 <h2 class="sc_blogger_title sc_item_title sc_item_title_without_descr" style="margin-top:30px" >Sponsorship Packages</h2>
-            </div>
-                @if ($plan->count() > 0)
-                    <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3 margin_bottom_large row">
+            </div> -->
+                <!-- @if ($plan->count() > 0) -->
+                    <!-- <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3 margin_bottom_large row">
                         @foreach ($plan as $item)
-                            <!-- Price block -->
                             <div class="col-lg-4 sc_column_item sc_column_item_1 odd first">
                                 <div class="sc_price_block sc_price_block_style_3 card price-card">
                                     <div class="card-body">
@@ -36,18 +35,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Price block -->
                         @endforeach
 
-                    </div>
-                @else
+                    </div> -->
+                <!-- @else
                     <h1>No Data available.</h1>
-                @endif
+                @endif -->
 
-            </div>
+            <!-- </div> -->
             <!-- /Price Table -->
 
-            <div class="modal fade" id="sponserFormModal" tabindex="-1" aria-labelledby="sponserFormModalLabel"
+            <!-- <div class="modal fade" id="sponserFormModal" tabindex="-1" aria-labelledby="sponserFormModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content">
@@ -71,7 +69,7 @@
                                     <form id="sponsershipForm" action="{{ route('createSponsorship') }}" method="POST"
                                         enctype="multipart/form-data" class="sponsershipForm sc_input_hover_default"
                                         onsubmit="return validateForm()">
-                                        @csrf <!-- CSRF token -->
+                                        @csrf 
 
                                         <div class="row">
 
@@ -149,12 +147,10 @@
                                     </form>
 
                                     <script>
-                                        // Function to set amount based on selected package
                                         function setAmount() {
                                             var selectedPackage = document.getElementById('plan').value;
                                             var amountField = document.getElementById('amount');
 
-                                            // Set amount based on selected package
                                             switch (selectedPackage) {
                                                 case 'gold':
                                                     amountField.value = '1000';
@@ -171,12 +167,10 @@
                                             }
                                         }
 
-                                        // Function to update total amount
                                         function updateAmount() {
                                             var selectedPackage = document.getElementById('plan').value;
                                             var totalAmountElement = document.getElementById('totalAmount');
 
-                                            // Update total amount based on selected package
                                             switch (selectedPackage) {
                                                 case 'gold':
                                                     totalAmountElement.textContent = '1000';
@@ -193,7 +187,6 @@
                                             }
                                         }
 
-                                        // Event listener to update amount field when package selection changes
                                         document.getElementById('plan').addEventListener('change', function() {
                                             setAmount();
                                             updateAmount();
@@ -258,4 +251,4 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->

@@ -60,9 +60,9 @@
                             <div class="column-1_4 contact_logo">
                                 <div class="logo">
                                     <a href="{{ url('/') }}">
-                                        <img src="{{ url('frontend/images/logo.png') }}" class="logo_main"
+                                        <img src="{{ url('frontend/images/logo1.png') }}" class="logo_main"
                                             alt="">
-                                        <img src="{{ url('frontend/images/logo.png') }}" class="logo_fixed"
+                                        <img src="{{ url('frontend/images/logo1.png') }}" class="logo_fixed"
                                             alt="">
                                     </a>
                                 </div>
@@ -252,7 +252,7 @@
                 <!-- Logo -->
                 <div class="logo">
                     <a href="{{ url('/') }}">
-                        <img src="{{ url('frontend/images/logo.png') }}" class="logo_main" alt="">
+                        <img src="{{ url('frontend/images/logo1.png') }}" class="logo_main" alt="">
                     </a>
                 </div>
                 <!-- /Logo -->
@@ -597,7 +597,7 @@
                                         data-param3="" data-param4="" data-param5="" data-param6="" data-param7=""
                                         data-param8="" data-param9="" data-param10="" data-description="">
                                         <!-- MAIN IMAGE -->
-                                        <img src="{{ url('frontend/images/heading_2 1.jpeg') }}" alt=""
+                                        <img src="{{ url('frontend/images/home5.png') }}" alt=""
                                             title="slider_3_slide_3" width="1920" height="980"
                                             data-bgposition="center center" data-bgfit="cover"
                                             data-bgrepeat="no-repeat" data-bgparallax="off" class="rev-slidebg"
@@ -1146,7 +1146,7 @@
 
                             <div class="textwidget">
                                 <div class="wpc-weather-id">
-                                    <img src="{{ url('frontend/images/logo.png') }}" class="footer_logo"
+                                    <img src="{{ url('frontend/images/logo1.png') }}" class="footer_logo"
                                         alt="">
                                 </div>
 

@@ -3183,7 +3183,7 @@ body:not(.top_panel_fixed) .top_panel_position_over .top_panel_bottom {
 	position: relative;
 	background-size: cover;
 	background-position: center;
-	background-image: url(../images/heading_background.jpeg)
+	background-image: url(../images/aboutheading.jpeg)
 }
 
 .top_panel_image_hover {
@@ -9140,7 +9140,7 @@ body table.booked-calendar tr.days th {
 }
 
 .promo_image_1 {
-	background-image: url(../images/altete-register-from.jpg);
+	background-image: url(../images/about1.jpg);
 }
 
 /* About Us 1 */

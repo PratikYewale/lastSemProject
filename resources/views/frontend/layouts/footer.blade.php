@@ -8,7 +8,7 @@
 
                             <div class="textwidget">
                                 <div class="wpc-weather-id">
-                                    <img src="{{ url('frontend/images/logo.png') }}" class="footer_logo"
+                                    <img src="{{ url('frontend/images/logo1.png') }}" class="footer_logo"
                                         alt="">
                                 </div>
 

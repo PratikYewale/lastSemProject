@@ -54,9 +54,9 @@
                             <div class="column-1_4 contact_logo">
                                 <div class="logo">
                                     <a href="{{ url('/') }}">
-                                        <img src="{{ url('frontend/images/logo.png') }}" class="logo_main"
+                                        <img src="{{ url('frontend/images/logo1.png') }}" class="logo_main"
                                             alt="">
-                                        <img src="{{ url('frontend/images/logo.png') }}" class="logo_fixed"
+                                        <img src="{{ url('frontend/images/logo1.png') }}" class="logo_fixed"
                                             alt="">
                                     </a>
                                 </div>
@@ -223,7 +223,7 @@
                     <!-- Logo -->
                     <div class="logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ url('frontend/images/logo.png') }}" class="logo_main" alt="">
+                            <img src="{{ url('frontend/images/logo1.png') }}" class="logo_main" alt="">
                         </a>
                     </div>
                     <!-- /Logo -->

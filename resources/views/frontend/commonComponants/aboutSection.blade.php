@@ -3,7 +3,7 @@
               <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_2 columns_1_2_xs margin_top_large">
                   <div class="column-1_2 sc_column_item sc_column_item_1 odd first">
                       <figure class="sc_image sc_image_shape_square">
-                          <img src="{{ url('frontend/images/depositphotos-86257350-570.png') }}" alt="" />
+                          <!-- <img src="{{ url('frontend/images/heading_2.jpeg') }}" alt="" /> -->
                       </figure>
                   </div>
                   <div class="column-1_2 sc_column_item sc_column_item_2 even">
