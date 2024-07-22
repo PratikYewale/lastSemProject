@@ -3,7 +3,7 @@
 @section('main-container')
     <!-- Top panel -->
     <section class="top_panel_image">
-        <div class="top_panel_image_hover"></div>
+        <!-- <div class="top_panel_image_hover"></div> -->
         <div class="content_wrap">
             <div class="top_panel_image_header">
                 <h1 class="top_panel_image_title">ABOUT US</h1>
