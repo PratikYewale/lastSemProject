@@ -1054,7 +1054,8 @@
                         <!-- School Info -->
 
                         <!-- Equipment -->
-                        @include('frontend.commonComponants.sponsershipPackages')
+                         <div>vaishu</div>
+                        <!-- @include('frontend.commonComponants.sponsershipPackages') -->
                         <!-- /Equipment -->
                         <!-- From the Blog -->
                         <div class="hp_blog_section">

@@ -1,11 +1,11 @@
             <!-- Price Table -->
-            <!-- <div class="content_wrap">
+            <div class="content_wrap">
             <div
             class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
                 <h2 class="sc_blogger_title sc_item_title sc_item_title_without_descr" style="margin-top:30px" >Sponsorship Packages</h2>
-            </div> -->
-                <!-- @if ($plan->count() > 0) -->
-                    <!-- <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3 margin_bottom_large row">
+            </div>
+                @if ($plan->count() > 0)
+                    <div class="columns_wrap sc_columns columns_nofluid sc_columns_count_3 margin_bottom_large row">
                         @foreach ($plan as $item)
                             <div class="col-lg-4 sc_column_item sc_column_item_1 odd first">
                                 <div class="sc_price_block sc_price_block_style_3 card price-card">
@@ -37,15 +37,15 @@
                             </div>
                         @endforeach
 
-                    </div> -->
-                <!-- @else
+                    </div>
+                @else
                     <h1>No Data available.</h1>
-                @endif -->
+                @endif
 
-            <!-- </div> -->
+            </div>
             <!-- /Price Table -->
 
-            <!-- <div class="modal fade" id="sponserFormModal" tabindex="-1" aria-labelledby="sponserFormModalLabel"
+            <div class="modal fade" id="sponserFormModal" tabindex="-1" aria-labelledby="sponserFormModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content">
@@ -69,7 +69,7 @@
                                     <form id="sponsershipForm" action="{{ route('createSponsorship') }}" method="POST"
                                         enctype="multipart/form-data" class="sponsershipForm sc_input_hover_default"
                                         onsubmit="return validateForm()">
-                                        @csrf 
+                                        @csrf
 
                                         <div class="row">
 
@@ -251,4 +251,4 @@
 
                     </div>
                 </div>
-            </div> -->
+            </div>
