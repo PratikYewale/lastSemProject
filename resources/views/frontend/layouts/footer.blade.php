@@ -49,8 +49,8 @@
                                                         class="ms-1">Announcement</span></a>
                                         </li>
                                         <!-- /Menu: Store -->
-                                       
-                                 
+
+
 
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
@@ -84,7 +84,7 @@
                                                     href="{{ url('/registration/sponsorshipRegistration') }}"><span class="ms-1">Sponsor</span></a>
                                         </li>
                                         <!-- /Menu: Rent -->
-                                   
+
                                     </ul>
                                 </article>
 
@@ -128,7 +128,7 @@
                                                 <div class="sc_socials_item">
                                                     <a href="#" target="_blank"
                                                         class="social_icons social_twitter">
-                                                        <span class="icon-twitter"></span>
+                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
                                                     </a>
                                                 </div>
                                                 <div class="sc_socials_item">
@@ -137,12 +137,12 @@
                                                         <span class="icon-instagram-3"></span>
                                                     </a>
                                                 </div>
-                                                <div class="sc_socials_item">
+                                                <!-- <div class="sc_socials_item">
                                                     <a href="#" target="_blank"
                                                         class="social_icons social_foursquare">
                                                         <span class="icon-foursquare"></span>
                                                     </a>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </aside>

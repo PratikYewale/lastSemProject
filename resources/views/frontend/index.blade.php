@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="{{ url('frontend/css/skin.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ url('frontend/css/plugin.woocommerce.css') }}" type="text/css" media="all" />
     <link rel="stylesheet" href="{{ url('frontend/css/responsive.css') }}" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <link rel="stylesheet" href="{{ url('frontend/js/vendor/magnific/magnific-popup.min.css') }}" type="text/css"
         media="all" />
@@ -706,7 +707,8 @@
                         <!-- /The Essential Grid -->
 
                         <!-- Crew -->
-                        <div class="hp_crew_section">
+                         <!-- Crew -->
+                         <div class="hp_crew_section">
                             <div class="content_wrap">
                                 <div class="custom_title_1 text_align_center">Team</div>
                                 <div class="sc_section title_center">
@@ -727,21 +729,21 @@
                                                                             <div
                                                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <!-- <a href="#" target="_blank"
                                                                                         class="social_icons social_facebook">
                                                                                         <span
                                                                                             class="icon-facebook"></span>
-                                                                                    </a>
+                                                                                    </a> -->
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://x.com/100thofasec?t=leocgpjRDLMK1IKo5QZLdA&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <span
-                                                                                            class="icon-twitter"></span>
+                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+
                                                                                     </a>
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://www.instagram.com/100thofasec?igsh=MW5vajV2NjkzbGF5Zg==" target="_blank"
                                                                                         class="social_icons social_instagram-3">
                                                                                         <span
                                                                                             class="icon-instagram-3"></span>
@@ -771,21 +773,21 @@
                                                                             <div
                                                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <!-- <a href="#" target="_blank"
                                                                                         class="social_icons social_facebook">
                                                                                         <span
                                                                                             class="icon-facebook"></span>
-                                                                                    </a>
+                                                                                    </a> -->
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://x.com/B_Snoweagle?t=EoFZxd6_MMLMSSpFWhirUQ&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <span
-                                                                                            class="icon-twitter"></span>
+                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+
                                                                                     </a>
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://www.instagram.com/bhavani_thekkada?igsh=MWp1dzJndDNvdXV2Yg==" target="_blank"
                                                                                         class="social_icons social_instagram-3">
                                                                                         <span
                                                                                             class="icon-instagram-3"></span>
@@ -814,21 +816,21 @@
                                                                             <div
                                                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <!-- <a href="https://www.instagram.com/arifkhan_skier?igsh=YTc4YWU0Z2ppMml2" target="_blank"
                                                                                         class="social_icons social_facebook">
                                                                                         <span
                                                                                             class="icon-facebook"></span>
-                                                                                    </a>
+                                                                                    </a> -->
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <span
-                                                                                            class="icon-twitter"></span>
+                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+
                                                                                     </a>
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href="https://www.instagram.com/arifkhan_skier?igsh=YTc4YWU0Z2ppMml2" target="_blank"
                                                                                         class="social_icons social_instagram-3">
                                                                                         <span
                                                                                             class="icon-instagram-3"></span>
@@ -847,7 +849,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div><!-- /Team item --><!-- Team item -->
+                                                        </div>
+                                                        <!-- /Team item --><!-- Team item -->
                                                         <div class="col-lg-3 column_padding_bottom">
                                                             <div class="sc_team_item sc_team_item_4 even">
                                                                 <div class="sc_team_item_avatar">
@@ -857,18 +860,17 @@
                                                                         <div class="sc_team_item_socials">
                                                                             <div
                                                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                <div class="sc_socials_item">
+                                                                                <!-- <div class="sc_socials_item">
                                                                                     <a href="#" target="_blank"
                                                                                         class="social_icons social_facebook">
                                                                                         <span
                                                                                             class="icon-facebook"></span>
                                                                                     </a>
-                                                                                </div>
+                                                                                </div> -->
                                                                                 <div class="sc_socials_item">
-                                                                                    <a href="#" target="_blank"
+                                                                                    <a href=" https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <span
-                                                                                            class="icon-twitter"></span>
+                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px; color:#FFFFFF;">
                                                                                     </a>
                                                                                 </div>
                                                                                 <div class="sc_socials_item">
@@ -1054,8 +1056,8 @@
                         <!-- School Info -->
 
                         <!-- Equipment -->
-                         <div>vaishu</div>
-                        <!-- @include('frontend.commonComponants.sponsershipPackages') -->
+                         <!-- <div>vaishu</div> -->
+
                         <!-- /Equipment -->
                         <!-- From the Blog -->
                         <div class="hp_blog_section">
@@ -1267,29 +1269,30 @@
                                             <div
                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
                                                 <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                    <a href="https://www.facebook.com/share/6GxrSo4xKDWHPGMe/?mibextid=qi2Omg" target="_blank"
                                                         class="social_icons social_facebook">
                                                         <span class="icon-facebook"></span>
                                                     </a>
                                                 </div>
-                                                <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                <div class="sc_socials_item " >
+                                                    <a href="https://x.com/SkiandSnowIndia?t=gNwV8SVoJfVWWE22ccP8bA&s=08" target="_blank"
                                                         class="social_icons social_twitter">
-                                                        <span class="icon-twitter"></span>
+                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+
                                                     </a>
                                                 </div>
                                                 <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                    <a href="https://www.instagram.com/skiandsnowboardindia?igsh=MWN0YTl5eHQ1czE4aw==" target="_blank"
                                                         class="social_icons social_instagram-3">
                                                         <span class="icon-instagram-3"></span>
                                                     </a>
                                                 </div>
-                                                <div class="sc_socials_item">
+                                                <!-- <div class="sc_socials_item">
                                                     <a href="#" target="_blank"
                                                         class="social_icons social_foursquare">
                                                         <span class="icon-foursquare"></span>
                                                     </a>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </aside>
@@ -1383,6 +1386,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="{{ url('frontend/js/collapse.js') }}"></script>
+
 </body>
 
 </html>
