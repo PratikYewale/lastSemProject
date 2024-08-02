@@ -44,6 +44,7 @@
     <link rel="icon" href="http://placehold.it/32x32" sizes="32x32" />
     <link rel="icon" href="http://placehold.it/32x32" sizes="192x192" />
     <link rel="apple-touch-icon-precomposed" href="http://placehold.it/32x32" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body class="home page body_filled article_style_stretch scheme_original top_panel_show top_panel_over sidebar_hide">
@@ -728,17 +729,14 @@
                                                                         <div class="sc_team_item_socials">
                                                                             <div
                                                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
-                                                                                <div class="sc_socials_item">
-                                                                                    <!-- <a href="#" target="_blank"
-                                                                                        class="social_icons social_facebook">
-                                                                                        <span
-                                                                                            class="icon-facebook"></span>
-                                                                                    </a> -->
-                                                                                </div>
+
                                                                                 <div class="sc_socials_item">
                                                                                     <a href="https://x.com/100thofasec?t=leocgpjRDLMK1IKo5QZLdA&s=08" target="_blank"
-                                                                                        class="social_icons social_twitter">
-                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+                                                                                    class="social_icons social_twitter">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
+                                                                                    <!-- <span>   <img src="{{ url('frontend/images/Twitter-new-logo.jpeg') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> </span> -->
 
                                                                                     </a>
                                                                                 </div>
@@ -782,7 +780,10 @@
                                                                                 <div class="sc_socials_item">
                                                                                     <a href="https://x.com/B_Snoweagle?t=EoFZxd6_MMLMSSpFWhirUQ&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
+                                                                                        <!-- <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> -->
 
                                                                                     </a>
                                                                                 </div>
@@ -825,7 +826,10 @@
                                                                                 <div class="sc_socials_item">
                                                                                     <a href="https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
-                                                                                        <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
+                                                                                        <!-- <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> -->
 
                                                                                     </a>
                                                                                 </div>
@@ -867,19 +871,22 @@
                                                                                             class="icon-facebook"></span>
                                                                                     </a>
                                                                                 </div> -->
-                                                                                <div class="sc_socials_item">
+                                                                                <!-- <div class="sc_socials_item">
                                                                                     <a href=" https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+</svg>
                                                                                         <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px; color:#FFFFFF;">
                                                                                     </a>
-                                                                                </div>
-                                                                                <div class="sc_socials_item">
+                                                                                </div> -->
+                                                                                <!-- <div class="sc_socials_item">
                                                                                     <a href="#" target="_blank"
                                                                                         class="social_icons social_instagram-3">
                                                                                         <span
                                                                                             class="icon-instagram-3"></span>
                                                                                     </a>
-                                                                                </div>
+                                                                                </div> -->
                                                                             </div>
                                                                         </div>
                                                                     </div>

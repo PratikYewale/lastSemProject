@@ -120,19 +120,20 @@
                                             <div
                                                 class="sc_socials sc_socials_type_icons sc_socials_shape_round sc_socials_size_tiny">
                                                 <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                    <a href="https://www.facebook.com/share/6GxrSo4xKDWHPGMe/?mibextid=qi2Omg" target="_blank"
                                                         class="social_icons social_facebook">
                                                         <span class="icon-facebook"></span>
                                                     </a>
                                                 </div>
-                                                <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                <div class="sc_socials_item " >
+                                                    <a href="https://x.com/SkiandSnowIndia?t=gNwV8SVoJfVWWE22ccP8bA&s=08" target="_blank"
                                                         class="social_icons social_twitter">
                                                         <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;">
+
                                                     </a>
                                                 </div>
                                                 <div class="sc_socials_item">
-                                                    <a href="#" target="_blank"
+                                                    <a href="https://www.instagram.com/skiandsnowboardindia?igsh=MWN0YTl5eHQ1czE4aw==" target="_blank"
                                                         class="social_icons social_instagram-3">
                                                         <span class="icon-instagram-3"></span>
                                                     </a>
