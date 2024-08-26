@@ -10,12 +10,12 @@
                             <div class="col-lg-4 sc_column_item sc_column_item_1 odd first">
                                 <div class="sc_price_block sc_price_block_style_3 card price-card">
                                     <div class="card-body">
-                                        <div class="sc_price_block_money">
+                                        <!-- <div class="sc_price_block_money">
                                             <div class="sc_price">
                                                 <span class="sc_price_currency">₹</span>
                                                 <span class="sc_price_money">{{ $item->amount }}</span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="sc_price_block_title"><span>{{ $item->name }}</span></div>
                                         <div class="sc_price_block_line"></div>
                                         <div class="sc_price_block_description">
@@ -39,7 +39,7 @@
 
                     </div>
                 @else
-                    <h1>No Data available.</h1>
+                    <h4 style='text-align:center;'>No Data available.</h4>
                 @endif
 
             </div>

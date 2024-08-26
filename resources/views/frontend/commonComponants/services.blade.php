@@ -6,7 +6,7 @@
                             <div class="sc_section">
                                 <div class="sc_section_inner">
                                     <div class="sc_section_content_wrap">
-                                        <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">Services
+                                        <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">Programs
                                         </h5>
                                         <h2
                                             class="sc_title sc_title_underline margin_top_null margin_bottom_null pb-auto">
@@ -70,7 +70,7 @@
 
                                     <div class="sc_section_content_wrap">
                                         <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">
-                                            Services
+                                            Programs
                                         </h5>
                                         <h2
                                             class="sc_title sc_title_underline margin_top_null margin_bottom_null pb-auto">
@@ -119,7 +119,7 @@
                                 <div class="sc_section_inner">
                                     <div class="sc_section_content_wrap">
                                         <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">
-                                            Services
+                                            Programs
                                         </h5>
                                         <h2
                                             class="sc_title sc_title_underline margin_top_null margin_bottom_null pb-auto">

@@ -34,8 +34,8 @@
                                 <div class="sc_section">
                                     <div class="sc_section_inner">
                                         <div class="sc_section_content_wrap">
-                                            <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">HELLO
-                                            </h5>
+                                            <!-- <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">HELLO
+                                            </h5> -->
                                             <h2 class="sc_title sc_title_underline margin_top_null margin_bottom_null">Ski
                                                 and Snowboard India (SSI) </h2>
                                             <p class="margin_top_1_5em margin_bottom_tiny">Ski and Snowboard India (SSI) is
@@ -62,12 +62,12 @@
                             <div class="columns_wrap sc_skills_columns sc_skills_columns_4 row">
                                 <div class="sc_skills_column col-lg-6">
                                     <div class="sc_skills_item sc_skills_style_2 odd first">
-                                        <div class=""> <img alt=""
+                                        <!-- <div class=""> <img alt=""
                                                 src="{{ url('frontend/images/target.png') }}">
-                                        </div>
+                                        </div> -->
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
-                                            <div class="sc_skills_label">Mission </div>
+                                            <div class="sc_skills_label" style='font-size:20px;font-weight:bold'>Mission </div>
                                             <div class="sc_skills_addinfo">The mission of the National Sport Federation of
                                                 Ski and Snowboard India is to promote and develop skiing and snowboarding as
                                                 accessible and popular sports throughout India. </div>
@@ -76,11 +76,12 @@
                                 </div>
                                 <div class="sc_skills_column col-lg-6">
                                     <div class="sc_skills_item sc_skills_style_2 even">
-                                        <div class=""><img alt=""
-                                                src="{{ url('frontend/images/vision.png') }}"></div>
+                                        <!-- <div class=""><img alt=""
+                                                src="{{ url('frontend/images/vision.png') }}">
+                                        </div> -->
                                         <div class="sc_skills_count"></div>
                                         <div class="sc_skills_info">
-                                            <div class="sc_skills_label">Vision</div>
+                                            <div class="sc_skills_label" style='font-size:20px;font-weight:bold'>Vision</div>
                                             <div class="sc_skills_addinfo">Their vision is to create a vibrant skiing and
                                                 snowboarding community that fosters talent, encourages participation, and
                                                 achieves excellence on both national and international levels.</div>
@@ -418,6 +419,34 @@
                     @include('frontend.commonComponants.committee')
                     @include('frontend.commonComponants.association')
 
+                    <div class="content_wrap">
+                            <div class="custom_title_1 text_align_center">Our Constitution</div>
+                            <div class="sc_section title_center">
+                                <div class="sc_section_inner">
+                                    <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">Our Constitution</h2>
+                                </div>
+                                <div class=" mb-4">
+        <div class="d-flex justify-content-center">
+    <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank" download  class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  margin_bottom_null mb-10">
+    Download Constitution
+    </a>
+</div>
+
+
+
+                    </div>
+                                <!-- <div class='row'>
+                                    <div class='col-lg-3'>
+                                    <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank"
+                                                    download>
+
+                                                    <img src="{{ url('frontend/images/logo1.png') }}"
+                                                        alt="">
+                                                    </a>
+                                    </div>
+                                </div> -->
+                            </div>
+                    </div>
 
                 </section>
 

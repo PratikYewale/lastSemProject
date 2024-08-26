@@ -97,3 +97,4 @@ Route::get('/media-gallery', [AfterLoginPagesController::class, 'mediaGallery'])
 Route::get('/userAchivements', [AfterLoginPagesController::class, 'userAchivements']);
 Route::get('/editAchivement', [AfterLoginPagesController::class, 'editAchivement']);
 Route::get('/profile', [AfterLoginPagesController::class, 'profile']);
+// Route::get('/about', [HomeController::class, 'showPdfImage']);

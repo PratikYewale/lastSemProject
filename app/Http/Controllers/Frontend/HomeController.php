@@ -17,6 +17,9 @@ use App\Models\User;
 use App\Models\Team;
 use App\Models\Plan;
 use Carbon\Carbon;
+// use Intervention\Image\ImageManagerStatic as Image;
+// use Imagick;
+// use Barryvdh\DomPDF\Facade as PDF;
 
 class HomeController extends Controller
 {
@@ -179,4 +182,41 @@ class HomeController extends Controller
         }
 
     }
+    // public function showPdfImage()
+// {
+//     $pdf = PDF::loadFile(public_path('frontend/images/demo.pdf'));
+
+//         // Convert the first page to an image
+//         $pdf->setPage(1)
+//             ->saveImage(public_path('frontend/images/demo_page_1.png'));
+
+//         return view('frontend.about', [
+//             'pdfImage' => url('frontend/images/demo_page_1.png'),
+//         ]);
+// }
+// public function convertPdfToImag($pdfPath)
+// {
+//     $pdfPath = storage_path('app/public/' . $pdfPath);
+//     $outputPath = storage_path('app/public/first_page.png');
+
+//     // Check if the image already exists
+//     if (!file_exists($outputPath)) {
+//         $imagick = new Imagick();
+//         $imagick->setResolution(300, 300);
+//         $imagick->readImage($pdfPath . '[0]'); // Only the first page
+//         $imagick->setImageFormat('png');
+//         $imagick->writeImage($outputPath);
+//     }
+
+//     // Return the URL of the generated image
+//     return url('storage/first_page.png');
+// }
+
+// public function showPdfImage()
+// {
+//     // Assuming the PDF is located in 'frontend/images/demo.pdf'
+//     $pdfImageUrl = $this->convertPdfToImag('frontend/images/demo.pdf');
+
+//     return view('frontend.about', ['pdfImage' => $pdfImageUrl]);
+// }
 }

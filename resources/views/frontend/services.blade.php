@@ -5,11 +5,11 @@
         <div class="top_panel_image_hover"></div>
         <div class="content_wrap">
             <div class="top_panel_image_header">
-                <h1 class="top_panel_image_title">Services</h1>
+                <h1 class="top_panel_image_title">Programs</h1>
                 <div class="breadcrumbs">
                     <a class="breadcrumbs_item home" href="index.html">Home</a>
                     <span class="breadcrumbs_delimiter"></span>
-                    <span class="breadcrumbs_item current">Services</span>
+                    <span class="breadcrumbs_item current">Programs</span>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
                                             <h5 class="sc_title sc_title_regular margin_top_null margin_bottom_tiny">Ski and
                                                 Snowboard India (SSI)</h5>
                                             <h2 class="sc_title sc_title_underline margin_top_null margin_bottom_null pb-auto">
-                                                Services
+                                                Programs
                                             </h2>
                                             <p class="margin_top_1_5em margin_bottom_tiny">Ski and Snowboard India (SSI) is
                                                 the National Sports Association governing sport disciplines under the
@@ -60,7 +60,7 @@
                     <!-- /Sports -->
 
 
-                    @include('frontend.commonComponants.athletesHistory')
+                    {{--   @include('frontend.commonComponants.athletesHistory') --}}
                     <!-- E-mailer -->
                     {{-- <div class="emailer_section">
                         <div class="content_wrap">

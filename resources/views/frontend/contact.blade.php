@@ -21,7 +21,7 @@
         <div class="content">
             <article class="post_item post_item_single page">
                 <section class="post_content">
-                    @include('frontend.commonComponants.three_org_details')
+                {{--   @include('frontend.commonComponants.three_org_details') --}}
                     <!-- Contact form -->
 
                     <!-- Promo -->
@@ -49,7 +49,7 @@
                                                 <form action="{{ Auth::user() ? route('addContactUsVerified') : route('addContactUs') }}" method="POST"
                                                     enctype="multipart/form-data" id="contactForm"
                                                     class="contactForm sc_input_hover_default">
-                                                   
+
                                                     {{ csrf_field()}}
                                                     <div class="row">
                                                         <div class="col-lg-12">

@@ -54,7 +54,7 @@
 
 
             <!-- Snowboard Schools -->
-            <div class="hp_schools_section">
+               <!-- <div class="hp_schools_section">
                 <div class="content_wrap">
                     <div class="custom_title_1 text_align_center">WHAT WE OFFER</div>
                     <div class="sc_services_wrap">
@@ -66,7 +66,7 @@
                             <div class="sc_columns columns_wrap row">
                                 <div class="col-lg-4 column_padding_bottom">
                                     <div class="sc_services_item sc_services_item_1 odd first">
-                                        <!-- <div class="sc_services_item_featured post_featured">
+                                        <div class="sc_services_item_featured post_featured">
                                             <div class="post_thumb" data-image=""
                                                 data-title="Private Lessons for Beginners">
                                                 <a class="" href="service-single.html">
@@ -74,7 +74,7 @@
                                                         src="{{ url('frontend/images/service_image_4.png') }}">
                                                 </a>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="sc_services_item_content">
 
                                             <h4 class="sc_services_item_title">
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-lg-4 column_padding_bottom">
                                     <div class="sc_services_item sc_services_item_2 even">
-                                        <!-- <div class="sc_services_item_featured post_featured">
+                                        <div class="sc_services_item_featured post_featured">
                                             <div class="post_thumb" data-image=""
                                                 data-title="Group Lessons for Beginners">
                                                 <a class="" href="service-single.html">
@@ -97,7 +97,7 @@
                                                         src="{{ url('frontend/images/service_image_5.png') }}">
                                                 </a>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="sc_services_item_content">
 
                                             <h4 class="sc_services_item_title">
@@ -112,14 +112,14 @@
                                 </div>
                                 <div class="col-lg-4 column_padding_bottom">
                                     <div class="sc_services_item sc_services_item_3 odd">
-                                        <!-- <div class="sc_services_item_featured post_featured">
+                                        <div class="sc_services_item_featured post_featured">
                                             <div class="post_thumb" data-image="" data-title="Advanced Group Lessons">
                                                 <a class="" href="service-single.html">
                                                     <img alt="service_image_6.png"
                                                         src="{{ url('frontend/images/service_image_6.png') }}">
                                                 </a>
                                             </div>
-                                        </div> -->
+                                        </div>
                                         <div class="sc_services_item_content">
 
                                             <h4 class="sc_services_item_title">
@@ -138,7 +138,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
             <!-- /Snowboard Schools -->
 
             <div class="" id="association-register-form">

@@ -181,7 +181,7 @@
 
                             <!-- End Custom Pagination -->
                         @else
-                            <h1>No Data available.</h1>
+                            <h4 style='text-align:center;'>No Ongoing Event.</h4>
                         @endif
                     </div>
                 </div>
@@ -314,7 +314,7 @@
 
                             <!-- End Custom Pagination -->
                         @else
-                            <h1>No Data available.</h1>
+                            <h4 style='text-align:center;'>No Upcoming Event.<h4>
                         @endif
                     </div>
                 </div>
@@ -452,7 +452,7 @@
 
                                     <!-- End Custom Pagination -->
                                 @else
-                                    <h1>No Data available.</h1>
+                                    <h4 style='text-align:center;'>No Past Event.</h4>
                                 @endif
                             </div>
                         </div>

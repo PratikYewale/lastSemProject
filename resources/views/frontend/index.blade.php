@@ -98,7 +98,7 @@
                                         <!-- Menu: Services -->
                                         <li
                                             class="{{ request()->is('services*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                            <a href="{{ url('/services') }}"><span>Services</span></a>
+                                            <a href="{{ url('/services') }}"><span>Programs</span></a>
                                         </li>
                                         <!-- /Menu: Services -->
 
@@ -312,7 +312,7 @@
                             <!-- Menu: Services -->
                             <li
                                 class="{{ Route::currentRouteName() == 'services' ? 'menu-item current-menu-item' : 'menu-item' }}">
-                                <a href="{{ url('/services') }}"><span>Services</span></a>
+                                <a href="{{ url('/services') }}"><span>Programs</span></a>
                             </li>
                             <!-- /Menu: Services -->
 
@@ -698,7 +698,85 @@
                         </div>
                         <!-- END REVOLUTION SLIDER -->
                         {{-- @include('frontend.commonComponants.aboutSection') --}}
-                        @include('frontend.commonComponants.three_sports')
+                        {{-- @include('frontend.commonComponants.three_sports')  --}}
+                         <!-- From the Blog -->
+                         <div class="hp_blog_section">
+                            <div class="content_wrap">
+                                <div class="sc_section">
+                                    <div class="sc_section_inner">
+                                        <div class="sc_section_content_wrap">
+                                            <div class="custom_title_1 text_align_center">FROM THE NEWS</div>
+                                            <div
+                                                class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
+                                                <h2 class="sc_blogger_title sc_item_title sc_item_title_without_descr">
+                                                    Latest News</h2>
+                                                <div class="">
+                                                    <!-- Post item -->
+                                                    @if ($news->count() > 0)
+                                                        <div class="row">
+                                                            @foreach ($news as $item)
+                                                                <!-- Display each news item here -->
+                                                                <div class="col-lg-4 mb-4">
+                                                                    <!-- Post item -->
+                                                                    <article
+                                                                        class="post_item card news-card post_item_excerpt odd post">
+                                                                        <div class="clearfix card-body">
+                                                                            <div class="post_featured">
+                                                                                <div class="post_thumb" data-image=""
+                                                                                    data-title="Serving Cookies at Alpine Nationals">
+                                                                                    <a class="hover_icon hover_icon_link"
+                                                                                        href="{{ route('announcementDetails', ['id' => $item->id]) }}">
+                                                                                        <img alt="Serving Cookies at Alpine Nationals"
+                                                                                            src="{{ $item->primary_img }}"
+                                                                                            onerror="this.onerror=null; this.src='{{ url('frontend/images/image-4-480x480.jpg') }}';">
+                                                                                    </a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <h4 class="news-title">
+                                                                                <a
+                                                                                    href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
+                                                                            </h4>
+                                                                            <div class="post_descr">
+                                                                                <p>{{ $item->img_description }}</p>
+                                                                            </div>
+                                                                            <div
+                                                                                class="post_info mb-0 mt-0 d-flex justify-content-between">
+                                                                                <span
+                                                                                    class="post_info_item post_info_posted">
+                                                                                    <span
+                                                                                        class="contact_icon icon-calendar-light"></span>
+                                                                                    <a href="#"
+                                                                                        class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
+                                                                                </span>
+                                                                                <span
+                                                                                    class="post_info_item post_info_posted_by">
+                                                                                    <span
+                                                                                        class="contact_icon icon-user"></span>
+                                                                                    <a href="#"
+                                                                                        class="post_info_author">{{ $item->type }}</a>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </article>
+                                                                    <!-- /Post item -->
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    @else
+                                                        <h1>No Data available.</h1>
+                                                    @endif
+                                                    <!-- /Post item -->
+                                                </div>
+                                            </div>
+                                            <a href="{{ url('/announcement') }}"
+                                                class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large aligncenter margin_top_small margin_bottom_tiny sc_button_iconed none">View
+                                                More News</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /From the Blog -->
                         @include('frontend.commonComponants.chairmanWords')
 
 
@@ -709,7 +787,7 @@
 
                         <!-- Crew -->
                          <!-- Crew -->
-                         <div class="hp_crew_section">
+                         {{--      <div class="hp_crew_section">
                             <div class="content_wrap">
                                 <div class="custom_title_1 text_align_center">Team</div>
                                 <div class="sc_section title_center">
@@ -734,8 +812,8 @@
                                                                                     <a href="https://x.com/100thofasec?t=leocgpjRDLMK1IKo5QZLdA&s=08" target="_blank"
                                                                                     class="social_icons social_twitter">
                                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-</svg>
+                                                                                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                                                </svg>
                                                                                     <!-- <span>   <img src="{{ url('frontend/images/Twitter-new-logo.jpeg') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> </span> -->
 
                                                                                     </a>
@@ -781,8 +859,8 @@
                                                                                     <a href="https://x.com/B_Snoweagle?t=EoFZxd6_MMLMSSpFWhirUQ&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-</svg>
+                                                                                        <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                                                        </svg>
                                                                                         <!-- <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> -->
 
                                                                                     </a>
@@ -827,8 +905,8 @@
                                                                                     <a href="https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-</svg>
+                                                                                                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                                                                </svg>
                                                                                         <!-- <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px;"> -->
 
                                                                                     </a>
@@ -875,8 +953,8 @@
                                                                                     <a href=" https://x.com/ArifKhanskier?t=uwfDX1F6Itv-DEhUP_5Dpg&s=08" target="_blank"
                                                                                         class="social_icons social_twitter">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
-  <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
-</svg>
+                                                                                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                                                                                </svg>
                                                                                         <img src="{{ url('frontend/images/twitter2.png') }}" alt="Twitter Logo" style="width: 12px; height: 12px; margin: 9px; color:#FFFFFF;">
                                                                                     </a>
                                                                                 </div> -->
@@ -911,6 +989,7 @@
                                 </div>
                             </div>
                         </div>
+                        --}}
                         <!-- /Crew -->
                         <article class="myportfolio-container custom-1" id="esg-grid-1-1-wrap">
                             <div id="esg-grid-1-1" class="esg-grid">
@@ -1066,84 +1145,7 @@
                          <!-- <div>vaishu</div> -->
 
                         <!-- /Equipment -->
-                        <!-- From the Blog -->
-                        <div class="hp_blog_section">
-                            <div class="content_wrap">
-                                <div class="sc_section">
-                                    <div class="sc_section_inner">
-                                        <div class="sc_section_content_wrap">
-                                            <div class="custom_title_1 text_align_center">FROM THE NEWS</div>
-                                            <div
-                                                class="sc_blogger layout_classic_alter_3 template_masonry sc_blogger_horizontal no_description title_center">
-                                                <h2 class="sc_blogger_title sc_item_title sc_item_title_without_descr">
-                                                    Breaking News</h2>
-                                                <div class="">
-                                                    <!-- Post item -->
-                                                    @if ($news->count() > 0)
-                                                        <div class="row">
-                                                            @foreach ($news as $item)
-                                                                <!-- Display each news item here -->
-                                                                <div class="col-lg-4 mb-4">
-                                                                    <!-- Post item -->
-                                                                    <article
-                                                                        class="post_item card news-card post_item_excerpt odd post">
-                                                                        <div class="clearfix card-body">
-                                                                            <div class="post_featured">
-                                                                                <div class="post_thumb" data-image=""
-                                                                                    data-title="Serving Cookies at Alpine Nationals">
-                                                                                    <a class="hover_icon hover_icon_link"
-                                                                                        href="{{ route('announcementDetails', ['id' => $item->id]) }}">
-                                                                                        <img alt="Serving Cookies at Alpine Nationals"
-                                                                                            src="{{ $item->primary_img }}"
-                                                                                            onerror="this.onerror=null; this.src='{{ url('frontend/images/image-4-480x480.jpg') }}';">
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h4 class="news-title">
-                                                                                <a
-                                                                                    href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }}</a>
-                                                                            </h4>
-                                                                            <div class="post_descr">
-                                                                                <p>{{ $item->img_description }}</p>
-                                                                            </div>
-                                                                            <div
-                                                                                class="post_info mb-0 mt-0 d-flex justify-content-between">
-                                                                                <span
-                                                                                    class="post_info_item post_info_posted">
-                                                                                    <span
-                                                                                        class="contact_icon icon-calendar-light"></span>
-                                                                                    <a href="#"
-                                                                                        class="post_info_date">{{ \Carbon\Carbon::parse($item->created_at)->format('M d, Y') }}</a>
-                                                                                </span>
-                                                                                <span
-                                                                                    class="post_info_item post_info_posted_by">
-                                                                                    <span
-                                                                                        class="contact_icon icon-user"></span>
-                                                                                    <a href="#"
-                                                                                        class="post_info_author">{{ $item->type }}</a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </article>
-                                                                    <!-- /Post item -->
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <h1>No Data available.</h1>
-                                                    @endif
-                                                    <!-- /Post item -->
-                                                </div>
-                                            </div>
-                                            <a href="{{ url('/announcement') }}"
-                                                class="sc_button sc_button_square sc_button_style_simple_alter sc_button_size_large aligncenter margin_top_small margin_bottom_tiny sc_button_iconed none">View
-                                                More News</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /From the Blog -->
+
                         @include('frontend.commonComponants.three_org_details')
 
                     </section>
@@ -1193,7 +1195,7 @@
                                         <li class="menu-item">
                                             <span class="sc_list_icon icon-right-small"> <a
                                                     href="{{ url('/services') }}"><span
-                                                        class="ms-1">Services</span></a>
+                                                        class="ms-1">Programs</span></a>
                                         </li>
                                         <!-- Menu: Store -->
                                         <li class="menu-item">

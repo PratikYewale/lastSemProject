@@ -90,7 +90,7 @@
                                         <!-- Menu: Services -->
                                         <li
                                             class="{{ request()->is('services*') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                            <a href="{{ url('/services') }}"><span>Services</span></a>
+                                            <a href="{{ url('/services') }}"><span>Programs</span></a>
                                         </li>
                                         <!-- /Menu: Services -->
 
@@ -284,7 +284,7 @@
                             <!-- Menu: Services -->
                             <li
                                 class="{{ Route::currentRouteName() == 'services' ? 'menu-item current-menu-item' : 'menu-item' }}">
-                                <a href="{{ url('/services') }}"><span>Services</span></a>
+                                <a href="{{ url('/services') }}"><span>Programs</span></a>
                             </li>
                             <!-- /Menu: Services -->
 
