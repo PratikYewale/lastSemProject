@@ -2,7 +2,8 @@
 <html lang="en-US" class="scheme_original">
 
 <head>
-    <title>Ski Snowboard India</title>
+    <title>Ski Snowboard India 
+    </title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="format-detection" content="telephone=no">
@@ -696,6 +697,28 @@
                                 <div class="tp-bannertimer tp-bottom"></div>
                             </div>
                         </div>
+                        <div class="content_wrap">
+                            <!-- <div class="custom_title_1 text_align_center">Our Constitution</div> -->
+                            <div class="sc_section title_center">
+                                <div class="sc_section_inner">
+                                <h2 class="sc_title text-center mt-4">Official Website Ski and Snowboard India (SSI)
+                                 </h2>
+                                </div>
+                                <!-- <div class=" mb-4">
+                                 <div class="d-flex justify-content-center">
+                                  <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank" download  class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  margin_bottom_null mb-10">
+                                     Download Constitution
+                                 </a>
+                                 </div>
+
+
+
+                                     </div>
+
+                            </div> -->
+                    </div>
+
+
                         <!-- END REVOLUTION SLIDER -->
                         {{-- @include('frontend.commonComponants.aboutSection') --}}
                         {{-- @include('frontend.commonComponants.three_sports')  --}}

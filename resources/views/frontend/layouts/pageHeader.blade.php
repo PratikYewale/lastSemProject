@@ -2,10 +2,17 @@
 <html lang="en-US" class="scheme_original">
 
 <head>
-    <title>Ski Snowboard India</title>
+    <title>Ski Snowboard India - {{ ucfirst(last(explode('/', request()->path()))) }}‌
+    </title>
+    <title>@yield('title', 'Default Title')</title>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="format-detection" content="telephone=no">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url('frontend/js/vendor/woocommerce/css/woocommerce-layout.css') }}" type="text/css"
@@ -40,7 +47,23 @@
 </head>
 
 <body class="page body_filled article_style_stretch scheme_original top_panel_show top_panel_above sidebar_hide">
-    <!-- Body wrap -->
+@yield('content')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var pageTitle = document.title;
+
+        window.addEventListener('blur', function() {
+            document.title = "You're on the " + pageTitle + " page";
+        });
+
+        window.addEventListener('focus', function() {
+            document.title = pageTitle;
+        });
+    });
+</script>
+
+<!-- Body wrap -->
     <div class="body_wrap">
         <!-- Page wrap -->
         <div class="page_wrap">

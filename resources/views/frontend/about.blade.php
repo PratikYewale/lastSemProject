@@ -1,6 +1,7 @@
 @extends('frontend.layouts.main')
 <link rel="stylesheet" href="js/vendor/swiper/swiper.min.css" type="text/css" media="all" />
 @section('main-container')
+
     <!-- Top panel -->
     <section class="top_panel_image">
         <!-- <div class="top_panel_image_hover"></div> -->
@@ -15,6 +16,8 @@
             </div>
         </div>
     </section>
+    <p>The current URL is: {{url()->current()}}</p>‌
+
     <!-- /Top panel -->
     <div class="page_content_wrap page_paddings_no">
         <!-- Content -->
@@ -426,15 +429,15 @@
                                     <h2 class="sc_section_title sc_item_title sc_item_title_without_descr">Our Constitution</h2>
                                 </div>
                                 <div class=" mb-4">
-        <div class="d-flex justify-content-center">
-    <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank" download  class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  margin_bottom_null mb-10">
-    Download Constitution
-    </a>
-</div>
+                                 <div class="d-flex justify-content-center">
+                                  <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank" download  class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  margin_bottom_null mb-10">
+                                     Download Constitution
+                                 </a>
+                                 </div>
 
 
 
-                    </div>
+                                     </div>
                                 <!-- <div class='row'>
                                     <div class='col-lg-3'>
                                     <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank"

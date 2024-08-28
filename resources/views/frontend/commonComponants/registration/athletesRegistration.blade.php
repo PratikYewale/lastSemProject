@@ -42,9 +42,9 @@
                                     opportunities and become an integral part of our vibrant community.</p>
                             </div>
                         </div>
-                        <a href="#Athlete-register-form"
+                        <!-- <a href="#Athlete-register-form"
                             class="sc_button sc_button_square sc_button_style_filled sc_button_size_small margin_top_small margin_bottom_null">Register
-                            Now</a>
+                            Now</a> -->
                     </section>
                 </div>
                 <!-- /Single team info -->
