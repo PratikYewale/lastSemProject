@@ -2,8 +2,9 @@
 <html lang="en-US" class="scheme_original">
 
 <head>
-    <title>Ski Snowboard India 
+    <title>Ski Snowboard India
     </title>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="format-detection" content="telephone=no">
@@ -42,20 +43,24 @@
     <link rel="stylesheet" href="{{ url('frontend/js/core.messages/core.messages.min.css') }}" type="text/css"
         media="all" />
 
-    <link rel="icon" href="http://placehold.it/32x32" sizes="32x32" />
-    <link rel="icon" href="http://placehold.it/32x32" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="http://placehold.it/32x32" />
+    <link rel="icon" href="{{ url('frontend/images/faviconicon.png') }}" sizes="32x32" />
+    <link rel="icon" href="{{ url('frontend/images/faviconicon.png') }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ url('frontend/images/faviconicon.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body class="home page body_filled article_style_stretch scheme_original top_panel_show top_panel_over sidebar_hide">
+ <div class="top_text">
+                Official Website of Ski and Snowboard India (SSI)
+            </div>
     <!-- Body wrap -->
     <div class="body_wrap">
         <!-- Page wrap -->
         <div class="page_wrap">
-            <div class="top_panel_fixed_wrap"></div>
+
             <!-- Header -->
             <header class="top_panel_wrap top_panel_style_7 top_panel_position_over">
+
                 <div class="top_panel_wrap_inner top_panel_inner_style_6 top_panel_position_over">
                     <div class="top_panel_middle">
                         <div class="content_wrap">
@@ -78,7 +83,7 @@
                                         <!-- Menu: Home -->
                                         <li
                                             class="{{ request()->is('/') ? 'menu-item current-menu-ancestor' : 'menu-item' }}">
-                                            <a href="{{ url('/') }}"><span>Home</span></a>
+                                            <a href="{{ url('/') }}"><span>Home </span></a>
                                         </li>
                                         <!-- /Menu: Home -->
 
@@ -697,13 +702,16 @@
                                 <div class="tp-bannertimer tp-bottom"></div>
                             </div>
                         </div>
-                        <div class="content_wrap">
+                        <br>
+                        <!-- <div class="content_wrap"> -->
+                        <div>
+
                             <!-- <div class="custom_title_1 text_align_center">Our Constitution</div> -->
                             <div class="sc_section title_center">
-                                <div class="sc_section_inner">
-                                <h2 class="sc_title text-center mt-4">Official Website Ski and Snowboard India (SSI)
+                                <!-- <div class="sc_section_inner">
+                                <h2 class="sc_title text-center mt-4">Official Website of Ski and Snowboard India (SSI)
                                  </h2>
-                                </div>
+                                </div> -->
                                 <!-- <div class=" mb-4">
                                  <div class="d-flex justify-content-center">
                                   <a href="{{ url('frontend/images/ahcpdf.pdf') }}" target="_blank" download  class="sc_button sc_button_square sc_button_style_filled sc_button_size_small  margin_bottom_null mb-10">
@@ -800,7 +808,7 @@
                             </div>
                         </div>
                         <!-- /From the Blog -->
-                        @include('frontend.commonComponants.chairmanWords')
+                       {{-- @include('frontend.commonComponants.chairmanWords')--}}
 
 
 
@@ -1013,7 +1021,9 @@
                             </div>
                         </div>
                         --}}
+                        <br>
                         <!-- /Crew -->
+
                         <article class="myportfolio-container custom-1" id="esg-grid-1-1-wrap">
                             <div id="esg-grid-1-1" class="esg-grid">
                                 <ul>

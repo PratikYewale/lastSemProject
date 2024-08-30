@@ -9011,7 +9011,7 @@ body table.booked-calendar tr.days th {
 	background-image: url(../images/background6.png);
 	padding-top: 13em;
 	padding-bottom: 11.33em;
-	
+
 }
 
 .hp_school_info .sc_section_title {
@@ -9511,5 +9511,14 @@ input[type="number"] {
 }
 .menu_mobile .copyright_style_socials .copyright_text, .menu_mobile .copyright_style_menu .copyright_text, .menu_mobile .copyright_wrap .sc_socials, .menu_mobile .menu_footer_nav{
  text-align: start;
+}
+
+.top_text{
+    font-size: 20px;
+    margin-top: 9px;
+    /* margin-bottom: 9px; */
+    text-align: center;
+    background-color: #000000d9;
+    color:white;
 }
 

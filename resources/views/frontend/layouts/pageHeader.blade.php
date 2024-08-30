@@ -2,9 +2,10 @@
 <html lang="en-US" class="scheme_original">
 
 <head>
+
     <title>Ski Snowboard India - {{ ucfirst(last(explode('/', request()->path()))) }}‌
     </title>
-    <title>@yield('title', 'Default Title')</title>
+   <title>@yield('title', 'Default Title')</title>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,9 +41,9 @@
     <link rel="stylesheet" href="{{ url('frontend/js/core.messages/core.messages.min.css') }}" type="text/css"
         media="all" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-    <link rel="icon" href="http://placehold.it/32x32" sizes="32x32" />
-    <link rel="icon" href="http://placehold.it/32x32" sizes="192x192" />
-    <link rel="apple-touch-icon-precomposed" href="http://placehold.it/32x32" />
+    <link rel="icon" href="{{ url('frontend/images/faviconicon.png') }}" sizes="32x32" />
+    <link rel="icon" href="{{ url('frontend/images/faviconicon.png') }}" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="{{ url('frontend/images/faviconicon.png') }}" />
 
 </head>
 
@@ -62,13 +63,14 @@
         });
     });
 </script>
-
+         <div class="top_text">
+                Official Website of Ski and Snowboard India (SSI)
+            </div>
 <!-- Body wrap -->
     <div class="body_wrap">
         <!-- Page wrap -->
         <div class="page_wrap">
-            <div class="top_panel_fixed_wrap"></div>
-            <!-- Header -->
+                <!-- Header -->
             <header class="top_panel_wrap top_panel_style_7">
                 <div class="top_panel_wrap_inner top_panel_inner_style_7 top_panel_position_above">
                     <div class="top_panel_middle">
