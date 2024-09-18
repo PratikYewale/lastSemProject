@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -12,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -60,11 +61,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function achievements()
     {
-        return $this->hasMany(Achievement::class,'user_id');
+        return $this->hasMany(Achievement::class, 'user_id');
     }
     public function sport_certificates()
     {
-        return $this->hasMany(SportCertificate::class,'id');
+        return $this->hasMany(SportCertificate::class, 'id');
     }
     public function payment_history()
     {
@@ -77,5 +78,5 @@ class User extends Authenticatable implements JWTSubject
     public function teamProfiles()
     {
         return $this->belongsToMany(TeamProfiles::class, 'team_member', 'athlete_id', 'team_profile_id');
-    } 
+    }
 }

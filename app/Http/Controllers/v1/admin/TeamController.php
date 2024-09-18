@@ -212,13 +212,14 @@ class TeamController extends Controller
                     // Check if athlete is already part of the team profile
                     $existingTeamMember = TeamMember::query()
                         ->where('team_id', $team_id)
+                        ->where('team_profile_id', $team_profile_id)
                         ->where('athlete_id', $athlete_id)
                         ->first();
                     if ($existingTeamMember) {
-                        $teamProfile = TeamProfiles::where('id', $existingTeamMember->team_profile_id)->pluck('name')->first();
+                        // $teamProfile = TeamProfiles::where('id', $existingTeamMember->team_profile_id)->pluck('name')->first();
                         $athleteName = User::where('id', $athlete_id)->pluck('first_name')->first();
                         DB::rollBack();
-                        return $this->sendError("$athleteName is already assigned to team '$teamProfile'.", [], 409);
+                        return $this->sendError("$athleteName is already assigned to the same team'.", [], 409);
                     }
                     // $user = User::where('team_id', $team_id)->where('id', $athlete_id);
                     // if ($user) {
@@ -282,12 +283,15 @@ class TeamController extends Controller
                     // Ensure athlete is not already assigned to another team in the same game
                     $existingTeamMember = TeamMember::query()
                         ->where('team_id', $team_id)
+                        ->where('team_profile_id', $teamProfile->id)
                         ->where('athlete_id', $athlete_id)
                         ->first();
 
                     if ($existingTeamMember) {
                         DB::rollBack();
-                        return $this->sendError("Athlete with ID $athlete_id is already assigned to another team in this game", [], 409);
+                        $athleteName = User::where('id', $athlete_id)->pluck('first_name')->first();
+                        return $this->sendError("Athlete $athleteName is already assigned to this team", [], 409);
+                        // return $this->sendError("Athlete with ID $athlete_id is already assigned to another team in this game", [], 409);
                     }
 
                     // Add athlete to the team profile
@@ -531,13 +535,13 @@ class TeamController extends Controller
                     return $this->sendError("Athlete with ID $athlete_id already belongs to this team profile.", [], 409);
                 }
 
-                $existingTeamMember = TeamMember::where('team_id', $team_id)
-                    ->where('athlete_id', $athlete_id)
-                    ->first();
+                // $existingTeamMember = TeamMember::where('team_id', $team_id)
+                //     ->where('athlete_id', $athlete_id)
+                //     ->first();
 
-                if ($existingTeamMember) {
-                    return $this->sendError("Athlete with ID $athlete_id already belongs to another team profile.", [], 409);
-                }
+                // if ($existingTeamMember) {
+                //     return $this->sendError("Athlete with ID $athlete_id already belongs to another team profile.", [], 409);
+                // }
 
                 $newTeamMember = new TeamMember();
                 $newTeamMember->team_id = $team_id;

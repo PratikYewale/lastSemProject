@@ -31,6 +31,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MemberController extends Controller
 {
+    public function genarateCode($firstname, $lastname, $user_id)
+    {
+        $firstLetterVar1 = strtoupper(substr($firstname, 0, 1));
+        $firstLetterVar2 = strtoupper(substr($lastname, 0, 1));
+        $code = "SSI" . $firstLetterVar1 . $firstLetterVar2 . $user_id;
+        return $code;
+    }
     public function saveFile($file, $fileName)
     {
         $fileExtension = $file->getClientOriginalExtension();
@@ -139,7 +146,7 @@ class MemberController extends Controller
                 'state' => 'required',
                 'country' => 'required',
                 'team_id' => 'integer|exists:teams,id',
-                'club_name'=>'required',
+                'club_name' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -166,7 +173,7 @@ class MemberController extends Controller
                 $user->aadhar_number = $request->aadhar_number;
                 $user->passport_number = $request->passport_number;
                 $user->team_id = $request->team_id;
-                $user->club_name=$request->club_name;
+                $user->club_name = $request->club_name;
                 // $user->designation = "Designation not defined yet.";
                 if ($request->hasFile('profile_picture')) {
                     $user->profile_picture = $this->saveFile($request->file('profile_picture'), 'AthleteProfilePicture');
@@ -188,6 +195,9 @@ class MemberController extends Controller
                 }
             }
             $user->save();
+            $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id);
+            $user->save();
+
             if ($request->has('achievements')) {
                 foreach ($request->achievements as $achievement) {
                     $newAchievment = new Achievement();
@@ -209,7 +219,6 @@ class MemberController extends Controller
                     $newCertificate->save();
                 }
             }
-
             DB::commit();
             return back()->with('success', 'Athlete added successfully.');
             // return $this->sendResponse([], "Athlete added succesfully.");
@@ -656,6 +665,7 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
+                // return $this->sendError('Validation Error.', $validator->errors());
                 return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
@@ -695,6 +705,8 @@ class MemberController extends Controller
                     $user->signature_of_bearer_2 = $this->saveFile($request->file('signature_of_bearer_2'), 'Bearer2Signature');
                 }
                 $user->acknowledgement = $request->acknowledgement;
+                $user->save();
+                $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id);
                 $user->save();
             }
 
@@ -1059,7 +1071,7 @@ class MemberController extends Controller
                 'success' => true,
                 'message' => 'OTP verified. You can now reset your password.',
             ]);
-        return redirect()->back()->with('success', 'OTP verified. You can now reset your password.');
+            return redirect()->back()->with('success', 'OTP verified. You can now reset your password.');
         } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
@@ -1088,7 +1100,7 @@ class MemberController extends Controller
                 'message' => 'Password updated successfully.',
                 'redirect_url' => url('/login')
             ]);
-               } catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
