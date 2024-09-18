@@ -1,4 +1,33 @@
 @extends('frontend.layouts.main')
+<style>
+    .password-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .password-container input {
+      width: 100%;
+      padding: 8px;
+      padding-right: 40px; /* Space for the eye icon */
+    }
+    .password-container .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: black;
+    }
+    .toggle-password {
+        color:'#007bff'
+    }
+
+    .password-container .toggle-password:hover {
+      color: #007bff;
+    }
+  </style>
 <link rel="stylesheet" href="js/vendor/swiper/swiper.min.css" type="text/css" media="all" />
 
 @section('main-container')
@@ -107,15 +136,45 @@
                                                     </div>
                                                     <div class="row">
                                                             <div class="col-lg-12">
-                                                                <div class="mb-3">
+                                                                <!-- <div class="mb-3">
                                                                     <p>New Password</p>
                                                                     <input type="password" id="password" name="password">
+                                                                    <div class="input-group-append h-100" style="width: 20%">
+                                                                        <span class="input-group-text toggle-password"
+                                                                            id="togglePassword">
+                                                                            <span class="icon-eye"></span>
+                                                                        </span>
+                                                                    </div>
+
+                                                                </div> -->
+                                                                <div class="mb-3">
+                                                                    <p> New Password</p>
+                                                                    <div class="password-container" >
+                                                                        <input type="password" id="password" name="password" class="form-control" >
+                                                                        <!-- <div class="input-group-append" > -->
+                                                                            <span class="toggle-password" id="togglePassword" style="">
+                                                                                <i class="icon-eye" style="color:'color:'#007bff';"></i> <!-- Replace with your actual icon -->
+                                                                            </span>
+                                                                        <!-- </div> -->
+                                                                    </div>
+
+
                                                                 </div>
+
                                                             </div>
                                                            <div class="col-lg-12">
                                                              <div class="mb-3">
                                                                 <p>Confirm New Password</p>
-                                                                <input type="password" id="password_confirmation" name="password_confirmation">
+                                                                <div class="password-container" >
+                                                                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                                                    <!-- <div class="input-group-append"> -->
+                                                                        <span class=" toggle-password" id="togglePasswordConfirmation">
+                                                                            <i class="icon-eye"></i> <!-- Replace with your actual icon -->
+                                                                        </span>
+                                                                    <!-- </div> -->
+                                                                </div>
+
+
                                                              </div>
                                                             </div>
                                                     <div class="col-lg-12">
@@ -208,4 +267,52 @@ document.getElementById('resetPasswordForm').addEventListener('submit', function
 
 
 </script>
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle password visibility
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('icon-eye-slash'); // Update icon class
+        });
+
+        // Toggle confirm password visibility
+        const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
+        const passwordConfirmationField = document.querySelector('#password_confirmation');
+
+        togglePasswordConfirmation.addEventListener('click', function () {
+            const type = passwordConfirmationField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordConfirmationField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('icon-eye-slash'); // Update icon class
+        });
+    });
+</script> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle password visibility
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('icon-eye-slash'); // Update icon class
+        });
+
+        // Toggle confirm password visibility
+        const togglePasswordConfirmation = document.querySelector('#togglePasswordConfirmation');
+        const passwordConfirmationField = document.querySelector('#password_confirmation');
+
+        togglePasswordConfirmation.addEventListener('click', function () {
+            const type = passwordConfirmationField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordConfirmationField.setAttribute('type', type);
+            this.querySelector('i').classList.toggle('icon-eye-slash'); // Update icon class
+        });
+    });
+</script>
+
 @endsection

@@ -22,7 +22,7 @@
                                                             User Id:
                                                         </b>
                                                         <b class="text-danger">
-                                                            SKI{{ Auth::user()->id }}
+                                                            {{ Auth::user()->unique_code }}
                                                         </b>
                                                     </td>
                                                     <td>

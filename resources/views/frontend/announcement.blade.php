@@ -76,7 +76,7 @@
                                                     <a href="{{ route('announcementDetails', ['id' => $item->id]) }}">{{ $item->title }} kjhr</a>
                                                 </h4>
                                                 <div class="post_descr">
-                                                    <p>{{ $item->img_description }}</p>
+                                                    <p style="whiteSpace: 'pre-wrap';">{{ $item->img_description }}</p>
                                                 </div>
                                                 <div class="post_info mb-0 mt-0 d-flex justify-content-between">
                                                     <span class="post_info_item post_info_posted">
