@@ -424,9 +424,7 @@
                                         <div class="col-lg-4 d-none d-lg-block"></div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="recommendation" class="form-label">Recommendation from State
-                                                    Sports
-                                                    Federation</label>
+                                                <label for="recommendation" class="form-label">Health Insurance Certificate</label>
                                                 <input type="file" class="form-control" id="recommendation"
                                                     name="recommendation">
                                             </div>

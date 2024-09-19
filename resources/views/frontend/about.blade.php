@@ -317,9 +317,9 @@
                                                         <div class="row d-flex justify-content-between align-items-center">
 
                                                             <div class="col-lg-8">
-                                                                <h5 class="org-member-name mt-auto">Mrs. Bhavani TN </h5>
+                                                                <h5 class="org-member-name mt-auto">Miss. Bhavani TN </h5>
                                                                 <h6 class="org-member-role mb-2 text-muted">Member</h6>
-                                                                <p class="card-text">Mrs Bhavani TN Has been the most
+                                                                <p class="card-text">Miss Bhavani TN Has been the most
                                                                     successful nordic ski athlete
                                                                     in India. She won 3 Gold Medals in the 2024 Khelo India
                                                                     winter Games and has
@@ -419,10 +419,11 @@
                         </div>
                     </div>
 
-                    @include('frontend.commonComponants.committee')
+                  {{--   @include('frontend.commonComponants.committee')--}}
                     @include('frontend.commonComponants.association')
 
-                    <div class="content_wrap">
+                   {{--
+                     <div class="content_wrap">
                             <div class="custom_title_1 text_align_center">Our Constitution</div>
                             <div class="sc_section title_center">
                                 <div class="sc_section_inner">
@@ -450,6 +451,7 @@
                                 </div> -->
                             </div>
                     </div>
+                    --}}
 
                 </section>
 
