@@ -31,11 +31,16 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MemberController extends Controller
 {
-    public function genarateCode($firstname, $lastname, $user_id)
+    public function genarateCode($firstname, $lastname, $user_id, $gender)
     {
         $firstLetterVar1 = strtoupper(substr($firstname, 0, 1));
         $firstLetterVar2 = strtoupper(substr($lastname, 0, 1));
-        $code = "SSI" . $firstLetterVar1 . $firstLetterVar2 . $user_id;
+        if ($gender == 1) {
+            $firstLetterVar3 = "M";
+        } else {
+            $firstLetterVar3 = "F";
+        }
+        $code = "SSI" . $firstLetterVar1 . $firstLetterVar2 . $firstLetterVar3 . $user_id;
         return $code;
     }
     public function saveFile($file, $fileName)
@@ -150,8 +155,8 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                // return $this->sendError('Validation Error.', $validator->errors());
-                return back()->withErrors($validator)->withInput();
+                return $this->sendError('Validation Error.', $validator->errors());
+                // return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -195,7 +200,7 @@ class MemberController extends Controller
                 }
             }
             $user->save();
-            $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id);
+            $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id, $user->gender);
             $user->save();
 
             if ($request->has('achievements')) {
@@ -220,8 +225,8 @@ class MemberController extends Controller
                 }
             }
             DB::commit();
-            return back()->with('success', 'Athlete added successfully.');
-            // return $this->sendResponse([], "Athlete added succesfully.");
+            // return back()->with('success', 'Athlete added successfully.');
+            return $this->sendResponse([], "Athlete added succesfully.");
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
@@ -706,7 +711,7 @@ class MemberController extends Controller
                 }
                 $user->acknowledgement = $request->acknowledgement;
                 $user->save();
-                $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id);
+                $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id, $user->gender);
                 $user->save();
             }
 
