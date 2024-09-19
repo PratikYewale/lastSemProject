@@ -424,7 +424,7 @@
                                         <div class="col-lg-4 d-none d-lg-block"></div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="recommendation" class="form-label">Health Insurance Certificate</label>
+                                                <label for="recommendation" class="form-label">Health Insurance Certificate <span class="text-danger">*</span></label>
                                                 <input type="file" class="form-control" id="recommendation"
                                                     name="recommendation">
                                             </div>
@@ -561,6 +561,14 @@
                                         // Validate first name
                                         var firstName = document.getElementById("first_name").value.trim();
                                         if (firstName === "") {
+                                            document.getElementById("first_name_error").innerText = "The first name field is required.";
+                                            isValid = false;
+                                        } else {
+                                            document.getElementById("first_name_error").innerText = "";
+                                        }
+                                        // Validate first name
+                                        var recommendation = document.getElementById("recommendation").value.trim();
+                                        if (recommendation === "") {
                                             document.getElementById("first_name_error").innerText = "The first name field is required.";
                                             isValid = false;
                                         } else {
