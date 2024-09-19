@@ -260,6 +260,7 @@ class MemberController extends Controller
                 'passport' => 'mimes:png,jpg,jpeg,pdf|max:2048',
                 'acknowledge' => 'boolean',
                 'team_id' => 'integer|exists:teams,id',
+                'is_active' => 'nullable|boolean'
             ]);
             if ($validator->fails()) {
                 return $this->sendError("Validation failed", $validator->errors());
@@ -272,6 +273,9 @@ class MemberController extends Controller
             }
             if ($request->has('first_name')) {
                 $user->first_name = $request->first_name;
+            }
+            if ($request->has('is_active')) {
+                $user->is_active = $request->is_active;
             }
             if ($request->has('middle_name')) {
                 $user->middle_name = $request->middle_name;
@@ -365,6 +369,7 @@ class MemberController extends Controller
                 'signature_of_bearer_1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'signature_of_bearer_2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'acknowledgement' => 'nullable|boolean|max:255',
+                'is_active' => 'nullable|boolean'
 
 
             ]);
@@ -379,6 +384,9 @@ class MemberController extends Controller
             }
             if ($request->has('first_name')) {
                 $user->first_name = $request->first_name;
+            }
+            if ($request->has('is_active')) {
+                $user->is_active = $request->is_active;
             }
             if ($request->has('middle_name')) {
                 $user->middle_name = $request->middle_name;
