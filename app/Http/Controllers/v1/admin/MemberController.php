@@ -465,7 +465,7 @@ class MemberController extends Controller
 
             $user->save();
             DB::commit();
-            return $this->sendResponse([], "Profile Updated successfully.");
+            return $this->sendResponse([], "Profile updated successfully.");
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
