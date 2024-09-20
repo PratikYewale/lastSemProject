@@ -501,9 +501,6 @@ class MemberController extends Controller
                 //return $this->sendError('User does not exist or user doesn\'t have access', [], 401);
                 return back()->withErrors(['error' => 'User does not exist or user doesn\'t have access']);
             }
-            if ($user->is_active == false) {
-                return back()->withErrors(['error' => 'Please contact admin.']);
-            }
             if (Hash::check($request->password, $user->password)) {
                 $token = JWTAuth::fromUser($user);
                 $response = ['token' => $token];
