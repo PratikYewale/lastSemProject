@@ -161,6 +161,7 @@ Route::group(['prefix' => 'v1/admin', 'as' => 'v1/admin'], function () {
         Route::post('updateAthleteDesignation', [AdminMemberController::class, 'updateAthleteDesignation']);
         Route::post('updateAchievement', [MemberController::class, 'updateAchievement']);
         Route::post('updateAssociationMember', [AdminMemberController::class, 'updateAssociationMember']);
+        Route::delete('deleteUser', [AdminMemberController::class, 'deleteUser']);
 
         //ContactUs
         Route::get('getAllContactUs', [AdminContactUsController::class, 'getAllContactUs']);

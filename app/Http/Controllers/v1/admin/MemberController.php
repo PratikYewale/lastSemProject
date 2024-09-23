@@ -471,5 +471,101 @@ class MemberController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 413);
         }
     }
-    
+
+    public function deleteUser(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'id' => 'required|integer|exists:users,id'
+            ]);
+
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors());
+            }
+
+            DB::beginTransaction();
+
+            $deleteUser = User::query()->where('id', $request->id)->first();
+
+            if ($deleteUser->teamProfiles()->exists()) {
+                $deleteUser->teamProfiles()->detach();
+            }
+            // Delete other related data
+            if ($deleteUser->members()->exists()) {
+                $deleteUser->members()->delete();
+            }
+            if ($deleteUser->achievements()->exists()) {
+                $deleteUser->achievements()->delete();
+            }
+            if ($deleteUser->sport_certificates()->exists()) {
+                $deleteUser->sport_certificates()->delete();
+            }
+            if ($deleteUser->team()->exists()) {
+                $deleteUser->team()->delete();
+            }
+
+            // Finally delete the user
+            $deleteUser->delete();
+
+            DB::commit();
+
+            return $this->sendResponse($deleteUser->id, 'User deleted successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+
+    // public function deleteUser(Request $request)
+    // {
+    //     try {
+    //         $validator = Validator::make($request->all(), [
+    //             'id' => 'required|integer|exists:users,id'
+    //         ]);
+
+    //         if ($validator->fails()) {
+    //             return $this->sendError('Validation Error.', $validator->errors());
+    //         }
+
+    //         DB::beginTransaction();
+
+    //         // Find the user to delete
+    //         $deleteUser = User::query()->where('id', $request->id)->first();
+
+    //         // Check and delete members related to the user
+    //         if ($deleteUser->members()->exists()) {
+    //             $deleteUser->members()->delete();
+    //         }
+
+    //         // Check and delete achievements related to the user
+    //         if ($deleteUser->achievements()->exists()) {
+    //             $deleteUser->achievements()->delete();
+    //         }
+
+    //         // Check and delete sport certificates related to the user
+    //         if ($deleteUser->sport_certificates()->exists()) {
+    //             $deleteUser->sport_certificates()->delete();
+    //         }
+
+    //         // Check and detach user from all team profiles (team_member pivot table)
+    //         if ($deleteUser->teamProfiles()->exists()) {
+    //             $deleteUser->teamProfiles()->detach(); // Detach from pivot table
+    //         }
+
+    //         // Check and delete the team the user belongs to, if applicable
+    //         if ($deleteUser->team()->exists()) {
+    //             $deleteUser->team()->delete();
+    //         }
+
+    //         // Delete the user itself
+    //         $deleteUser->delete();
+
+    //         DB::commit();
+
+    //         return $this->sendResponse($deleteUser->id, 'User and related data deleted successfully.', true);
+    //     } catch (Exception $e) {
+    //         DB::rollBack();
+    //         return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+    //     }
+    // }
 }
