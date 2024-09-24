@@ -31,7 +31,7 @@
                 <div class="col-lg-7">
                     <!-- Content -->
                     <div class="content">
-                        <article class="post_item post_item_single post">
+                        <article class="post_item post_item_single post" >
                             <h3 class="post_title_single">
                                 <a href="#">{{ $news->title }}</a>
                             </h3>
@@ -55,7 +55,7 @@
                                     </a>
                                 </div>
                             </section> --}}
-                            <section class="post_content">
+                            <section class="post_content" style="white-space: pre-wrap;">
                                 <p>
                                     <b>{{ $news->intro_para }}</b>
                                 </p>
