@@ -131,7 +131,7 @@
 
                                     </div>
                                 @else
-                                    <h1>No Data available.</h1>
+                                    <h4>No Data available.</h4>
                                 @endif
                             </aside>
 

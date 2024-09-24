@@ -8,7 +8,7 @@
                 @if (isset($associations) && count($associations) > 0)
                 <div class="row">
                     @foreach ($associations as $associations)
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-6 mb-4">
                         <div class="card association-card">
                             <div class="card-body">
                                 <div class="row">
@@ -43,11 +43,9 @@
 
                     </div>
                     @endforeach
-                 
-
                 </div>
                 @else
-                <h1>No Data available.</h1>
+                <h4>No Data available.</h4>
                 @endif
             </div>
         </div>

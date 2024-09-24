@@ -131,7 +131,7 @@ class MemberController extends Controller
                 'profile_picture' => 'required|image|mimes:png,jpg,jpeg',
                 'anti_doping_certificate' => 'required|mimes:png,jpg,jpeg,pdf',
                 'physical_fitness_certificate' => 'required|mimes:png,jpg,jpeg,pdf',
-                'recommendation' => 'mimes:png,jpg,jpeg,pdf',
+                'recommendation' => 'required|mimes:png,jpg,jpeg,pdf',
                 'aadhar_card' => 'mimes:png,jpg,jpeg,pdf',
                 'aadhar_number' => 'required|max:12|min:12',
                 'passport_number' => 'nullable|unique:users',

@@ -569,10 +569,10 @@
                                         // Validate first name
                                         var recommendation = document.getElementById("recommendation").value.trim();
                                         if (recommendation === "") {
-                                            document.getElementById("first_name_error").innerText = "The first name field is required.";
+                                            document.getElementById("recommendation_error").innerText = "The Health Insurance Certificate field is required.";
                                             isValid = false;
                                         } else {
-                                            document.getElementById("first_name_error").innerText = "";
+                                            document.getElementById("recommendation").innerText = "";
                                         }
 
 
