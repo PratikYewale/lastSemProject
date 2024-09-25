@@ -155,8 +155,8 @@ class MemberController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return $this->sendError('Validation Error.', $validator->errors());
-                // return back()->withErrors($validator)->withInput();
+                // return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             DB::beginTransaction();
             $user = User::query()->where('email', $request->email)->first();
@@ -225,8 +225,10 @@ class MemberController extends Controller
                 }
             }
             DB::commit();
-            // return back()->with('success', 'Athlete added successfully.');
-            return $this->sendResponse([], "Athlete added succesfully.");
+            return back()->with('success', 'Athlete added successfully.');
+            // return $this->sendResponse([], "Athlete added succesfully.");
+            // return back()->with('success', 'Athlete added succesfully.');
+
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getMessage(), 413);
@@ -1019,13 +1021,23 @@ class MemberController extends Controller
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|exists:users,email',
             ]);
+            // if ($validator->fails()) {
+            //     return $this->sendError("Validation failed.", $validator->errors());
+
+            // }
             if ($validator->fails()) {
-                return $this->sendError("Validation failed.", $validator->errors());
+                // return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             $user = User::query()->where('email', $request->email)->first();
+            // if (!$user) {
+            //     return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+            // }
             if (!$user) {
-                return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+                // Return back with an error message if user is not found
+                return back()->withErrors( 'User does not exist or user doesn\'t have access.',[], 401)->withInput();
             }
+
             $otp = rand(100000, 999999);
             $user->email_otp = $otp;
             $user->email_otp_expiry = Carbon::now()->addMinutes(5);
@@ -1038,6 +1050,7 @@ class MemberController extends Controller
                 $message->from(env('MAIL_FROM_ADDRESS'), 'SKI AND SNOWBOARDS INDIA');
             });
             DB::commit();
+            // return back()->with('success', 'Athlete added successfully.');
 
             return back()->with('success', 'Otp sent successfully.')->with('showOtpScreen', true)->with('email', $request->email);
         } catch (Exception $e) {
@@ -1053,6 +1066,7 @@ class MemberController extends Controller
             ]);
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
+                
             }
             $user = User::query()->where('email', $request->email)->first();
             if (!$user) {

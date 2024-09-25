@@ -51,6 +51,15 @@
                                         <div  id="forgetPassword" style="display: {{ session('showOtpScreen') ? 'none' : 'block' }};">
                                             <div class="comments_form">
                                                 <div id="respond" class="comment-respond">
+                                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                                     @if (Session::has('success'))
                                                         <div class="alert alert-success">
                                                             {{ Session::get('success') }}
@@ -97,12 +106,14 @@
                                                     </div>
                                                 @endif
                                                 @if ($errors->any())
-                                                    <div class="alert alert-danger">
-                                                        @foreach ($errors->all() as $error)
-                                                            <p>{{ $error }}</p>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                                 <p class="text-center">We Send Code To <b id="emailPlaceholder">{{ session('email') }}</b></p>
                                                 <form id="verifyOTPForm" action="{{ route('checkOtpAndLoginEmail') }}" method="POST" enctype="multipart/form-data">
                                                     @csrf

@@ -144,18 +144,27 @@ class AdminAuthController extends Controller
                 'email' => 'required|email|exists:users,email',
                 'otp' => 'required|string',
             ]);
+            // if ($validator->fails()) {
+            //     return $this->sendError("Validation failed.", $validator->errors());
+
+            // }
             if ($validator->fails()) {
-                return $this->sendError("Validation failed.", $validator->errors());
+                // return $this->sendError('Validation Error.', $validator->errors());
+                return back()->withErrors($validator)->withInput();
             }
             $user = User::query()->where('email', $request->email)->first();
-            if (!$user) {
-                return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
-            }
+            // if (!$user) {
+            //     return $this->sendError('User does not exist or user doesn\'t have access.', [], 401);
+            // }
             if ($user->email_otp != $request->otp) {
-                return $this->sendError("Validation failed.", ['otp' => 'Invalid OTP.']);
+                // return $this->sendError("Validation failed.", ['otp' => 'Invalid OTP.']);
+                return back()->withErrors("Validation failed.", ['otp' => 'Invalid OTP.'])->withInput();
+
             }
             if ($user->email_otp_expiry < Carbon::now()) {
-                return $this->sendError("Validation failed.", ['otp' => 'Expired OTP.']);
+                // return $this->sendError("Validation failed.", ['otp' => 'Expired OTP.']);
+                return back()->withErrors("Validation failed.", ['otp' => 'Expired OTP.'])->withInput();
+
             }
             $user->email_otp = null;
             $user->email_otp_expiry = null;

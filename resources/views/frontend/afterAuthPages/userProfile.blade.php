@@ -19,7 +19,7 @@
                                                 <tr>
                                                     <td>
                                                         <b>
-                                                            User Id:
+                                                            Athlete Id:
                                                         </b>
                                                         <b class="text-danger">
                                                             {{ Auth::user()->unique_code }}
@@ -302,14 +302,14 @@
 
                                             <tbody>
                                                 <tr>
-                                                    <td>
+                                                    <!-- <td>
                                                         <b>
                                                             Id:
                                                         </b>
                                                         <b class="text-danger">
                                                             SKI{{ Auth::user()->id }}
                                                         </b>
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         <b>
                                                             Role:
