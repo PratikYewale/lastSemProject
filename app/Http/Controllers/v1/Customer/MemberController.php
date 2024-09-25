@@ -35,12 +35,19 @@ class MemberController extends Controller
     {
         $firstLetterVar1 = strtoupper(substr($firstname, 0, 1));
         $firstLetterVar2 = strtoupper(substr($lastname, 0, 1));
-        if ($gender == 1) {
-            $firstLetterVar3 = "M";
+        $firstLetterVar3 = ($gender == 1) ? "M" : "F";
+        $lastAthlete = User::where('role', 'athlete')
+            ->orderBy('id', 'desc')
+            ->first();
+            // dd($lastAthlete);
+        if ($lastAthlete) {
+            $lastCode = $lastAthlete->unique_code;
+            $lastNumber = (int)preg_replace('/[^0-9]/', '', $lastCode);
+            $newNumber = $lastNumber + 1;
         } else {
-            $firstLetterVar3 = "F";
+            $newNumber = 1;
         }
-        $code = "SSI" . $firstLetterVar1 . $firstLetterVar2 . $firstLetterVar3 . $user_id;
+        $code = "SSI" . $firstLetterVar1 . $firstLetterVar2 . $firstLetterVar3 . $newNumber;
         return $code;
     }
     public function saveFile($file, $fileName)
@@ -199,7 +206,6 @@ class MemberController extends Controller
                     $user->passport = $this->saveFile($request->file('passport'), 'Passport');
                 }
             }
-            $user->save();
             $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id, $user->gender);
             $user->save();
 
@@ -713,8 +719,8 @@ class MemberController extends Controller
                 }
                 $user->acknowledgement = $request->acknowledgement;
                 $user->save();
-                $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id, $user->gender);
-                $user->save();
+                // $user->unique_code = $this->genarateCode($user->first_name, $user->last_name, $user->id, $user->gender);
+                // $user->save();
             }
 
 
@@ -1035,7 +1041,7 @@ class MemberController extends Controller
             // }
             if (!$user) {
                 // Return back with an error message if user is not found
-                return back()->withErrors( 'User does not exist or user doesn\'t have access.',[], 401)->withInput();
+                return back()->withErrors('User does not exist or user doesn\'t have access.', [], 401)->withInput();
             }
 
             $otp = rand(100000, 999999);
@@ -1066,7 +1072,6 @@ class MemberController extends Controller
             ]);
             if ($validator->fails()) {
                 return $this->sendError("Validation failed.", $validator->errors());
-                
             }
             $user = User::query()->where('email', $request->email)->first();
             if (!$user) {
