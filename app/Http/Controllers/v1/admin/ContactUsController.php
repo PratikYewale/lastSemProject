@@ -42,7 +42,7 @@ class ContactUsController extends Controller
 
         $file->move($destinationPath, $fileName);
 
-       
+
 
         return "/uploads/$fileName/" . $fileName;
     }
@@ -106,6 +106,7 @@ class ContactUsController extends Controller
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
         }
     }
+
     public function resolveQuery(Request $request)
     {
         try {
@@ -142,6 +143,26 @@ class ContactUsController extends Controller
             });
             DB::commit();
             return $this->sendResponse($resolveQuery, 'Mail sent successfully.', true);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return $this->sendError($e->getMessage(), $e->getTrace(), 500);
+        }
+    }
+    public function deleteQuery(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'query_id' => 'required|exists:contact_us,id',
+            ]);
+            if ($validator->fails()) {
+                return $this->sendError('Validation Error.', $validator->errors(), 422);
+            }
+            DB::beginTransaction();
+            $query = ContactUs::query()->where('id', $request->query_id)->first();
+            $query->solvedQuery()->delete();
+            $query->delete();
+            DB::commit();
+            return $this->sendResponse($query->id, 'Query deleted successfully.', true);
         } catch (Exception $e) {
             DB::rollBack();
             return $this->sendError($e->getMessage(), $e->getTrace(), 500);
